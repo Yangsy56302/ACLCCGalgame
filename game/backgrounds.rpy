@@ -1,0 +1,1 @@
+image bg adofai = "bg/adofai.jpg"
