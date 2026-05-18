@@ -36,11 +36,10 @@ label naming_loop:
     mc "Is this name correct?{nw}"
     menu:
         mc "Is this name correct?{fast}"
-        "Yes.":
+        "Yes":
             $ persistent.name_mc = name_mc
-            $ renpy.save_persistent()
             return
-        "No.":
+        "No":
             jump naming_loop
 
 
