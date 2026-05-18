@@ -25,7 +25,7 @@ image dwen side = "char/dwen/avatar.jpg"
 # image dwen normal = "char/dwen/normal.png"
 
 
-default name_gra = "晴柚-Grafrustix"
+default name_gra = "晴安柚子"
 define character.gra = DynamicCharacter("name_gra", image="gra", what_prefix='< ', what_suffix=' 3')
 
 image gra side = "char/gra/avatar.jpg"
@@ -68,14 +68,14 @@ image maoyuna side = "char/maoyuna/avatar.jpg"
 # image maoyuna normal = "char/maoyuna/normal.png"
 
 
-default name_morin = "莫邪Morin"
+default name_morin = "莫邪"
 define character.morin = DynamicCharacter("name_morin", image="morin", what_prefix='', what_suffix='')
 
 image morin side = "char/morin/avatar.jpg"
 image morin normal = "char/morin/normal.png"
 
 
-default name_mwam = "ms_win_and_mc"
+default name_mwam = "李婉清"
 define character.mwam = DynamicCharacter("name_mwam", image="mwam", what_prefix='', what_suffix='')
 
 image mwam side = "char/mwam/avatar.jpg"
@@ -103,7 +103,7 @@ image uni side = "char/uni/avatar.jpg"
 # image uni normal = "char/uni/normal.png"
 
 
-default name_yangsy = "Yangsy56302"
+default name_yangsy = "杨曦"
 define character.yangsy = DynamicCharacter("name_yangsy", image="yangsy", what_prefix='" ', what_suffix=' "')
 
 image yangsy side = "char/yangsy/avatar.jpg"
