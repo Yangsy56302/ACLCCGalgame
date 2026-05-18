@@ -4,7 +4,7 @@ translate None strings:
 
     # game/screens.rpy:252
     old "Back"
-    new "返回"
+    new "后退"
 
     # game/screens.rpy:253
     old "History"
@@ -12,7 +12,7 @@ translate None strings:
 
     # game/screens.rpy:254
     old "Skip"
-    new "快进"
+    new "飙速"
 
     # game/screens.rpy:255
     old "Auto"
@@ -36,11 +36,11 @@ translate None strings:
 
     # game/screens.rpy:300
     old "Start"
-    new "新游戏"
+    new "开始"
 
     # game/screens.rpy:308
     old "Load"
-    new "加载游戏"
+    new "读取"
 
     # game/screens.rpy:310
     old "Preferences"
@@ -48,11 +48,11 @@ translate None strings:
 
     # game/screens.rpy:314
     old "End Replay"
-    new "End Replay"
+    new "结束回想"
 
     # game/screens.rpy:318
     old "Main Menu"
-    new "标题画面"
+    new "主菜单"
 
     # game/screens.rpy:320
     old "About"
@@ -80,15 +80,15 @@ translate None strings:
 
     # game/screens.rpy:598
     old "Automatic saves"
-    new "自动存档"
+    new "自动保存"
 
     # game/screens.rpy:598
     old "Quick saves"
-    new "快捷存档"
+    new "快速保存"
 
     # game/screens.rpy:640
     old "{#file_time}%A, %B %d %Y, %H:%M"
-    new "当前存档：{#file_time}%Y年%m月%d日 %H:%M:%S"
+    new "当前存档：{#file_time}%Y年%B%d日%A %H:%M:%S"
 
     # game/screens.rpy:640
     old "empty slot"
@@ -100,11 +100,11 @@ translate None strings:
 
     # game/screens.rpy:660
     old "{#auto_page}A"
-    new "{#auto_page}A"
+    new "{#auto_page}自动"
 
     # game/screens.rpy:663
     old "{#quick_page}Q"
-    new "{#quick_page}Q"
+    new "{#quick_page}快速"
 
     # game/screens.rpy:669
     old ">"
@@ -124,11 +124,11 @@ translate None strings:
 
     # game/screens.rpy:733
     old "Unseen Text"
-    new "未读文字"
+    new "未读文本"
 
     # game/screens.rpy:734
     old "After Choices"
-    new "选项后"
+    new "选择后"
 
     # game/screens.rpy:735
     old "Transitions"
@@ -140,7 +140,7 @@ translate None strings:
 
     # game/screens.rpy:752
     old "Auto-Forward Time"
-    new "BPM倍频器"
+    new "自动播放 BPM"
 
     # game/screens.rpy:759
     old "Music Volume"
@@ -176,149 +176,144 @@ translate None strings:
 
     # game/screens.rpy:978
     old "Gamepad"
-    new "手柄"
+    new "游戏手柄"
 
-    # game/screens.rpy:991
+    # game/screens.rpy:1039
     old "Enter"
     new "回车"
 
-    # game/screens.rpy:992
+    # game/screens.rpy:1040
     old "Advances dialogue and activates the interface."
-    new "Advances dialogue and activates the interface."
+    new "推进对话并激活界面。"
 
-    # game/screens.rpy:995
+    # game/screens.rpy:1043
     old "Space"
     new "空格"
 
-    # game/screens.rpy:996
+    # game/screens.rpy:1044
     old "Advances dialogue without selecting choices."
-    new "Advances dialogue without selecting choices."
+    new "在没有选项的情况下推进对话。"
 
-    # game/screens.rpy:999
+    # game/screens.rpy:1047
     old "Arrow Keys"
     new "方向键"
 
-    # game/screens.rpy:1000
+    # game/screens.rpy:1048
     old "Navigate the interface."
-    new "Navigate the interface."
+    new "导航界面。"
 
-    # game/screens.rpy:1003
+    # game/screens.rpy:1051
     old "Escape"
-    new "Escape"
+    new "Esc"
 
-    # game/screens.rpy:1004
+    # game/screens.rpy:1052
     old "Accesses the game menu."
-    new "Accesses the game menu."
+    new "进入游戏菜单。"
 
-    # game/screens.rpy:1007
+    # game/screens.rpy:1055
     old "Ctrl"
     new "Ctrl"
 
-    # game/screens.rpy:1008
+    # game/screens.rpy:1056
     old "Skips dialogue while held down."
-    new "Skips dialogue while held down."
+    new "按住时跳过对话。"
 
-    # game/screens.rpy:1011
+    # game/screens.rpy:1059
     old "Tab"
     new "Tab"
 
-    # game/screens.rpy:1012
+    # game/screens.rpy:1060
     old "Toggles dialogue skipping."
-    new "Toggles dialogue skipping."
+    new "切换对话跳过。"
 
-    # game/screens.rpy:1015
+    # game/screens.rpy:1063
     old "Page Up"
     new "Page Up"
 
-    # game/screens.rpy:1016
+    # game/screens.rpy:1064
     old "Rolls back to earlier dialogue."
-    new "Rolls back to earlier dialogue."
+    new "回到前面的对话。"
 
-    # game/screens.rpy:1019
+    # game/screens.rpy:1067
     old "Page Down"
     new "Page Down"
 
-    # game/screens.rpy:1020
+    # game/screens.rpy:1068
     old "Rolls forward to later dialogue."
-    new "Rolls forward to later dialogue."
+    new "转到后面的对话。"
 
-    # game/screens.rpy:1024
+    # game/screens.rpy:1072
     old "Hides the user interface."
-    new "Hides the user interface."
+    new "隐藏用户界面。"
 
-    # game/screens.rpy:1028
+    # game/screens.rpy:1076
     old "Takes a screenshot."
-    new "Takes a screenshot."
+    new "截图。"
 
-    # game/screens.rpy:1032
+    # game/screens.rpy:1080
     old "Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}."
-    new "Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}."
+    new "切换无障碍{a=https://www.renpy.org/l/voicing}自动语音{/a}。（{a=https://renpy.cn/doc/self_voicing.html}中文文档{/a}）"
 
-    # game/screens.rpy:1036
-    old "Opens the accessibility menu."
-    new "Opens the accessibility menu."
-
-    # game/screens.rpy:1042
+    # game/screens.rpy:1086
     old "Left Click"
-    new "鼠标左键"
+    new "左键"
 
-    # game/screens.rpy:1046
+    # game/screens.rpy:1090
     old "Middle Click"
-    new "鼠标中键"
+    new "中键"
 
-    # game/screens.rpy:1050
+    # game/screens.rpy:1094
     old "Right Click"
-    new "鼠标右键"
+    new "右键"
 
-    # game/screens.rpy:1054
-    old "Mouse Wheel Up\nClick Rollback Side"
-    new "鼠标滚轮向上滚动\nClick Rollback Side"
+    # game/screens.rpy:1098
+    old "Mouse Wheel Up"
+    new "鼠标滚轮向上"
 
-    # game/screens.rpy:1058
+    # game/screens.rpy:1102
     old "Mouse Wheel Down"
-    new "鼠标滚轮向下滚动"
+    new "鼠标滚轮向下"
 
-    # game/screens.rpy:1065
+    # game/screens.rpy:1109
     old "Right Trigger\nA/Bottom Button"
-    new "Right Trigger\nA/Bottom Button"
+    new "右触发器\nA/下 键"
 
-    # game/screens.rpy:1069
+    # game/screens.rpy:1113
     old "Left Trigger\nLeft Shoulder"
-    new "Left Trigger\nLeft Shoulder"
+    new "左触发器\n左肩"
 
-    # game/screens.rpy:1073
+    # game/screens.rpy:1117
     old "Right Shoulder"
-    new "Right Shoulder"
+    new "右肩"
 
-    # game/screens.rpy:1078
+    # game/screens.rpy:1121
     old "D-Pad, Sticks"
     new "D-Pad, Sticks"
 
-    # game/screens.rpy:1082
+    # game/screens.rpy:1125
     old "Start, Guide"
     new "Start, Guide"
 
-    # game/screens.rpy:1086
+    # game/screens.rpy:1129
     old "Y/Top Button"
-    new "Y/Top Button"
+    new "Y/上 键"
 
-    # game/screens.rpy:1089
+    # game/screens.rpy:1132
     old "Calibrate"
     new "校准"
 
-    # game/screens.rpy:1154
+    # game/screens.rpy:1197
     old "Yes"
     new "是"
 
-    # game/screens.rpy:1155
+    # game/screens.rpy:1198
     old "No"
     new "否"
 
-    # game/screens.rpy:1201
+    # game/screens.rpy:1244
     old "Skipping"
-    new "快进中"
+    new "飙速模式"
 
-    # game/screens.rpy:1424
+    # game/screens.rpy:1465
     old "Menu"
     new "菜单"
-
