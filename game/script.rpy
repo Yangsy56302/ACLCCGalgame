@@ -1,6 +1,4 @@
-﻿# The script of the game goes in this file.
-
-# The game starts here.
+﻿# The game starts here.
 label start:
     call naming
     call ch0
@@ -39,12 +37,10 @@ label naming:
         if not name_mc:
             "You must choose a name."
             jump naming_loop
-        elif name_mc.lower() == "gaster":
-            jump main_menu
-        # elif any(name_mc in n for n in ["ashell", "阿希尔"]):
+        # elif any(name_mc.lower() in n for n in ["ashell", "阿希尔"]):
         #     character.ashell('大概是取名彩蛋对话啥的')
         #     jump naming_loop
-        # elif name_mc == "你的名字":
+        # elif name_mc.lower() == "你的名字":
         #     name_mc = "韦一敏"
         mc "Is this name correct?{nw}"
         menu:

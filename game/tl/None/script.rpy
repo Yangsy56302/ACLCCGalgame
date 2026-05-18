@@ -14,3 +14,6 @@
 
     old "You must choose a name."
     new "你必须选择一个名字。"
+
+    old "A name has already been chosen."
+    new "已经选择一个名字了。"
