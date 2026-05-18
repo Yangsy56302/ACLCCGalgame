@@ -72,14 +72,14 @@ default name_morin = "莫邪Morin"
 define character.morin = DynamicCharacter("name_morin", image="morin", what_prefix='', what_suffix='')
 
 image morin side = "char/morin/avatar.jpg"
-# image morin normal = "char/morin/normal.png"
+image morin normal = "char/morin/normal.png"
 
 
 default name_mwam = "ms_win_and_mc"
 define character.mwam = DynamicCharacter("name_mwam", image="mwam", what_prefix='', what_suffix='')
 
 image mwam side = "char/mwam/avatar.jpg"
-# image mwam normal = "char/mwam/normal.png"
+image mwam normal = "char/mwam/normal.png"
 
 
 default name_nona = "怃"
