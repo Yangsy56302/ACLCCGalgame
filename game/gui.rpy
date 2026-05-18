@@ -17,6 +17,15 @@ init python:
 ## GUI Configuration Variables
 ################################################################################
 
+## Sounds ######################################################################
+##
+## These variables set the sound effects for the GUI elements in the game.
+define gui.navigate_sound = "gui/sfx/snd_menu_navigate.ogg"
+define gui.squelch_sound = "gui/sfx/snd_menu_squelch.ogg"
+define gui.button_sound = "gui/sfx/snd_mobile_menu_button.ogg"
+define gui.enter_sound = "gui/sfx/snd_mobile_menu_button_enter.ogg"
+define gui.choice_hover_sound = "gui/sfx/snd_sizzle.ogg"
+define gui.choice_activate_sound = "gui/sfx/snd_reverb_clack.ogg"
 
 ## Colors ######################################################################
 ##

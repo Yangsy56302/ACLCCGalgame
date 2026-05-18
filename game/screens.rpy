@@ -225,6 +225,9 @@ style choice_vbox:
     spacing gui.choice_spacing
 
 style choice_button is default:
+    hover_sound gui.choice_hover_sound
+    activate_sound gui.choice_activate_sound
+
     properties gui.button_properties("choice_button")
 
 style choice_button_text is default:
@@ -270,6 +273,9 @@ style quick_button is default
 style quick_button_text is button_text
 
 style quick_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     properties gui.button_properties("quick_button")
 
 style quick_button_text:
@@ -335,6 +341,9 @@ style navigation_button is gui_button
 style navigation_button_text is gui_button_text
 
 style navigation_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     size_group "navigation"
     properties gui.button_properties("navigation_button")
 
@@ -527,6 +536,9 @@ style game_menu_label_text:
     yalign 0.5
 
 style return_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     xpos gui.navigation_xpos
     yalign 1.0
     yoffset -45
@@ -689,12 +701,18 @@ style page_label_text:
     hover_color gui.hover_color
 
 style page_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     properties gui.button_properties("page_button")
 
 style page_button_text:
     properties gui.button_text_properties("page_button")
 
 style slot_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
@@ -829,6 +847,9 @@ style radio_vbox:
     spacing gui.pref_button_spacing
 
 style radio_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.squelch_sound
+
     properties gui.button_properties("radio_button")
     foreground "gui/button/radio_[prefix_]foreground.png"
 
@@ -839,6 +860,9 @@ style check_vbox:
     spacing gui.pref_button_spacing
 
 style check_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.squelch_sound
+
     properties gui.button_properties("check_button")
     foreground "gui/button/check_[prefix_]foreground.png"
 
@@ -846,6 +870,9 @@ style check_button_text:
     properties gui.button_text_properties("check_button")
 
 style slider_slider:
+    hover_sound gui.navigate_sound
+    activate_sound gui.squelch_sound
+
     xsize 525
 
 style slider_button:
@@ -974,15 +1001,15 @@ screen help():
                 textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
                 textbutton _("Mouse") action SetScreenVariable("device", "mouse")
 
-                if GamepadExists():
-                    textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
+                # if GamepadExists():
+                #     textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
 
             if device == "keyboard":
                 use keyboard_help
             elif device == "mouse":
                 use mouse_help
-            elif device == "gamepad":
-                use gamepad_help
+            # elif device == "gamepad":
+            #     use gamepad_help
 
 
 screen keyboard_help():
@@ -1058,7 +1085,7 @@ screen mouse_help():
         label _("Mouse Wheel Down")
         text _("Rolls forward to later dialogue.")
 
-
+"""
 screen gamepad_help():
 
     hbox:
@@ -1087,7 +1114,7 @@ screen gamepad_help():
         text _("Hides the user interface.")
 
     textbutton _("Calibrate") action GamepadCalibrate()
-
+"""
 
 style help_button is gui_button
 style help_button_text is gui_button_text
@@ -1096,6 +1123,9 @@ style help_label_text is gui_label_text
 style help_text is gui_text
 
 style help_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     properties gui.button_properties("help_button")
     xmargin 12
 
@@ -1175,6 +1205,9 @@ style confirm_prompt_text:
     layout "subtitle"
 
 style confirm_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.enter_sound
+
     properties gui.button_properties("confirm_button")
 
 style confirm_button_text:
@@ -1386,6 +1419,9 @@ style nvl_thought:
     layout ("subtitle" if gui.nvl_text_xalign else "tex")
 
 style nvl_button:
+    hover_sound gui.choice_hover_sound
+    activate_sound gui.choice_activate_sound
+    
     properties gui.button_properties("nvl_button")
     xpos gui.nvl_button_xpos
     xanchor gui.nvl_button_xalign
