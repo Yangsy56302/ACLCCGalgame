@@ -12,7 +12,7 @@
 
     scene bg adofai with fade
     
-    $ renpy.notify("2020年某日")
+    $ renpy.notify('2020年某日')
     pause 1.0
 
     '你偶然在某个视频网站上遇到了一款游戏。'
@@ -30,7 +30,7 @@
 
     scene bg adofai with fade
 
-    $ renpy.notify("2022年某日，哔哩哗哩评论区")
+    $ renpy.notify('2022年某日，哔哩哗哩评论区')
     pause 1.0
     
     '就像之前的每一天一样，{w=0.5}你百无聊赖的刷着B站。'
@@ -61,7 +61,7 @@
 
     scene bg adofai with fade
 
-    # $ renpy.notify("几天之后")
+    # $ renpy.notify('几天之后')
     # pause 1.0
 
     '几天之后，{w=0.5}你的评论{w=0.5}收到了一条回复。'
@@ -71,7 +71,7 @@
 
     scene bg adofai with fade
 
-    gra "（占位符文本）"
+    gra '（占位符文本）'
 
     scene black with dissolve
     stop music fadeout 1.0
