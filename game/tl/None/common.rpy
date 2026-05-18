@@ -1,6 +1,6 @@
 ﻿# TODO: Translation updated at 2026-05-17 18:58
 
-translate schinese strings:
+translate None strings:
 
     # renpy/common/00accessibility.rpy:28
     old "Self-voicing disabled."
@@ -356,7 +356,7 @@ translate schinese strings:
 
     # renpy/common/00director.rpy:1633
     old "Add"
-    new "加"
+    new "添加"
 
     # renpy/common/00director.rpy:1636
     old "Cancel"
@@ -400,7 +400,7 @@ translate schinese strings:
 
     # renpy/common/00gui.rpy:374
     old "Are you sure?"
-    new "你确定？"
+    new "你确定吗？"
 
     # renpy/common/00gui.rpy:375
     old "Are you sure you want to delete this save?"
@@ -488,7 +488,7 @@ translate schinese strings:
 
     # renpy/common/00preferences.rpy:289
     old "skip"
-    new "飙速"
+    new "飙速模式"
 
     # renpy/common/00preferences.rpy:292
     old "skip unseen [text]"
@@ -932,7 +932,7 @@ translate schinese strings:
 
     # renpy/common/00gltest.rpy:101
     old "Disable"
-    new "关闭"
+    new "禁用"
 
     # renpy/common/00gltest.rpy:131
     old "Powersave"
@@ -1056,19 +1056,19 @@ translate schinese strings:
 
     # renpy/common/_errorhandling.rpym:542
     old "Copy BBCode"
-    new "复制BBCode"
+    new "复制 BBCode"
 
     # renpy/common/_errorhandling.rpym:544
     old "Copies the traceback.txt file to the clipboard as BBcode for forums like https://lemmasoft.renai.us/."
-    new "以BBcode复制 traceback.txt 文件到论坛如 https://lemmasoft.renai.us/ 。"
+    new "以 BBcode 复制 traceback.txt 文件到论坛，如 https://lemmasoft.renai.us/ 。"
 
     # renpy/common/_errorhandling.rpym:546
     old "Copy Markdown"
-    new "Copy Markdown"
+    new "复制 Markdown"
 
     # renpy/common/_errorhandling.rpym:548
     old "Copies the traceback.txt file to the clipboard as Markdown for Discord."
-    new "以Markdown复制 traceback.txt 文件到Discord。"
+    new "以 Markdown 复制 traceback.txt 文件到 Discord 。"
 
     # renpy/common/_errorhandling.rpym:577
     old "An exception has occurred."
@@ -1124,13 +1124,13 @@ translate schinese strings:
 
     # renpy/common/_errorhandling.rpym:683
     old "Copies the errors.txt file to the clipboard as BBcode for forums like https://lemmasoft.renai.us/."
-    new "以BBcode复制 errors.txt 文件到论坛如 https://lemmasoft.renai.us/ 。"
+    new "以 BBcode 复制 errors.txt 文件到论坛，如 https://lemmasoft.renai.us/ 。"
 
     # renpy/common/_errorhandling.rpym:687
     old "Copies the errors.txt file to the clipboard as Markdown for Discord."
-    new "以Markdown复制 errors.txt 文件到Discord。"
+    new "以 Markdown 复制 errors.txt 文件到 Discord 。"
 
-translate schinese strings:
+translate None strings:
 
     # renpy/common/00accessibility.rpy:193
     old "Self-Voicing Volume Drop"
@@ -1166,11 +1166,11 @@ translate schinese strings:
 
     # renpy/common/00gltest.rpy:245
     old "This game requires use of GL2 that can't be initialised."
-    new "这个游戏需要使用GL2，无法初始化"
+    new "这个游戏需要使用GL2，无法初始化。"
 
     # renpy/common/00gltest.rpy:256
     old "More details on how to fix this can be found in the {a=[url]}documentation{/a}."
-    new "更多细节可以在{a=[url]}文档{/a}中找到"
+    new "更多细节可以在{a=[url]}文档{/a}中找到。"
 
     # renpy/common/00gltest.rpy:273
     old "Change render options"

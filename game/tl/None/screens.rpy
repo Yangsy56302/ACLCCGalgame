@@ -88,7 +88,7 @@ translate None strings:
 
     # game/screens.rpy:640
     old "{#file_time}%A, %B %d %Y, %H:%M"
-    new "当前存档：{#file_time}%Y年%B%d日%A %H:%M:%S"
+    new "当前存档：{#file_time}%Y年%m月%d日 %H:%M:%S"
 
     # game/screens.rpy:640
     old "empty slot"
@@ -254,6 +254,10 @@ translate None strings:
     old "Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}."
     new "切换无障碍{a=https://www.renpy.org/l/voicing}自动语音{/a}。（{a=https://renpy.cn/doc/self_voicing.html}中文文档{/a}）"
 
+    # game/screens.rpy:????
+    old "Opens the accessibility menu."
+    new "打开无障碍菜单。"
+
     # game/screens.rpy:1086
     old "Left Click"
     new "左键"
@@ -267,7 +271,7 @@ translate None strings:
     new "右键"
 
     # game/screens.rpy:1098
-    old "Mouse Wheel Up"
+    old "Mouse Wheel Up\nClick Rollback Side"
     new "鼠标滚轮向上"
 
     # game/screens.rpy:1102
