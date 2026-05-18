@@ -3,7 +3,7 @@
   "packages": [
     "win"
   ],
-  "add_from": false,
+  "add_from": true,
   "force_recompile": true,
   "android_build": "Release",
   "tutorial": false,

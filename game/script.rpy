@@ -1,7 +1,7 @@
 ﻿# The game starts here.
 label start:
-    call naming
-    call ch0
+    call naming from _call_naming
+    call ch0 from _call_ch0
 
     # yoosee '不用照搬历史\n确定人物性格和故事走向就行'
 
@@ -22,6 +22,28 @@ label start:
     return
 
 
+label naming_loop:
+    "Name the main character.{nw}"
+    $ name_mc = renpy.input(_("Name the main character.{fast}"), length=56).strip()
+    if not name_mc:
+        "You must choose a name."
+        jump naming_loop
+    # elif any(name_mc.lower() in n for n in ["ashell", "阿希尔"]):
+    #     character.ashell('大概是取名彩蛋对话啥的')
+    #     jump naming_loop
+    # elif name_mc.lower() == "你的名字":
+    #     name_mc = "韦一敏"
+    mc "Is this name correct?{nw}"
+    menu:
+        mc "Is this name correct?{fast}"
+        "Yes.":
+            $ persistent.name_mc = name_mc
+            $ renpy.save_persistent()
+            return
+        "No.":
+            jump naming_loop
+
+
 label naming:
     scene black with fade
 
@@ -29,28 +51,8 @@ label naming:
         $ name_mc = persistent.name_mc
         mc "A name has already been chosen."
     else:
-        jump naming_loop
+        call naming_loop
     
-    label naming_loop:
-        "Name the main character.{nw}"
-        $ name_mc = renpy.input(_("Name the main character.{fast}"), length=56).strip()
-        if not name_mc:
-            "You must choose a name."
-            jump naming_loop
-        # elif any(name_mc.lower() in n for n in ["ashell", "阿希尔"]):
-        #     character.ashell('大概是取名彩蛋对话啥的')
-        #     jump naming_loop
-        # elif name_mc.lower() == "你的名字":
-        #     name_mc = "韦一敏"
-        mc "Is this name correct?{nw}"
-        menu:
-            mc "Is this name correct?{fast}"
-            "Yes":
-                return
-            "No":
-                jump naming_loop
-    
-    $ persistent.name_mc = name_mc
     scene black with fade
     return
 
