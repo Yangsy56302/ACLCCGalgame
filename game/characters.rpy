@@ -1,5 +1,8 @@
+
+default persistent.name_mc = ""
 default name_mc = ""
 define character.mc = DynamicCharacter("name_mc")
+
 
 default name_ashell = "阿希尔Ashell"
 define character.ashell = DynamicCharacter("name_ashell", image="ashell", what_prefix='a ', what_suffix='')

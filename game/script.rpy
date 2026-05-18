@@ -27,10 +27,15 @@ label start:
 label naming:
     scene black with fade
 
+    if persistent.name_mc:
+        $ name_mc = persistent.name_mc
+        mc "A name has already been chosen."
+    else:
+        jump naming_loop
+    
     label naming_loop:
         "Name the main character.{nw}"
-        python:
-            name_mc = renpy.input(_("Name the main character.{fast}"), length=56).strip()
+        $ name_mc = renpy.input(_("Name the main character.{fast}"), length=56).strip()
         if not name_mc:
             "You must choose a name."
             jump naming_loop
@@ -49,6 +54,7 @@ label naming:
             "No":
                 jump naming_loop
     
+    $ persistent.name_mc = name_mc
     scene black with fade
     return
 
