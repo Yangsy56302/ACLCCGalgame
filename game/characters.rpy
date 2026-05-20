@@ -1,6 +1,5 @@
 default persistent.name_mc = ""
 default name_mc = ""
-define default_name_mc = "这个名字没错"
 define character.mc = DynamicCharacter("name_mc")
 
 
