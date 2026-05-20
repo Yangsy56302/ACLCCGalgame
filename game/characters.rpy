@@ -4,10 +4,10 @@ define default_name_mc = "这个名字没错"
 define character.mc = DynamicCharacter("name_mc")
 
 
-define nickname_qqq = "？？？"
-define realname_qqq = nickname_qqq
-default name_qqq = nickname_qqq
-define character.qqq = DynamicCharacter("name_qqq")
+define nickname_guide = "？？？"
+define realname_guide = nickname_guide
+default name_guide = nickname_guide
+define character.guide = DynamicCharacter("name_guide")
 
 
 define nickname_ashell = "阿希尔Ashell"
@@ -185,15 +185,27 @@ transform tcyangsy:
     zoom 2.5 nearest True
 
 # image side yangsy = "char/yangsy/avatar.jpg"
-image yangsy = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_cat.png"), tcyangsy)
-image yangsy blush = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat.png"), tcyangsy)
-image yangsy say = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_cat_open.png"), tcyangsy)
-image yangsy blush say = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_open.png"), tcyangsy)
-image yangsy flirt = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/mouth_cat.png"), tcyangsy)
-image yangsy flirt blush = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat.png"), tcyangsy)
-image yangsy flirt say = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/mouth_cat_open.png"), tcyangsy)
-image yangsy flirt blush say = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_open.png"), tcyangsy)
- 
+image yangsy = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_cat_happy.png"), tcyangsy)
+image yangsy angry = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_angry.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/mouth_sad_open.png"), tcyangsy)
+image yangsy bulb = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_happy_open.png"), tcyangsy)
+image yangsy chat = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_neutral_open.png"), tcyangsy)
+image yangsy dot = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png"), tcyangsy)
+image yangsy exclaim = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_angry.png", (0, 0), "char/yangsy/eye_gtlt.png", (0, 0), "char/yangsy/mouth_neutral_open.png"), tcyangsy)
+image yangsy heart = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_happy.png"), tcyangsy)
+image yangsy music = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/mouth_cat_happy_open.png"), tcyangsy)
+image yangsy question = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_neutral_open.png"), tcyangsy)
+image yangsy respond = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_cat_happy_open.png"), tcyangsy)
+image yangsy shy = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_gtlt.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_sad.png"), tcyangsy)
+image yangsy sigh = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_flat.png", (0, 0), "char/yangsy/mouth_neutral_open.png"), tcyangsy)
+image yangsy steam = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_angry.png", (0, 0), "char/yangsy/eye_gtlt.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_sad.png"), tcyangsy)
+image yangsy surprise = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_angry.png", (0, 0), "char/yangsy/eye_tareme.png", (0, 0), "char/yangsy/mouth_sad_open.png"), tcyangsy)
+image yangsy sweat = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_happy.png"), tcyangsy)
+image yangsy tear = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_sad.png", (0, 0), "char/yangsy/eye_gtlt.png", (0, 0), "char/yangsy/mouth_cat_sad.png"), tcyangsy)
+image yangsy think = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_angry.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/mouth_neutral.png"), tcyangsy)
+image yangsy twinkle = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_happy.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_happy_open.png"), tcyangsy)
+image yangsy upset = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_jitome.png", (0, 0), "char/yangsy/mouth_sad.png"), tcyangsy)
+image yangsy zzz = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_flat.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_happy.png"), tcyangsy)
+
 
 define nickname_yoosee = "祐荽"
 define realname_yoosee = "祐荽"
