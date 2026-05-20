@@ -38,3 +38,17 @@ label chtest:
     ""
 
     return
+
+image splash = "splash.png"
+label splashscreen: 
+    
+    scene black 
+    with Pause(1) 
+    
+    show splash with dissolve
+    with Pause(2)
+    
+    scene black with dissolve
+    with Pause(1)
+
+    return
