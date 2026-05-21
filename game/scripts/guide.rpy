@@ -150,6 +150,11 @@ label guide_naming_entered:
         guide "[player_input]"
         $ name_mc = player_input
         jump guide_naming_confirm
+
+    elif player_input in names:
+        guide "该名称已被占用"
+        $ name_mc = player_input
+        jump guide_naming_loop
     
     # 否则，如果输入的名字含有特殊符号（通过检查Unicode字符分类判断）：
     elif any(unicodedata.category(c) in ("So", "Zl", "Zp", "Cc", "Cf", "Cs", "Co", "Cn") for c in player_input):
