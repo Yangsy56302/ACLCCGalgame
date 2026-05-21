@@ -453,8 +453,8 @@ init python:
         ## Change the size and spacing of various things.
         gui.slider_size = 54
 
-        gui.choice_button_width = 1860
-        gui.choice_button_text_size = 45
+        gui.choice_button_width = 1185
+        gui.choice_button_text_size = 40
 
         gui.navigation_spacing = 30
         gui.pref_button_spacing = 15
@@ -471,6 +471,7 @@ init python:
         gui.history_text_xalign = 0.0
 
         gui.quick_button_text_size = 30
+        gui.quick_button_borders = Borders(40, 6, 40, 0)
 
         ## File button layout.
         gui.file_slot_cols = 2
