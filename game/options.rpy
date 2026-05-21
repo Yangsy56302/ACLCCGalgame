@@ -36,7 +36,7 @@ ADOFAI Cursed Levels (CN) Community
 
 程序: Yangsy56302, ms_win_and_mc, myworldzycpc, baileovo
 
-立绘: {a=https://www.doubao.com/}豆包{/a}， {a=https://www.chatgpt.com/}ChatGPT{/a}
+立绘: {a=https://www.doubao.com/}豆包{/a}, {a=https://www.chatgpt.com/}ChatGPT{/a}
 """)
 
 
