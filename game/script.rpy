@@ -61,7 +61,7 @@ label splashscreen:
     return
 
 
-init python:
+init -999 python:
     class Continue(Action):
         def __call__(self):
             newest_page , newest_name = self.get_newest_slot()
