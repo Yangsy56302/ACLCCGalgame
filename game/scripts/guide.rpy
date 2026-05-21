@@ -12,6 +12,7 @@ label guide_naming_start:
     
     scene black with fade
     
+    $ error_times = 0
     guide "{......}噢，{w=0.25}嘿，{w=0.25}你好。"
 
     # 如果已经选择了一个名字：
@@ -28,6 +29,7 @@ label guide_naming_start:
                 guide "非常感谢，{w=0.5}这样我就不用再重新念一遍那无聊的稿子了。"
                 return
             "我还是换一个吧。":
+                $ error_times = 0
                 guide "当然，{w=0.5}换个身份也是个很好的选择。"
                 guide "让我找找取名界面被我收拾到哪去了{......}"
                 jump guide_naming_loop
@@ -151,9 +153,32 @@ label guide_naming_entered:
         $ name_mc = player_input
         jump guide_naming_confirm
 
+    # 名字冲突处理（修改部分）
     elif player_input in names:
-        guide "该名称已被占用"
-        $ name_mc = player_input
+        $ error_times += 1
+        
+        # 显示自定义错误对话框
+        $ error_message = f"名字“{player_input}”已经被其他角色使用了"
+        call screen naming_error_message(error_message)
+        
+        # 显示错误提示（不再使用 raise）
+        if error_times == 1:
+            guide "哦不……我没考虑到这一点。"
+            guide "大概是你的名字和游戏内角色冲突了，我的程序没考虑到这点。"
+            guide "我想，你可能得试试别的名字了，非常抱歉。"
+            guide "稍等一下，我得回退一下进程。"
+        elif error_times == 2:
+            guide "啊，你运气真不好。"
+            guide "我想你得再试一次了。"
+        elif error_times == 3:
+            guide "喂，你是故意的吧。"
+            guide "你是不是在网络上看过攻略了？还是你认识他们？"
+            guide "我劝你最好认真考虑一下，我的耐心是有限的。"
+        else:
+            guide "{......}"
+            $ name_mc = player_input
+        
+        # 返回重新输入
         jump guide_naming_loop
     
     # 否则，如果输入的名字含有特殊符号（通过检查Unicode字符分类判断）：
@@ -207,39 +232,38 @@ label guide_naming_done:
     return
 
 
-# 以下是已被弃用的仿UNDERTALE取名系统
-
-
-label ut_naming:
-    scene black with fade
-
-    if persistent.name_mc:
-        $ name_mc = persistent.name_mc
-        mc "A name has already been chosen."
-    else:
-        call ut_naming_loop from _call_ut_naming_loop
+# 自定义错误提示屏幕（在 screens.rpy 中添加，或直接加在这里）
+screen naming_error_message(error_message):
+    modal True
     
-    return
-
-
-label ut_naming_loop:
-    "Name the main character.{nw}"
-    $ name_mc = renpy.input(_("Name the main character.{fast}"), length=56).strip()
-    if not name_mc:
-        "You must choose a name."
-        jump ut_naming_loop
-    # elif any(name_mc.lower() in n for n in ["ashell", "阿希尔"]):
-    #     character.ashell("大概是取名彩蛋对话啥的")
-    #     jump guide_naming_loop
-    # elif name_mc.lower() == "你的名字":
-    #     name_mc = "韦一敏"
-    mc "Is this name correct?{nw}"
-    $ _history_list.pop()
-    menu:
-        mc "Is this name correct?{fast}"
-        "Yes":
-            $ persistent.name_mc = name_mc
-            $ renpy.block_rollback()
-            return
-        "No":
-            jump ut_naming_loop
+    frame:
+        background "#ffffff"
+        xfill True
+        yfill True
+        padding (50, 50)
+        
+        vbox:
+            spacing 15
+            xfill True
+            
+            text "I'm sorry, but an uncaught exception occurred.":
+                size 16
+                color "#000000"
+            
+            frame:
+                background "#f5f5f5"
+                padding (15, 15)
+                xfill True
+                
+                text "[error_message]":
+                    size 13
+                    color "#000000"
+            
+            hbox:
+                spacing 20
+                xalign 0.0
+                
+                textbutton "Rollback" action Return() text_color "#000000"
+                textbutton "Ignore" action Return() text_color "#000000"
+                textbutton "Reload" action Return() text_color "#000000"
+                textbutton "Console" action Return() text_color "#000000"
