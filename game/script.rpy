@@ -59,3 +59,30 @@ label splashscreen:
     with Pause(1)
 
     return
+
+
+init -999 python:
+    class Continue(Action):
+        def __call__(self):
+            newest_page , newest_name = self.get_newest_slot()
+            FileLoad(newest_name , confirm = False , page = newest_page)()
+
+        def get_sensitive(self):
+            if not renpy.newest_slot():
+                return False
+
+            newest_page ,newest_name = self.get_newest_slot()
+
+            if newest_page == '_reload':
+                return False
+
+            return FileLoadable(newest_name , page=newest_page)
+
+        def  get_newest_slot(self):
+
+            newest = renpy.newest_slot()
+
+
+            if newest:
+                page , name = newest.split("-")
+                return page , name

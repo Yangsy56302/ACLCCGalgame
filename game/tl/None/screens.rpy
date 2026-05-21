@@ -321,3 +321,7 @@ translate None strings:
     # game/screens.rpy:1465
     old "Menu"
     new "菜单"
+
+    # continue
+    old "Continue"
+    new "继续"

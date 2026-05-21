@@ -214,3 +214,8 @@ init python:
 ## by a slash.
 
 # define build.itch_project = "renpytom/test-project"
+
+
+
+# 退出自动保存（测试）
+define config.autosave_on_quit = True

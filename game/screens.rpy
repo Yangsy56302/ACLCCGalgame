@@ -339,6 +339,8 @@ screen navigation():
 
             textbutton _("Start") action Start()
 
+            textbutton _("Continue") action Continue()
+            
         else:
 
             textbutton _("History") action ShowMenu("history")
