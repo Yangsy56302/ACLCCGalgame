@@ -135,6 +135,7 @@ default preferences.text_cps = 24
 
 default preferences.afm_time = 15
 
+default preferences.audio_when_unfocused = False
 
 ## Save directory ##############################################################
 ##
