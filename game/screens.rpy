@@ -834,6 +834,10 @@ screen preferences():
 
                             if config.sample_voice:
                                 textbutton _("Test") action Play("voice", config.sample_voice)
+                    
+                    vbox:
+                        style_prefix "check"
+                        textbutton _("后台播放声音") action Preference("audio when unfocused", "toggle")
 
                     if config.has_music or config.has_sound or config.has_voice:
                         null height gui.pref_spacing
