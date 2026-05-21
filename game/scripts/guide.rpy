@@ -262,7 +262,6 @@ screen naming_error_message(error_message):
             hbox:
                 spacing 20
                 xalign 0.0
-                
                 textbutton "Rollback" action Return() text_color "#000000"
                 textbutton "Ignore" action Return() text_color "#000000"
                 textbutton "Reload" action Return() text_color "#000000"
