@@ -435,18 +435,20 @@ init python:
     def small():
 
         ## Font sizes.
-        gui.text_size = 45
-        gui.name_text_size = 54
+        gui.text_size = 40
+        gui.name_text_size = 40
         gui.notify_text_size = 38
-        gui.interface_text_size = 45
-        gui.button_text_size = 45
-        gui.label_text_size = 51
+        gui.interface_text_size = 35
+        gui.button_text_size = 33
+        gui.label_text_size = 35
 
         ## Adjust the location of the textbox.
-        gui.textbox_height = 360
+        gui.textbox_height = 277
         gui.name_xpos = 120
+        gui.name_ypos = 20
         gui.dialogue_xpos = 135
         gui.dialogue_width = 1650
+        gui.dialogue_ypos = 80
 
         ## Change the size and spacing of various things.
         gui.slider_size = 54
@@ -457,8 +459,16 @@ init python:
         gui.navigation_spacing = 30
         gui.pref_button_spacing = 15
 
-        gui.history_height = 285
-        gui.history_text_width = 1035
+        gui.history_height = 150
+        gui.history_name_ypos = 0
+        gui.history_name_xpos = 233
+        gui.history_name_width = 233
+        gui.history_name_xalign = 1.0
+
+        gui.history_text_xpos = 255
+        gui.history_text_ypos = 3
+        gui.history_text_width = 1110
+        gui.history_text_xalign = 0.0
 
         gui.quick_button_text_size = 30
 

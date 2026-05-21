@@ -101,6 +101,9 @@ screen say(who, what):
     window:
         id "window"
 
+        if renpy.variant("small"):
+            yalign 1.0
+
         if who is not None:
 
             window:
