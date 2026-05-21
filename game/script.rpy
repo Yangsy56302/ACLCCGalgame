@@ -40,10 +40,17 @@ label chtest:
     return
 
 image splash = "splash.png"
+# image attention = "attention.png"
 label splashscreen: 
     
     scene black 
     with Pause(1) 
+
+#    show attention with dissolve
+#    with Pause(2)
+
+#    scene black with dissolve
+#    with Pause(1)
     
     show splash with dissolve
     with Pause(2)
