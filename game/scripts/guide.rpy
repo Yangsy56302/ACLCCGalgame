@@ -11,8 +11,10 @@ init python:
 label guide_naming_start:
     
     scene black with fade
-    
-    $ error_times = 0
+
+    python:
+        error_times = 0
+        empty_name_attempts = 0
     guide "{......}噢，{w=0.25}嘿，{w=0.25}你好。"
 
     # 如果已经选择了一个名字：
@@ -93,43 +95,54 @@ label guide_naming_entered:
     
     # 如果不输入名字，或者输入的名字全部为空白字符：
     if not player_input:
-        guide "怎么，{w=0.25}你觉得这样会触发什么彩蛋吗？\n{w=1.0}还是说你叫棍母？\n{w=1.0}又或者你是那个睿智的国王？{w=0.5}名字只有聪明人才能看见？"
-        guide "{......}"
-        guide "咳咳，{w=0.25}我开玩笑的。"
-        guide "总有些人不太擅长取名字，{w=0.5}我也一样。"
-        guide "或者他们就喜欢主角的名字，{w=0.5}也许是为了沉浸感？"
-        guide "不过这样的话，{w=0.5}我就得替你想一个名字了。\n{w=1.0}这可真是个艰巨的任务。"
-        guide "{......}"
-        guide "算了，{w=0.25}稍等一下，{w=0.5}我好像有个随机名字生成器，{w=0.5}我找找{......}"
+        $ empty_name_attempts += 1
+    
+        if empty_name_attempts == 1:
+            guide "你刚刚是不是{...}不小心把取名环节给跳过去了？\n{w=1.0}问题不大，{w=0.5}我们再来一次。"
+            jump guide_naming_loop
 
-        "{......}"
+        elif empty_name_attempts == 2:
+            guide "{...}是我的问题，{w=0.5}还是说你好像又一次什么名字都没有输入？"
+            jump guide_naming_loop
+            
+        else:
+            guide "怎么，{w=0.25}你觉得这样会触发什么彩蛋吗？\n{w=1.0}还是说你叫棍母？\n{w=1.0}又或者你是那个睿智的国王？{w=0.5}名字只有聪明人才能看见？"
+            guide "{......}"
+            guide "咳咳，{w=0.25}我开玩笑的。"
+            guide "总有些人不太擅长取名字，{w=0.5}我也一样。"
+            guide "或者他们就喜欢主角的名字，{w=0.5}也许是为了沉浸感？"
+            guide "不过这样的话，{w=0.5}我就得替你想一个名字了。\n{w=1.0}这可真是个艰巨的任务。"
+            guide "{......}"
+            guide "算了，{w=0.25}稍等一下，{w=0.5}我好像有个随机名字生成器，{w=0.5}我找找{......}"
 
-        guide "嗯，{w=0.25}你觉得，{w=0.5}“XDDCC”这个名字怎么样？"
-        guide "啊哈哈，{w=0.25}抱歉，{w=0.25}你可能不知道这个梗，{w=0.5}实在是不好意思。\n{w=1.0}我绝对不会用这个名字的，{w=0.5}这名字太烂了。"
-        guide "看来还得我自己想一个{......}{nw}"
-        guide "噢，{w=0.25}你觉得“Era”这个名字怎么样？\n{w=0.5}{nw}"
-        $ _history_list.pop()
-        menu:
-            guide "噢，你觉得“Era”这个名字怎么样？\n{fast}{w=0.5}我实在是不擅长取名字，{w=0.5}这已经是我能想到的比较好的一个了。"
-            "当然。": 
-                $ name_mc = "Era"
-                jump guide_naming_done
-            "我再想想......": 
-                guide "好吧，{w=0.5}显然你需要一个中文名字。"
-                guide "那就叫“殷夏”吧，{w=0.25}{nw}"
-                $ _history_list.pop()
-                menu:
-                    guide "那就叫“殷夏”吧，{fast}{w=0.25}这是我朋友的名字。"
-                    "当然。": 
-                        $ name_mc = "殷夏"
-                        jump guide_naming_done
-                    "我再想想......": 
-                        $ name_mc = "玩家"
-                        $ persistent.name_mc = name_mc
-                        $ renpy.block_rollback()
-                        guide "什么，{w=0.5}这都不满意吗？\n{w=1.0}我明白了，{w=0.5}你莫不是来消遣洒家？"
-                        guide "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
-                        return
+            "{......}"
+
+            guide "嗯，{w=0.25}你觉得，{w=0.5}“XDDCC”这个名字怎么样？"
+            guide "啊哈哈，{w=0.25}抱歉，{w=0.25}你可能不知道这个梗，{w=0.5}实在是不好意思。\n{w=1.0}我绝对不会用这个名字的，{w=0.5}这名字太烂了。"
+            guide "看来还得我自己想一个{......}{nw}"
+            guide "噢，{w=0.25}你觉得“Era”这个名字怎么样？\n{w=0.5}{nw}"
+            $ _history_list.pop()
+            menu:
+                guide "噢，你觉得“Era”这个名字怎么样？\n{fast}{w=0.5}我实在是不擅长取名字，{w=0.5}这已经是我能想到的比较好的一个了。"
+                "当然。": 
+                    $ name_mc = "Era"
+                    jump guide_naming_done
+                "我再想想......": 
+                    guide "好吧，{w=0.5}显然你需要一个中文名字。"
+                    guide "那就叫“殷夏”吧，{w=0.25}{nw}"
+                    $ _history_list.pop()
+                    menu:
+                        guide "那就叫“殷夏”吧，{fast}{w=0.25}这是我朋友的名字。"
+                        "当然。": 
+                            $ name_mc = "殷夏"
+                            jump guide_naming_done
+                        "我再想想......": 
+                            $ name_mc = "玩家"
+                            $ persistent.name_mc = name_mc
+                            $ renpy.block_rollback()
+                            guide "什么，{w=0.5}这都不满意吗？\n{w=1.0}我明白了，{w=0.5}你莫不是来消遣洒家？"
+                            guide "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
+                            return
     
     # 否则，如果输入的名字是administrator等管理员用户名：
     elif player_input.lower() in ("admin", "administrator", "system", "root", "wheel"):
