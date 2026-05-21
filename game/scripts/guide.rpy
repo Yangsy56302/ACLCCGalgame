@@ -155,13 +155,16 @@ label guide_naming_entered:
 
     # 名字冲突处理（修改部分）
     elif player_input in names:
-        $ error_times += 1
-        
+        python:
+            error_times += 1
+            quick_menu = False
         # 显示自定义错误对话框
-        $ error_message = f"名字“{player_input}”已经被其他角色使用了"
+            error_message = f"名字“{player_input}”已经被其他角色使用了"
         call screen naming_error_message(error_message)
-        
         # 显示错误提示（不再使用 raise）
+        python:  
+            quick_menu = True
+            renpy.block_rollback()
         if error_times == 1:
             guide "哦不……我没考虑到这一点。"
             guide "大概是你的名字和游戏内角色冲突了，我的程序没考虑到这点。"
@@ -235,7 +238,6 @@ label guide_naming_done:
 # 自定义错误提示屏幕（在 screens.rpy 中添加，或直接加在这里）
 screen naming_error_message(error_message):
     modal True
-    
     frame:
         background "#ffffff"
         xfill True
