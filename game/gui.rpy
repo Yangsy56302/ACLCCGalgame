@@ -63,19 +63,20 @@ define gui.interface_text_color = "#ffffff"
 
 ## Fonts and Font Sizes ########################################################
 
-define english_font = "godoMaum.ttf"
-define chinese_font = "16FontSeto.ttf"
-define mixed_font = FontGroup().add("godoMaum.ttf", "\x00", "\x7F").add("godoMaum.ttf", "\u1100", "\u11FF").add("godoMaum.ttf", "\u3130", "\u318F").add("godoMaum.ttf", "\uAC00", "\uD7FF").add("16FontSeto.ttf", None, None)
-define config.font_name_map["mixed"] = mixed_font
+define debug_gui_font = "SYBlack.otf"
+define adofai_english_font = "godoMaum.ttf"
+define adofai_chinese_font = "16FontSeto.ttf"
+define adofai_mixed_font = FontGroup().add("godoMaum.ttf", "\x00", "\x7F").add("godoMaum.ttf", "\u1100", "\u11FF").add("godoMaum.ttf", "\u3130", "\u318F").add("godoMaum.ttf", "\uAC00", "\uD7FF").add("16FontSeto.ttf", None, None)
+define config.font_name_map["mixed"] = adofai_mixed_font
 
 ## The font used for in-game text.
-define gui.text_font = mixed_font
+define gui.text_font = adofai_mixed_font
 
 ## The font used for character names.
-define gui.name_text_font = mixed_font
+define gui.name_text_font = adofai_mixed_font
 
 ## The font used for out-of-game text.
-define gui.interface_text_font = mixed_font
+define gui.interface_text_font = adofai_mixed_font
 
 ## The size of normal dialogue text.
 define gui.text_size = 33
