@@ -1867,8 +1867,6 @@ screen music_room:
         value AudioPositionValue(channel='music', update_interval=0.1)
         xysize (800,5)
         align (0.5, 0.7)
-        thumb "gui/music/dot.png"
-        thumb_offset 3
   
     vbox:
         xpos 0.5
