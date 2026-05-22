@@ -269,6 +269,7 @@ screen naming_error_message(error_message):
             text "Oops! Something went wrong.":
                 size 60
                 color "#000000"
+                font "fonts/SYBlack.otf"
             
             frame:
                 background "#f5f5f5"
@@ -278,11 +279,12 @@ screen naming_error_message(error_message):
                 text "[error_message]":
                     size 30
                     color "#000000"
+                    font "fonts/SYBlack.otf"
             
             hbox:
                 spacing 20
                 xalign 0.0
-                textbutton "Rollback" action Rollback() text_color "#000000"
-                textbutton "Ignore" action Return() text_color "#000000"
-                textbutton "Reload" text_color "#999999"
-                textbutton "Console" text_color "#999999"
+                textbutton "Rollback" action Rollback() text_color "#000000" text_font "fonts/SYBlack.otf"
+                textbutton "Ignore" action Return() text_color "#000000" text_font "fonts/SYBlack.otf"
+                textbutton "Reload" action None text_color "#999999" text_font "fonts/SYBlack.otf"
+                textbutton "Console" action None text_color "#999999" text_font "fonts/SYBlack.otf"
