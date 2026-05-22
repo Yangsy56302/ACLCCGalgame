@@ -360,11 +360,9 @@ screen navigation():
 
         textbutton _("Preferences") action ShowMenu("preferences")
 
-        if persistent.has_seen_ending:
+        textbutton _("Music") action ShowMenu("music_room")
 
-            textbutton _("Music") action ShowMenu("music_room")
-
-            textbutton _("Gallery") action ShowMenu("gallery")
+        textbutton _("Gallery") action ShowMenu("gallery")
 
         if _in_replay:
 
@@ -1611,13 +1609,16 @@ image gallery_background:
     "bg/adofai.jpg"
     size (1920, 1080)
 
+default persistent.unlock_sbeam = False
 
 #前提条件
 init python:
 
     g = Gallery()
 
+    g.locked_image = "bg/locked.png"
     g.button("bg")#类似于标签
+    g.condition("persistent.unlock_sbeam")#解锁限制
     g.image("bg/sbeam.png")#真正的图片
     g.image("bg/that_video.png")#真正的图片
     # g.unlock_image("bg03.png")#差分
@@ -1654,7 +1655,10 @@ screen gallery(page=0):
                 grid 3 1:
                     spacing 100
                     #由于全部添加会导致代码很长，以下只展示三张图片，请自行添加判断语句
-                    add g.make_button("bg", "bg/smsbeam.png")
+                    if persistent.unlock_sbeam:
+                        add g.make_button("bg", "bg/smsbeam.png")
+                    else:
+                        add g.make_button("unlock", "bg/locked.png")
                     # add g.make_button("bg", "smthat_video.png")
                     # add g.make_button("bg", "smbg03.png")          
 

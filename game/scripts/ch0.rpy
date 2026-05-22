@@ -11,6 +11,7 @@ label ch0:
     "{......}"
 
     scene bg sbeam with fade
+    $ persistent.unlock_sbeam = True
     
     $ renpy.notify("2020年某日")
     pause 1.0
