@@ -7,3 +7,6 @@
 /traceback.txt
 /.vscode/
 *.keystore
+/build
+/__pycache__
+/test
