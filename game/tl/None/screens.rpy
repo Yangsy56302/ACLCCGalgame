@@ -325,3 +325,11 @@ translate None strings:
     # continue
     old "Continue"
     new "继续"
+
+    # Gallery
+    old "Gallery"
+    new "鉴赏模式"
+
+    #MusicRoom
+    old "Music"
+    new "音乐鉴赏"

@@ -348,7 +348,6 @@ screen navigation():
 
             textbutton _("Continue") action Continue()
 
-            # textbutton "Gallery" action ShowMenu("gallery")
 
             
         else:
@@ -364,6 +363,8 @@ screen navigation():
         if persistent.has_seen_ending:
 
             textbutton _("Music") action ShowMenu("music_room")
+
+            textbutton _("Gallery") action ShowMenu("gallery")
 
         if _in_replay:
 
@@ -1602,112 +1603,104 @@ style slider_slider:
     
 
 
-# init python:
 
-    # 步骤1，创建Gallery对象。
-    # g = Gallery()
+#画廊/CG鉴赏
 
-    # 步骤2，在画廊中添加按钮和图像。
+#背景图片
+image gallery_background:
+    "bg/adofai.jpg"
+    size (1920, 1080)
 
-    # 一个图像一直解锁状态的按钮。
-    # g.button("title")
-    # g.image("title")
 
-    # 添加一个包含自动解锁图像的按钮。
-    # g.button("sbeam")
-    # g.image("sbeam1")
-    # g.unlock("sbeam1")
+#前提条件
+init python:
 
-    # 该按钮有多个关联图像。
-    # 我们使用unlock_image函数，这样就不需要同时调用“.image”和“.unlock”了。
-    # 我们也在第一张图像上添加了一个变换效果。
-    # g.button("dark")
-    # g.unlock_image("bigbeach1")
-    # g.transform(slowpan)
-    # g.unlock_image("beach1 mary")
-    # g.unlock_image("beach2")
-    # g.unlock_image("beach3")
+    g = Gallery()
 
-    # 该按钮有一个关联的条件，允许游戏选择是否解锁图片。
-    # g.button("end1")
-    # g.condition("persistent.unlock_1")
-    # g.image("transfer")
-    # g.image("moonpic")
-    # g.image("girlpic")
-    # g.image("nogirlpic")
-    # g.image("bad_ending")
+    g.button("bg")#类似于标签
+    g.image("bg/sbeam.png")#真正的图片
+    g.image("bg/that_video.png")#真正的图片
+    # g.unlock_image("bg03.png")#差分
 
-    # g.button("end2")
-    # g.condition("persistent.unlock_2")
-    # g.image("library")
-    # g.image("beach1 nomoon")
-    # g.image("bad_ending")
+    # g.button("cg")
+    # g.condition("persistent.unlock_1")#解锁限制
+    # g.image("cg01.png")
 
-    # # 该按钮的最后一张图像有一个关联条件，只有只有达到两种结局才会解锁。
-    # g.button("end3")
-    # g.condition("persistent.unlock_3")
-    # g.image("littlemary2")
-    # g.image("littlemary")
-    # g.image("good_ending")
-    # g.condition("persistent.unlock_3 and persistent.unlock_4")
+    #未解锁
+    g.button("unlock")
+    
 
-    # g.button("end4")
-    # g.condition("persistent.unlock_4")
-    # g.image("hospital1")
-    # g.image("hospital2")
-    # g.image("hospital3")
-    # g.image("heaven")
-    # g.image("white")
-    # g.image("good_ending")
-    # g.condition("persistent.unlock_3 and persistent.unlock_4")
+    #更多图像请自行添加
 
-    # # 后面两个按钮包含会同时显示的多个图片。
-    # # 这可能会用于在背景上显示人物立绘。
-    # g.button("dawn mary")
-    # g.unlock_image("dawn1", "mary dawn wistful")
-    # g.unlock_image("dawn1", "mary dawn smiling")
-    # g.unlock_image("dawn1", "mary dawn vhappy")
+    # 图像切换使用的转场。
+    g.transition = dissolve
 
-    # g.button("dark mary")
-    # g.unlock_image("beach2", "mary dark wistful")
-    # g.unlock_image("beach2", "mary dark smiling")
-    # g.unlock_image("beach2", "mary dark vhappy")
+# #如果选择翻页功能可以不加
+# default p = ui.adjustment()
 
-    # 用于图像切换使用的转场(transition)。
-    # g.transition = dissolve
+screen gallery(page=0):
 
-# Step 3. 我们使用的画廊界面。
-# screen gallery:
+    tag menu
+    add "gallery_background"
+    
+    viewport:    
+        xysize (1500, 680)
+        align (0.5, 0.5)
 
-#     # 确保画廊界面替换主菜单。
-#     tag menu
+        vbox:
+            spacing 60
+            #页数判断
+            if (page == 0):
+                grid 3 1:
+                    spacing 100
+                    #由于全部添加会导致代码很长，以下只展示三张图片，请自行添加判断语句
+                    add g.make_button("bg", "bg/smsbeam.png")
+                    # add g.make_button("bg", "smthat_video.png")
+                    # add g.make_button("bg", "smbg03.png")          
 
-#     # 背景图。
-#     add "beach2"
 
-#     # 按钮网格(grid)。
-#     grid 3 3:
+            # if (page == 1):
+            #     grid 3 1:
+            #         spacing 60
+            #         add g.make_button("bg", "smbg03.png")
+            #         add g.make_button("bg", "smbg03.png")
+            #         add g.make_button("cg", "smcg01.png")
 
-#         xfill True
-#         yfill True
 
-#         # 调用make_button显示具体的按钮。
-        # add g.make_button("dark", "gal-dark.png", xalign=0.5, yalign=0.5)
-        # add g.make_button("dawn", "gal-dawn.png", xalign=0.5, yalign=0.5)
-        # add g.make_button("end1", "gal-end1.png", xalign=0.5, yalign=0.5)
+            # if (page == 2):
+            #     grid 3 1:
+            #         spacing 60
+            #         add g.make_button("cg", "smcg01.png")
+            #         add g.make_button("cg", "smcg01.png")
+            #         add g.make_button("cg", "smcg01.png")
 
-        # add g.make_button("end2", "gal-end2.png", xalign=0.5, yalign=0.5)
-        # add g.make_button("end3", "gal-end3.png", xalign=0.5, yalign=0.5)
-        # add g.make_button("end4", "gal-end4.png", xalign=0.5, yalign=0.5)
 
-        # add g.make_button("dark mary", "gal-dark_mary.png", xalign=0.5, yalign=0.5)
-        # add g.make_button("dawn mary", "gal-dawn_mary.png", xalign=0.5, yalign=0.5)
-        # add g.make_button("title", "title.png", xalign=0.5, yalign=0.5)
+            #更多页面请自行添加
 
-#         add g.make_button("sbeam" , "bg/sbeam.png" , xalign=0.5, yalign=0.5)
-#     # 用于响应后返回主菜单的界面。
-#     # 也能用于导航到其他画廊界面。
-#     textbutton "Return" action Return() xalign 0.5 yalign 0.5
+    #底部按钮
+    hbox:
+        xalign 0.5 yalign 0.9
+        spacing 60
+        #请自行根据你的CG数量进行条件判断
+        if page < 0:
+            textbutton "下一页" action Show("gallery",page=(page+1))
+        else:
+            textbutton "下一页" action NullAction()
+
+        textbutton "1" action Show("gallery",page=0)
+        # textbutton "2" action Show("gallery",page=1)
+        # textbutton "3" action Show("gallery",page=2)
+        
+        if page > 0:
+            textbutton "上一页" action Show("gallery",page=(page-1))
+        else:
+            textbutton "上一页" action NullAction()
+
+    #返回按钮
+    textbutton "返回":
+        align (0.0, 0.98)
+        action Return()  
+
 
 #音乐空间背景
 image music_background:
@@ -1771,7 +1764,6 @@ init python:
 default persistent.is_music1_unlock = False
 
 screen music_room:
-
     #更新renpy.music.get_position()和get_music_duration()
     timer 0.1:
         action [SetVariable('duration',get_audio_duration()),SetVariable('music_pos',get_audio_position())]
@@ -1781,7 +1773,7 @@ screen music_room:
     zorder 2
     tag menu
     add "music_background"
-
+ 
     #音乐列表
     viewport id "music_list":
         mousewheel True #垂直滚动
@@ -1789,7 +1781,6 @@ screen music_room:
         align (0.3, 0.4)
         draggable True #鼠标拖动可滚动视口
         vbox:
-            
             spacing 50
 
             textbutton "Aurora (Title Ver.)" action mr.Play("mus_aurora_part1.ogg")
