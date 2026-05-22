@@ -321,6 +321,7 @@ style quick_button:
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
 
+define geted_once_end = False
 
 ################################################################################
 ## Main and Game Menu Screens
@@ -346,6 +347,9 @@ screen navigation():
             textbutton _("Start") action Start()
 
             textbutton _("Continue") action Continue()
+
+            # textbutton "Gallery" action ShowMenu("gallery")
+
             
         else:
 
@@ -356,6 +360,10 @@ screen navigation():
         textbutton _("Load") action ShowMenu("load")
 
         textbutton _("Preferences") action ShowMenu("preferences")
+
+        if geted_once_end:
+
+            textbutton _("Music") action ShowMenu("music_room")
 
         if _in_replay:
 
@@ -1594,3 +1602,150 @@ style slider_slider:
     
 
 
+# init python:
+
+    # 步骤1，创建Gallery对象。
+    # g = Gallery()
+
+    # 步骤2，在画廊中添加按钮和图像。
+
+    # 一个图像一直解锁状态的按钮。
+    # g.button("title")
+    # g.image("title")
+
+    # 添加一个包含自动解锁图像的按钮。
+    # g.button("sbeam")
+    # g.image("sbeam1")
+    # g.unlock("sbeam1")
+
+    # 该按钮有多个关联图像。
+    # 我们使用unlock_image函数，这样就不需要同时调用“.image”和“.unlock”了。
+    # 我们也在第一张图像上添加了一个变换效果。
+    # g.button("dark")
+    # g.unlock_image("bigbeach1")
+    # g.transform(slowpan)
+    # g.unlock_image("beach1 mary")
+    # g.unlock_image("beach2")
+    # g.unlock_image("beach3")
+
+    # 该按钮有一个关联的条件，允许游戏选择是否解锁图片。
+    # g.button("end1")
+    # g.condition("persistent.unlock_1")
+    # g.image("transfer")
+    # g.image("moonpic")
+    # g.image("girlpic")
+    # g.image("nogirlpic")
+    # g.image("bad_ending")
+
+    # g.button("end2")
+    # g.condition("persistent.unlock_2")
+    # g.image("library")
+    # g.image("beach1 nomoon")
+    # g.image("bad_ending")
+
+    # # 该按钮的最后一张图像有一个关联条件，只有只有达到两种结局才会解锁。
+    # g.button("end3")
+    # g.condition("persistent.unlock_3")
+    # g.image("littlemary2")
+    # g.image("littlemary")
+    # g.image("good_ending")
+    # g.condition("persistent.unlock_3 and persistent.unlock_4")
+
+    # g.button("end4")
+    # g.condition("persistent.unlock_4")
+    # g.image("hospital1")
+    # g.image("hospital2")
+    # g.image("hospital3")
+    # g.image("heaven")
+    # g.image("white")
+    # g.image("good_ending")
+    # g.condition("persistent.unlock_3 and persistent.unlock_4")
+
+    # # 后面两个按钮包含会同时显示的多个图片。
+    # # 这可能会用于在背景上显示人物立绘。
+    # g.button("dawn mary")
+    # g.unlock_image("dawn1", "mary dawn wistful")
+    # g.unlock_image("dawn1", "mary dawn smiling")
+    # g.unlock_image("dawn1", "mary dawn vhappy")
+
+    # g.button("dark mary")
+    # g.unlock_image("beach2", "mary dark wistful")
+    # g.unlock_image("beach2", "mary dark smiling")
+    # g.unlock_image("beach2", "mary dark vhappy")
+
+    # 用于图像切换使用的转场(transition)。
+    # g.transition = dissolve
+
+# Step 3. 我们使用的画廊界面。
+# screen gallery:
+
+#     # 确保画廊界面替换主菜单。
+#     tag menu
+
+#     # 背景图。
+#     add "beach2"
+
+#     # 按钮网格(grid)。
+#     grid 3 3:
+
+#         xfill True
+#         yfill True
+
+#         # 调用make_button显示具体的按钮。
+        # add g.make_button("dark", "gal-dark.png", xalign=0.5, yalign=0.5)
+        # add g.make_button("dawn", "gal-dawn.png", xalign=0.5, yalign=0.5)
+        # add g.make_button("end1", "gal-end1.png", xalign=0.5, yalign=0.5)
+
+        # add g.make_button("end2", "gal-end2.png", xalign=0.5, yalign=0.5)
+        # add g.make_button("end3", "gal-end3.png", xalign=0.5, yalign=0.5)
+        # add g.make_button("end4", "gal-end4.png", xalign=0.5, yalign=0.5)
+
+        # add g.make_button("dark mary", "gal-dark_mary.png", xalign=0.5, yalign=0.5)
+        # add g.make_button("dawn mary", "gal-dawn_mary.png", xalign=0.5, yalign=0.5)
+        # add g.make_button("title", "title.png", xalign=0.5, yalign=0.5)
+
+#         add g.make_button("sbeam" , "bg/sbeam.png" , xalign=0.5, yalign=0.5)
+#     # 用于响应后返回主菜单的界面。
+#     # 也能用于导航到其他画廊界面。
+#     textbutton "Return" action Return() xalign 0.5 yalign 0.5
+
+init python:
+
+    #  步骤1，创建一个MusicRoom实例。
+    mr = MusicRoom(fadeout=1.0)
+
+    # Step 2. 添加音乐文件。
+    mr.add("mus_aurora_part1.ogg", always_unlocked=True)
+    mr.add("mus_astral_calm.mp3")
+    # mr.add("track3.ogg")
+
+
+# Step 3. 创建音乐空间界面。
+screen music_room:
+
+    tag menu
+
+    frame:
+        has vbox
+
+        # 每条音轨的播放按钮。
+        textbutton "Aurora (Title Ver.)" action mr.Play("mus_aurora_part1.ogg")
+        textbutton "Astral Calm" action mr.Play("mus_astral_calm.mp3")
+        # textbutton "Track 3" action mr.Play("track3.ogg")
+
+        null height 20
+
+        # 切换音轨按钮。
+        textbutton "Next" action mr.Next()
+        textbutton "Previous" action mr.Previous()
+
+        null height 20
+
+        # 用户退出音乐空间的按钮。
+        textbutton "Main Menu" action ShowMenu("main_menu")
+
+    # 音乐空间的音乐播放入口。
+    on "replace" action mr.Play()
+
+    # 离开时恢复主菜单的音乐。
+    on "replaced" action Play("music", "mus_aurora_part1.ogg")
