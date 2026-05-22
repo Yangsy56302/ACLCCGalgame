@@ -1846,10 +1846,10 @@ screen music_room:
         #暂停/播放切换
         imagebutton:
             
-            idle "pause.png"
-            hover "pause.png"
-            selected_idle "continue.png"
-            selected_hover "continue.png"
+            idle "gui/music/pause.png"
+            hover "gui/music/pause.png"
+            selected_idle "gui/music/continue.png"
+            selected_hover "gui/music/continue.png"
             if not renpy.music.is_playing() and not renpy.music.get_pause():
                 action mr.Play("mus_aurora_part1.ogg")
             else:
@@ -1863,7 +1863,7 @@ screen music_room:
         value AudioPositionValue(channel='music', update_interval=0.1)
         xysize (800,5)
         align (0.5, 0.7)
-        thumb "dot.png"
+        thumb "gui/music/dot.png"
         thumb_offset 3
   
     vbox:
