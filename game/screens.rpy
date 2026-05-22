@@ -360,9 +360,11 @@ screen navigation():
 
         textbutton _("Preferences") action ShowMenu("preferences")
 
-        textbutton _("Music") action ShowMenu("music_room")
+        if persistent.has_seen_ending:
 
-        textbutton _("Gallery") action ShowMenu("gallery")
+            textbutton _("Music") action ShowMenu("music_room")
+
+            textbutton _("Gallery") action ShowMenu("gallery")
 
         if _in_replay:
 
