@@ -51,7 +51,7 @@ label guide_naming_start:
     with None
     call screen volatile_input_screen("↓试着给自己想个名字？", 1.0)
     with None
-    window show None
+    window auto None
     $ entered = _return
     python:
         delta_time = time.time() - start_time
@@ -159,7 +159,7 @@ label guide_naming_entered:
         with None
         call screen naming_error_message(error_message)
         with None
-        window show None
+        window auto None
         # 显示错误提示（不再使用 raise）
         python: 
             quick_menu = True
