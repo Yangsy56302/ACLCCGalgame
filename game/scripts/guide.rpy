@@ -172,7 +172,7 @@ label guide_naming_entered:
             error_times += 1
             quick_menu = False
         # 显示自定义错误对话框
-            error_message = f"名字“{player_input}”已经被其他角色使用了"
+            error_message = f"NameError: \"{player_input}\" is already defined.\nPress Ignore to continue..."
         call screen naming_error_message(error_message)
         # 显示错误提示（不再使用 raise）
         python:  
@@ -261,8 +261,8 @@ screen naming_error_message(error_message):
             spacing 15
             xfill True
             
-            text "I'm sorry, but an uncaught exception occurred.":
-                size 16
+            text "Oops! Something went wrong.":
+                size 60
                 color "#000000"
             
             frame:
@@ -271,13 +271,13 @@ screen naming_error_message(error_message):
                 xfill True
                 
                 text "[error_message]":
-                    size 13
+                    size 30
                     color "#000000"
             
             hbox:
                 spacing 20
                 xalign 0.0
-                textbutton "Rollback" action Return() text_color "#000000"
+                textbutton "Rollback" action Rollback() text_color "#000000"
                 textbutton "Ignore" action Return() text_color "#000000"
-                textbutton "Reload" action Return() text_color "#000000"
-                textbutton "Console" action Return() text_color "#000000"
+                textbutton "Reload" text_color "#999999"
+                textbutton "Console" text_color "#999999"
