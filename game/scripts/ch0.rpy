@@ -65,6 +65,6 @@ label ch0:
     mwam "他自己说的，不要问我（{nw}"
     scene black
     stop music
-    $ geted_once_end = True
+    $ persistent.has_seen_ending = True
     "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
     return

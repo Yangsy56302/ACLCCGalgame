@@ -321,7 +321,7 @@ style quick_button:
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
 
-define geted_once_end = False
+default persistent.has_seen_ending = False
 
 ################################################################################
 ## Main and Game Menu Screens
@@ -361,7 +361,7 @@ screen navigation():
 
         textbutton _("Preferences") action ShowMenu("preferences")
 
-        if geted_once_end:
+        if persistent.has_seen_ending:
 
             textbutton _("Music") action ShowMenu("music_room")
 
