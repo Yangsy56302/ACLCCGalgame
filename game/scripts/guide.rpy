@@ -13,7 +13,7 @@ label guide_naming_start:
     scene black with fade
 
     python:
-        error_times = 0
+        duplicate_name_attempts = 0
         empty_name_attempts = 0
     guide "{......}噢，{w=0.25}嘿，{w=0.25}你好。"
 
@@ -31,7 +31,7 @@ label guide_naming_start:
                 guide "非常感谢，{w=0.5}这样我就不用再重新念一遍那无聊的稿子了。"
                 return
             "我还是换一个吧。":
-                $ error_times = 0
+                $ duplicate_name_attempts = 0
                 guide "当然，{w=0.5}换个身份也是个很好的选择。"
                 guide "让我找找取名界面被我收拾到哪去了{......}"
                 jump guide_naming_loop
@@ -143,6 +143,35 @@ label guide_naming_entered:
                             guide "什么，{w=0.5}这都不满意吗？\n{w=1.0}我明白了，{w=0.5}你莫不是来消遣洒家？"
                             guide "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
+
+    # 否则，如果输入的名字与剧情中存在的角色撞名：
+    elif player_input in names:
+        python:
+            duplicate_name_attempts += 1
+            quick_menu = False
+        # 显示自定义错误对话框
+            error_message = f"NameError: '{player_input}' is already defined.\nPress Ignore to continue..."
+        call screen naming_error_message(error_message)
+        # 显示错误提示（不再使用 raise）
+        python: 
+            quick_menu = True
+            renpy.block_rollback()
+        if duplicate_name_attempts == 1:
+            guide "哦不{...}{w=0.5}我没考虑到这一点。\n{w=1.0}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
+            guide "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
+            guide "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
+        elif duplicate_name_attempts == 2:
+            guide "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
+        elif duplicate_name_attempts == 3:
+            guide "喂，{w=0.25}你是故意的吧。"
+            guide "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
+            guide "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
+        else:
+            guide "{......}"
+            $ name_mc = player_input
+        
+        # 返回重新输入
+        jump guide_naming_loop
     
     # 否则，如果输入的名字是administrator等管理员用户名：
     elif player_input.lower() in ("admin", "administrator", "system", "root", "wheel"):
@@ -165,37 +194,6 @@ label guide_naming_entered:
         guide "[player_input]"
         $ name_mc = player_input
         jump guide_naming_confirm
-
-    # 名字冲突处理（修改部分）
-    elif player_input in names:
-        python:
-            error_times += 1
-            quick_menu = False
-        # 显示自定义错误对话框
-            error_message = f"NameError: \"{player_input}\" is already defined.\nPress Ignore to continue..."
-        call screen naming_error_message(error_message)
-        # 显示错误提示（不再使用 raise）
-        python:  
-            quick_menu = True
-            renpy.block_rollback()
-        if error_times == 1:
-            guide "哦不……我没考虑到这一点。"
-            guide "大概是你的名字和游戏内角色冲突了，我的程序没考虑到这点。"
-            guide "我想，你可能得试试别的名字了，非常抱歉。"
-            guide "稍等一下，我得回退一下进程。"
-        elif error_times == 2:
-            guide "啊，你运气真不好。"
-            guide "我想你得再试一次了。"
-        elif error_times == 3:
-            guide "喂，你是故意的吧。"
-            guide "你是不是在网络上看过攻略了？还是你认识他们？"
-            guide "我劝你最好认真考虑一下，我的耐心是有限的。"
-        else:
-            guide "{......}"
-            $ name_mc = player_input
-        
-        # 返回重新输入
-        jump guide_naming_loop
     
     # 否则，如果输入的名字含有特殊符号（通过检查Unicode字符分类判断）：
     elif any(unicodedata.category(c) in ("So", "Zl", "Zp", "Cc", "Cf", "Cs", "Co", "Cn") for c in player_input):
@@ -217,7 +215,6 @@ label guide_naming_entered:
     
     # 否则（以上条件均没能满足）：
     else:
-        # yangsy "（此处应为[name_guide]对玩家所取的名称（[player_input]）的默认评价）"
         $ name_mc = player_input
         jump guide_naming_confirm
 
