@@ -269,20 +269,22 @@ screen naming_error_message(error_message):
             text "Oops! Something went wrong.":
                 size 60
                 color "#000000"
+                font debug_gui_font
             
             frame:
-                background "#f5f5f5"
+                background "#eeeeee"
                 padding (15, 15)
                 xfill True
                 
                 text "[error_message]":
                     size 30
                     color "#000000"
+                    font debug_gui_font
             
             hbox:
                 spacing 20
                 xalign 0.0
-                textbutton "Rollback" action Rollback() text_color "#000000"
-                textbutton "Ignore" action Return() text_color "#000000"
-                textbutton "Reload" text_color "#999999"
-                textbutton "Console" text_color "#999999"
+                textbutton "Rollback" action Rollback() text_color "#000000" text_hover_color "#555555" text_font debug_gui_font
+                textbutton "Ignore" action Return() text_color "#000000" text_hover_color "#555555" text_font debug_gui_font
+                textbutton "Reload" action None text_color "#aaaaaa" text_font debug_gui_font
+                textbutton "Console" action None text_color "#aaaaaa" text_font debug_gui_font
