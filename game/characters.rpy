@@ -180,3 +180,8 @@ define character.yoosee = CharacterWithData("祐荽", image="yoosee", what_prefi
 
 # image side yoosee = "char/yoosee/avatar.jpg"
 # image yoosee = "char/yoosee/normal.png"
+
+define character.myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", what_prefix="", what_suffix="")
+
+# image side myworldzycpc = "char/myworldzycpc/avatar.jpg"
+# image myworldzycpc = "char/myworldzycpc/normal.png"

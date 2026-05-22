@@ -24,6 +24,10 @@ style hyperlink_text:
 style gui_text:
     properties gui.text_properties("interface")
 
+style ruby_style is default:
+    size 20
+    yoffset -25
+    color None
 
 style button:
     properties gui.button_properties("button")
@@ -164,6 +168,8 @@ style say_dialogue:
     ypos gui.dialogue_ypos
 
     adjust_spacing False
+    ruby_line_leading 12
+    ruby_style style.ruby_style
 
 ## Input screen ################################################################
 ##
@@ -1009,6 +1015,8 @@ style history_text:
     min_width gui.history_text_width
     text_align gui.history_text_xalign
     layout ("subtitle" if gui.history_text_xalign else "tex")
+    ruby_line_leading 12
+    ruby_style style.ruby_style
 
 style history_label:
     xfill True
@@ -1584,3 +1592,5 @@ style slider_slider:
     variant "small"
     xsize 900
     
+
+
