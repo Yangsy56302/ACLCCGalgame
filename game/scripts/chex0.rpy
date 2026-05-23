@@ -1,4 +1,4 @@
-label chex0:
+label chex0_not_join:
     stop music fadeout 1.0
     scene black with fade
     "你没有加群。\n{w=1.0}日子就这么普普通通的过着，{w=0.5}普普通通的过完了一生。"

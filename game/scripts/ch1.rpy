@@ -10,7 +10,7 @@ label ch1:
         "加群":
             pass
         "不加群":
-            jump chex0
+            jump chex0_not_join
 
     "你发送了入群申请。"
     "在等待回复的时候，{w=0.5}你顺便看了这位UP的其他视频。"
@@ -30,7 +30,7 @@ label ch1:
         "是":
             pass
         "否":
-            jump chex0
+            jump chex0_not_join
 
     "不信邪的你又发了一遍入群申请——{w=0.5}这次的提示音倒是没过多久就出现了。"
     "QQ的群聊一栏多出了个名叫“Grafrustix的聊天群”的群。\n{w=1.0}你点进群内，{w=0.5}很快就看到了第一条消息："
