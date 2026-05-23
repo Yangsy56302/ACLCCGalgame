@@ -359,9 +359,7 @@ screen navigation():
 
         if main_menu and persistent.has_seen_ending:
 
-            textbutton _("Music") action ShowMenu("music_room")
-
-            textbutton _("Gallery") action ShowMenu("gallery")
+            textbutton _("Extra Mode") action ShowMenu("gallery")
 
         textbutton _("Preferences") action ShowMenu("preferences")
 
@@ -542,6 +540,8 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 style game_menu_outer_frame is empty
 style game_menu_navigation_frame is empty
 style game_menu_content_frame is empty
+style admire_navigation_frame is empty
+style admire_content_frame is empty
 style game_menu_viewport is gui_viewport
 style game_menu_side is gui_side
 style game_menu_scrollbar is gui_vscrollbar
@@ -558,11 +558,27 @@ style game_menu_outer_frame:
 
     background "gui/overlay/game_menu.png"
 
+style admire_outer_frame:
+    bottom_padding 45
+    top_padding 180
+
+    background "gui/overlay/game_menu.png"
+
 style game_menu_navigation_frame:
     xsize 420
     yfill True
 
+style admire_navigation_frame:
+    xsize 420
+    yfill True
+
+
 style game_menu_content_frame:
+    left_margin 60
+    right_margin 30
+    top_margin 15
+
+style admire_content_frame:
     left_margin 60
     right_margin 30
     top_margin 15
@@ -1545,9 +1561,18 @@ style game_menu_navigation_frame:
     variant "small"
     xsize 510
 
+style admire_navigation_frame:
+    variant "small"
+    xsize 510
+
 style game_menu_content_frame:
     variant "small"
     top_margin 0
+
+style admire_content_frame:
+    variant "small"
+    top_margin 0
+
 
 style pref_vbox:
     variant "small"
@@ -1596,6 +1621,76 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+
+screen admire_mode(title, scroll=None, yinitial=0.0):
+    tag menu
+    style_prefix "game_menu" 
+    if main_menu:
+        add gui.main_menu_background 
+    else:
+        add gui.game_menu_background 
+    frame:
+        style "admire_outer_frame"
+        hbox:
+            frame:
+                style "admire_navigation_frame"
+
+            frame:
+                style "admire_content_frame"
+                if scroll == "viewport":
+
+                    viewport:
+                        yinitial yinitial
+                        scrollbars "vertical"
+                        mousewheel True
+                        draggable True
+                        pagekeys True
+
+                        side_yfill True
+
+                        vbox:
+                            transclude
+
+                elif scroll == "vpgrid":
+
+                    vpgrid:
+                        cols 1
+                        yinitial yinitial
+
+                        scrollbars "vertical"
+                        mousewheel True
+                        draggable True
+                        pagekeys True
+
+                        side_yfill True
+
+                        transclude
+
+                else:
+
+                    transclude
+    vbox:
+        style_prefix "navigation"
+        xpos gui.navigation_xpos
+        yalign 0.5
+        spacing gui.navigation_spacing
+        textbutton _("Gallery"):
+            action [ShowMenu("gallery"),Play("music", "mus_aurora_part1.ogg")]
+
+        textbutton _("Music") action ShowMenu("music_room")
+
+    textbutton _("Return"):
+        style "return_button"
+
+        action[Return(),Play("music", "mus_aurora_part1.ogg")]
+            
+
+    label title
+
+    if main_menu:
+        key "game_menu" action ShowMenu("main_menu")
+
 
 
 # 画廊/CG鉴赏
@@ -1653,7 +1748,7 @@ screen gallery(page=0):
 
     tag menu
 
-    use game_menu(_("Gallery")):
+    use admire_mode(_("Gallery")):
 
         grid g_column g_row:
             style_prefix "slot"
@@ -1730,9 +1825,8 @@ init python:
 screen music_room:
 
     tag menu
-
-    use game_menu(_("Music")):
-        
+    
+    use admire_mode(_("Music")):    
         # 更新 renpy.music.get_position() 和 get_music_duration()
         timer 0.1:
             action [SetVariable('duration', get_audio_duration()), SetVariable('music_pos', get_audio_position())]
@@ -1741,7 +1835,7 @@ screen music_room:
         vbox:
             xalign 0.5
             yalign 0.5
-                
+
             yfill True
             box_justify "all"
 
@@ -1767,7 +1861,7 @@ screen music_room:
             hbox:
                 xalign 0.5
                 yalign 0.5
-                
+
                 xfill True
                 box_justify "all"
 
@@ -1782,14 +1876,14 @@ screen music_room:
                 hbox:
                     style_prefix "page"
                     textbutton "⏮️" action mr.Previous()
-                    
+
                     $ play_pause = "▶️" if renpy.music.get_pause() else "⏸️"
                     textbutton play_pause:
                         if not renpy.music.is_playing() and not renpy.music.get_pause():
                             action mr.Play() # yangsy "这是在干啥？（"
                         else:
                             action PauseAudio(channel="music", value="toggle")
-                            
+
                     textbutton "⏭️" action mr.Next()
 
                 hbox:
@@ -1805,10 +1899,10 @@ screen music_room:
                 ysize gui.scrollbar_size
                 align (0.5, 0.7)
 
-    
+
 
         # 进入音乐空间时自动播放音乐……？
         on "replace" action mr.Play()
 
         # 离开时恢复主菜单的音乐……诶如果注释掉这行的话可以替换掉主菜单音乐，ok现在这是个特性了（
-        # on "replaced" action Play("music", "mus_aurora_part1.ogg")
+
