@@ -609,7 +609,7 @@ style return_button:
     yalign 1.0
     yoffset -45
 
-
+default persistent.playing_music = "mus_aurora_part1.ogg"
 ## About screen ################################################################
 ##
 ## This screen gives credit and copyright information about the game and Ren'Py.
@@ -1688,8 +1688,7 @@ screen admire_mode(title, scroll=None, yinitial=0.0):
 
     label title
 
-    if main_menu:
-        key "game_menu" action ShowMenu("main_menu")
+
 
 
 
@@ -1779,6 +1778,9 @@ screen gallery(page=0):
 
             textbutton _(">") action Show("gallery", page=min(g_pagecount-1, page+1))
 
+    if main_menu:
+        key "game_menu" action ShowMenu("main_menu")
+
 
 # 音乐列表
 
@@ -1800,6 +1802,11 @@ init python:
                 # 默认解锁的音乐：
                 "mus_aurora_part1.ogg",
             ))
+        
+        class Check_music(Action):
+            def check_music(file_name):
+                persistent.playing_music = file_name
+
 
 init python:
 
@@ -1853,7 +1860,7 @@ screen music_room:
                     for music_name, music_file in room_musics.items():
                         # 判断bgm是否解锁
                         if mr.is_unlocked(music_file):
-                            textbutton music_name action mr.Play(music_file)
+                            textbutton music_name action [mr.Play(music_file),Check_music.check_music(music_file)]
                         else:
                             textbutton "???" action NullAction()
 
@@ -1903,6 +1910,7 @@ screen music_room:
 
         # 进入音乐空间时自动播放音乐……？
         on "replace" action mr.Play()
-
-        # 离开时恢复主菜单的音乐……诶如果注释掉这行的话可以替换掉主菜单音乐，ok现在这是个特性了（
+    if main_menu:
+        
+        key "game_menu" action [ShowMenu("main_menu"),Play("music", "mus_aurora_part1.ogg")]
 

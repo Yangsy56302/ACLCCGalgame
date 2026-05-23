@@ -334,3 +334,6 @@ translate None strings:
 
     old "Music"
     new "音乐鉴赏"
+
+    old "Extra Mode"
+    new "鉴赏模式"
