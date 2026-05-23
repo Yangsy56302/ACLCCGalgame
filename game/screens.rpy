@@ -1693,6 +1693,7 @@ init python:
         room_musics = {
             "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
             "Astral Calm": "mus_astral_calm.mp3",
+            "Aurora (Full Ver.)": "mus_aurora.mp3",
             # 更多音乐请自行添加
         }
 

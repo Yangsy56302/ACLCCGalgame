@@ -2,7 +2,7 @@ label chex0:
     "你没有加群"
     "日子就这么普普通通的过着"
     "普普通通的过完了一生"
-    jump bad_ending
+    jump bad_ending_no_choice
 
 label chex0_oi:
     scene black with fade
@@ -176,6 +176,7 @@ label chex0_oi:
     "你点点头，没有追问。"
 
     play music "<from 15>mus_aurora.mp3" fadein 3.0 fadeout 5.0
+    $ renpy.notify("♪ ms_win_and_mc - Aurora")
     "几天后的一个晚上，爸爸把一个盒子放在了你桌上。"
 
     "包装很简单，不是什么昂贵的牌子，但足够用了。"
