@@ -2,6 +2,9 @@
 label start:
     stop music
 
+    default has_phone = False
+
+
     # jump chtest
 
     call guide_naming_start from _call_guide_naming_start
