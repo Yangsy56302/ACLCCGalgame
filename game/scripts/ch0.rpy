@@ -31,9 +31,7 @@ label ch0_adofai:
         "你突然很想尝试一下，{w=0.5}不过你身无分文。"
     
     play music "mus_astral_calm.mp3"
-    python:
-        renpy.notify("♪ ms_win_and_mc - Astral Calm")
-        persistent.is_music1_unlock = True
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
     
     if has_phone:
         "最终，{w=0.25}你一点点跟着[tutorial]下载了Sbeam，\n{w=0.5}购买了这款游戏。"
