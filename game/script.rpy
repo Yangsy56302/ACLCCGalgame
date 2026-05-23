@@ -10,7 +10,8 @@ label start:
     call guide_naming_start from _call_guide_naming_start
     $ renpy.block_rollback()
     call ch0 from _call_ch0
-    call ch1 from _call_ch1
+    # call ch1 from _call_ch1
+    
     # yoosee "不用照搬历史\n确定人物性格和故事走向就行"
 
     # "事件：深圳电玩节\n事件：Manka Life"
