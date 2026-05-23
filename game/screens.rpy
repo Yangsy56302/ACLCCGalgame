@@ -839,7 +839,6 @@ screen preferences():
                             if config.sample_sound:
                                 textbutton _("Test") action Play("sound", config.sample_sound)
 
-
                     if config.has_voice:
                         label _("Voice Volume")
 
@@ -849,16 +848,14 @@ screen preferences():
                             if config.sample_voice:
                                 textbutton _("Test") action Play("voice", config.sample_voice)
                     
-                    vbox:
-                        style_prefix "check"
-                        textbutton _("后台播放声音") action Preference("audio when unfocused", "toggle")
-
                     if config.has_music or config.has_sound or config.has_voice:
                         null height gui.pref_spacing
 
-                        textbutton _("Mute All"):
-                            action Preference("all mute", "toggle")
-                            style "mute_all_button"
+                        vbox:
+                            style_prefix "check"
+                            
+                            textbutton _("Audio when Unfocused") action Preference("audio when unfocused", "toggle")
+                            textbutton _("Mute All") action Preference("all mute", "toggle") style "mute_all_button"
 
 
 style pref_label is gui_label

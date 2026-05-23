@@ -158,6 +158,10 @@ translate None strings:
     old "Voice Volume"
     new "节拍音量"
 
+    # game/screens.rpy
+    old "Audio when Unfocused"
+    new "后台播放声音"
+
     # game/screens.rpy:787
     old "Mute All"
     new "全部静音"
@@ -322,14 +326,11 @@ translate None strings:
     old "Menu"
     new "菜单"
 
-    # continue
     old "Continue"
     new "继续"
 
-    # Gallery
     old "Gallery"
     new "图片鉴赏"
 
-    #MusicRoom
     old "Music"
     new "音乐鉴赏"
