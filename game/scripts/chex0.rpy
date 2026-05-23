@@ -1,6 +1,9 @@
 label chex0:
-    "你没有加群。\n{w=1.0}日子就这么普普通通的过着，\n{w=0.5}普普通通的过完了一生。"
+    stop music fadeout 1.0
+    scene black with fade
+    "你没有加群。\n{w=1.0}日子就这么普普通通的过着，{w=0.5}普普通通的过完了一生。"
     jump bad_ending_no_choice
+
 
 label chex0_oi:
     scene black with fade
