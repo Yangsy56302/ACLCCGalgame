@@ -13,8 +13,6 @@ label ch0:
     menu:
         "<问题占位符>"
         "刷嘁站":
-            scene bg sbeam with fade
-            $ persistent.unlock_sbeam = True
             $ renpy.notify("2020年某日")
             pause 1.0
             "你偶然在某个视频网站上遇到了一款游戏。"
@@ -23,6 +21,8 @@ label ch0:
             jump chex0_oi
 
 label ch0_adofai:
+    scene bg sbeam with fade
+    $ persistent.unlock_sbeam = True        
     "只需一个按键，{w=0.5}控制盘旋飞舞的双星，{w=0.5}踏着摇曳的舞步，\n{w=0.5}在一条跟随音乐节奏变化的蜿蜒道路上不断前进，{w=0.5}探索音乐的宇宙。"
     
     if has_phone:
