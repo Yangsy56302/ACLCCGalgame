@@ -1,6 +1,8 @@
 label chex0:
     "你没有加群"
     "日子就这么普普通通的过着"
+    "普普通通的过完了一生"
+    jump bad_ending
 
 label chex0_oi:
     scene black with fade
@@ -71,7 +73,7 @@ label chex0_oi:
     $ renpy.notify("某个暑假")
     pause 1.0
 
-    "暑假快要结束的一天，你正在学校里发了一则关于信息学竞赛的通知"
+    "暑假快要结束的一天，学校里发了一则关于信息学竞赛的通知"
 
     "这个消息像一道闪电，劈进了你平淡的生活。你开始打听学校的OI社团是怎么加入的，需要什么条件。信息技术老师告诉你，要先通过一次选拔考试。"
 
@@ -173,6 +175,7 @@ label chex0_oi:
 
     "你点点头，没有追问。"
 
+    play music "<from 15>mus_aurora.mp3" fadein 3.0 fadeout 5.0
     "几天后的一个晚上，爸爸把一个盒子放在了你桌上。"
 
     "包装很简单，不是什么昂贵的牌子，但足够用了。"
@@ -202,6 +205,8 @@ label chex0_oi:
     "那个窗口很小，只有几英寸。"
 
     "但对你来说，它亮着的时候，整个世界都是亮的。"
+
+    stop music fadeout 5.0
 
     $ has_phone = True
 
