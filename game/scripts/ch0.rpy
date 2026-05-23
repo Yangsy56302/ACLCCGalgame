@@ -82,6 +82,6 @@ label ch0_adofai:
     scene black
     stop music
     $ persistent.has_seen_ending = True
-    "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
+    "{cps=*0.5}故事，{w=0.5}就从{a=jump:ch1}这{/a}{w=0.25}开始了。{/cps}"
     
     return
