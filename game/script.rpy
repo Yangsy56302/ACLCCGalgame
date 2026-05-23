@@ -25,6 +25,7 @@ label start:
     # yoosee "魔改用于增添风味（）"
 
     # scene black with dissolve
+
     return
 
 
@@ -86,3 +87,5 @@ init -999 python:
                 return page, name
     
     names = ["祐荽", "Yangsy56302", "小绿君", "飞雨凌云", "莫邪Morin", "ms_win_and_mc", "是动听D温呐", "晴柚-Grafrustix", "TheHale", "终究是摆了", "阿希尔Ashell", "myworldzycpc"]
+
+

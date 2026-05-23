@@ -321,6 +321,7 @@ style quick_button:
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
 
+default persistent.has_seen_ending = False
 
 ################################################################################
 ## Main and Game Menu Screens
@@ -346,6 +347,8 @@ screen navigation():
             textbutton _("Start") action Start()
 
             textbutton _("Continue") action Continue()
+
+
             
         else:
 
@@ -356,6 +359,12 @@ screen navigation():
         textbutton _("Load") action ShowMenu("load")
 
         textbutton _("Preferences") action ShowMenu("preferences")
+
+        if persistent.has_seen_ending:
+
+            textbutton _("Music") action ShowMenu("music_room")
+
+            textbutton _("Gallery") action ShowMenu("gallery")
 
         if _in_replay:
 
@@ -1594,3 +1603,294 @@ style slider_slider:
     
 
 
+
+#画廊/CG鉴赏
+
+#背景图片
+image gallery_background:
+    "bg/adofai.jpg"
+    size (1920, 1080)
+
+default persistent.unlock_sbeam = False
+
+#前提条件
+init python:
+
+    g = Gallery()
+
+    g.locked_image = "bg/locked.png"
+    g.button("bg")#类似于标签
+    g.condition("persistent.unlock_sbeam")#解锁限制
+    g.image("bg/sbeam.png")#真正的图片
+    g.image("bg/that_video.png")#真正的图片
+    # g.unlock_image("bg03.png")#差分
+
+    # g.button("cg")
+    # g.condition("persistent.unlock_1")#解锁限制
+    # g.image("cg01.png")
+
+    #未解锁
+    g.button("unlock")
+    
+
+    #更多图像请自行添加
+
+    # 图像切换使用的转场。
+    g.transition = dissolve
+
+# #如果选择翻页功能可以不加
+# default p = ui.adjustment()
+
+screen gallery(page=0):
+
+    tag menu
+    add "gallery_background"
+    
+    viewport:    
+        xysize (1500, 680)
+        align (0.5, 0.5)
+
+        vbox:
+            spacing 60
+            #页数判断
+            if (page == 0):
+                grid 3 1:
+                    spacing 100
+                    #由于全部添加会导致代码很长，以下只展示三张图片，请自行添加判断语句
+                    if persistent.unlock_sbeam:
+                        add g.make_button("bg", "bg/smsbeam.png")
+                    else:
+                        add g.make_button("unlock", "bg/locked.png")
+                    # add g.make_button("bg", "smthat_video.png")
+                    # add g.make_button("bg", "smbg03.png")          
+
+
+            # if (page == 1):
+            #     grid 3 1:
+            #         spacing 60
+            #         add g.make_button("bg", "smbg03.png")
+            #         add g.make_button("bg", "smbg03.png")
+            #         add g.make_button("cg", "smcg01.png")
+
+
+            # if (page == 2):
+            #     grid 3 1:
+            #         spacing 60
+            #         add g.make_button("cg", "smcg01.png")
+            #         add g.make_button("cg", "smcg01.png")
+            #         add g.make_button("cg", "smcg01.png")
+
+
+            #更多页面请自行添加
+
+    #底部按钮
+    hbox:
+        xalign 0.5 yalign 0.9
+        spacing 60
+        #请自行根据你的CG数量进行条件判断
+        if page < 0:
+            textbutton "下一页" action Show("gallery",page=(page+1))
+        else:
+            textbutton "下一页" action NullAction()
+
+        textbutton "1" action Show("gallery",page=0)
+        # textbutton "2" action Show("gallery",page=1)
+        # textbutton "3" action Show("gallery",page=2)
+        
+        if page > 0:
+            textbutton "上一页" action Show("gallery",page=(page-1))
+        else:
+            textbutton "上一页" action NullAction()
+
+    #返回按钮
+    textbutton "返回":
+        align (0.0, 0.98)
+        action Return()  
+
+
+#音乐空间背景
+image music_background:
+    "bg/adofai.jpg"
+    size (1920, 1080)
+
+#音乐列表
+init python:
+    #淡入淡出
+    mr = MusicRoom(fadein = 1.0 , fadeout = 1.0)
+    #音乐列表，第一个用于主界面bgm，设为默认解锁
+    mr.add("mus_aurora_part1.ogg",always_unlocked = True)
+    mr.add("mus_astral_calm.mp3")
+    # mr.add("bgm03.ogg")
+    # mr.add("bgm04.ogg")
+
+    #更多音乐请自行添加
+
+
+#时长参数
+init python:
+    def get_audio_duration(channel="music"):
+        duration = renpy.music.get_duration(channel)
+        return convert_format(int(duration))
+        
+ 
+    def get_audio_position(channel="music"):
+        music_pos = renpy.music.get_pos(channel)
+        
+        if music_pos:
+            return convert_format(int(music_pos))
+        return "00:00"
+    #时间转换
+    def convert_format(second):
+        minute = second // 60
+        second = second % 60
+        result = ""
+
+        #可用于59分59秒内音乐
+        if minute:
+            
+            if minute < 10:
+                result = '0' + str(minute) + ":" + str(second)
+                if second < 10:
+                    result ='0' + str(minute) + ":" '0' + str(second)
+            else:
+                result = str(minute) + ":" + str(second)
+                if second < 10:
+                    result = str(minute) + '0' + str(second)
+                       
+        else:
+
+            if second < 10:
+                result = '00:0' + str(second)
+            else:
+                result = '00:' + str(second)
+
+        return result
+#音乐空间界面
+
+default persistent.is_music1_unlock = False
+
+screen music_room:
+    #更新renpy.music.get_position()和get_music_duration()
+    timer 0.1:
+        action [SetVariable('duration',get_audio_duration()),SetVariable('music_pos',get_audio_position())]
+        repeat True
+    
+
+    zorder 2
+    tag menu
+    add "music_background"
+ 
+    #音乐列表
+    viewport id "music_list":
+        mousewheel True #垂直滚动
+        xysize (500, 500)
+        align (0.3, 0.4)
+        draggable True #鼠标拖动可滚动视口
+        vbox:
+            spacing 50
+
+            textbutton "Aurora (Title Ver.)" action mr.Play("mus_aurora_part1.ogg")
+            #判断bgm是否解锁
+            if persistent.is_music1_unlock:
+                textbutton "Astral Calm" action mr.Play("mus_astral_calm.mp3")
+            else:
+                textbutton "???" action NullAction()
+
+            # if mr.is_unlocked("bgm03.ogg"):
+            #     textbutton "bgm03" action mr.Play("bgm03.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+            # if mr.is_unlocked("bgm04.ogg"):
+            #     textbutton "bgm04" action mr.Play("bgm04.ogg")
+            # else:
+            #     textbutton "???" action NullAction()
+
+            #更多音乐请自行添加
+
+
+
+    #可拖动滑块
+    vbar:
+        xysize (10, 500)
+        align (0.9, 0.4)
+        value YScrollValue("music_list")
+
+
+    #功能按键
+    hbox:
+
+        align (0.5, 0.8)
+        spacing 200
+
+        textbutton "下一首" action mr.Next()
+
+        #暂停/播放切换
+        imagebutton:
+            
+            idle "gui/music/pause.png"
+            hover "gui/music/pause.png"
+            selected_idle "gui/music/continue.png"
+            selected_hover "gui/music/continue.png"
+            if not renpy.music.is_playing() and not renpy.music.get_pause():
+                action mr.Play("mus_aurora_part1.ogg")
+            else:
+                action PauseAudio(channel="music",value="toggle")
+                
+        textbutton "上一首" action mr.Previous()
+        textbutton "随机播放" action mr.RandomPlay()
+
+    #显示时长
+    bar:
+        value AudioPositionValue(channel='music', update_interval=0.1)
+        xysize (800,5)
+        align (0.5, 0.7)
+  
+    vbox:
+        xpos 0.5
+        ypos 0.2
+        python:
+            duration = get_audio_duration()
+            music_pos = get_audio_position()
+    hbox:
+        spacing 20
+        align (0.8, 0.7)
+        text music_pos
+        text "/"
+        text duration
+        
+    #返回按钮
+    textbutton "返回":
+        align (0.0, 0.98)
+        action Return()
+
+    
+    # 音乐空间的音乐播放入口。
+    on "replace" action mr.Play()
+
+    # 离开时恢复主菜单的音乐。
+    on "replaced" action Play("music", "mus_aurora_part1.ogg")

@@ -38,14 +38,14 @@ init python:
     def texttag_ellipsis(tag, argument):
         return [
             (renpy.TEXT_TAG, "cps=*0.25"),
-            (renpy.TEXT_TEXT, "..."),
+            (renpy.TEXT_TEXT, "...\u200B"),
             (renpy.TEXT_TAG, "/cps"),
         ]
     
     def texttag_ellipsis2(tag, argument):
         return [
             (renpy.TEXT_TAG, "cps=*0.25"),
-            (renpy.TEXT_TEXT, "......"),
+            (renpy.TEXT_TEXT, "......\u200B"),
             (renpy.TEXT_TAG, "/cps"),
         ]
     
