@@ -357,13 +357,20 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        textbutton _("Preferences") action ShowMenu("preferences")
-
-        if persistent.has_seen_ending:
+        if main_menu and persistent.has_seen_ending:
 
             textbutton _("Music") action ShowMenu("music_room")
 
             textbutton _("Gallery") action ShowMenu("gallery")
+
+        textbutton _("Preferences") action ShowMenu("preferences")
+
+        textbutton _("About") action ShowMenu("about")
+
+        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
+
+            ## Help isn't necessary or relevant to mobile devices.
+            textbutton _("Help") action ShowMenu("help")
 
         if _in_replay:
 
@@ -372,13 +379,6 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("Main Menu") action MainMenu()
-
-        textbutton _("About") action ShowMenu("about")
-
-        if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
-
-            ## Help isn't necessary or relevant to mobile devices.
-            textbutton _("Help") action ShowMenu("help")
 
         if renpy.variant("pc"):
 
@@ -1603,31 +1603,35 @@ style slider_slider:
 
 # 画廊/CG鉴赏
 
-# 背景图片
-
-image gallery_background:
-    "bg/adofai.jpg"
-    size (1920, 1080)
-
 transform thumb_transform:
-    size (1920, 1080)
-    zoom 0.25
+    size (414, 233)
 
 # 前提条件
 
 init python:
-    # 可鉴赏的图片
+
     # 字典的值为图片组成的列表，键为这组图片的内部标识符
-    gallery_images = {
+    # 默认解锁的鉴赏图片
+    defaultly_unlocked_gallery_images = {
+        "group_photo": ["bg group_photo"],
         "adofai": ["bg adofai"],
+        # 更多图像请自行添加
+    }
+    # 默认未能解锁的鉴赏图片
+    defaultly_locked_gallery_images = {
         "monitor": ["bg sbeam", "bg that_video"],
         # 更多图像请自行添加
     }
+    gallery_images = {**defaultly_unlocked_gallery_images, **defaultly_locked_gallery_images}
 
     g = Gallery()
 
     # 批量注册CG图片
-    for group_id, group_images in gallery_images.items():
+    for group_id, group_images in defaultly_unlocked_gallery_images.items():
+        g.button(group_id)
+        for group_image in group_images:
+            g.image(group_image)
+    for group_id, group_images in defaultly_locked_gallery_images.items():
         g.button(group_id)
         for group_image in group_images:
             g.unlock_image(group_image)
@@ -1638,7 +1642,7 @@ init python:
 
     # 页面相关定义
     g_column = 3
-    g_row = 2
+    g_row = 3
     g_perpage = g_column*g_row
     g_pagecount = math.ceil(len(gallery_images) / g_perpage)
 
@@ -1651,64 +1655,58 @@ init python:
 screen gallery(page=0):
 
     tag menu
-    add "gallery_background"
-    
-    viewport:    
-        xysize (1500, 680)
-        align (0.5, 0.5)
 
-        vbox:
-            spacing 60
-            grid g_column g_row:
-                spacing 100
-                for i, (group_id, group_images) in enumerate(gallery_images.items()):
-                    if not page * g_perpage <= i < (page + 1) * g_perpage: # 页数判断
-                        continue
-                    add g.make_button(group_id, unlocked=At(group_images[0], thumb_transform), locked=At(g.locked_image, thumb_transform))
+    use game_menu(_("Gallery")):
 
-    # 底部按钮
-    hbox:
-        xalign 0.5 yalign 0.9
-        spacing 60
-        
-        textbutton "上一页" action Show("gallery", page=max(0, page-1))
+        grid g_column g_row:
+            style_prefix "slot"
 
-        for i in range(g_pagecount):
-            textbutton str(i+1) action Show("gallery", page=i)
+            xalign 0.5
+            yalign 0.0
 
-        textbutton "下一页" action Show("gallery", page=min(g_pagecount-1, page+1))
+            spacing gui.slot_spacing
 
-    # 返回按钮
-    textbutton "返回":
-        align (0.0375, 0.95)
-        action Return()
+            for i, (group_id, group_images) in enumerate(gallery_images.items()):
+                if not page * g_perpage <= i < (page + 1) * g_perpage: # 页数判断
+                    continue
+                add g.make_button(group_id, unlocked=At(group_images[0], thumb_transform), locked=At(g.locked_image, thumb_transform))
 
+        # 底部按钮
+        hbox:
+            style_prefix "page"
 
-#音乐空间背景
-image music_background:
-    "bg/adofai.jpg"
-    size (1920, 1080)
+            xalign 0.5
+            yalign 1.0
+            
+            spacing gui.page_spacing
+
+            textbutton _("<") action Show("gallery", page=max(0, page-1))
+
+            for i in range(g_pagecount):
+                textbutton str(i+1) action Show("gallery", page=i)
+
+            textbutton _(">") action Show("gallery", page=min(g_pagecount-1, page+1))
 
 
 # 音乐列表
 
 init python:
 
-    # 可鉴赏的音乐
-    room_musics = {
-        "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
-        "Astral Calm": "mus_astral_calm.mp3",
-        # 更多音乐请自行添加
-    }
+        # 可鉴赏的音乐
+        room_musics = {
+            "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
+            "Astral Calm": "mus_astral_calm.mp3",
+            # 更多音乐请自行添加
+        }
 
-    mr = MusicRoom(single_track = True)
+        mr = MusicRoom(single_track = True)
 
-    # 批量添加音乐
-    for music_name, music_file in room_musics.items():
-        mr.add(music_file, always_unlocked=music_file in (
-            # 默认解锁的音乐：
-            "mus_aurora_part1.ogg",
-        ))
+        # 批量添加音乐
+        for music_name, music_file in room_musics.items():
+            mr.add(music_file, always_unlocked=music_file in (
+                # 默认解锁的音乐：
+                "mus_aurora_part1.ogg",
+            ))
 
 init python:
 
@@ -1733,87 +1731,86 @@ init python:
 
 screen music_room:
 
-    # 更新 renpy.music.get_position() 和 get_music_duration()
-    timer 0.1:
-        action [SetVariable('duration', get_audio_duration()), SetVariable('music_pos', get_audio_position())]
-        repeat True
-
-    zorder 2
     tag menu
-    add "music_background"
- 
-    # 音乐列表
-    viewport id "music_list":
-        mousewheel True # 垂直滚动
-        xysize (500, 500)
-        align (0.3, 0.4)
-        draggable True # 鼠标拖动可滚动视口
-        vbox:
-            spacing 50
 
-            for music_name, music_file in room_musics.items():
-                # 判断bgm是否解锁
-                if mr.is_unlocked(music_file):
-                    textbutton music_name action mr.Play(music_file)
-                else:
-                    textbutton "???" action NullAction()
-
-    # 可拖动滑块
-    vbar:
-        xysize (10, 500)
-        align (0.9, 0.4)
-        value YScrollValue("music_list")
-
-    # 功能按键
-    hbox:
-
-        align (0.5, 0.8)
-        spacing 200
-
-        textbutton "上一首" action mr.Previous()
-
-        imagebutton: # 暂停 / 播放切换
-            
-            idle "gui/music/pause.png"
-            hover "gui/music/pause.png"
-            selected_idle "gui/music/continue.png"
-            selected_hover "gui/music/continue.png"
-            if not renpy.music.is_playing() and not renpy.music.get_pause():
-                action mr.Play("mus_aurora_part1.ogg") # yangsy "这是在干啥？（"
-            else:
-                action PauseAudio(channel="music", value="toggle")
-                
-        textbutton "下一首" action mr.Next()
-
-        textbutton "随机播放" action mr.RandomPlay()
-
-    # 显示时长
-    bar:
-        value AudioPositionValue(channel='music', update_interval=0.1)
-        xysize (800, 5)
-        align (0.5, 0.7)
-  
-    vbox:
-        xpos 0.5
-        ypos 0.2
-        python:
-            duration = get_audio_duration()
-            music_pos = get_audio_position()
-    hbox:
-        spacing 20
-        align (0.8, 0.7)
-        text music_pos
-        text "/"
-        text duration
+    use game_menu(_("Music")):
         
-    # 返回按钮
-    textbutton "返回":
-        align (0.0375, 0.95)
-        action Return()
+        # 更新 renpy.music.get_position() 和 get_music_duration()
+        timer 0.1:
+            action [SetVariable('duration', get_audio_duration()), SetVariable('music_pos', get_audio_position())]
+            repeat True
+        
+        vbox:
+            xalign 0.5
+            yalign 0.5
+                
+            yfill True
+            box_justify "all"
+
+            # 音乐列表
+            viewport id "music_list":
+                ysize 0.875
+
+                mousewheel True # 垂直滚动
+                draggable True # 鼠标拖动可滚动视口
+                scrollbars "vertical" # 默认滚动条
+
+                vbox:
+                    style_prefix "check"
+
+                    for music_name, music_file in room_musics.items():
+                        # 判断bgm是否解锁
+                        if mr.is_unlocked(music_file):
+                            textbutton music_name action mr.Play(music_file)
+                        else:
+                            textbutton "???" action NullAction()
+
+            # 功能按键
+            hbox:
+                xalign 0.5
+                yalign 0.5
+                
+                xfill True
+                box_justify "all"
+
+                hbox:
+                    style_prefix "page"
+                    $ music_pos = get_audio_position()
+                    $ duration = get_audio_duration()
+                    text music_pos
+                    text "/"
+                    text duration
+
+                hbox:
+                    style_prefix "page"
+                    textbutton "⏮️" action mr.Previous()
+                    
+                    $ play_pause = "⏸️" if renpy.music.get_pause() else "▶️"
+                    textbutton play_pause:
+                        if not renpy.music.is_playing() and not renpy.music.get_pause():
+                            action mr.Play() # yangsy "这是在干啥？（"
+                        else:
+                            action PauseAudio(channel="music", value="toggle")
+                            
+                    textbutton "⏭️" action mr.Next()
+
+                hbox:
+                    style_prefix "page"
+                    textbutton "🔂" action mr.ToggleSingleTrack()
+                    textbutton "🔁" action mr.ToggleLoop()
+                    textbutton "🔀" action mr.ToggleShuffle()
+                    textbutton "🎲" action mr.RandomPlay()
+
+            # 显示时长
+            bar:
+                value AudioPositionValue(channel='music', update_interval=0.1)
+                ysize gui.scrollbar_size
+                align (0.5, 0.7)
 
     
-    # 音乐空间的音乐播放入口。
-    on "replace" action mr.Play()
 
-    # 离开时恢复主菜单的音乐。
-    on "replaced" action Play("music", "mus_aurora_part1.ogg")
+        # 进入音乐空间时自动播放音乐……？
+        on "replace" action mr.Play()
+
+        # 离开时恢复主菜单的音乐……诶如果注释掉这行的话可以替换掉主菜单音乐，ok现在这是个特性了（
+        # on "replaced" action Play("music", "mus_aurora_part1.ogg")
