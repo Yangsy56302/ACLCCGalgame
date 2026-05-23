@@ -1,34 +1,38 @@
 init python:
 
-    class CharacterWithData(renpy.character.ADVCharacter):
-        def __init__(self, nickname, realname=None, **properties):
-            super().__init__(dynamic=True, **properties)
-            self.nickname = nickname
-            self.realname = nickname if realname is None else realname
+    class CharacterWithNVL(renpy.character.ADVCharacter):
+        def __init__(self, name, **properties):
+            super().__init__(name, **properties)
+            self.nvl = Character(name, kind=nvl, **properties)
+    
+    class CharacterWithData(CharacterWithNVL):
+        def __init__(self, name, realname=None, **properties):
+            super().__init__(self.get_name, dynamic=True, **properties)
+            self.nickname = name
+            self.realname = name if realname is None else realname
             self.meet_irl = False
-            self.name = self._name
-            self.affection = 0
-        def _name(self):
+            # self.affection = 0
+        def get_name(self):
             return self.realname if self.meet_irl else self.nickname
         def str(self):
-            return self._name()
+            return self.get_name()
 
 
 default persistent.name_mc = ""
 default name_mc = ""
-define character.mc = DynamicCharacter("name_mc")
+define mc = CharacterWithNVL("name_mc", dynamic=True)
 
 
-define character.guide = CharacterWithData("？？？")
+define guide = CharacterWithData("？？？")
 
 
-define character.ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")
+define ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")
 
 # image side ashell = "char/ashell/avatar.jpg"
 # image ashell = "char/ashell/normal.png"
 
 
-define character.baile = CharacterWithData("终究是摆了", "李星眠", image="baile", what_prefix="", what_suffix="")
+define baile = CharacterWithData("终究是摆了", "李星眠", image="baile", what_prefix="", what_suffix="")
 
 transform tcbaile:
     yanchor 0.5 subpixel True
@@ -54,13 +58,13 @@ image baile tsundere = At("char/baile/tsundere.png", tcbaile)
 image baile worried = At("char/baile/worried.png", tcbaile)
 
 
-define character.dwen = CharacterWithData("是动听D温呐", image="dwen", what_prefix="~ ", what_suffix="")
+define dwen = CharacterWithData("是动听D温呐", image="dwen", what_prefix="~ ", what_suffix="")
 
 # image side dwen = "char/dwen/avatar.jpg"
 # image dwen = "char/dwen/normal.png"
 
 
-define character.gra = CharacterWithData("晴柚-Grafrustix", "晴安柚子", image="gra", what_prefix="< ", what_suffix=" 3")
+define gra = CharacterWithData("晴柚-Grafrustix", "晴安柚子", image="gra", what_prefix="< ", what_suffix=" 3")
 
 transform tcgra:
     yanchor 0.625 subpixel True
@@ -71,19 +75,19 @@ image gra = At("char/gra/normal.png", tcgra)
 image gra flirt = At("char/gra/flirt.png", tcgra)
 
 
-define character.hale = CharacterWithData("TheHale", image="hale", what_prefix="", what_suffix="")
+define hale = CharacterWithData("TheHale", image="hale", what_prefix="", what_suffix="")
 
 # image side hale = "char/hale/avatar.jpg"
 # image hale = "char/hale/normal.png"
 
 
-define character.lamb = CharacterWithData("Happylamb029", image="lamb", what_prefix="", what_suffix="")
+define lamb = CharacterWithData("Happylamb029", image="lamb", what_prefix="", what_suffix="")
 
 # image side lamb = "char/lamb/avatar.jpg"
 # image lamb = "char/lamb/normal.png"
 
 
-define character.lingyun = CharacterWithData("飞雨凌云", "凌云", image="lingyun", what_prefix="", what_suffix="")
+define lingyun = CharacterWithData("飞雨凌云", "凌云", image="lingyun", what_prefix="", what_suffix="")
 
 transform tclingyun:
     yanchor 0.5 subpixel True
@@ -93,19 +97,19 @@ transform tclingyun:
 # image lingyun = "char/lingyun/normal.png"
 
 
-define character.lv = CharacterWithData("小绿君", image="lv", what_prefix="# ", what_suffix="")
+define lv = CharacterWithData("小绿君", image="lv", what_prefix="# ", what_suffix="")
 
 # image side lv = "char/lv/avatar.jpg"
 # image lv = "char/lv/normal.png"
 
 
-define character.maoyuna = CharacterWithData("MaoYuNa133", image="maoyuna", what_prefix="", what_suffix="")
+define maoyuna = CharacterWithData("MaoYuNa133", image="maoyuna", what_prefix="", what_suffix="")
 
 # image side maoyuna = "char/maoyuna/avatar.jpg"
 # image maoyuna = "char/maoyuna/normal.png"
 
 
-define character.morin = CharacterWithData("莫邪Morin", "莫邪", image="morin", what_prefix="", what_suffix="")
+define morin = CharacterWithData("莫邪Morin", "莫邪", image="morin", what_prefix="", what_suffix="")
 
 transform tcmorin:
     yanchor 0.5 subpixel True
@@ -115,7 +119,7 @@ transform tcmorin:
 image morin = At("char/morin/normal.png", tcmorin)
 
 
-define character.mwam = CharacterWithData("ms_win_and_mc", "李婉清", image="mwam", what_prefix="", what_suffix="")
+define mwam = CharacterWithData("ms_win_and_mc", "李婉清", image="mwam", what_prefix="", what_suffix="")
 
 transform tcmwam:
     yanchor 0.5 subpixel True
@@ -129,25 +133,25 @@ image mwam sad = At("char/mwam/sad.png", tcmwam)
 image mwam angry = At("char/mwam/angry.png", tcmwam)
 
 
-define character.nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")
+define nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")
 
 # image side nona = "char/nona/avatar.jpg"
 # image nona = "char/nona/normal.png"
 
 
-define character.pumi = CharacterWithData("Pumi", image="pumi", what_prefix="", what_suffix="")
+define pumi = CharacterWithData("Pumi", image="pumi", what_prefix="", what_suffix="")
 
 # image side pumi = "char/pumi/avatar.jpg"
 # image pumi = "char/pumi/normal.png"
 
 
-define character.uni = CharacterWithData("UNI", image="uni", what_prefix="", what_suffix="")
+define uni = CharacterWithData("UNI", image="uni", what_prefix="", what_suffix="")
 
 # image side uni = "char/uni/avatar.jpg"
 # image uni = "char/uni/normal.png"
 
 
-define character.yangsy = CharacterWithData("Yangsy56302", "杨曦", image="yangsy", what_prefix="\" ", what_suffix=" \"")
+define yangsy = CharacterWithData("Yangsy56302", "杨曦", image="yangsy", what_prefix="\" ", what_suffix=" \"")
 
 transform tcyangsy:
     yanchor 0.65625 subpixel True
@@ -176,12 +180,12 @@ image yangsy upset = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0
 image yangsy zzz = At(Composite((200, 500), (0, 0), "char/yangsy/body.png", (0, 0), "char/yangsy/bow_flat.png", (0, 0), "char/yangsy/eye_flat.png", (0, 0), "char/yangsy/blush.png", (0, 0), "char/yangsy/mouth_cat_happy.png"), tcyangsy)
 
 
-define character.yoosee = CharacterWithData("祐荽", image="yoosee", what_prefix="", what_suffix="")
+define yoosee = CharacterWithData("祐荽", image="yoosee", what_prefix="", what_suffix="")
 
 # image side yoosee = "char/yoosee/avatar.jpg"
 # image yoosee = "char/yoosee/normal.png"
 
-define character.myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", what_prefix="", what_suffix="")
+define myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", what_prefix="", what_suffix="")
 
 # image side myworldzycpc = "char/myworldzycpc/avatar.jpg"
 # image myworldzycpc = "char/myworldzycpc/normal.png"
