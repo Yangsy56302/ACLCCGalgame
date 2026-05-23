@@ -1675,15 +1675,14 @@ screen admire_mode(title, scroll=None, yinitial=0.0):
         xpos gui.navigation_xpos
         yalign 0.5
         spacing gui.navigation_spacing
-        textbutton _("Gallery"):
-            action [ShowMenu("gallery"),Play("music", "mus_aurora_part1.ogg")]
+        textbutton _("Gallery") action ShowMenu("gallery")
 
         textbutton _("Music") action ShowMenu("music_room")
 
     textbutton _("Return"):
         style "return_button"
 
-        action[Return(),Play("music", "mus_aurora_part1.ogg")]
+        action Return()
             
 
     label title
@@ -1907,10 +1906,6 @@ screen music_room:
                 align (0.5, 0.7)
 
 
-
         # 进入音乐空间时自动播放音乐……？
         on "replace" action mr.Play()
-    if main_menu:
-        
-        key "game_menu" action [ShowMenu("main_menu"),Play("music", "mus_aurora_part1.ogg")]
 
