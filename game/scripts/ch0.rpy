@@ -14,7 +14,6 @@ label ch0:
         "<问题占位符>"
         "刷嘁站":
             scene bg sbeam with fade
-            $ persistent.unlock_sbeam = True
             $ renpy.notify("2020年某日")
             pause 1.0
             "你偶然在某个视频网站上遇到了一款游戏。"
