@@ -1783,7 +1783,7 @@ screen music_room:
                     style_prefix "page"
                     textbutton "⏮️" action mr.Previous()
                     
-                    $ play_pause = "⏸️" if renpy.music.get_pause() else "▶️"
+                    $ play_pause = "▶️" if renpy.music.get_pause() else "⏸️"
                     textbutton play_pause:
                         if not renpy.music.is_playing() and not renpy.music.get_pause():
                             action mr.Play() # yangsy "这是在干啥？（"
