@@ -348,7 +348,6 @@ screen navigation():
 
             textbutton _("Continue") action Continue()
 
-
             
         else:
 
@@ -1610,7 +1609,9 @@ image gallery_background:
     "bg/adofai.jpg"
     size (1920, 1080)
 
-default persistent.unlocked_gallery_images = set()
+transform thumb_transform:
+    size (1920, 1080)
+    zoom 0.25
 
 # 前提条件
 
@@ -1618,7 +1619,8 @@ init python:
     # 可鉴赏的图片
     # 字典的值为图片组成的列表，键为这组图片的内部标识符
     gallery_images = {
-        "monitor": ["bg/sbeam.png", "bg/that_video.png"],
+        "adofai": ["bg adofai"],
+        "monitor": ["bg sbeam", "bg that_video"],
         # 更多图像请自行添加
     }
 
@@ -1627,13 +1629,12 @@ init python:
     # 批量注册CG图片
     for group_id, group_images in gallery_images.items():
         g.button(group_id)
-        g.condition(f"'{group_id}' in persistent.unlocked_gallery_images") # 貌似用不到的解锁条件？
         for group_image in group_images:
-            g.image(group_image) # 添加图片
+            g.unlock_image(group_image)
 
     # 未解锁图片
     g.button("locked")
-    g.locked_image = im.MatrixColor("bg/thumb/locked.png", im.matrix.desaturate())
+    g.locked_image = "bg/thumb/locked.png"
 
     # 页面相关定义
     g_column = 3
@@ -1663,10 +1664,7 @@ screen gallery(page=0):
                 for i, (group_id, group_images) in enumerate(gallery_images.items()):
                     if not page * g_perpage <= i < (page + 1) * g_perpage: # 页数判断
                         continue
-                    if group_id in persistent.unlocked_gallery_images:
-                        add g.make_button(group_id, group_images[0].replace("bg", "bg/thumb"))
-                    else:
-                        add g.make_button("locked", g.locked_image)
+                    add g.make_button(group_id, unlocked=At(group_images[0], thumb_transform), locked=At(g.locked_image, thumb_transform))
 
     # 底部按钮
     hbox:
@@ -1694,8 +1692,6 @@ image music_background:
 
 # 音乐列表
 
-default persistent.unlocked_room_musics = set(("Aurora (Title Ver.)", ))
-
 init python:
 
     # 可鉴赏的音乐
@@ -1707,10 +1703,12 @@ init python:
 
     mr = MusicRoom(single_track = True)
 
-    # 判断bgm是否解锁
+    # 批量添加音乐
     for music_name, music_file in room_musics.items():
-        if music_name in persistent.unlocked_room_musics:
-            mr.add(music_file)
+        mr.add(music_file, always_unlocked=music_file in (
+            # 默认解锁的音乐：
+            "mus_aurora_part1.ogg",
+        ))
 
 init python:
 
@@ -1755,7 +1753,7 @@ screen music_room:
 
             for music_name, music_file in room_musics.items():
                 # 判断bgm是否解锁
-                if music_name in persistent.unlocked_room_musics:
+                if mr.is_unlocked(music_file):
                     textbutton music_name action mr.Play(music_file)
                 else:
                     textbutton "???" action NullAction()

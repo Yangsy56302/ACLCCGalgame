@@ -11,17 +11,15 @@ label ch0:
     "{......}"
 
     scene bg sbeam with fade
-    $ persistent.unlock_sbeam = True
     
     $ renpy.notify("2020年某日")
     pause 1.0
     "你偶然在某个视频网站上遇到了一款游戏。"
     "只需一个按键，{w=0.5}控制盘旋飞舞的双星，{w=0.5}踏着摇曳的舞步，\n{w=0.5}在一条跟随音乐节奏变化的蜿蜒道路上不断前进，{w=0.5}探索音乐的宇宙。"
     "你突然很想尝试一下，{w=0.5}不过你身无分文。"
+    
     play music "mus_astral_calm.mp3"
-    python:
-        renpy.notify("♪ ms_win_and_mc - Astral Calm")
-        persistent.is_music1_unlock = True
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
     
     "最终，{w=0.25}你一点点跟着网上的教程下载了Sbeam，\n{w=0.5}又偷偷用父母的信用卡笨拙地按照指示付了款。"
     "游戏并不贵，{w=0.5}26元人民币，\n{w=0.5}但对于只在父母手机上玩过一些免费小游戏的你来说，{w=0.5}依然是一笔巨款。"
