@@ -328,7 +328,7 @@ translate None strings:
 
     # Gallery
     old "Gallery"
-    new "鉴赏模式"
+    new "图片鉴赏"
 
     #MusicRoom
     old "Music"

@@ -1,8 +1,9 @@
 # 向导 by 祐荽
 
 
-init python:
+init -99 python:
     import os
+    import math
     import time
     import string
     import unicodedata
