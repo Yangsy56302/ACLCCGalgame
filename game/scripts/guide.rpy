@@ -25,7 +25,8 @@ label guide_naming_start:
 
     guide "噢，{w=0.25}嘿，{w=0.5}你好。"
 
-    play music "audio/mus_setup.ogg" fadein 2.0
+    play music "mus_setup.ogg" fadein 2.0
+    $ renpy.notify("♪ ms_win_and_mc - Before Beginning")
 
     # 如果已经选择了一个名字：
     if persistent.name_mc:
@@ -53,7 +54,7 @@ label guide_naming_start:
     guide "{cps=*0.7}呃{......}{w=2}{nw}"
     guide "{cps=*0.5}呃{......}{......}{w=1}{nw}"
     guide "啊，该死的，我又忘记我要说什么了。"
-    play music "audio/mus_setup.ogg" fadein 2.0
+    play music "mus_setup.ogg" fadein 2.0
     guide "抱歉，{w=0.25}我应该在这之前准备好的，{w=0.25}我总是这样。"
     guide "算了，{w=0.25}又不是什么重要的内容，{w=0.25}你直接取名算了。"
 
@@ -88,7 +89,7 @@ label guide_naming_start:
         guide "尽管我并不会限制你输入自己的名字（我的程序也没办法识别），\n但还是请你{red}一定一定不要这么做{/red}，好吗？{fast}"
         "当然可以。":
             pass
-    play music "audio/mus_setup.ogg" fadein 2.0
+    play music "mus_setup.ogg" fadein 2.0
     guide "唔，{w=0.25}看来选择模块运行正常。"
     guide "实在是不好意思，{w=0.5}让不知情的你参与了一下调试。\n{w=1.0}我不太擅长调用这些功能，{w=0.5}所以有时可能会出现一些小错误。"
     guide "非常感谢你的配合。"
@@ -132,7 +133,7 @@ label guide_naming_entered:
             guide "怎么，{w=0.25}你觉得这样会触发什么彩蛋吗？"
             guide "还是说你叫棍母？\n{w=0.5}又或者你是那个睿智的国王？{w=0.5}名字只有聪明人才能看见？"
             guide "{......}{w=0.25}{nw}"
-            play music "audio/mus_setup.ogg" fadein 2.0
+            play music "mus_setup.ogg" fadein 2.0
             guide "咳咳，{w=0.25}我开玩笑的。"
             guide "总有些人不太擅长取名字，{w=0.5}我也一样。"
             guide "或者他们就喜欢主角的名字，{w=0.5}也许是为了沉浸感？"
@@ -180,6 +181,7 @@ label guide_naming_entered:
             error_message = f"NameError: '{player_input}' is already defined.\nPress Ignore to continue..."
         window hide None
         with None
+        stop music
         call screen naming_error_message(error_message)
         with None
         window auto None
@@ -187,6 +189,7 @@ label guide_naming_entered:
         python: 
             quick_menu = True
             renpy.block_rollback()
+        play music "mus_setup.ogg"
         if duplicate_name_attempts == 1:
             guide "哦不{......}{w=0.5}我没考虑到这一点。\n{w=1.0}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
             guide "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"

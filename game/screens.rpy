@@ -1788,8 +1788,9 @@ init python:
         # 可鉴赏的音乐
         room_musics = {
             "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
-            "Astral Calm": "mus_astral_calm.mp3",
+            "Before Beginning":"mus_setup.ogg",
             "Aurora (Full Ver.)": "mus_aurora.mp3",
+            "Astral Calm": "mus_astral_calm.mp3",
             # 更多音乐请自行添加
         }
 
