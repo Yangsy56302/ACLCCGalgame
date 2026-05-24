@@ -1815,6 +1815,12 @@ init python:
         if music_pos:
             return convert_format(int(music_pos))
         return "00:00"
+
+    def set_audio_position(value, channel="music"):
+        print(value)
+        filename = renpy.music.get_playing(channel)
+        if filename:
+            renpy.music.play("<from {} loop 0.0>{}".format(value, filename), channel=channel)
     
     # 时间转换，可用于59分59秒内音乐
     def convert_format(time):
@@ -1899,7 +1905,9 @@ screen music_room():
             # 显示时长
             bar:
                 value AudioPositionValue(channel='music', update_interval=0.1)
+                # value FieldValue(, field="bar_value", min=0, max=duration, style='bar')
                 ysize gui.scrollbar_size
+                adjustment ui.adjustment(adjustable=True, range=renpy.music.get_duration(), changed=set_audio_position)
                 align (0.5, 0.7)
 
 
