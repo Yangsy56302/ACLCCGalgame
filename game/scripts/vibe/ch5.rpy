@@ -1,13 +1,14 @@
 label vibe_ch5:
     scene black with fade
 
-    play music "audio/mus_astral_calm.mp3" fadein 3.0
+    
 
     $ renpy.notify("几个月后")
-    pause 1.0
+    pause 2.0
 
     scene bg group_photo with fade
-
+    play music "audio/mus_astral_calm.mp3" fadein 3.0
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
     "ACLC 在几个月里成长了很多。\n新成员源源不断地加入，\n群里的消息记录一天比一天长。"
 
     "baile 的网站访问量也在稳步上升。\n偶尔会有陌生人来群里说\n\"我是从 aclc.top 找到你们的\"。"
