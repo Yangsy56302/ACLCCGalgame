@@ -5,7 +5,11 @@ label vibe_route_baile:
 
     "你走向了 baile。"
 
-    "在所有角色里，她是和你相识最久的。\n在 chex0 的 OI 分支中，你们早就是竞争对手兼网友了。\n这份缘分从代码的世界延续到了魔改的世界。"
+    if ch0ex_oi_has_been_seen:
+        "在所有角色里，她是和你相识最久的。\n在 chex0 的 OI 分支中，你们早就是竞争对手兼网友了。\n这份缘分从代码的世界延续到了魔改的世界。"
+    else:
+        mwam "你们来填吧{nw}"
+
 
     nvl clear
 
