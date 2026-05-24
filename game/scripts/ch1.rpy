@@ -1,3 +1,5 @@
+# 以下片段已合并至ch0.rpy
+
 # label ch1:
 #     scene bg that_video with fade
 #     if has_phone:
