@@ -1562,11 +1562,11 @@ style game_menu_outer_frame:
 
 style game_menu_navigation_frame:
     variant "small"
-    xsize 510
+    xsize 420
 
 style admire_navigation_frame:
     variant "small"
-    xsize 510
+    xsize 420
 
 style game_menu_content_frame:
     variant "small"
