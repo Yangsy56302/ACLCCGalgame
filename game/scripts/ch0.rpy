@@ -144,16 +144,16 @@ label ch0_adofai:
     gra.nvl "我是Grafrustix{w=0.5}{nw}"
     gra.nvl "叫我晴柚也行{w=1.0}{nw}"
     gra.nvl "所以 你叫什么"
-    if name_mc == "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
+    if mc.nickname == "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
         menu:
-            "[name_mc]":
-                mc.nvl "我叫[name_mc]"
+            "[mc]":
+                mc.nvl "我叫[mc]"
         gra.nvl "你这个名字很有个性啊{w=1.0}{nw}"
         gra.nvl "我感觉你很适合做魔改啊"
     else:
         menu:
-            "[name_mc]":
-                mc.nvl "我叫[name_mc]"
+            "[mc]":
+                mc.nvl "我叫[mc]"
             "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
                 mc.nvl "我叫奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子"
                 gra.nvl "？{w=1.0}{nw}"
@@ -161,8 +161,8 @@ label ch0_adofai:
                 gra.nvl "我感觉你很适合做魔改啊{w=1.0}{nw}"
                 gra.nvl "不过你不叫这个吧？{w=1.0}我到底怎么叫你？"
                 menu:
-                    "[name_mc]":
-                        mc.nvl "我叫[name_mc]"       
+                    "[mc]":
+                        mc.nvl "我叫[mc]"       
     gra.nvl "行，就这么叫你了"
     mc.nvl "Gra，{w=0.25}这个魔改到底是什么，{w=0.5}能给我讲讲吗？{w=1.0}{nw}"
     if not has_phone:

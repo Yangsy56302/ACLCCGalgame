@@ -1,42 +1,63 @@
 init python:
+    class CharacterDataKey:
+        def __init__(self, name: str):
+            self.name = name
 
-    class CharacterWithNVL(renpy.character.ADVCharacter):
-        def __init__(self, name, **properties):
-            super().__init__(name, **properties)
-            self.nvl = Character(name, kind=nvl, **properties)
+    AFFECTION = CharacterDataKey("affection")
+
+    class CharacterWithData(renpy.character.ADVCharacter):
+        def __init__(self, name, realname=None, **properties):
+            properties["dynamic"] = True
+            super().__init__(self.get_name, **properties)
+            self.nickname = name
+            self.realname = realname
+            self.meet_irl = False
+            self.meet_irl_nvl = False
+
+            self.nvl = Character(self.get_nvl_name, kind=nvl, **properties)
+            
             properties["what_prefix"] = "# " + properties.get("what_prefix", "")
             properties["what_color"] = "#808080"
+            properties["dynamic"] = False
             self.comment = Character(name, **properties)
             self.nvl.comment = Character(name, kind=nvl, **properties)
-    
-    class CharacterWithData(CharacterWithNVL):
-        def __init__(self, name, realname=None, **properties):
-            super().__init__(self.get_name, dynamic=True, **properties)
-            self.nickname = name
-            self.realname = name if realname is None else realname
-            self.meet_irl = False
-            # self.affection = 0
+
+            self.data: dict[CharacterDataKey, object] = {}
+
         def get_name(self):
-            return self.realname if self.meet_irl else self.nickname
-        def str(self):
+            if self.realname is None:
+                return self.nickname
+            if self.meet_irl:
+                return self.realname
+            return self.nickname
+
+        def get_nvl_name(self):
+            if self.realname is None:
+                return self.nickname
+            if self.meet_irl_nvl:
+                return self.realname
+            return self.nickname
+
+        def __str__(self):
             return self.get_name()
 
+        def __getitem__(self, key: CharacterDataKey):
+            return self.data[key]
 
 default persistent.name_mc = ""
-default name_mc = ""
-define mc = CharacterWithNVL("name_mc", dynamic=True)
+default mc = CharacterWithData("undefined")
 
 
-define guide = CharacterWithData("？？？")
+default guide = CharacterWithData("？？？")
 
 
-define ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")
+default ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")
 
 # image side ashell = "char/ashell/avatar.jpg"
 # image ashell = "char/ashell/normal.png"
 
 
-define baile = CharacterWithData("终究是摆了", "李星眠", image="baile", what_prefix="", what_suffix="")
+default baile = CharacterWithData("终究是摆了", "李星眠", image="baile", what_prefix="", what_suffix="")
 
 transform tcbaile:
     yanchor 0.5 subpixel True
@@ -62,13 +83,13 @@ image baile tsundere = At("char/baile/tsundere.png", tcbaile)
 image baile worried = At("char/baile/worried.png", tcbaile)
 
 
-define dwen = CharacterWithData("是动听D温呐", image="dwen", what_prefix="~ ", what_suffix="")
+default dwen = CharacterWithData("是动听D温呐", image="dwen", what_prefix="~ ", what_suffix="")
 
 # image side dwen = "char/dwen/avatar.jpg"
 # image dwen = "char/dwen/normal.png"
 
 
-define gra = CharacterWithData("晴柚-Grafrustix", "晴安柚子", image="gra", what_prefix="< ", what_suffix=" 3")
+default gra = CharacterWithData("晴柚-Grafrustix", "晴安柚子", image="gra", what_prefix="< ", what_suffix=" 3")
 
 transform tcgra:
     yanchor 0.625 subpixel True
@@ -79,19 +100,19 @@ image gra = At("char/gra/normal.png", tcgra)
 image gra flirt = At("char/gra/flirt.png", tcgra)
 
 
-define hale = CharacterWithData("TheHale", image="hale", what_prefix="", what_suffix="")
+default hale = CharacterWithData("TheHale", image="hale", what_prefix="", what_suffix="")
 
 # image side hale = "char/hale/avatar.jpg"
 # image hale = "char/hale/normal.png"
 
 
-define lamb = CharacterWithData("Happylamb029", image="lamb", what_prefix="", what_suffix="")
+default lamb = CharacterWithData("Happylamb029", image="lamb", what_prefix="", what_suffix="")
 
 # image side lamb = "char/lamb/avatar.jpg"
 # image lamb = "char/lamb/normal.png"
 
 
-define lingyun = CharacterWithData("飞雨凌云", "凌云", image="lingyun", what_prefix="", what_suffix="")
+default lingyun = CharacterWithData("飞雨凌云", "凌云", image="lingyun", what_prefix="", what_suffix="")
 
 transform tclingyun:
     yanchor 0.5 subpixel True
@@ -101,19 +122,19 @@ transform tclingyun:
 # image lingyun = "char/lingyun/normal.png"
 
 
-define lv = CharacterWithData("小绿君", image="lv", what_prefix="# ", what_suffix="")
+default lv = CharacterWithData("小绿君", image="lv", what_prefix="# ", what_suffix="")
 
 # image side lv = "char/lv/avatar.jpg"
 # image lv = "char/lv/normal.png"
 
 
-define maoyuna = CharacterWithData("MaoYuNa133", image="maoyuna", what_prefix="", what_suffix="")
+default maoyuna = CharacterWithData("MaoYuNa133", image="maoyuna", what_prefix="", what_suffix="")
 
 # image side maoyuna = "char/maoyuna/avatar.jpg"
 # image maoyuna = "char/maoyuna/normal.png"
 
 
-define morin = CharacterWithData("莫邪Morin", "莫邪", image="morin", what_prefix="", what_suffix="")
+default morin = CharacterWithData("莫邪Morin", "莫邪", image="morin", what_prefix="", what_suffix="")
 
 transform tcmorin:
     yanchor 0.5 subpixel True
@@ -123,7 +144,7 @@ transform tcmorin:
 image morin = At("char/morin/normal.png", tcmorin)
 
 
-define mwam = CharacterWithData("ms_win_and_mc", "李婉清", image="mwam", what_prefix="", what_suffix="")
+default mwam = CharacterWithData("ms_win_and_mc", "李婉清", image="mwam", what_prefix="", what_suffix="")
 
 transform tcmwam:
     yanchor 0.5 subpixel True
@@ -137,25 +158,25 @@ image mwam sad = At("char/mwam/sad.png", tcmwam)
 image mwam angry = At("char/mwam/angry.png", tcmwam)
 
 
-define nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")
+default nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")
 
 # image side nona = "char/nona/avatar.jpg"
 # image nona = "char/nona/normal.png"
 
 
-define pumi = CharacterWithData("Pumi", image="pumi", what_prefix="", what_suffix="")
+default pumi = CharacterWithData("Pumi", image="pumi", what_prefix="", what_suffix="")
 
 # image side pumi = "char/pumi/avatar.jpg"
 # image pumi = "char/pumi/normal.png"
 
 
-define uni = CharacterWithData("UNI", image="uni", what_prefix="", what_suffix="")
+default uni = CharacterWithData("UNI", image="uni", what_prefix="", what_suffix="")
 
 # image side uni = "char/uni/avatar.jpg"
 # image uni = "char/uni/normal.png"
 
 
-define yangsy = CharacterWithData("Yangsy56302", "杨曦", image="yangsy", what_prefix="\" ", what_suffix=" \"")
+default yangsy = CharacterWithData("Yangsy56302", "杨曦", image="yangsy", what_prefix="\" ", what_suffix=" \"")
 
 transform tcyangsy:
     yanchor 0.65625 subpixel True
@@ -215,14 +236,14 @@ layeredimage yangsy:
         "char/yangsy/blush.png"
 
 
-define yoosee = CharacterWithData("祐荽", image="yoosee", what_prefix="", what_suffix="")
+default yoosee = CharacterWithData("祐荽", image="yoosee", what_prefix="", what_suffix="")
 
 # image side yoosee = "char/yoosee/avatar.jpg"
 # image yoosee = "char/yoosee/normal.png"
 
-define myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", what_prefix="", what_suffix="")
+default myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", what_prefix="", what_suffix="")
 
 # image side myworldzycpc = "char/myworldzycpc/avatar.jpg"
 # image myworldzycpc = "char/myworldzycpc/normal.png"
 
-define comment = CharacterWithData("# ", what_color="#808080")
+default comment = CharacterWithData("# ", what_color="#808080")

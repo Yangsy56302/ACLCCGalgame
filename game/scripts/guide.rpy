@@ -38,7 +38,7 @@ label guide_naming_start:
         menu:
             "要使用上次的名字吗？"
             "当然。":
-                $ name_mc = persistent.name_mc
+                $ mc.nickname = persistent.name_mc
                 guide "非常感谢，{w=0.5}这样我就不用再重新念一遍那无聊的稿子了。"
                 return
             "我还是换一个吧。":
@@ -151,7 +151,7 @@ label guide_naming_entered:
             menu:
                 guide "噢，你觉得“Era”这个名字怎么样？\n{fast}{w=0.5}我实在是不擅长取名字，{w=0.5}这已经是我能想到的比较好的一个了。"
                 "当然。": 
-                    $ name_mc = "Era"
+                    $ mc.nickname = "Era"
                     jump guide_naming_done
                 "换一个吧。": 
                     guide "好吧，{w=0.5}显然你需要一个中文名字。"
@@ -160,11 +160,11 @@ label guide_naming_entered:
                     menu:
                         guide "那就叫“殷夏”吧，{fast}{w=0.25}这是我朋友的名字。"
                         "当然。": 
-                            $ name_mc = "殷夏"
+                            $ mc.nickname = "殷夏"
                             jump guide_naming_done
                         "再换一个吧": 
-                            $ name_mc = "玩家"
-                            $ persistent.name_mc = name_mc
+                            $ mc.nickname = "玩家"
+                            $ persistent.name_mc = mc.nickname
                             $ renpy.block_rollback()
                             stop music fadeout 2.0
                             guide "啊，{w=0.5}都不满意吗？"
@@ -202,7 +202,7 @@ label guide_naming_entered:
             guide "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
         else:
             guide "{......}"
-            $ name_mc = player_input
+            $ mc.nickname = player_input
         
         # 返回重新输入
         jump guide_naming_loop
@@ -213,27 +213,27 @@ label guide_naming_entered:
         guide "我应该没有调用获取系统账户名称的API吧{......}"
         guide "难道说你觉得这样做就能获得什么“{green}管理员权限{/green}”之类的？"
         guide "谁知道呢，{w=0.5}说不定某次更新之后作者就会为这个加点什么？"
-        $ name_mc = player_input
+        $ mc.nickname = player_input
         jump guide_naming_confirm
     
     # 否则，如果输入的名字是当前系统用户名：
     elif player_input == currentuser:
         guide "唔{......}这好像是你系统账户的名字。\n{w=1.0}你不会所有地方都会用一样的名字吧？"
         guide "没什么好说的，你喜欢就好。"
-        $ name_mc = player_input
+        $ mc.nickname = player_input
         jump guide_naming_confirm
     
     # 否则，如果输入的名字是qwq/awa等：
     elif player_input.lower() in ("qwq", "awa", "uwu", "xwx"):
         guide "[player_input]"
-        $ name_mc = player_input
+        $ mc.nickname = player_input
         jump guide_naming_confirm
     
     # 否则，如果输入的名字含有特殊符号（通过检查Unicode字符分类判断）：
     elif any(unicodedata.category(c) in ("So", "Zl", "Zp", "Cc", "Cf", "Cs", "Co", "Cn") for c in player_input):
         guide "虽然说输入框能支持，{w=0.25}但是{......}你取个这样的名字，{w=0.5}我该怎么念呢？"
         guide "难道说你在聊天框里塞了颜文字？{w=1.0}我的程序可检测不出来。"
-        $ name_mc = player_input
+        $ mc.nickname = player_input
         jump guide_naming_confirm
 
     # 否则，如果输入的名字长度大于20个字符：
@@ -244,12 +244,12 @@ label guide_naming_entered:
     # 否则，如果输入的名字长度小于3字节：
     elif len(bytes(player_input, encoding="utf-8")) < 3:
         guide "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
-        $ name_mc = player_input
+        $ mc.nickname = player_input
         jump guide_naming_confirm
     
     # 否则（以上条件均没能满足）：
     else:
-        $ name_mc = player_input
+        $ mc.nickname = player_input
         jump guide_naming_confirm
 
 
@@ -268,7 +268,7 @@ label guide_naming_confirm:
 
 label guide_naming_done:
 
-    $ persistent.name_mc = name_mc
+    $ persistent.name_mc = mc.nickname
     $ renpy.block_rollback()
     guide "好的，{w=0.25}看来你决定好自己叫什么了。"
     guide "不过我还是叫你玩家吧，{w=0.5}叫别人的名字我总感觉挺羞耻的。"
