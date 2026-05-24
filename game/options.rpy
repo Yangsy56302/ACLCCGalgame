@@ -220,3 +220,5 @@ init python:
 
 # 退出自动保存（测试）
 define config.autosave_on_quit = True
+
+define config.check_conflicting_properties = True

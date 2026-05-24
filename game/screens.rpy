@@ -638,7 +638,7 @@ screen about():
                 text "[gui.about!t]\n"
 
             text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
-
+            
 
 style about_label is gui_label
 style about_label_text is gui_label_text
@@ -1073,15 +1073,15 @@ screen help():
                 textbutton _("Keyboard") action SetScreenVariable("device", "keyboard")
                 textbutton _("Mouse") action SetScreenVariable("device", "mouse")
 
-                # if GamepadExists():
-                #     textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
+                if GamepadExists():
+                    textbutton _("Gamepad") action SetScreenVariable("device", "gamepad")
 
             if device == "keyboard":
                 use keyboard_help
             elif device == "mouse":
                 use mouse_help
-            # elif device == "gamepad":
-            #     use gamepad_help
+            elif device == "gamepad":
+                use gamepad_help
 
 
 screen keyboard_help():
@@ -1157,7 +1157,6 @@ screen mouse_help():
         label _("Mouse Wheel Down")
         text _("Rolls forward to later dialogue.")
 
-"""
 screen gamepad_help():
 
     hbox:
@@ -1186,7 +1185,6 @@ screen gamepad_help():
         text _("Hides the user interface.")
 
     textbutton _("Calibrate") action GamepadCalibrate()
-"""
 
 style help_button is gui_button
 style help_button_text is gui_button_text
@@ -1562,11 +1560,11 @@ style game_menu_outer_frame:
 
 style game_menu_navigation_frame:
     variant "small"
-    xsize 510
+    xsize 420
 
 style admire_navigation_frame:
     variant "small"
-    xsize 510
+    xsize 420
 
 style game_menu_content_frame:
     variant "small"
@@ -1832,7 +1830,7 @@ init python:
 
 # 音乐空间界面
 
-screen music_room:
+screen music_room():
 
     tag menu
     
