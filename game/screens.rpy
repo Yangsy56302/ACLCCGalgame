@@ -1710,6 +1710,7 @@ init python:
     # 默认未能解锁的鉴赏图片
     defaultly_locked_gallery_images = {
         "monitor": ["bg sbeam", "bg that_video"],
+        "sky":["bg sky"]
         # 更多图像请自行添加
     }
     gallery_images = {**defaultly_unlocked_gallery_images, **defaultly_locked_gallery_images}
