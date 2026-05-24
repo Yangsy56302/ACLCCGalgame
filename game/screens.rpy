@@ -973,6 +973,9 @@ screen history():
 
         style_prefix "history"
 
+        has vbox:
+            spacing gui.history_spacing
+
         for h in _history_list:
 
             window:
