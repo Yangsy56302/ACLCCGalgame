@@ -27,7 +27,7 @@ default name_mc = ""
 define mc = CharacterWithNVL("name_mc", dynamic=True)
 
 
-define guide = CharacterWithData("？？？")
+define setup = CharacterWithData("？？？")
 
 
 define ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")
