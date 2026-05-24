@@ -7,7 +7,7 @@ label chex0_not_join:
 
 label chex0_oi:
     scene black with fade
-
+    $ ch0ex_oi_has_been_seen = True
     "你从小对信息技术就很感兴趣。"
     
     "这听起来好像也没什么特别的。\n{w=1.0}毕竟在这个时代，{w=0.5}哪个小孩不喜欢玩电脑、{w=0.25}打游戏呢？{w=1.0}"

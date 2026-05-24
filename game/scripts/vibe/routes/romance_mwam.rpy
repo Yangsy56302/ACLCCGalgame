@@ -76,7 +76,9 @@ label vibe_route_mwam:
     "李婉清线·结局"
     play music "audio/mus_aurora_part1.ogg" fadein 3.0
 
-    "后来，你们的合作越来越频繁。\n你做魔改，她做配乐。\n你们的作品被称为"ACLCC 最默契的搭档"。"
+    $ mwam.meet_irl = True
+
+    "后来，你们的合作越来越频繁。\n你做魔改，她做配乐。\n你们的作品被称为\"ACLCC 最默契的搭档\"。"
 
     "但你知道，最默契的时刻不是那些公开的作品——\n而是那些深夜的私聊里，\n她断断续续地和你聊生活和灵感，\n不知不觉聊到天亮。"
 
