@@ -469,7 +469,7 @@ init python:
         gui.navigation_spacing = 30
         gui.pref_button_spacing = 15
 
-        gui.history_height = 150
+        gui.history_height = None
         gui.history_name_ypos = 0
         gui.history_name_xpos = 233
         gui.history_name_width = 233
