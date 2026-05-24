@@ -4,6 +4,10 @@ init python:
         def __init__(self, name, **properties):
             super().__init__(name, **properties)
             self.nvl = Character(name, kind=nvl, **properties)
+            properties["what_prefix"] = "# " + properties.get("what_prefix", "")
+            properties["what_color"] = "#808080"
+            self.comment = Character(name, **properties)
+            self.nvl.comment = Character(name, kind=nvl, **properties)
     
     class CharacterWithData(CharacterWithNVL):
         def __init__(self, name, realname=None, **properties):
@@ -220,3 +224,5 @@ define myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", wh
 
 # image side myworldzycpc = "char/myworldzycpc/avatar.jpg"
 # image myworldzycpc = "char/myworldzycpc/normal.png"
+
+define comment = CharacterWithData("# ", what_color="#808080")

@@ -8,7 +8,7 @@ label bone_ch3:
 
     scene bg group_photo with fade
 
-    yangsy "……所以[name_mc]到底是在什么时候进群的？"
+    yangsy.comment "……所以[name_mc]到底是在什么时候进群的？"
 
     stop music fadeout 2.0
 
@@ -21,7 +21,7 @@ label bone_ch3:
 
     "你时不时在群里看到他们讨论技术问题——\n什么框架、什么部署、什么域名解析——\n你听不太懂，但觉得他们很厉害。"
 
-    yangsy "这里可以选择跟建设网站的成员交谈，提高进线可能"
+    yangsy.comment "这里可以选择跟建设网站的成员交谈，提高进线可能"
 
     "几天后，网站做好了。"
 
@@ -45,7 +45,7 @@ label bone_ch3:
 
     gra "我们搞个{s}魔改比赛{/s}吧"
 
-    yangsy "等会咱们也没搞过魔改比赛什么的啊\n按理来说不是应该让[name_mc]试做魔改吗"
+    yangsy.comment "等会咱们也没搞过魔改比赛什么的啊\n按理来说不是应该让[name_mc]试做魔改吗"
 
     menu:
         "尝试":
@@ -56,8 +56,8 @@ label bone_ch3:
             $ joined_contest = False
             pass
             
-    yangsy "这里可以存个变量用于决定后续分支；\n首次尝试会导致游戏倾向于进入作者线"
-    yangsy "最终进什么线应该是多个选项变量综合而来的结果，且最好不是随机的"
+    yangsy.comment "这里可以存个变量用于决定后续分支；\n首次尝试会导致游戏倾向于进入作者线"
+    yangsy.comment "最终进什么线应该是多个选项变量综合而来的结果，且最好不是随机的"
 
     if joined_contest:
         "你开始构思自己的第一个魔改作品。\n虽然你还什么都不会，但你知道——\n这个群里会有人帮你。"

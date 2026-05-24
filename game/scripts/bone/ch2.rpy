@@ -7,7 +7,7 @@ label bone_ch2:
 
     nvl clear
 
-    nvl_narrator "大概就是所有群员全都欢迎一句；可以顺便加点互动"
+    comment.nvl "大概就是所有群员全都欢迎一句；可以顺便加点互动"
 
     "消息一条接一条地弹出来。\n你还没来得及回复，就已经被淹没了。"
 
@@ -29,7 +29,7 @@ label bone_ch2:
 
     "几天下来，你逐渐摸清了群里的生态。"
 
-    "Gra 是（待补）"
+    comment "Gra 是（待补）"
     "除了 Gra，群里还有一个人的发言风格让你印象深刻——Yangsy。\n她（待补）"
 
     scene black with fade
@@ -46,11 +46,11 @@ label bone_ch2:
 
     nvl clear
 
-    "mwam（待补）"
+    comment "mwam（待补）"
 
     nvl clear
 
-    "Morin（待补）"
+    comment "Morin（待补）"
 
     nvl clear
 
