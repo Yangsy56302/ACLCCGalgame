@@ -330,7 +330,7 @@ translate None strings:
     new "继续"
 
     old "Gallery"
-    new "图片鉴赏"
+    new "CG鉴赏"
 
     old "Music"
     new "音乐鉴赏"
