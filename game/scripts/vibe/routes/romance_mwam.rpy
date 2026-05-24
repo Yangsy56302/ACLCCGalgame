@@ -1,6 +1,4 @@
 label vibe_route_mwam:
-    if go_to_expo == True:
-        $ mwam.meet_irl = True
     scene black with fade
 
     play music "audio/mus_setup.ogg" fadein 2.0
