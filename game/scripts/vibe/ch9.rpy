@@ -11,21 +11,21 @@ label vibe_ch9:
 
     "直到有一天，你收到了一条私聊。"
 
-    lv.nvl "# ……在吗？"
+    lv.nvl "……在吗？"
 
     mc.nvl "在"
 
-    lv.nvl "# 我想重建 ACLC"
+    lv.nvl "我想重建 ACLC"
 
     "你愣住了。"
 
     mc.nvl "你说真的？"
 
-    lv.nvl "# 真的\n# 我不甘心就这么结束了"
+    lv.nvl "真的\n# 我不甘心就这么结束了"
 
     mc.nvl "但是……Gra 她……"
 
-    lv.nvl "# Gra 那边我会去说\n# 但我觉得这个社区应该继续存在\n# 哪怕换一个名字，换一种方式"
+    lv.nvl "Gra 那边我会去说\n# 但我觉得这个社区应该继续存在\n# 哪怕换一个名字，换一种方式"
 
     nvl clear
 
@@ -39,14 +39,14 @@ label vibe_ch9:
         "我愿意帮你重建":
             mc "需要我做什么？"
 
-            lv "# 先帮我联系一下大家吧\n# 看看还有多少人愿意回来"
+            lv "先帮我联系一下大家吧\n# 看看还有多少人愿意回来"
 
             $ helped_rebuild = True
 
         "我需要想想……":
             mc "让我想想……"
 
-            lv "# 嗯\n# 想好了告诉我"
+            lv "嗯\n# 想好了告诉我"
 
             $ helped_rebuild = False
 
@@ -66,7 +66,7 @@ label vibe_ch9:
 
     "小绿君在空荡荡的新群里发了一条消息："
 
-    lv.nvl "# 我回来啦"
+    lv.nvl "我回来啦"
 
     "然后——"
 
@@ -74,7 +74,7 @@ label vibe_ch9:
 
     baile.nvl "来了喵~"
 
-    dwen.nvl "~ 我还在 ~"
+    dwen.nvl "我还在"
 
     ashell.nvl "嗯。"
 
@@ -91,7 +91,7 @@ label vibe_ch9:
     if helped_rebuild:
         "你也在群里发了消息："
         mc.nvl "我也在"
-        lv.nvl "# 欢迎回来"
+        lv.nvl "欢迎回来"
 
     "但有两个人的名字一直没有出现。"
 

@@ -9,13 +9,13 @@ label vibe_ch2:
 
     gra.nvl "欢迎新人[[鼓掌]"
     mc.nvl "大家好，我是新来的[mc]，请多关照"
-    yangsy.nvl "\" 哦哦！新人！( ´▽｀) \""
+    yangsy.nvl "哦哦！新人！( ´▽｀)"
     morin.nvl "欢迎欢迎！"
     lv.nvl "欢迎。"
     baile.nvl "欢迎喵~"
     mwam.nvl "欢迎。"
     ashell.nvl "欢迎。"
-    dwen.nvl "~ 欢迎来到 Gra 的群 ~"
+    dwen.nvl "欢迎来到 Gra 的群"
     lingyun.nvl "欢迎。"
     lamb.nvl "嗨~"
 
@@ -57,15 +57,15 @@ label vibe_ch2:
 
     "除了 Gra，群里还有一个人的发言风格让你印象深刻——Yangsy。\n她说话永远带着引号，仿佛每句话都是在引用什么神秘语录。"
 
-    yangsy "\" 今天又做出来一个逆天的玩意儿 (￣▽￣)ノ \""
+    yangsy "今天又做出来一个逆天的玩意儿 (￣▽￣)ノ"
 
     mc "什么逆天的玩意儿？"
 
-    yangsy "\" 一个把 Adofai 变成音游的魔改 (不是) \""
+    yangsy "一个把 Adofai 变成音游的魔改 (不是)"
 
-    lv "# 等等，Adofai 本来就是音游吧"
+    lv "等等，Adofai 本来就是音游吧"
 
-    yangsy "\" 那就是把音游变成另一个音游！ \""
+    yangsy "那就是把音游变成另一个音游！"
 
     morin "你搁这套娃呢"
 
@@ -73,13 +73,13 @@ label vibe_ch2:
 
     mc "这……这也能玩？"
 
-    yangsy "\" 能！而且我已经录了全连视频！ [[链接] \""
+    yangsy "能！而且我已经录了全连视频！ [[链接]"
 
     "你点开链接，看了完整通关视频。\n虽然画面离谱，但节奏竟然意外地对得上。\n你忍不住笑出了声。"
 
     mc "你是怎么做出来的？"
 
-    yangsy "\" 勇气 + 咖啡 + 深夜 + 一点点的 (消音) \""
+    yangsy "勇气 + 咖啡 + 深夜 + 一点点的 (消音)"
 
     gra "别听她瞎说 3\n你要是感兴趣，我可以教你基础"
 
@@ -121,9 +121,9 @@ label vibe_ch2:
 
     baile.nvl "我报名喵~"
 
-    lv.nvl "# 虽然我觉得联机打 Adofai 没什么意义……但我也来"
+    lv.nvl "虽然我觉得联机打 Adofai 没什么意义……但我也来"
 
-    yangsy.nvl "\" 联机什么模式？比谁先被魔改吓哭吗 (´▽｀) \""
+    yangsy.nvl "联机什么模式？比谁先被魔改吓哭吗 (´▽｀)"
 
     morin.nvl "就比谁通关快！简单粗暴！"
 
