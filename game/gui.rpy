@@ -354,7 +354,11 @@ define config.history_length = 250
 
 ## The height of a history screen entry, or None to make the height variable at
 ## the cost of performance.
-define gui.history_height = 210
+define gui.history_height = None
+
+## The spacing between history screen entries when gui.history_height is None, 
+## and between history screen entries and an NVL-mode menu.
+define gui.history_spacing = 15
 
 ## The position, width, and alignment of the label giving the name of the
 ## speaking character.
@@ -383,7 +387,7 @@ define gui.nvl_list_length = 6
 
 ## The height of an NVL-mode entry. Set this to None to have the entries
 ## dynamically adjust height.
-define gui.nvl_height = 173
+define gui.nvl_height = None
 
 ## The spacing between NVL-mode entries when gui.nvl_height is None, and between
 ## NVL-mode entries and an NVL-mode menu.
@@ -484,7 +488,7 @@ init python:
         gui.file_slot_rows = 2
 
         ## NVL-mode.
-        gui.nvl_height = 255
+        gui.nvl_height = None
 
         gui.nvl_name_width = 458
         gui.nvl_name_xpos = 488
