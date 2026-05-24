@@ -93,7 +93,9 @@ label ch0_adofai:
     stop music
     $ persistent.has_seen_ending = True
     "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
-    
+    jump ch0_1
+
+label ch0_1:
     scene bg that_video with fade
     if has_phone:
         "你使用在视频简介里发现的群号找到了群。"
