@@ -180,16 +180,17 @@ label ch0_adofai:
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
 
-    menu:
-        "未完待续{......}"
-        "查看AI剧情":
-            jump vibe_ch2
-        "查看[yoosee]的建议":
-            jump chplotadvice_yoosee
-        "查看[yangsy]的建议":
-            jump chplotadvice_yangsy
-        "返回主菜单":
-            pass
+    while True:
+        menu:
+            "未完待续{......}"
+            "查看AI剧情":
+                jump vibe_ch2
+            "查看[yoosee]的建议":
+                call chplotadvice_yoosee
+            "查看[yangsy]的建议":
+                call chplotadvice_yangsy
+            "返回主菜单":
+                return
         
     return
 
@@ -214,6 +215,8 @@ label chplotadvice_yoosee:
     yoosee.comment "攻略线更侧重感情"
     yoosee.comment "魔改用于增添风味（）"
 
+    return
+
 
 label chplotadvice_yangsy:
 
@@ -233,3 +236,5 @@ label chplotadvice_yangsy:
     yangsy.comment "最终结局和二周目meta线就到时候再说了，这都不是现在的首要事项"
     yangsy.comment "哦对如果你还没发现Yangsy每句长度都一样的话Yangsy会很失望的（"
     yangsy.comment "当然游戏内的字体并不是等宽字体所以这点很难看出来就是了（（（"
+
+    return
