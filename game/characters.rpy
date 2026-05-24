@@ -48,7 +48,7 @@ default persistent.name_mc = ""
 default mc = CharacterWithData("undefined")
 
 
-default guide = CharacterWithData("？？？")
+default setup = CharacterWithData("？？？")
 
 
 default ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")

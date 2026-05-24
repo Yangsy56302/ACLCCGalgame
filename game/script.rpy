@@ -7,7 +7,7 @@ label start:
 
     # jump chtest
 
-    call guide_naming_start from _call_guide_naming_start
+    call setup_naming_start from _call_setup_naming_start
     $ renpy.block_rollback()
     call ch0 from _call_ch0
 
@@ -24,6 +24,7 @@ label chtest:
     ""
 
     return
+
 
 image splash = "splash.png"
 image attention = "attention.png"
@@ -64,12 +65,11 @@ init -999 python:
 
             return FileLoadable(newest_name, page=newest_page)
 
-        def  get_newest_slot(self):
+        def get_newest_slot(self):
             newest = renpy.newest_slot()
 
             if newest:
                 page, name = newest.split("-")
                 return page, name
+    
     names = ["祐荽", "Yangsy56302", "小绿君", "飞雨凌云", "莫邪Morin", "ms_win_and_mc", "是动听D温呐", "晴柚-Grafrustix", "TheHale", "终究是摆了", "阿希尔Ashell", "myworldzycpc"]
-
-

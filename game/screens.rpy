@@ -609,7 +609,6 @@ style return_button:
     yalign 1.0
     yoffset -45
 
-default persistent.playing_music = "mus_aurora_part1.ogg"
 ## About screen ################################################################
 ##
 ## This screen gives credit and copyright information about the game and Ren'Py.
@@ -1803,10 +1802,6 @@ init python:
                 # 默认解锁的音乐：
                 "mus_aurora_part1.ogg",
             ))
-        
-        class Check_music(Action):
-            def check_music(file_name):
-                persistent.playing_music = file_name
 
 
 init python:
@@ -1861,7 +1856,7 @@ screen music_room():
                     for music_name, music_file in room_musics.items():
                         # 判断bgm是否解锁
                         if mr.is_unlocked(music_file):
-                            textbutton music_name action [mr.Play(music_file),Check_music.check_music(music_file)]
+                            textbutton music_name action mr.Play(music_file)
                         else:
                             textbutton "???" action NullAction()
 
