@@ -93,13 +93,13 @@ label vibe_route_creator:
 
     "有人把你的作品转给了她。\n她只回了一句话——"
 
-    yangsy.nvl "\" 这个风格……有点像我 (´･ω･`) \""
+    yangsy.nvl "这个风格……有点像我 (´･ω･`)"
 
     mc.nvl "因为我是看着你的作品学的"
 
     "那边沉默了很久。"
 
-    yangsy.nvl "\" ……谢谢 \""
+    yangsy.nvl "……谢谢"
 
     nvl clear
 

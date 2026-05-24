@@ -13,7 +13,7 @@ label vibe_route_yangsy:
 
     "两个月后，她回了你。"
 
-    yangsy.nvl "\" 这个比我做的差远了 (￣ω￣) \""
+    yangsy.nvl "这个比我做的差远了 (￣ω￣)"
 
     "你笑了。\n她回来了。"
 
@@ -29,9 +29,9 @@ label vibe_route_yangsy:
 
     "她沉默了很久。"
 
-    yangsy.nvl "\" 有时候还是会这么想 \""
+    yangsy.nvl "有时候还是会这么想"
 
-    yangsy.nvl "\" 但每次看到有人因为我的作品笑了\n我又觉得——值得 \""
+    yangsy.nvl "但每次看到有人因为我的作品笑了\n我又觉得——值得"
 
     mc.nvl "那就够了"
 

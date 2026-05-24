@@ -13,7 +13,7 @@ label vibe_ch6:
 
     "有人说魔改是对原作的不尊重，\n有人说魔改让 Adofai 失去了它原本的魅力，\n也有人在为魔改辩护。"
 
-    lv.nvl "# 这帖子被转到好几个地方了"
+    lv.nvl "这帖子被转到好几个地方了"
 
     morin.nvl "我看到好多人无脑喷……气死我了"
 
@@ -21,7 +21,7 @@ label vibe_ch6:
 
     gra.nvl "不用\n去那里吵架只会让事情更糟"
 
-    yangsy.nvl "\" 但也不能什么都不说吧！ \""
+    yangsy.nvl "但也不能什么都不说吧！"
 
     nvl clear
 
@@ -29,15 +29,15 @@ label vibe_ch6:
 
     scene bg group_photo with fade
 
-    yangsy "\" Gra，我不明白\n为什么别人骂到头上了，我们还要忍着 \""
+    yangsy "Gra，我不明白\n为什么别人骂到头上了，我们还要忍着"
 
     gra "我不是说要忍。\n但去评论区对喷不是解决办法。"
 
-    yangsy "\" 那什么是解决办法？\n等他们自己改变想法？ \""
+    yangsy "那什么是解决办法？\n等他们自己改变想法？"
 
     gra "我们做好自己的作品，自然会有人看到"
 
-    yangsy "\" 如果没人看呢？\n如果官方下场封杀呢？ \""
+    yangsy "如果没人看呢？\n如果官方下场封杀呢？"
 
     gra "……那就到时候再说"
 
@@ -55,14 +55,14 @@ label vibe_ch6:
 
             gra "嗯"
 
-            yangsy "\" ……好吧\n反正我就是咽不下这口气 \""
+            yangsy "……好吧\n反正我就是咽不下这口气"
 
         "我觉得 Yangsy 说得有道理——不能沉默":
             $ support_gra = False
             $ support_yangsy = True
             mc "但是 Yangsy 也有道理……\n完全沉默的话，别人只会当我们好欺负"
 
-            yangsy "\" 对吧！ \""
+            yangsy "对吧！"
 
             gra "我不是说要沉默……\n只是要选对方式"
 
@@ -75,7 +75,7 @@ label vibe_ch6:
 
             gra "……你说得对"
 
-            yangsy "\" 嗯……我也不是要吵架\n就是气不过 \""
+            yangsy "嗯……我也不是要吵架\n就是气不过"
 
     nvl clear
 
@@ -99,7 +99,7 @@ label vibe_ch6:
 
     morin "……这人粉丝好多的"
 
-    lv "# 他的视频播放量也很夸张"
+    lv "他的视频播放量也很夸张"
 
     mwam "……"
 
