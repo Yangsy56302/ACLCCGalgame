@@ -452,7 +452,7 @@ translate None strings:
 
     # renpy/common/00library.rpy:281
     old "This program contains free software under a number of licenses, including the MIT License and GNU Lesser General Public License. A complete list of software, including links to full source code, can be found {a=https://www.renpy.org/l/license}here{/a}."
-    new "这个程序包含了许多许可证下的自由软件，包括MIT许可证和GNU Lesser通用公共许可证。完整的软件列表，包括全部源代码的链接，可以在{a=https://www.renpy.org/l/license}这里{/a}找到。"
+    new "这个程序包含了许多许可证下的自由软件，包括MIT许可证和GNU Lesser通用公共许可证。\n完整的软件列表，包括全部源代码的链接，可以在{a=https://www.renpy.org/l/license}这里{/a}找到。"
 
     # renpy/common/00preferences.rpy:233
     old "display"
