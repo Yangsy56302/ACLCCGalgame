@@ -36,7 +36,7 @@ label start:
 
 label chtest:
     
-    show yangsy flirt zorder 2 at t41
+    show yangsy zorder 2 at t41
     show gra zorder 2 at t11
     show mwam angry zorder 2 at t43
     show morin zorder 2 at t44
