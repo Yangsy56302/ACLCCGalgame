@@ -1,6 +1,6 @@
 label ch0:
     stop music
-    scene black with fade
+    scene bg sky with fade
 
     "作为一个二线城市普通家庭的学生，\n{w=0.5}你比大多数人更容易接触到一些新潮的事物。"
     "同样的，{w=0.25}作为一个二线城市普通家庭的学生，\n{w=0.5}你的一些爱好往往并不能找到与你志同道合的伙伴。"
@@ -17,19 +17,19 @@ label ch0:
     menu:
         "不点开这个视频":
             "你对这个视频不感兴趣，于是你没有点开那个视频"
-            scene black with fade
+            scene bg sky with fade
             $ renpy.notify("2020年某日")
             pause 1.0
             "你偶然在某个视频网站上遇到了一款游戏。"
             $ tutorial = "网上的教程"
         "点开这个视频":
             "你对这个视频很感兴趣，于是点了进去"
-            scene black with fade
+            scene bg sky with fade
             "跟着视频学了一会，你渐渐的开始对信息技术产生了浓厚的兴趣"
             jump chex0_oi
 
 label ch0_adofai:
-    scene bg sbeam with fade
+    scene bg sbeam with dissolve
     "只需一个按键，{w=0.5}控制盘旋飞舞的双星，{w=0.5}踏着摇曳的舞步，\n{w=0.5}在一条跟随音乐节奏变化的蜿蜒道路上不断前进，{w=0.5}探索音乐的宇宙。"
     
     if has_phone:
