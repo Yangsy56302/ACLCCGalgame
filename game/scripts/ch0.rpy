@@ -214,6 +214,8 @@ label chplotadvice_yoosee:
     yoosee.comment "攻略线更侧重感情"
     yoosee.comment "魔改用于增添风味（）"
 
+    return
+
 
 label chplotadvice_yangsy:
 
@@ -233,3 +235,5 @@ label chplotadvice_yangsy:
     yangsy.comment "最终结局和二周目meta线就到时候再说了，这都不是现在的首要事项"
     yangsy.comment "哦对如果你还没发现Yangsy每句长度都一样的话Yangsy会很失望的（"
     yangsy.comment "当然游戏内的字体并不是等宽字体所以这点很难看出来就是了（（（"
+
+    return
