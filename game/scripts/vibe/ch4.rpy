@@ -86,10 +86,10 @@ label vibe_ch4:
     scene black with fade
 
     $ renpy.notify("一个深夜")
-    pause 1.0
+    pause 2.0
 
     play music "audio/mus_aurora.mp3" fadein 2.0
-
+    $ renpy.notify("♪ ms_win_and_mc - Aurora (Full Ver.)")
     "群里的消息渐渐安静了下来。\n你正准备关手机睡觉，却收到了 baile 的私聊。"
 
     baile "你睡了吗喵？"
