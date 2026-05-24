@@ -50,7 +50,8 @@ label vibe_ch10:
     nvl clear
 
     "hale 的话在群里引发了激烈的讨论。"
-    "有人说他在分裂社区，\n有人说他说得有道理，\n更多的人在沉默——\n因为他们也不知道哪个选择才是对的。"
+    "有人说他在分裂社区，\n有人说他说得有道理"
+    "更多的人在沉默——\n因为他们也不知道哪个选择才是对的。"
 
     scene bg group_photo with fade
 
@@ -72,23 +73,31 @@ label vibe_ch10:
 
     "Gra 说完这句话就下线了。\n她来得很突然，走得很安静。\n但她说的话，让所有人都沉默了。"
 
-    "那天晚上，hale 建立了他的 ACLCC。\n他搭建了新的网站——acclcc.top。\n和 baile 做过的 aclc.top 一样，又是一个网站。\n又是一个新的开始。"
+    "那天晚上，hale 建立了他的 ACLCC。\n他搭建了新的网站——aclcc.top。"
+    
+    "和 baile 做过的 aclc.top 一样，又是一个网站。\n又是一个新的开始。"
 
     stop music fadeout 2.0
 
     scene black with fade
 
-    "于是，新的时代开始了。\n两个 ACLCC，\n一群同样的人，\n两座各自发光的灯塔。"
+    "于是，新的时代开始了。\n两个 ACLCC"
+    
+    "一群同样的人，\n两座各自发光的灯塔。"
 
     pause 1.0
 
     play music "audio/mus_aurora.mp3" fadein 3.0
 
+    $ renpy.notify("♪ ms_win_and_mc - Aurora (Full Ver.)")
+
     "你同时待在两个群里。\n小绿君的群里，大家还是像以前一样自由地聊天创作。\nhale 的群里，开始有了制度、规则、定期活动。"
 
     "有人说这样很好——两个社区互相补充。\n也有人说这不是好事——分裂会削弱魔改圈的力量。"
 
-    "你不知道谁对谁错。\n你只知道，\n无论在哪一个群里，\n你都能看到那些熟悉的名字。"
+    "你不知道谁对谁错。\n你只知道，"
+    
+    "无论在哪一个群里，\n你都能看到那些熟悉的名字。"
 
     nvl clear
 

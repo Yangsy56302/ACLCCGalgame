@@ -31,7 +31,9 @@ label vibe_ch9:
 
     '小绿君的话让你沉默了很久。\n你想起杨曦退群前的那句话——\n"也许我本来就不该做魔改"'
 
-    "但你又想起更多——\n那些深夜里的笑声，第一次发表作品时的成就感，\n听到 mwam 的曲子时的震撼，\n和 baile 一起看星星时的宁静……"
+    "但你又想起更多——\n那些深夜里的笑声，第一次发表作品时的成就感"
+
+    "听到 mwam 的曲子时的震撼，\n和 baile 一起看星星时的宁静……"
 
     menu:
         "我愿意帮你重建":
@@ -54,7 +56,7 @@ label vibe_ch9:
     pause 1.0
 
     play music "audio/mus_aurora.mp3" fadein 3.0
-
+    $ renpy.notify("♪ ms_win_and_mc - Aurora (Full Ver.)")
     "几天后，一个新的群聊出现在你的群列表里。"
 
     "群名：ACLC (CN)"
