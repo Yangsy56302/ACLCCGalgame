@@ -9,8 +9,7 @@ label ch0:
     "日子就这么普普通通的过着{......}"
 
 
-    scene black with dissolve
-    "{......}"
+    scene bg home_noon with fade
 
     # "有一天，{w=0.25}你在网上冲浪的时候发现一个视频，{w=0.5}标题写着{w=0.25}“0基础编程教学”。{nw}"
     # $ _history_list.pop()
@@ -52,7 +51,7 @@ label ch0:
     "不得已，你只能在搜索结果下的无数广告里下载了一个{yellow}“渠道版”{/yellow}将就着玩。"
 
 
-    scene bg sbeam with fade
+    scene bg sbeam with dissolve
 
     # play music "mus_astral_calm.mp3"
     # python:
@@ -83,7 +82,7 @@ label ch0:
     "他们并没有斥责你，{w=0.5}只是用一种深邃的眼神看着你。"
 
     stop music fadeout 2.0
-    scene black with fade
+    scene sky with dissolve
 
 
     "对于经历着忽略式教育的你，{w=0.25}在你做错事的时候，\n{w=0.25}这种眼神已经见过无数次。"
