@@ -121,7 +121,7 @@ label ch0_adofai:
 
 
 label ch0_1:
-    scene bg that_video with dissolve
+    scene bg home_night with dissolve
     # if has_phone:
     #     "你使用在视频简介里发现的群号找到了群。"
     # else:
@@ -136,7 +136,7 @@ label ch0_1:
 
     "你发送了入群申请。"
 
-    scene bg adofai with fade
+    scene bg that_video with fade
 
     "在等待回复的途中，{w=0.5}你顺便看了这位UP的其他视频。"
     mc "这螃蟹有意思{...}"
@@ -146,7 +146,7 @@ label ch0_1:
 
     scene black with dissolve
     "{......}"
-    scene bg adofai with dissolve
+    scene bg home_midnight with dissolve
 
     "——突然响起的QQ提示音将你的意识拉回现实。"
     "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
@@ -219,6 +219,7 @@ label ch0_1:
     nvl clear
     mc.nvl 'Gra，{w=0.25}我先不聊了，{w=0.5}我["妈" if has_phone else "母亲"]叫我睡觉了'
     gra.nvl "祝你好梦"
+    scene bg star with fade
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
 
