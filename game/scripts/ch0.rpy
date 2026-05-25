@@ -11,7 +11,6 @@ label ch0:
 
     scene black with dissolve
     "{......}"
-    scene bg sky with dissolve
 
     # "有一天，{w=0.25}你在网上冲浪的时候发现一个视频，{w=0.5}标题写着{w=0.25}“0基础编程教学”。{nw}"
     # $ _history_list.pop()
@@ -25,9 +24,6 @@ label ch0:
     #         "{......}"
     #         scene bg sky with dissolve
     # 
-    #         $ renpy.notify("2020年某日")
-    #         pause 1.0
-    #         "你偶然在某个视频网站上遇到了一款游戏。"
     #         $ tutorial = "网上的教程"
     #         jump ch0_adofai
     # 
@@ -41,7 +37,14 @@ label ch0:
 
 
 label ch0_adofai:
+
+    $ renpy.notify("2020年某日")
+    pause 1.0
+
+    "你偶然在某个视频网站上遇到了一款游戏。"
+
     scene bg sbeam with dissolve
+    
     "只需一个按键，{w=0.5}控制盘旋飞舞的双星，{w=0.5}踏着摇曳的舞步，\n{w=0.5}在一条跟随音乐节奏变化的蜿蜒道路上不断前进，{w=0.5}探索音乐的宇宙。"
     
     # if has_phone:
@@ -99,9 +102,10 @@ label ch0_adofai:
     "看着这一个个被“魔改”得面目全非的关卡，\n{w=0.5}你的心情从疑惑，{w=0.5}无语，{w=0.5}到愤怒，{w=0.5}再到平静。"
     "到了快结束的时候，{w=0.5}你甚至不受控制地笑了一下。"
     "显然，{w=0.5}你已经彻底理解了这种{cps=*0.5}“特立独行”{/cps}的艺术。"
-    "按照惯例，{w=0.25}你发表了一条评论："
+    "按照惯例，{w=0.25}你发表了一条评论——"
     mc "{w=1.0}{nw}"
-    "其实你早就把那天评论的具体内容给忘了，\n{w=0.5}不过那条评论收获了许多的点赞与回复你倒是还记得很清楚。"
+    $ _history_list.pop()
+    "——其实你早就把那天评论的具体内容给忘了，\n{w=0.5}不过那条评论收获了许多的点赞与回复你倒是还记得很清楚。"
     stop music fadeout 1.0
     "而其中有一条回复，{w=0.5}你无论如何也不会忘记："
 
@@ -117,7 +121,7 @@ label ch0_adofai:
 
 
 label ch0_1:
-    scene bg that_video with fade
+    scene bg that_video with dissolve
     # if has_phone:
     #     "你使用在视频简介里发现的群号找到了群。"
     # else:
@@ -126,10 +130,13 @@ label ch0_1:
     menu:
         "要加群吗？"
         "加群":
-            "你发送了入群申请。"
+            pass
         "不加群":
-            "你发送了入群申请。"
             setup "骗你的，{w=0.5}你莫得选择。"
+
+    "你发送了入群申请。"
+
+    scene bg adofai with fade
 
     "在等待回复的途中，{w=0.5}你顺便看了这位UP的其他视频。"
     mc "这螃蟹有意思{...}"
@@ -139,9 +146,9 @@ label ch0_1:
 
     scene black with dissolve
     "{......}"
-    scene bg adofai with fade
+    scene bg adofai with dissolve
 
-    "突然响起的QQ提示音将你的意识拉回现实。"
+    "——突然响起的QQ提示音将你的意识拉回现实。"
     "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
     "你满怀期待地打开了QQ——{nw}"
     "{cps=*0.25}群主拒绝了你的入群申请{/cps}"
