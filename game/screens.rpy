@@ -1786,43 +1786,156 @@ screen gallery(page=0):
 
 init python:
 
-        # 可鉴赏的音乐
-        room_musics = {
-            "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
-            "Before Beginning":"mus_setup.ogg",
-            "Aurora (Full Ver.)": "mus_aurora.mp3",
-            "Astral Calm": "mus_astral_calm.mp3",
-            # 更多音乐请自行添加
-        }
+    import re
+    from enum import Enum
 
-        mr = MusicRoom(single_track = True)
+    class MusicPlayMode(Enum):
+        REPEAT = "repeat"
+        SEQUENTIAL = "sequential"
+        SHUFFLE = "shuffle"
 
-        # 批量添加音乐
-        for music_name, music_file in room_musics.items():
-            mr.add(music_file, always_unlocked=music_file in (
-                # 默认解锁的音乐：
-                "mus_aurora_part1.ogg",
-            ))
+    class ACLCCMusicRoom(MusicRoom):
+        def __init__(self, single_track=False):
+            super().__init__()
+            self.mode = MusicPlayMode.REPEAT
+            self.last_audio_info = [0, 0]
+
+        def get_audio_duration_in_float(self, channel=None):
+            if channel is None:
+                channel = self.channel
+            duration = renpy.music.get_duration(channel)
+            if not duration:
+                duration = self.last_audio_info[1]
+            self.last_audio_info[1] = duration
+            return duration
+
+        def get_audio_duration(self, channel=None):
+            if channel is None:
+                channel = self.channel
+            return convert_format(int(self.get_audio_duration_in_float(channel)))
+
+        def get_audio_position_in_float(self, channel=None):
+            if channel is None:
+                channel = self.channel
+            position = renpy.music.get_pos(channel)
+            if not position:
+                position = self.last_audio_info[0]
+            self.last_audio_info[0] = position
+            return position
+
+        def get_audio_position(self, channel=None):
+            if channel is None:
+                channel = self.channel
+            music_pos = self.get_audio_position_in_float(channel)
+            if music_pos:
+                return convert_format(int(music_pos))
+            return "00:00"
+
+        def set_audio_position(self, value):
+            filename = self.real_filename()
+            if filename:
+                self.Play("<from {} loop 0.0>{}".format(value, filename))()
+
+        def get_music_play_mode(self):
+            return {
+                MusicPlayMode.REPEAT.value: "🔂",
+                MusicPlayMode.SEQUENTIAL.value: "🔁",
+                MusicPlayMode.SHUFFLE.value: "🔀",
+            } [self.mode.value]
 
 
-init python:
+        class _Play(Action, FieldEquality):
+            def __init__(self, outer, music_file, single_track=False):
+                self.music_file = music_file
+                self.outer = outer
 
-    def get_audio_duration(channel="music"):
-        duration = renpy.music.get_duration(channel)
-        return convert_format(int(duration))
-        
-    def get_audio_position(channel="music"):
-        music_pos = renpy.music.get_pos(channel)
-        if music_pos:
-            return convert_format(int(music_pos))
-        return "00:00"
-    
+            def __call__(self):
+                renpy.music.play(self.music_file, channel=self.outer.channel)
+
+            def get_selected(self):
+                playing_music = self.outer.real_filename()
+                if playing_music == self.music_file:
+                    return True
+                return False
+
+        def Play(self, *args, **kwargs):
+            return self._Play(self, *args, **kwargs)
+
+        class _SwitchMusicPlayMode(Action, FieldEquality):
+            def __init__(self, outer):
+                self.outer = outer
+
+            def __call__(self):
+                values = list(MusicPlayMode)
+                index = (values.index(self.outer.mode) + 1) % len(values)  # 循环
+                self.outer.mode = values[index]
+
+        def next(self):
+            """
+            Plays the next file in the playlist.
+            """
+
+            filename = self.real_filename()
+            if filename is None:
+                return self.play(None, 0)
+            else:
+                playlist = self.unlocked_playlist()
+                return self.Play(playlist[(playlist.index(self.real_filename()) + 1) % len(playlist)])()
+
+        def SwitchMusicPlayMode(self, *args, **kwargs):
+            return self._SwitchMusicPlayMode(self)
+
+        def play_callback(self):
+            if self.mode == MusicPlayMode.SEQUENTIAL:
+                self.next()
+            elif self.mode == MusicPlayMode.SHUFFLE:
+                self.RandomPlay()()
+
+        def real_filename(self):
+            playing_music_raw = renpy.music.get_playing(self.channel)
+            playing_music = extract_real_filename(playing_music_raw)
+            return playing_music
+
+        def update(self, threshold=0.2):
+            diff = self.get_audio_duration_in_float() - self.get_audio_position_in_float()
+            if diff < threshold:
+                self.play_callback()
+                
+
     # 时间转换，可用于59分59秒内音乐
     def convert_format(time):
         minute = time // 60
         second = time % 60
         result = f"{minute:02d}:{second:02d}"
         return result
+
+    # 辅助函数：从 '<from 15>file.ogg' 中提取 'file.ogg'
+    def extract_real_filename(s):
+        if not isinstance(s, str):
+            return s
+        match = re.match(r'^<.*?>(.*)$', s)
+        if match:
+            return match.group(1)
+        return s
+
+    # 可鉴赏的音乐
+    room_musics = {
+        "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
+        "Before Beginning":"mus_setup.ogg",
+        "Aurora (Full Ver.)": "mus_aurora.mp3",
+        "Astral Calm": "mus_astral_calm.mp3",
+        # 更多音乐请自行添加
+    }
+
+    mr = ACLCCMusicRoom(single_track = True)
+
+    # 批量添加音乐
+    for music_name, music_file in room_musics.items():
+        mr.add(music_file, always_unlocked=music_file in (
+            # 默认解锁的音乐：
+            "mus_aurora_part1.ogg",
+        ))
+
 
 # 音乐空间界面
 
@@ -1833,7 +1946,7 @@ screen music_room():
     use admire_mode(_("Music")):    
         # 更新 renpy.music.get_position() 和 get_music_duration()
         timer 0.1:
-            action [SetVariable('duration', get_audio_duration()), SetVariable('music_pos', get_audio_position())]
+            action [SetVariable('duration', mr.get_audio_duration()), SetVariable('music_pos', mr.get_audio_position()), Function(mr.update)]
             repeat True
         
         vbox:
@@ -1871,8 +1984,8 @@ screen music_room():
 
                 hbox:
                     style_prefix "page"
-                    $ music_pos = get_audio_position()
-                    $ duration = get_audio_duration()
+                    $ music_pos = mr.get_audio_position()
+                    $ duration = mr.get_audio_duration()
                     text music_pos
                     text "/"
                     text duration
@@ -1883,27 +1996,26 @@ screen music_room():
 
                     $ play_pause = "▶️" if renpy.music.get_pause() else "⏸️"
                     textbutton play_pause:
-                        if not renpy.music.is_playing() and not renpy.music.get_pause():
-                            action mr.Play() # yangsy "这是在干啥？（"
+                        if not renpy.music.is_playing(mr.channel) and not renpy.music.get_pause(mr.channel):
+                            pass
+                            # action mr.Play() # yangsy "这是在干啥？（"
                         else:
-                            action PauseAudio(channel="music", value="toggle")
+                            action PauseAudio(channel=mr.channel, value="toggle")
 
                     textbutton "⏭️" action mr.Next()
 
                 hbox:
                     style_prefix "page"
-                    textbutton "🔂" action mr.ToggleSingleTrack()
-                    textbutton "🔁" action mr.ToggleLoop()
-                    textbutton "🔀" action mr.ToggleShuffle()
+                    textbutton mr.get_music_play_mode() action mr.SwitchMusicPlayMode()
                     textbutton "🎲" action mr.RandomPlay()
 
             # 显示时长
             bar:
-                value AudioPositionValue(channel='music', update_interval=0.1)
+                adjustment ui.adjustment(adjustable=True, range=mr.get_audio_duration_in_float(), value=mr.get_audio_position_in_float() or 0, changed=mr.set_audio_position)
                 ysize gui.scrollbar_size
                 align (0.5, 0.7)
 
 
         # 进入音乐空间时自动播放音乐……？
-        on "replace" action mr.Play()
+        # on "replace" action mr.Play()
 
