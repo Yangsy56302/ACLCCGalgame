@@ -144,7 +144,7 @@ label ch0:
     gra.nvl "喜欢的话可以来我们群里[[doge]"
     # mwam.comment "他自己说的，不要问我（{nw}"
     
-    $ persistent.has_seen_ending = True
+    
     "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
     jump ch0_1
 
@@ -251,6 +251,7 @@ label ch0_1:
     scene bg star with fade
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
+    $ persistent.has_seen_ending = True
 
     while True:
         menu:
