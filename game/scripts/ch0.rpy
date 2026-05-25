@@ -52,7 +52,6 @@ label ch0_adofai:
 
 
     scene bg sbeam with fade
-    $ persistent.unlock_sbeam = True
 
     # play music "mus_astral_calm.mp3"
     # python:
