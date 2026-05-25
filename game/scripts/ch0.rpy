@@ -32,14 +32,15 @@ label ch0:
     #         scene bg sky with fade
     #         "跟着视频学了一会，{w=0.5}你渐渐的开始对信息技术产生了浓厚的兴趣{...}"
     #         jump chex0_oi
-
-    jump ch0_adofai
-
-
-label ch0_adofai:
-
     $ renpy.notify("2020年某日")
-    pause 1.0
+    pause 3.0
+
+
+
+
+    play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
 
     "大概是2020年的某一天，{w=0.25}你偶然在某个视频网站上解接触到了一款游戏。"
     "作为一款音乐游戏，{w=0.25}它的玩法极其简单。"
@@ -103,7 +104,7 @@ label ch0_adofai:
     pause 1.0
 
     play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
-    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
     
     "就像之前的每一天一样，{w=0.5}你百无聊赖的刷着嘁站。"
     "作为一个已经断断续续玩过两年的玩家，\n{w=0.5}你早已掌握了这款名为《冰与火之舞》的游戏的玩法，\n{w=0.5}并取得了一些你自认为满意的记录。"
