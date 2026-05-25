@@ -35,11 +35,8 @@ label ch0:
     pause 3.0
 
 
-
-
     play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-
 
     "大概是2020年的某一天，{w=0.25}你偶然在某个视频网站上解接触到了一款游戏。"
     "作为一款音乐游戏，{w=0.25}它的玩法极其简单。"
@@ -268,6 +265,7 @@ label ch0_1:
     return
 
 
+
 label chplotadvice_yoosee:
 
     scene black with dissolve
@@ -289,6 +287,7 @@ label chplotadvice_yoosee:
     yoosee.comment "魔改用于增添风味（）"
 
     return
+
 
 
 label chplotadvice_yangsy:
