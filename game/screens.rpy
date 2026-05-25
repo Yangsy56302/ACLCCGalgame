@@ -1919,14 +1919,14 @@ init python:
             return match.group(1)
         return s
 
-        # 可鉴赏的音乐
-        room_musics = {
-            "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
-            "Before Beginning":"mus_setup.ogg",
-            "Astral Calm": "mus_astral_calm.mp3",
-            "Aurora": "mus_aurora.mp3"
-            # 更多音乐请自行添加
-        }
+    # 可鉴赏的音乐
+    room_musics = {
+        "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
+        "Before Beginning":"mus_setup.ogg",
+        "Astral Calm": "mus_astral_calm.mp3",
+        "Aurora": "mus_aurora.mp3"
+        # 更多音乐请自行添加
+    }
 
     mr = ACLCCMusicRoom(single_track = True)
 
