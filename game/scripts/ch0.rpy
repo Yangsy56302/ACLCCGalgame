@@ -44,7 +44,7 @@ label ch0_adofai:
     "你偶然在某个视频网站上遇到了一款游戏。"
 
     scene bg sbeam with dissolve
-    
+
     "只需一个按键，{w=0.5}控制盘旋飞舞的双星，{w=0.5}踏着摇曳的舞步，\n{w=0.5}在一条跟随音乐节奏变化的蜿蜒道路上不断前进，{w=0.5}探索音乐的宇宙。"
     
     # if has_phone:
@@ -165,20 +165,25 @@ label ch0_1:
     "QQ的群聊一栏多出了个名叫“Grafrustix的聊天群”的群。\n{w=1.0}你点进群内，{w=0.5}很快就看到了第一条消息："
     nvl clear
     gra.nvl "抱歉啊，{w=0.25}刚刚不小心点错了[[笑哭]"
-    if has_phone:
-        "你很快就回复了："
-    else:
-        "你笨拙地找着输入消息的地方，\n{w=0.5}笨拙地打着字，\n{w=0.5}最后{w=0.25}艰难的挤出一条消息："
+    # if has_phone:
+    #     "你很快就回复了："
+    # else:
+    "你笨拙地找着输入消息的地方，\n{w=0.5}笨拙地打着字，\n{w=0.5}最后{w=0.25}艰难的挤出一条消息："
     mc.nvl "没关系的{w=0.5}{nw}"
     gra.nvl "觉得有兴趣可以进群里玩哦[[doge]"
-    if not has_phone:
-        "你又笨拙的发送了一条消息："
+    # if not has_phone:
+    "你又笨拙的发送了一条消息："
     mc.nvl "那个，{w=0.25}你能介绍下你是谁吗，{w=0.5}我该怎么称呼您？"
     gra.nvl "不用这么恭敬的啦{w=1.0}{nw}"
     gra.nvl "我是Grafrustix{w=0.5}{nw}"
     gra.nvl "叫我晴柚也行{w=1.0}{nw}"
+
     gra.nvl "所以 {w=0.25}你叫什么"
+    default gra_chemistry_name = False
+    # yangsy.comment "Yangsy也不知道该在哪存剧情分支信息，目前就先这样吧（"
+
     if mc.nickname == "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
+        $ gra_chemistry_name = True
         menu:
             "[mc]":
                 mc.nvl "我叫[mc]"
@@ -189,6 +194,7 @@ label ch0_1:
             "[mc]":
                 mc.nvl "我叫[mc]"
             "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
+                $ gra_chemistry_name = True
                 mc.nvl "我叫奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子"
                 gra.nvl "？{w=1.0}{nw}"
                 gra.nvl "有想法{w=0.5}{nw}"
@@ -196,16 +202,18 @@ label ch0_1:
                 gra.nvl "不过你不叫这个吧？{w=1.0}我到底怎么叫你？"
                 menu:
                     "[mc]":
-                        mc.nvl "我叫[mc]"       
+                        mc.nvl "我叫[mc]"
+
     gra.nvl "行，{w=0.25}就这么叫你了"
+
     mc.nvl "Gra，{w=0.25}这个魔改到底是什么，{w=0.5}能给我讲讲吗？{w=1.0}{nw}"
-    if not has_phone:
-        mc.nvl "还有QQ怎么用[[笑哭]"
+    # if not has_phone:
+    mc.nvl "还有QQ怎么用[[笑哭]"
     "{......}"
-    if has_phone:
-        "Gra 耐心地跟你解释了各种事情：\n{w=1.0}什么是魔改，{w=0.5}以及关于QQ群聊的一些信息{...}"
-    else:
-        "Gra 耐心地跟你解释了各种事情：\n{w=1.0}什么是魔改，{w=0.5}QQ怎么用，{w=0.5}以及关于QQ群聊的一些信息{...}"
+    # if has_phone:
+    #     "Gra 耐心地跟你解释了各种事情：\n{w=1.0}什么是魔改，{w=0.5}以及关于QQ群聊的一些信息{...}"
+    # else:
+    "Gra 耐心地跟你解释了各种事情：\n{w=1.0}什么是魔改，{w=0.5}QQ怎么用，{w=0.5}以及关于QQ群聊的一些信息{...}"
     "你还了解到，{w=0.5}Gra 也是一名魔改作者，{w=0.5}而在这个群里还有好几位像 Gra 一样的魔改作者。"
     "你本来还想继续询问“该怎么做魔改”之类的更多疑问——\n{w=0.5}但你母亲却已经在催你去睡觉了。"
     nvl clear
