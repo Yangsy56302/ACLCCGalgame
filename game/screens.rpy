@@ -1711,7 +1711,7 @@ init python:
     defaultly_locked_gallery_images = {
         "monitor": ["bg sbeam", "bg that_video"],
         "sky":["bg sky","bg star"],
-        "home":["bg home_night","bg home_midnight","bg home_noon"]
+        "home":["bg home_noon","bg home_night","bg home_midnight"]
         # 更多图像请自行添加
     }
     gallery_images = {**defaultly_unlocked_gallery_images, **defaultly_locked_gallery_images}
