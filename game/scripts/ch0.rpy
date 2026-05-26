@@ -92,7 +92,7 @@ label ch0:
     "{cps=*0.5}日子依旧普普通通的过着{......}"
 
 
-    scene bg that_video with dissolve
+    scene bg that_video with fade
 
     $ renpy.notify("2022年某日，嘁哩嘁哩评论区")
     pause 1.0
