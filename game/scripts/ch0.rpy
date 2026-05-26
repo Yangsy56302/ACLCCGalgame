@@ -67,7 +67,6 @@ label ch0:
     "这让你的心理斗争与购买游戏的行为显得如此愚蠢。"
 
     play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
-    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
     "虽然你在知道这则消息之后气的跳脚，{w=0.5}但是你并没有抛弃这款游戏。"
     "一方面是，{w=0.5}你认为这是第一个属于自己的东西。"
