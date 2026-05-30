@@ -1,11 +1,11 @@
-label chex0_not_join:
+label chex_unknown_not_join:
     stop music fadeout 1.0
     scene black with fade
     "你没有加群。\n{w=1.0}日子就这么普普通通的过着，{w=0.5}普普通通的过完了一生。"
     jump bad_ending_no_choice
 
 
-label chex0_oi:
+label chex_unknown_oi:
     $ ch0ex_oi_has_been_seen = True
     
     "这听起来好像也没什么特别的。\n{w=1.0}毕竟在这个时代，{w=0.5}哪个小孩不喜欢玩电脑、{w=0.25}打游戏呢？{w=1.0}"
@@ -35,8 +35,8 @@ label chex0_oi:
 
     "很快就有人回复你了："
 
-    define chex0_oi_reply = Character("群友", kind=nvl)
-    chex0_oi_reply "欢迎！{w=0.5}你打OI吗？"
+    define chex_unknown_oi_reply = Character("群友", kind=nvl)
+    chex_unknown_oi_reply "欢迎！{w=0.5}你打OI吗？"
 
     "你其实还不太懂什么叫“打OI”，{w=0.5}但还是努力地回复着。"
     "那天晚上，{w=0.5}你兴奋得差点睡不着觉。"
@@ -153,9 +153,9 @@ label chex0_oi:
 
     nvl clear
 
-    chex0_oi_reply "你最近怎么很少上线啊？{w=1.0}{nw}"
-    chex0_oi_reply "备战比赛去了吧？{w=1.0}听说你拿了省一？{w=0.5}厉害！{w=1.0}{nw}"
-    chex0_oi_reply "大佬求带！{w=1.0}"
+    chex_unknown_oi_reply "你最近怎么很少上线啊？{w=1.0}{nw}"
+    chex_unknown_oi_reply "备战比赛去了吧？{w=1.0}听说你拿了省一？{w=0.5}厉害！{w=1.0}{nw}"
+    chex_unknown_oi_reply "大佬求带！{w=1.0}"
 
     "你笑了一下，{w=0.5}一个一个地回复。\n{w=1.0}那些朋友没有因为你的长期缺席而忘记你，{w=0.5}{cps=*0.5}他们一直在。{/cps}"
 
@@ -226,9 +226,9 @@ label chex0_oi:
 
     mc.nvl "我有手机了。"
 
-    chex0_oi_reply "恭喜{w=0.5}{nw}"
-    chex0_oi_reply "终于啊{w=0.5}{nw}"
-    chex0_oi_reply "以后可以随时联系了"
+    chex_unknown_oi_reply "恭喜{w=0.5}{nw}"
+    chex_unknown_oi_reply "终于啊{w=0.5}{nw}"
+    chex_unknown_oi_reply "以后可以随时联系了"
 
     "那些消息一条一条地涌进来，{w=0.5}像是无数只手在屏幕那头向你打招呼。"
 
@@ -276,3 +276,75 @@ label chex0_oi:
 
     $ tutorial = "朋友的指导"
     jump ch0_adofai
+
+    return
+
+label chex_unknown_baile_lefthanded:
+    '有一天，[baile]给你介绍了一款叫做"人生重开器"的游戏'
+    '你看到在"天赋点"中，有一个"左撇子（习惯使用左手）"'
+    myworldzycpc '有点好奇这个会带来什么后果'
+    baile '我以我这个左撇子的亲身经历告诉你，这样没什么喵~'
+    baile '顶多好奇和调侃我喵~'
+    baile '调侃 = 果然左撇子更聪明喵~'
+    myworldzycpc 'emm'
+    myworldzycpc '我有点好奇，你说的是现实还是游戏中的{...}'
+    baile '现实中喵~'
+    myworldzycpc '😰'
+    baile '我习惯了喵qwq'
+    myworldzycpc '啊这，突然感觉到你很有意思'
+    myworldzycpc '{color=#cccccc}（没想到啊，真是没想到啊{...}）{/color}'
+    myworldzycpc '{color=#cccccc}（没想到啊@^#&O@(!P(@**!@)__)#&)!）{/color}'
+    myworldzycpc '那你感觉到有什么和别人不一样的地方了吗'
+    myworldzycpc '我感觉，比较厉害的，好像都有些和别人不太一样的地方'
+    myworldzycpc '{color=#cccccc}（虽然可能都觉得没什么不一样的{...}）{/color}'
+    baile '作为刚接触我的人来说喵，我会比别人有更高的{...} {color=#cccccc}(怎么说呢喵{...}){/color}'
+    myworldzycpc '啊这，更高的什么？\n地位？引力？\n你会比别人有更高的受关注度吗？'
+    baile '举个例子喵，刚接触我的老师更爱叫我发言喵~'
+    myworldzycpc 'qwq\n感觉你有很多不同寻常的经历啊{...}'
+    myworldzycpc '啊这，那么你会用左手写字吗'
+    baile '我左撇子喵，干啥全左手喵。'
+    myworldzycpc '啊这，你写字也用左手啊'
+    baile '干啥全左手喵\n纯正的左撇子喵。'
+    myworldzycpc '{color=#cccccc}(#$%^&*@(#*&){/color}'
+    myworldzycpc '{color=#cccccc}(真是想不到，居然还有用左手写字的{...}){/color}'
+    myworldzycpc '你们班里还有其他用左手写字吗？'
+    baile '没有喵。'
+    myworldzycpc 'qwq那你一定很不一样了'
+    myworldzycpc '真厉害'
+
+    myworldzycpc '奇怪，之前在一个字帖上看到，正确的是用右手书写{...}'
+    baile '{......}'
+    baile '鄙视左撇子喵'
+
+    myworldzycpc '你让我对你突然产生了兴趣'
+    myworldzycpc '其实你昨天说用一只手打歌的时候，我就听到了细节/线索'
+    baile '{......}'
+    myworldzycpc '然后我的心中就一直波澜起伏，今天，没想到，只有一天时间'
+    myworldzycpc '就得到了证实{...}qwq'
+    baile '{......}'
+    baile 'qwq'
+    myworldzycpc 'qwq'
+    myworldzycpc '你好厉害'
+
+    myworldzycpc '不知道怎么形容了{...}'
+    myworldzycpc '%*@）#*——！@*——！@。。'
+    baile '#￥……￥%&#￥……#￥'
+    baile '——&%……&%&*&#……&喵'
+    myworldzycpc '可能我太激动了{...}你太让人激动了{...}'
+
+    myworldzycpc '好激动啊，跟发现了不得了的大事一样{...}'
+    myworldzycpc '啊这，那你这个样子应该不能模仿别人做事吧'
+    myworldzycpc '写字的方式应该也和别人有所不同吧'
+    baile 'qwq'
+    myworldzycpc '我感觉挺好玩的'
+    myworldzycpc '你觉得你写的字好看吗{color=#cccccc}（总比我写得好看吧）{/color}'
+    myworldzycpc '你吃饭的时候会打到别人的筷子吗？'
+    myworldzycpc '你父母是左撇子吗？'
+    myworldzycpc '你知道你为什么是左撇子吗？'
+    myworldzycpc '好吧，我可能问的有点{...}'
+    myworldzycpc '不知道这种感觉是怎么样的呢'
+
+    myworldzycpc '之前我还一直在想左撇子怎么玩MC'
+    myworldzycpc '你操作鼠标用右手还是左手？'
+    baile '右手喵，左手太别扭了喵'
+    

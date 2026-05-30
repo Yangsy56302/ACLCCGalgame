@@ -30,7 +30,7 @@ label ch0:
     #         "你对这个视频很感兴趣，{w=0.5}于是点了进去。"
     #         scene bg sky with fade
     #         "跟着视频学了一会，{w=0.5}你渐渐的开始对信息技术产生了浓厚的兴趣{...}"
-    #         jump chex0_oi
+    #         jump chex_unknown_oi
     $ renpy.notify("2020年某日")
     pause 3.0
 
@@ -183,7 +183,7 @@ label ch0_1:
     #     "是":
     #         pass
     #     "否":
-    #         jump chex0_not_join
+    #         jump chex_unknown_not_join
 
     "不信邪的你又发了一遍入群申请——{w=0.5}这次的提示音倒是没过多久就出现了。"
     "QQ的群聊一栏多出了个名叫“Grafrustix的聊天群”的群。\n{w=1.0}你点进群内，{w=0.5}很快就看到了第一条消息："
