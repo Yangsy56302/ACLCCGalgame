@@ -305,7 +305,7 @@ label chex_unknown_baile_lefthanded:
     baile '我左撇子喵，干啥全左手喵。'
     myworldzycpc '啊这，你写字也用左手啊'
     baile '干啥全左手喵\n纯正的左撇子喵。'
-    myworldzycpc '{color=#cccccc}(#$%^&*@(#*&){/color}'
+    myworldzycpc '{color=#cccccc}(#$\%^&*@(#*&){/color}'
     myworldzycpc '{color=#cccccc}(真是想不到，居然还有用左手写字的{...}){/color}'
     myworldzycpc '你们班里还有其他用左手写字吗？'
     baile '没有喵。'
@@ -327,9 +327,9 @@ label chex_unknown_baile_lefthanded:
     myworldzycpc '你好厉害'
 
     myworldzycpc '不知道怎么形容了{...}'
-    myworldzycpc '%*@）#*——！@*——！@。。'
-    baile '#￥……￥%&#￥……#￥'
-    baile '——&%……&%&*&#……&喵'
+    myworldzycpc '\%*@）#*——！@*——！@。。'
+    baile '#￥……￥\%&#￥……#￥'
+    baile '——&\%……&\%&*&#……&喵'
     myworldzycpc '可能我太激动了{...}你太让人激动了{...}'
 
     myworldzycpc '好激动啊，跟发现了不得了的大事一样{...}'
