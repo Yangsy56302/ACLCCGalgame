@@ -177,7 +177,7 @@ label ch0_1:
     "你满怀期待地打开了QQ——{nw}"
 
     nvl clear
-    nvl_narrator "{cps=*0.25}群主拒绝了你的入群申请{/cps}"
+    center.nvl "{cps=*0.25}群主拒绝了你的入群申请{/cps}"
 
     mc "{......}{w=0.5}为什么会这样？"
 

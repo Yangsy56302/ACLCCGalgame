@@ -247,3 +247,5 @@ default myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", w
 # image myworldzycpc = "char/myworldzycpc/normal.png"
 
 default comment = CharacterWithData("# ", what_color="#808080")
+
+define center = CharacterWithData(None, what_text_align=0.5, what_xalign=0.5)
