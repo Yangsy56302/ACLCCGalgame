@@ -16,11 +16,26 @@ init python:
 
             self.nvl = Character(self.get_nvl_name, kind=nvl, **properties)
             
+            old_what_text_align = properties.get("what_text_align", None)
+            old_what_xalign = properties.get("what_xalign", None)
+            properties["what_text_align"] = 0.5
+            properties["what_xalign"] = 0.5
+            self.center = Character(name, **properties)
+            self.nvl.center = Character(self.get_nvl_name, kind=nvl, **properties)
+
+            properties["what_text_align"] = old_what_text_align
+            properties["what_xalign"] = old_what_xalign
+
             properties["what_prefix"] = "# " + properties.get("what_prefix", "")
             properties["what_color"] = "#808080"
             properties["dynamic"] = False
             self.comment = Character(name, **properties)
             self.nvl.comment = Character(name, kind=nvl, **properties)
+
+            properties["what_text_align"] = 0.5
+            properties["what_xalign"] = 0.5
+            self.comment.center = Character(name, **properties)
+            self.nvl.comment.center = Character(name, kind=nvl, **properties)
 
             self.data: dict[CharacterDataKey, object] = {}
 
@@ -248,4 +263,4 @@ default myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", w
 
 default comment = CharacterWithData("# ", what_color="#808080")
 
-define center = CharacterWithData(None, what_text_align=0.5, what_xalign=0.5)
+define narrator = CharacterWithData(None)
