@@ -136,7 +136,7 @@ label ch0:
     scene black with dissolve
 
     nvl clear
-    gra.nvl "喜欢的话可以来我们群里[[doge]"
+    gra.nvl "觉得有兴趣的话可以来我们群里玩哦[[doge]"
     # mwam.comment "他自己说的，不要问我（{nw}"
     
     
@@ -175,7 +175,10 @@ label ch0_1:
     "——突然响起的QQ提示音将你的意识拉回现实。"
     "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
     "你满怀期待地打开了QQ——{nw}"
-    "{cps=*0.25}群主拒绝了你的入群申请{/cps}"
+
+    nvl clear
+    nvl_narrator "{cps=*0.25}群主拒绝了你的入群申请{/cps}"
+
     mc "{......}{w=0.5}为什么会这样？"
 
     # menu:
@@ -187,22 +190,41 @@ label ch0_1:
 
     "不信邪的你又发了一遍入群申请——{w=0.5}这次的提示音倒是没过多久就出现了。"
     "QQ的群聊一栏多出了个名叫“Grafrustix的聊天群”的群。\n{w=1.0}你点进群内，{w=0.5}很快就看到了第一条消息："
+
     nvl clear
     gra.nvl "抱歉啊，{w=0.25}刚刚不小心点错了[[笑哭]"
     # if has_phone:
     #     "你很快就回复了："
     # else:
     "你笨拙地找着输入消息的地方，\n{w=0.5}笨拙地打着字，\n{w=0.5}最后{w=0.25}艰难的挤出一条消息："
-    mc.nvl "没关系的{w=0.5}{nw}"
-    gra.nvl "觉得有兴趣可以进群里玩哦[[doge]"
-    # if not has_phone:
-    "你又笨拙的发送了一条消息："
-    mc.nvl "那个，{w=0.25}你能介绍下你是谁吗，{w=0.5}我该怎么称呼您？"
-    gra.nvl "不用这么恭敬的啦{w=1.0}{nw}"
-    gra.nvl "我是Grafrustix{w=0.5}{nw}"
-    gra.nvl "叫我晴柚也行{w=1.0}{nw}"
+    
+    morin.nvl "何意味{fast}{nw}"
+    mwam.nvl "这能点错也是没谁了{fast}{nw}"
+    mc.nvl "没关系的"
+    gra.nvl "总之欢迎新人入群[[doge]"
+    morin.nvl "[[新人酱！新人酱！！.gif]{nw}"
+    pause 0.25
+    mwam.nvl "欢迎新人{nw}"
+    pause 0.25
+    lingyun.nvl "欢迎{nw}"
+    pause 0.25
+    baile.nvl "欢迎"
 
-    gra.nvl "所以 {w=0.25}你叫什么"
+    # if not has_phone:
+    # "你又笨拙的发送了一条消息："
+    # mc.nvl "那个，{w=0.25}您能介绍下自己吗，{w=0.5}我该怎么称呼您？"
+    # gra.nvl "不用这么恭敬的啦{nw}"
+    # pause 0.5
+
+    gra.nvl "我是Grafrustix"
+    gra.nvl "叫我晴柚也行"
+
+    gra.nvl "群里的成员主要是对魔改感兴趣才加入这里讨论的"
+    gra.nvl "不过也不完全是，{w=0.5}比如说有一部分成员其实是我同学"
+    mwam.nvl "也可以说是线下粉丝"
+    lingyun.nvl "神TM线下粉丝"
+
+    gra.nvl "话说 {w=0.5}我该怎么叫你？"
     default gra_chemistry_name = False
     # yangsy.comment "Yangsy也不知道该在哪存剧情分支信息，目前就先这样吧（"
 
@@ -210,45 +232,86 @@ label ch0_1:
         $ gra_chemistry_name = True
         menu:
             "[mc]":
-                mc.nvl "我叫[mc]"
-        gra.nvl "你这个名字很有个性啊{w=1.0}{nw}"
-        gra.nvl "我感觉你很适合做魔改啊"
+                mc.nvl "[mc]"
+                gra.nvl "你这名字很有个性嘛"
+                gra.nvl "我感觉你很适合做魔改啊"
     else:
         menu:
             "[mc]":
-                mc.nvl "我叫[mc]"
+                mc.nvl "[mc]"
             "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
                 $ gra_chemistry_name = True
-                mc.nvl "我叫奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子"
-                gra.nvl "？{w=1.0}{nw}"
-                gra.nvl "有想法{w=0.5}{nw}"
-                gra.nvl "我感觉你很适合做魔改啊{w=1.0}{nw}"
-                gra.nvl "不过你不叫这个吧？{w=1.0}我到底怎么叫你？"
+                mc.nvl "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子"
+                gra.nvl "？"
+                gra.nvl "你这名字很有个性嘛"
+                gra.nvl "我感觉你很适合做魔改啊"
+                gra.nvl "不过你应该不叫这个吧？{w=1.0}我到底该怎么叫你？"
                 menu:
                     "[mc]":
-                        mc.nvl "我叫[mc]"
+                        mc.nvl "[mc]"
 
     gra.nvl "行，{w=0.25}就这么叫你了"
 
-    mc.nvl "Gra，{w=0.25}这个魔改到底是什么，{w=0.5}能给我讲讲吗？{w=1.0}{nw}"
-    # if not has_phone:
-    mc.nvl "还有QQ怎么用[[笑哭]"
-    "{......}"
-    # if has_phone:
-    #     "Gra 耐心地跟你解释了各种事情：\n{w=1.0}什么是魔改，{w=0.5}以及关于QQ群聊的一些信息{...}"
-    # else:
-    "Gra 耐心地跟你解释了各种事情：\n{w=1.0}什么是魔改，{w=0.5}QQ怎么用，{w=0.5}以及关于QQ群聊的一些信息{...}"
-    "你还了解到，{w=0.5}Gra 也是一名魔改作者，{w=0.5}而在这个群里还有好几位像 Gra 一样的魔改作者。"
-    "你本来还想继续询问“该怎么做魔改”之类的更多疑问——\n{w=0.5}但你母亲却已经在催你去睡觉了。"
+    mc.nvl "Grafrustix，{w=0.5}我还是不太理解这个魔改到底是什么"
+    mc.nvl "可以详细讲一讲吗？"
+    gra.nvl "可以的可以的"
+
+    gra.nvl "首先{...}你应该知道冰与火之舞吧？"
+    mc.nvl "知道"
+    gra.nvl "那就好，{w=0.5}省的我把整个游戏机制给从头讲一遍了"
+
     nvl clear
-    mc.nvl 'Gra，{w=0.25}我先不聊了，{w=0.5}我["妈" if has_phone else "母亲"]叫我睡觉了'
-    gra.nvl "祝你好梦"
-    scene bg star with fade
+    gra.nvl "魔改是一种对谱面进行修改的方式{nw}"
+    gra.nvl "通常会先在关卡标题后面加上“但如何如何”的描述{nw}"
+    gra.nvl "举个例子，Firestix有个魔改关卡，标题是\n“11-X 赫拉克勒斯但每一块地板上都有一个旋转”{nw}"
+    gra.nvl "其中的描述部分就是“但每一块地板上都有一个旋转”{nw}"
+    gra.nvl "然后对谱面进行修改，使谱面符合指定的描述{nw}"
+    gra.nvl "这里就需要给每块地板上都添加旋转{nw}"
+    gra.nvl "改完谱面之后还要修改音乐，确保与修改后的谱面所契合{nw}"
+    gra.nvl "这点很重要，毕竟冰与火之舞是一款音乐游戏\n音乐与关卡不一致是很严重的问题{nw}"
+    gra.nvl "魔改后的关卡会与原关卡产生一种强烈的反差感{nw}"
+    gra.nvl "我们喜欢这种反差感，并因此聚集在这里{nw}"
+    gra.nvl "其实我和另外几位成员也会自己制作魔改{nw}"
+    if gra_chemistry_name:
+        gra.nvl "哪天你也该去试一试"
+    else:
+        gra.nvl "或许你也可以试一试"
+    
+    mc.nvl "{......}谢谢Grafrustix，{w=0.5}我大概明白了"
+    gra.nvl "那就好\n{w=1.0}我还担心这么多字会不会把你给看迷糊呢"
+    yangsy.nvl "这年头持有长文本阅读能力的人确实不多了（"
+    
+    # if not has_phone:
+    mc.nvl "哦对，{w=0.25}还有，{w=0.5}QQ应该怎么用？我不是很熟悉[[笑哭]"
+
+    "{......}"
+    "Grafrustix又开始耐心地跟你解释起了QQ的使用方法，{w=0.5}以及关于QQ群聊的一些信息。"
+    "你本来还想继续询问“该怎么做魔改”之类的更多疑问——\n{w=0.5}但你母亲却已经在催你去睡觉了。"
+
+    nvl clear
+    mc.nvl "我先不聊了"
+    gra.nvl "？"
+    gra.nvl "这么早睡是有什么心事吗"
+    mc.nvl "不是，是{w=0.5}我['妈' if has_phone else '母亲']叫我睡觉了"
+    gra.nvl "哦，{w=0.25}好吧"
+    gra.nvl "那就祝你好梦{nw}"
+    pause 0.5
+    yangsy.nvl "明天见{nw}"
+    pause 0.5
+    morin.nvl "晚安"
+    
+    scene black with dissolve
+    "{......}"
+    scene bg star with dissolve
+
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
     $ persistent.has_seen_ending = True
 
+
     while True:
+        stop music fadeout 1.0
+        scene black with dissolve
         menu:
             "未完待续{......}"
             "查看已被废弃的AI剧情":
