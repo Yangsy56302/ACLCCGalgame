@@ -291,14 +291,17 @@ label ch0_1:
     nvl clear
     mc.nvl "我先不聊了"
     gra.nvl "？"
-    gra.nvl "这么早睡是有什么心事吗"
+    gra.nvl "这么早就睡？"
+    mwam.nvl "养生呢搁这"
     mc.nvl "不是，是{w=0.5}我['妈' if has_phone else '母亲']叫我睡觉了"
     gra.nvl "哦，{w=0.25}好吧"
     gra.nvl "那就祝你好梦{nw}"
     pause 0.5
-    yangsy.nvl "明天见{nw}"
-    pause 0.5
-    morin.nvl "晚安"
+    mwam.nvl "明天见{nw}"
+    pause 0.25
+    morin.nvl "晚安{nw}"
+    pause 0.25
+    yangsy.nvl "🌙"
     
     scene black with dissolve
     "{......}"
