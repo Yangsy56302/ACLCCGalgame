@@ -10,7 +10,7 @@
     "name": "ACLCC Galgame",
     "numeric_version": 1,
     "orientation": "sensorLandscape",
-    "package": "com.aclcc.galgame",
+    "package": "top.aclcc.aclccgalgame",
     "permissions": [
         "VIBRATE",
         "INTERNET"
