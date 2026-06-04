@@ -202,12 +202,9 @@ label ch0_1:
     mwam.nvl "这能点错也是没谁了{fast}{nw}"
     mc.nvl "没关系的"
     gra.nvl "总之欢迎新人入群[[doge]"
-    morin.nvl "[[新人酱！新人酱！！.gif]{nw}"
-    pause 0.25
-    mwam.nvl "欢迎新人{nw}"
-    pause 0.25
-    lingyun.nvl "欢迎{nw}"
-    pause 0.25
+    morin.nvl "[[新人酱！新人酱！！.gif]{w=0.25}{nw}"
+    mwam.nvl "欢迎新人{w=0.25}{nw}"
+    lingyun.nvl "欢迎{w=0.25}{nw}"
     baile.nvl "欢迎"
 
     # if not has_phone:
@@ -290,17 +287,16 @@ label ch0_1:
 
     nvl clear
     mc.nvl "我先不聊了"
-    gra.nvl "？"
-    gra.nvl "这么早就睡？"
+    gra.nvl "？{w=0.5}{nw}"
+    gra.nvl "这么早就睡？{w=1.0}{nw}"
+    baile.nvl "睡啥睡{w=0.5}{nw}"
+    baile.nvl "起来嗨{w=1.0}{nw}"
     mwam.nvl "养生呢搁这"
     mc.nvl "不是，是{w=0.5}我['妈' if has_phone else '母亲']叫我睡觉了"
     gra.nvl "哦，{w=0.25}好吧"
-    gra.nvl "那就祝你好梦{nw}"
-    pause 0.5
-    mwam.nvl "明天见{nw}"
-    pause 0.25
-    morin.nvl "晚安{nw}"
-    pause 0.25
+    gra.nvl "那就祝你好梦{w=0.5}{nw}"
+    mwam.nvl "明天见{w=0.25}{nw}"
+    morin.nvl "晚安{w=0.25}{nw}"
     yangsy.nvl "🌙"
     
     scene black with dissolve
