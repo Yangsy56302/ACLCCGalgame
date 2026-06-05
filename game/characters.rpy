@@ -6,61 +6,86 @@ init python:
     AFFECTION = CharacterDataKey("affection")
 
     class CharacterWithData(renpy.character.ADVCharacter):
-        def __init__(self, name, realname=None, **properties):
-            properties["dynamic"] = True
-            super().__init__(self.get_name, **properties)
+        def __init__(self, name, realname=None, meet_irl=False, meet_irl_nvl=False, is_dynamic=True, root=None, **raw_properties):
             self.nickname = name
             self.realname = realname
-            self.meet_irl = False
-            self.meet_irl_nvl = False
-
-            self.nvl = Character(self.get_nvl_name, kind=nvl, **properties)
-            
-            old_what_text_align = properties.get("what_text_align", None)
-            old_what_xalign = properties.get("what_xalign", None)
-            properties["what_text_align"] = 0.5
-            properties["what_xalign"] = 0.5
-            self.center = Character(name, **properties)
-            self.nvl.center = Character(self.get_nvl_name, kind=nvl, **properties)
-
-            properties["what_text_align"] = old_what_text_align
-            properties["what_xalign"] = old_what_xalign
-
-            properties["what_prefix"] = "# " + properties.get("what_prefix", "")
-            properties["what_color"] = "#808080"
-            properties["dynamic"] = False
-            self.comment = Character(name, **properties)
-            self.nvl.comment = Character(name, kind=nvl, **properties)
-
-            properties["what_text_align"] = 0.5
-            properties["what_xalign"] = 0.5
-            self.comment.center = Character(name, **properties)
-            self.nvl.comment.center = Character(name, kind=nvl, **properties)
+            self.meet_irl = meet_irl
+            self.meet_irl_nvl = meet_irl_nvl
+            self.raw_properties = raw_properties
+            self.is_dynamic = is_dynamic
+            if root is None:
+                self.root = self
+            else:
+                self.root = root
+            super().__init__(self.get_name, **raw_properties)
 
             self.data: dict[CharacterDataKey, object] = {}
 
+        def copy(self, **raw_properties):
+            new_raw_properties = self.raw_properties | raw_properties
+            obj = self.__class__(self.nickname, self.realname, meet_irl=self.meet_irl, meet_irl_nvl=self.meet_irl_nvl, is_dynamic=self.is_dynamic, root=self.root, **new_raw_properties)
+            obj.data = self.data
+            return obj
+
+        @property
+        def char(self):
+            return Character(str(self), **self.raw_properties)
+
+        @property
+        def nvl(self):
+            return self.copy(kind=nvl)
+
+        @property
+        def center(self):
+            return self.copy(what_text_align=0.5, what_xalign=0.5)
+
+        @property
+        def right(self):
+            return self.copy(what_text_align=1.0, what_xalign=0.5, who_text_align=0.0, who_xalign=0.85)
+
+        @property
+        def comment(self):
+            char = self.copy(what_prefix="# " + self.raw_properties.get("what_prefix", ""), what_color="#808080")
+            char.is_dynamic = False
+            return char
+
         def get_name(self):
-            if self.realname is None:
+            if not self.is_dynamic or self.realname is None:
                 return self.nickname
             if self.meet_irl:
                 return self.realname
             return self.nickname
 
         def get_nvl_name(self):
-            if self.realname is None:
+            if not self.is_dynamic or self.realname is None:
                 return self.nickname
             if self.meet_irl_nvl:
                 return self.realname
             return self.nickname
 
         def __str__(self):
-            return self.get_name()
+            name = self.get_name() if self.raw_properties.get('kind') != nvl else self.get_nvl_name()
+            if name is None:
+                return ""
+            return name
+
+        def __repr__(self):
+            return f"CharacterWithData(name={self.nickname}, realname={self.realname}, meet_irl={self.meet_irl}, meet_irl_nvl={self.meet_irl_nvl}, raw_properties={self.raw_properties}, data={self.data})"
 
         def __getitem__(self, key: CharacterDataKey):
             return self.data[key]
 
+        def __call__(self, what, interact=True, _call_done=True, multiple=None, **kwargs):
+            if self.raw_properties.get('kind') == nvl and current_perspective == self.root:
+                char = self.right.char
+            else:
+                char = self.char
+            return char(what, interact=interact, _call_done=_call_done, multiple=multiple, **kwargs)
+
+
 default persistent.name_mc = ""
 default mc = CharacterWithData("undefined")
+default current_perspective = mc
 
 
 default setup = CharacterWithData("？？？")
@@ -263,4 +288,7 @@ default myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", w
 
 default comment = CharacterWithData("# ", what_color="#808080")
 
-define narrator = CharacterWithData(None)
+default narrator = CharacterWithData(None)
+
+
+default system = narrator.center  # 别名？

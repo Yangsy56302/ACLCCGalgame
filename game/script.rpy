@@ -14,18 +14,6 @@ label start:
     return
 
 
-label chtest:
-    
-    show yangsy zorder 2 at t41
-    show gra zorder 2 at t11
-    show mwam angry zorder 2 at t43
-    show morin zorder 2 at t44
-    show baile zorder 3 at t42
-    ""
-
-    return
-
-
 image splash = "splash.png"
 image attention = "attention.png"
 label splashscreen: 
