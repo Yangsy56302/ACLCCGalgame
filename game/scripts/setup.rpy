@@ -293,7 +293,7 @@ screen naming_error_message(error_message):
             spacing 15
             xfill True
             
-            text "Oops! Something went wrong.":
+            text "Something went wrong.":
                 size 60
                 color "#000000"
                 font debug_gui_font
