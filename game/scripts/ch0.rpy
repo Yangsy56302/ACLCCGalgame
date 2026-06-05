@@ -313,6 +313,8 @@ label ch0_1:
         scene black with dissolve
         menu:
             "未完待续{......}"
+            "查看第一章剧情":
+                jump vibe_ch1
             "查看已被废弃的AI剧情":
                 jump vibe_ch2
             "查看[yoosee]的建议":
