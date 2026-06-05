@@ -227,13 +227,13 @@ label ch0_1:
 
     if mc.nickname == "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
         $ gra_chemistry_name = True
-        menu:
+        menu(nvl=True):
             "[mc]":
                 mc.nvl "[mc]"
                 gra.nvl "你这名字很有个性嘛"
                 gra.nvl "我感觉你很适合做魔改啊"
     else:
-        menu:
+        menu(nvl=True):
             "[mc]":
                 mc.nvl "[mc]"
             "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
@@ -243,7 +243,7 @@ label ch0_1:
                 gra.nvl "你这名字很有个性嘛"
                 gra.nvl "我感觉你很适合做魔改啊"
                 gra.nvl "不过你应该不叫这个吧？{w=1.0}我到底该怎么叫你？"
-                menu:
+                menu(nvl=True):
                     "[mc]":
                         mc.nvl "[mc]"
 
