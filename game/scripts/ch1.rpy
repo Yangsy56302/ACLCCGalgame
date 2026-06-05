@@ -31,25 +31,25 @@ label ch1_bored:
     menu:
         "我在网上看到的":
             myworldzycpc.nvl "我在网上看到的"
-            "你等了很久，终于收到了回复。"
+            "[myworldzycpc]等了很久，终于收到了回复："
             "群主拒绝了你的入群申请，并回复说：“不欢迎水军。”"
             jump ch1_bored
         "我朋友告诉我的":
             myworldzycpc.nvl "我朋友告诉我的"
-            "你等了很久，终于收到了回复。"
+            "[myworldzycpc]等了很久，终于收到了回复："
             "群主拒绝了你的入群申请，并回复说：“不好有内鬼。”"
             jump ch1_bored
         "从ACLC网站":
             myworldzycpc.nvl "从ACLC网站"
-            "不一会，你的入群申请就被通过了。"
+            "不一会，[myworldzycpc]的入群申请就被通过了。"
             gra "你说ACLC网站？你是怎么知道的？"
             myworldzycpc "我的朋友[baile]告诉我的，看到有个链接说可以加入群聊"
             gra "哦，是 [baile] 告诉你的？"
             gra "这样啊…"
             gra "不管怎样，总之欢迎加入 ACLC！"
         " ":
-            myworldzycpc.nvl "我朋友告诉我的"
-            "你等了很久，终于收到了回复。"
+            "[myworldzycpc]没有写入群消息。"
+            "[myworldzycpc]等了很久，终于收到了回复："
             "群主拒绝了你的入群申请，并什么都没有回复。"
             jump ch1_bored
 
