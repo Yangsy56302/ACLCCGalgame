@@ -53,7 +53,7 @@ label ch1_bored:
             "群主拒绝了你的入群申请，并什么都没有回复。"
             jump ch1_bored
 
-    baile "我回来了喵~"
+    baile "我是后背喵~"
     baile "{......}"
     baile "bro怎么进ACLC了喵？"
 
