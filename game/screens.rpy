@@ -287,6 +287,7 @@ style choice_button_text is default:
 ##
 ## The quick menu is displayed in-game to provide easy access to the out-of-game
 ## menus.
+default quick_menu = True
 
 screen quick_menu():
 
