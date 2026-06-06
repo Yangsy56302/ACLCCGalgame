@@ -104,12 +104,10 @@ screen say(who, what):
 
     window:
         id "window"
+        add "gui/textbox.png" xalign 0.5 yalign 1.0
 
         if another_view:
-            add "gui/textbox.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
-        else:
-            add "gui/textbox.png" xalign 0.5 yalign 1.0
 
         if renpy.variant("small"):
             yalign 1.0
@@ -253,9 +251,9 @@ init python:
 
 screen choice(items):
     style_prefix "choice"
+
     if another_view:
         add "gui/another_view.png" xalign 0.5 yalign 1.0
-
     
     vbox:
         for i in items:
