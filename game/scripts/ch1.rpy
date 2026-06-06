@@ -44,11 +44,12 @@ label ch1_bored:
         "从ACLC网站":
             myworldzycpc.nvl "从ACLC网站"
             "不一会，[myworldzycpc]的入群申请就被通过了。"
-            gra "你说ACLC网站？你是怎么知道的？"
-            myworldzycpc "我的朋友[baile]告诉我的，看到有个链接说可以加入群聊"
-            gra "哦，是 [baile] 告诉你的？"
-            gra "这样啊…"
-            gra "不管怎样，总之欢迎加入 ACLC！"
+            system "欢迎加入群聊，跟大家打个招呼吧！"
+            gra.nvl "你说ACLC网站？你是怎么知道的？"
+            myworldzycpc.nvl "我的朋友[baile]告诉我的，看到有个链接说可以加入群聊"
+            gra.nvl "哦，是 [baile] 告诉你的？"
+            gra.nvl "这样啊…"
+            gra.nvl "不管怎样，总之欢迎加入 ACLC！"
         " ":
             "[myworldzycpc]没有写入群消息。"
             "[myworldzycpc]等了很久，终于收到了回复："
