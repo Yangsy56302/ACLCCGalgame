@@ -74,7 +74,7 @@ label ch1_bored:
 
     nvl clear
     system.nvl "[myworldzycpc]加入了群聊{fast}"
-    gra.nvl "你说ACLC网站？{w=1.0}你是怎么知道的？{fast}"
+    gra.nvl "你说ACLC网站？你是怎么知道的？{fast}"
     myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
     gra.nvl "哦，是 [baile] 告诉你的？{fast}"
     gra.nvl "这样啊{...}{fast}"
