@@ -61,9 +61,9 @@ label ch1_bored:
             system.nvl "群主拒绝了你的入群申请"
             jump ch1_bored
 
-    baile "我是后背喵~"
-    baile "{......}"
-    baile "bro怎么进ACLC了喵？"
+    baile.nvl "我是后背喵~"
+    baile.nvl "{......}"
+    baile.nvl "bro怎么进ACLC了喵？"
 
     $ another_view = False
     scene bg star with dissolve
@@ -73,7 +73,15 @@ label ch1_bored:
     "又是一天，{w=0.5}你迫不及待的打开了群聊。"
 
     nvl clear
-    system.nvl "[myworldzycpc]加入了群聊"
+    system.nvl "[myworldzycpc]加入了群聊{fast}"
+    gra.nvl "你说ACLC网站？{w=1.0}你是怎么知道的？{fast}"
+    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
+    gra.nvl "哦，是 [baile] 告诉你的？{fast}"
+    gra.nvl "这样啊{...}{fast}"
+    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
+    baile.nvl "我是后背喵~{fast}"
+    baile.nvl "{......}{fast}"
+    baile.nvl "bro怎么进ACLC了喵？{fast}"
     mc "{cps=*0.25}{......}{/cps}"
 
     while True:
