@@ -1,4 +1,6 @@
 label ch1:
+    scene black with dissolve
+    # $ another_view = True
     myworldzycpc.comment "我要写主线了吗…冲突了怎么办呢…"
     myworldzycpc.comment "先写个简单的吧，后续再慢慢改"
 

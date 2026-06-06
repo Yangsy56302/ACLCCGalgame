@@ -105,6 +105,11 @@ screen say(who, what):
     window:
         id "window"
 
+        if another_view:
+            add "gui/textbox.png" xalign 0.5 yalign 1.0
+        else:
+            add "gui/textbox.png" xalign 0.5 yalign 1.0
+
         if renpy.variant("small"):
             yalign 1.0
 
@@ -143,7 +148,7 @@ style window:
     yalign gui.textbox_yalign
     ysize gui.textbox_height
 
-    background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
+    # background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
 
 style namebox:
     xpos gui.name_xpos
@@ -307,7 +312,7 @@ screen quick_menu():
 init python:
     config.overlay_screens.append("quick_menu")
 
-default quick_menu = True
+
 
 style quick_button is default
 style quick_button_text is button_text
@@ -321,7 +326,7 @@ style quick_button:
 style quick_button_text:
     properties gui.button_text_properties("quick_button")
 
-default persistent.has_seen_ending = False
+
 
 ################################################################################
 ## Main and Game Menu Screens
@@ -1535,7 +1540,7 @@ screen quick_menu():
 
 style window:
     variant "small"
-    background "gui/phone/textbox.png"
+    # background "gui/phone/textbox.png"
 
 style radio_button:
     variant "small"
