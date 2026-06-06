@@ -107,6 +107,7 @@ screen say(who, what):
 
         if another_view:
             add "gui/textbox.png" xalign 0.5 yalign 1.0
+            add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
             add "gui/textbox.png" xalign 0.5 yalign 1.0
 
@@ -252,7 +253,10 @@ init python:
 
 screen choice(items):
     style_prefix "choice"
+    if another_view:
+        add "gui/another_view.png" xalign 0.5 yalign 1.0
 
+    
     vbox:
         for i in items:
             textbutton i.caption action i.action
@@ -1399,6 +1403,8 @@ screen nvl(dialogue, items=None):
             spacing gui.nvl_spacing
 
         ## Displays dialogue in either a vpgrid or the vbox.
+        
+     
         if gui.nvl_height:
 
             vpgrid:
