@@ -1501,13 +1501,14 @@ style nvl_button:
     hover_sound gui.choice_hover_sound
     activate_sound gui.choice_activate_sound
     
-    properties gui.button_properties("nvl_button")
+    properties gui.button_properties("choice_button")
     xpos gui.nvl_button_xpos
+    xsize gui.nvl_button_width
     xanchor gui.nvl_button_xalign
 
 style nvl_button_text:
-    properties gui.button_text_properties("nvl_button")
-
+    xsize gui.nvl_button_width
+    properties gui.button_text_properties("choice_button")
 
 
 ################################################################################
