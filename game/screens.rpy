@@ -2032,3 +2032,21 @@ screen music_room():
         # 进入音乐空间时自动播放音乐……？
         # on "replace" action mr.Play()
 
+screen chapter_title(title_text):
+
+    text title_text:
+        xalign 0.5
+        yalign 0.5
+        size 72
+        color "#ffffff"
+        outlines [(2, "#000000", 0, 0)]  # 文字描边，增强可读性
+
+label show_chapter(title):
+    window hide
+    show screen chapter_title(title)
+    with dissolve
+    $ renpy.pause(2.0) # 'hard=True' 会忽略玩家的点击，确保效果停留
+    hide screen chapter_title
+    with dissolve
+    window auto
+    return

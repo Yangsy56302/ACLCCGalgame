@@ -44,7 +44,7 @@ label ch1_bored:
         "从ACLC网站":
             myworldzycpc.nvl "从ACLC网站"
             "不一会，[myworldzycpc]的入群申请就被通过了。"
-            system "欢迎加入群聊，跟大家打个招呼吧！"
+            system.nvl "欢迎加入群聊，跟大家打个招呼吧！"
             gra.nvl "你说ACLC网站？你是怎么知道的？"
             myworldzycpc.nvl "我的朋友[baile]告诉我的，看到有个链接说可以加入群聊"
             gra.nvl "哦，是 [baile] 告诉你的？"
@@ -59,6 +59,17 @@ label ch1_bored:
     baile "我是后背喵~"
     baile "{......}"
     baile "bro怎么进ACLC了喵？"
+
+    $ another_view = False
+    scene bg star with dissolve
+
+    call show_chapter("第二天")
+
+    "又是一天，你迫不及待的打开了群聊。"
+
+    nvl clear
+    system.nvl "[myworldzycpc]加入了群聊！"
+    mc "{cps=*0.25}{......}{/cps}"
 
     while True:
         stop music fadeout 1.0

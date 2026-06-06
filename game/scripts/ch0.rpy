@@ -313,7 +313,6 @@ label ch0_1:
         stop music fadeout 1.0
         scene black with dissolve
         menu:
-            "未完待续{......}"
             "查看第一章剧情":
                 jump ch1
             "查看已被废弃的AI剧情":
