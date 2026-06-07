@@ -251,9 +251,9 @@ label setup_naming_entered:
             nvl clear
             debug "{w=1.0}{nw}"
             nvl clear
-            debug "[[changename] Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
+            debug "[[data] Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
             $ persistent.duplicate_name_fixed = True
-            debug "[[changename] Success.{fast}{w=0.5}{nw}"
+            debug "[[data] Success.{fast}{w=0.5}{nw}"
             debug "Press any key to continue...{fast}"
             setup "{......}等等。"
             setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
