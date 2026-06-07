@@ -259,7 +259,7 @@ label setup_naming_entered:
                 setup "{......}等等。"
                 setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
                 setup "那你刚刚是不是修改了角色的数据存储方式？"
-                setup "我看看{...}你现在应该可以正常使用你自己的名字了"
+                setup "{......}你现在应该可以正常使用你自己的名字了"
                 setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
                 $ mc.nickname = player_input
                 jump setup_naming_confirm
