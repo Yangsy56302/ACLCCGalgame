@@ -5,9 +5,11 @@ label ch1:
     myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
     nvl clear
+    $ session_title = baile
 
     myworldzycpc.nvl "听说你要做个谱子下载网站，{w=0.5}是这样吗"
     baile.nvl "嗯是的喵~"
+    voice sustain
     menu(nvl=True):
         "可以看一下你做的吗":
             myworldzycpc.nvl "我可以看一下你做的吗"
@@ -34,6 +36,7 @@ label ch1:
         "[myworldzycpc]又试了一次。"
 
         nvl clear
+        $ session_title = None
 
         system.nvl "加入群聊之前，需要先回答问题：\n{w=1.0}你是怎么知道这个群的？{nw}"
 
@@ -71,7 +74,7 @@ label ch1:
 label ch1_baick:
 
     nvl clear
-    system.nvl "终究是摆了{fast}{nw}"
+    $ session_title = baile
     baile.nvl "我是后背喵~"
     baile.nvl "{......}"
     baile.nvl "bro怎么进ACLC了喵？"
@@ -85,6 +88,7 @@ label ch1_baick:
     "又是一天，{w=0.5}你迫不及待的打开了群聊。"
 
     nvl clear
+    $ session_title = None
     system.nvl "[myworldzycpc]加入了群聊{fast}"
     gra.nvl "你说ACLC网站？你是怎么知道的？{fast}"
     myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
