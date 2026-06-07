@@ -33,11 +33,36 @@ define build.version = "0.0.1"
 define gui.about = _p("""\
 ADOFAI Cursed Levels (CN) Community
 
-剧情: {a=https://space.bilibili.com/607963943}祐荽{/a}, {a=https://space.bilibili.com/3493270749448480}晴柚-Grafrustix{/a}, {a=https://space.bilibili.com/496241761}ms_win_and_mc{/a}, {a=https://space.bilibili.com/430612354}Yangsy56302{/a}, {a=https://space.bilibili.com/102578264}myworldzycpc{/a}
 
-程序: {a=https://space.bilibili.com/430612354}Yangsy56302{/a}, {a=https://space.bilibili.com/496241761}ms_win_and_mc{/a}, {a=https://space.bilibili.com/102578264}myworldzycpc{/a}, {a=https://space.bilibili.com/672178840}baileovo{/a}
+剧情
 
-立绘: {a=https://www.doubao.com/}豆包{/a}, {a=https://www.chatgpt.com/}ChatGPT{/a}
+{space=80}{a=https://space.bilibili.com/607963943}祐荽{/a}
+
+{space=80}{a=https://space.bilibili.com/3493270749448480}晴柚-Grafrustix{/a}
+
+{space=80}{a=https://space.bilibili.com/496241761}ms_win_and_mc{/a}
+
+{space=80}{a=https://space.bilibili.com/430612354}Yangsy56302{/a}
+
+{space=80}{a=https://space.bilibili.com/102578264}myworldzycpc{/a}
+
+
+程序
+
+{space=80}{a=https://space.bilibili.com/430612354}Yangsy56302{/a}
+
+{space=80}{a=https://space.bilibili.com/496241761}ms_win_and_mc{/a}
+
+{space=80}{a=https://space.bilibili.com/102578264}myworldzycpc{/a}
+
+{space=80}{a=https://space.bilibili.com/672178840}baileovo{/a}
+
+
+立绘
+
+{space=80}{a=https://www.doubao.com/}豆包{/a}
+
+{space=80}{a=https://www.chatgpt.com/}ChatGPT{/a}
 """)
 
 

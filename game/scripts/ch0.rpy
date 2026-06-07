@@ -309,22 +309,7 @@ label ch0_1:
     $ persistent.has_seen_ending = True
 
 
-    while True:
-        stop music fadeout 1.0
-        scene black with dissolve
-        menu:
-            "查看第一章剧情":
-                jump ch1
-            "查看已被废弃的AI剧情":
-                jump vibe_ch2
-            "查看[yoosee]的建议":
-                call chplotadvice_yoosee
-            "查看[yangsy]的建议":
-                call chplotadvice_yangsy
-            "测试":
-                call chtest
-            "返回主菜单":
-                return
+    call to_be_continued("ch0")
         
     return
 

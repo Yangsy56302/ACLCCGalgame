@@ -10,6 +10,30 @@ label start:
 
     return
 
+label to_be_continued(chp):
+    
+    while True:
+        stop music fadeout 1.0
+        scene black with dissolve
+        menu:
+            "查看第一章剧情" if chp == "ch0":
+                jump ch1
+            "查看已被废弃的AI剧情":
+                jump vibe_ch2
+            "查看游离的支线章节":
+                menu:
+                    "chex_unknown_oi":
+                        call chex_unknown_oi
+                    "chex_unknown_baile_lefthanded":
+                        call chex_unknown_baile_lefthanded
+                    "返回":
+                        pass
+            "查看[yoosee]的建议":
+                call chplotadvice_yoosee
+            "查看[yangsy]的建议":
+                call chplotadvice_yangsy
+            "返回主菜单":
+                return
 
 image splash = "splash.png"
 image attention = "attention.png"

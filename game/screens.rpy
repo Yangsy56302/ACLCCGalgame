@@ -628,28 +628,65 @@ style return_button:
 ## There's nothing special about this screen, and hence it also serves as an
 ## example of how to make a custom screen.
 
+init python:
+    def do_auto_scroll_credits():
+        vp_widget = renpy.get_widget("about", "vp")
+        adj = vp_widget.yadjustment
+        if adj.value >= adj.range:
+            adj.value = 0
+
+        renpy.run(Scroll("vp", "vertical increase", amount=2))
+
+image icon = Transform('images/icon.png', zoom=0.25)
+
 screen about():
-
     tag menu
+    default scroll_enabled = True
 
-    ## This use statement includes the game_menu screen inside this one. The
-    ## vbox child is then included inside the viewport inside the game_menu
-    ## screen.
-    use game_menu(_("About"), scroll="viewport"):
+    if scroll_enabled:
+        timer 1e-16 repeat True action Function(do_auto_scroll_credits)
+
+    use game_menu(_("About")):
 
         style_prefix "about"
 
-        vbox:
-
-            label "[config.name!t]"
-            text _("Version [config.version!t]\n")
-
-            ## gui.about is usually set in options.rpy.
-            if gui.about:
-                text "[gui.about!t]\n"
-
-            text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+        frame:
+            xfill True
+            yfill True
             
+            viewport:
+                id "vp"
+                draggable True
+                mousewheel True
+                scrollbars "vertical"
+                xfill True
+                yfill True
+
+                # 创建一个包含内容的容器，并应用变换
+                vbox:
+                    spacing 10
+                    xfill True
+
+                    null height 1080
+
+                    
+                    text "{image=icon} [config.name!t]" size 120 line_spacing 200 xalign 0.5
+                    text _("Version [config.version!t]\n") xalign 0.5
+
+                    ## gui.about is usually set in options.rpy.
+                    if gui.about:
+                        text "[gui.about!t]\n" xalign 0.5
+                    
+                    null height 300
+
+                    text _("Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].") color "#808080" xalign 0.5
+                    null height 20
+                    text _("[renpy.license!t]") color "#808080" xalign 0.5 text_align 0.5
+                    null height 1080
+
+            # 控制按钮（只在你想要的时候显示）
+            textbutton "自动滚动开关" action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95
+            # textbutton "自动滚动开关" action Function(scroll_test) xalign 0.5 yalign 0.95
 
 style about_label is gui_label
 style about_label_text is gui_label_text
