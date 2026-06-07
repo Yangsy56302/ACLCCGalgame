@@ -197,8 +197,8 @@ label setup_naming_entered:
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
-        if not persistent.debug_mode:
-            if not persistent.duplicate_name_fixed:
+        if not persistent.duplicate_name_fixed:
+            if not persistent.debug_mode:
                 python:
                     duplicate_name_attempts += 1
                     quick_menu = False
@@ -239,27 +239,29 @@ label setup_naming_entered:
                 hide screen custom_exception with dissolve
                 # 返回重新输入
                 jump setup_naming_loop
-            else:
-                setup "{...}又是游戏内的角色名吗？{w=1.0}有意思。"
-                setup "——不不不，{w=0.25}请不要误会，{w=0.5}我并没有什么要阻拦你使用这个名字的打算。"
-                setup "我只是单纯觉得这事很有意思，{w=0.25}仅此而已。"
-        else:
-            nvl clear
-            debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
-            debug "user@debugmode:~$ {fast}{w=0.5}sudo data --ChangeStorage 'character' 2{w=1.0}{nw}"
-            debug "[[sudo] Enter Password: {fast}{w=3.0}{nw}"
-            nvl clear
-            debug "{w=1.0}{nw}"
-            nvl clear
-            debug "[[data] Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
-            $ persistent.duplicate_name_fixed = True
-            debug "[[data] Success.{fast}{w=0.5}{nw}"
-            debug "Press any key to continue...{fast}"
-            setup "{......}等等。"
-            setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
-            setup "那你刚刚是不是修改了角色的数据存储方式？"
-            setup "我看看{...}你现在应该可以正常使用你自己的名字了"
-            setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
+            else: # 如果已经修改角色数据存储方式了
+                nvl clear
+                debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
+                debug "user@debugmode:~$ {fast}{w=0.5}sudo data --ChangeStorage 'character' 2{w=1.0}{nw}"
+                debug "[[sudo] Enter Password: {fast}{w=3.0}{nw}"
+                nvl clear
+                debug "{w=1.0}{nw}"
+                nvl clear
+                debug "[[data] Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
+                $ persistent.duplicate_name_fixed = True
+                debug "[[data] Success.{fast}{w=0.5}{nw}"
+                debug "Press any key to continue...{fast}"
+                setup "{......}等等。"
+                setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
+                setup "那你刚刚是不是修改了角色的数据存储方式？"
+                setup "我看看{...}你现在应该可以正常使用你自己的名字了"
+                setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
+                $ mc.nickname = player_input
+                jump setup_naming_confirm
+        else:# 如果处于debug模式
+            setup "{...}又是游戏内的角色名吗？{w=1.0}有意思。"
+            setup "——不不不，{w=0.25}请不要误会，{w=0.5}我并没有什么要阻拦你使用这个名字的打算。"
+            setup "我只是单纯觉得这事很有意思，{w=0.25}仅此而已。"
             $ mc.nickname = player_input
             jump setup_naming_confirm
     
