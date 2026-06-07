@@ -260,8 +260,9 @@ label setup_naming_entered:
             else: 
                 nvl clear
                 debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
-                debug "user@debugmode:~$ {fast}{w=0.5}sudo data --ChangeStorage 'character' 2{w=1.0}{nw}"
+                debug "user@debugmode:~$ {fast}{w=0.5}sudo chmod 777 changestorage.sh{w=1.0}{nw}"
                 debug "[[sudo] Enter Password: {fast}{w=3.0}{nw}"
+                debug "user@debugmode:~$ {fast}{w=0.5}./changestorage.sh{w=1.0}{nw}"
                 nvl clear
                 debug "{w=1.0}{nw}"
                 $ _history_list.pop()
