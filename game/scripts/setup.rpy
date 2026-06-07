@@ -12,10 +12,6 @@ label setup_naming_start:
     
     scene black with fade
 
-    python:
-        duplicate_name_attempts = 0
-        empty_name_attempts = 0
-
     """
     {cps=8}{nw}· · · · · ·{w=1}
 
@@ -185,13 +181,19 @@ label setup_naming_entered:
                             return
     # debug mode
     elif player_input == persistent.password:
-        python:
-            persistent.debug_mode = True
-            renpy.notify("Debug Mode Enabled")
+        $ _history_list.pop()
+        $ persistent.debug_mode = True
+        debug "Debug Mode Enabled{w=0.5}{nw}"
         jump setup_naming_loop
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
+        if persistent.duplicate_name_fixed:
+            setup "{...}又是游戏内的角色名吗？{w=1.0}有意思。"
+            setup "——不不不，{w=0.25}请不要误会，{w=0.5}我并没有什么要阻拦你使用这个名字的打算。"
+            setup "我只是单纯觉得这事很有意思，{w=0.25}仅此而已。"
+            $ mc.nickname = player_input
+            jump setup_naming_confirm
         python:
             duplicate_name_attempts += 1
             quick_menu = False
@@ -217,8 +219,10 @@ label setup_naming_entered:
         if persistent.debug_mode:
             setup "{......}等等。"
             setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
-            setup "好吧，{w=0.5}虽说我不是很清楚你们为何没有修复这个漏洞，\n{w=0.5}但我可以稍微调整一下数据，{w=0.5}然后你就能够正常使用自己的名称了。"
+            setup "好吧，{w=0.5}虽说我不是很清楚你们为何没有修复这个漏洞，\n{w=0.5}但我可以稍微调整一下数据结构，{w=0.5}然后你应该就能够正常使用自己的名称了。"
             setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
+            setup "稍等一下{......}{nw}"
+            $ persistent.duplicate_name_fixed = True
             $ mc.nickname = player_input
             play music "mus_setup.ogg" fadein 2.0
             hide screen custom_exception with dissolve
