@@ -256,7 +256,7 @@ label setup_naming_entered:
                 hide screen custom_exception with dissolve
                 # 返回重新输入
                 jump setup_naming_loop
-            # 撞名，未修改，调试模式：
+            # 撞名，未修改：
             else: 
                 nvl clear
                 debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
