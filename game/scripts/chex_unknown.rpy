@@ -275,7 +275,7 @@ label chex_unknown_oi:
     "她给你发来一个游戏录屏。\n{w=1.0}你打开看了看，{w=0.5}发现{w=0.25}是一个很有趣的游戏。"
 
     $ tutorial = "朋友的指导"
-    jump ch0_adofai
+    # jump ch0_adofai
 
     return
 
@@ -348,3 +348,4 @@ label chex_unknown_baile_lefthanded:
     myworldzycpc '你操作鼠标用右手还是左手？'
     baile '右手喵，左手太别扭了喵'
     
+    return
