@@ -1438,15 +1438,23 @@ screen nvl(dialogue, items=None):
 
     window:
         style "nvl_window"
+        if session_title is None:
+            padding gui.nvl_borders.padding
 
         has vbox:
             spacing gui.nvl_spacing
 
         ## Displays dialogue in either a vpgrid or the vbox.
         
-     
-        if gui.nvl_height:
+        if session_title:
+            frame:
+                xfill True
+                padding (20, 20)
+                background Solid("#0080ff80")
 
+                text "终究是摆了" xalign 0.5 text_align 0.5
+
+        if gui.nvl_height:
             vpgrid:
                 cols 1
                 yinitial 1.0
@@ -1505,7 +1513,6 @@ style nvl_window:
     yfill True
 
     background "gui/nvl.png"
-    padding gui.nvl_borders.padding
 
 style nvl_entry:
     xfill True
