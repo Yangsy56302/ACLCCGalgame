@@ -293,3 +293,5 @@ default narrator = CharacterWithData(None)
 
 
 default system = narrator.center  # 别名？
+
+define debug = CharacterWithData(None, kind=nvl, what_color="#00ff00")
