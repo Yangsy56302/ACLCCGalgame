@@ -235,9 +235,18 @@ label setup_naming_entered:
 
         else:
             nvl clear
-
-            debug "Now intercepting error{......}{w=1.0}{nw}"
-            debug "Success."
+            debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
+            debug "user@debugmode:~$ {fast}{w=0.5}sudo changename '[player_input]'{w=1.0}{nw}"
+            debug "[[sudo] Enter Password: {fast}{w=3.0}{nw}"
+            nvl clear
+            debug "{w=1.0}{nw}"
+            nvl clear
+            debug "[[changename] Now intercepting error{fast}{......}{w=1.0}{nw}"
+            debug "[[changename] Success.{fast}{w=0.5}{nw}"
+            nvl clear
+            debug "[[changename] Now setting player name to '[player_input]'{fast}{......}{w=1.0}{nw}"
+            debug "[[changename] Success.{fast}{w=0.5}{nw}"
+            debug "Press any key to continue...{fast}"
             $ mc.nickname = player_input
             jump setup_naming_confirm
     
