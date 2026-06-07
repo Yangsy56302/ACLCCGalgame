@@ -184,22 +184,29 @@ label setup_naming_entered:
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
+        # $ raise NameError("f'{player_input}' is already defined")
         python:
             duplicate_name_attempts += 1
             quick_menu = False
-        # 显示自定义错误对话框
-            error_message = f"NameError: '{player_input}' is already defined.\nPress Ignore to continue..."
-        window hide None
-        with None
-        stop music
-        call screen naming_error_message(error_message)
-        with None
-        window auto None
+            error_message = "\n".join([
+                f'  {{a}}File "game/script.rpy", line ???{{/a}}, in script call',
+                f'    call setup_naming_start from _call_setup_naming_start',
+                f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in script',
+                f'    {player_input} = CharacterWithData(',
+                f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in <module>',
+                f'    {player_input} = CharacterWithData(',
+                f"NameError: '{player_input}' is already defined",
+            ])
         # 显示错误提示（不再使用 raise）
+        window hide None
+        stop music
+        with None
+        show screen custom_exception(error_message)
         python: 
             quick_menu = True
             renpy.block_rollback()
-        play music "mus_setup.ogg"
+        pause 1.0
+        window auto
         if duplicate_name_attempts == 1:
             setup "哦不{......}{w=0.5}我没考虑到这一点。\n{w=1.0}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
             setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
@@ -214,6 +221,9 @@ label setup_naming_entered:
             setup "{......}"
             $ mc.nickname = player_input
         
+        with None
+        hide screen custom_exception
+        play music "mus_setup.ogg"
         # 返回重新输入
         jump setup_naming_loop
     

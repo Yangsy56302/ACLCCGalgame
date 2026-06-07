@@ -56,7 +56,7 @@ screen custom_exception(fmt_short, fmt_full=None, traceback_fn=None):
 
         side "c r":
             xfill True
-            label _("An exception has occurred.") text_size gui._scale(40)
+            label "An exception has occurred." text_size gui._scale(40)
             text "{size=-3}[config.version!q]\n[renpy.version_only!q]\n[renpy.platform!q]{/size}":
                 textalign 1.0 yalign 0.5
 
@@ -85,22 +85,41 @@ screen custom_exception(fmt_short, fmt_full=None, traceback_fn=None):
                     box_wrap True
                     box_wrap_spacing gui._scale(5)
 
-                    textbutton _("Ignore"):
+                    textbutton "Rollback":
+                        action Rollback()
+                        tooltip "Attempts a roll back to a prior time, allowing you to save or choose a different choice."
+
+                    textbutton "Ignore":
                         action Return()
                         if _ignore_action:
-                            tooltip _("Ignores the exception, allowing you to continue.")
+                            tooltip "Ignores the exception, allowing you to continue."
                         else:
-                            tooltip _("Ignores the exception, allowing you to continue. This often leads to additional errors.")
+                            tooltip "Ignores the exception, allowing you to continue. This often leads to additional errors."
+
+                    if config.developer and not renpy.mobile:
+                        if _errorhandling.reload:
+                            textbutton "Reload":
+                                action None
+                                tooltip "Reloads the game from disk, saving and restoring game state if possible."
+
+                        if _errorhandling.console:
+                            textbutton "Console":
+                                action None
+                                tooltip "Opens a console to allow debugging the problem."
                     
                     if traceback_fn:
                         if not any([renpy.ios, renpy.emscripten]):
-                            textbutton _("Open"):
+                            textbutton "Open":
                                 action CustomEditFile(traceback_fn)
-                                tooltip _("Opens the traceback.txt file in a text editor.")
+                                tooltip "Opens the traceback.txt file in a text editor."
 
-                        textbutton __("Copy"):
-                            action CustomCopyFile(traceback_fn)
-                            tooltip _("Copies the traceback.txt file to the clipboard.")
+                        textbutton "Copy BBCode":
+                            action CustomCopyFile(traceback_fn, u"[code]\n{}[/code]\n")
+                            tooltip "Copies the traceback.txt file to the clipboard as BBcode for forums like https://lemmasoft.renai.us/."
+
+                        textbutton "Copy Markdown":
+                            action CustomCopyFile(traceback_fn, u"```\n{}```\n")
+                            tooltip "Copies the traceback.txt file to the clipboard as Markdown for Discord."
 
                 $ tooltip = GetTooltip()
                 
@@ -109,7 +128,7 @@ screen custom_exception(fmt_short, fmt_full=None, traceback_fn=None):
             vbox:
                 xfill True
 
-                textbutton _("Quit"):
+                textbutton "Quit":
                     xalign 1.0
                     action custom_error_quit()
-                    tooltip _("Quits the game.")
+                    tooltip "Quits the game."

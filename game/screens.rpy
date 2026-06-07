@@ -191,8 +191,19 @@ screen input(prompt):
     style_prefix "input"
 
     window:
+        id "window"
 
+        if another_view:
+            add "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
+            add "gui/another_view.png" xalign 0.5 yalign 1.0
+        else:
+            add "gui/textbox.png" xalign 0.5 yalign 1.0
+
+        if renpy.variant("small"):
+            yalign 1.0
+        
         vbox:
+            
             xanchor gui.dialogue_text_xalign
             xpos gui.dialogue_xpos
             xsize gui.dialogue_width
@@ -216,6 +227,16 @@ screen volatile_input_screen(prompt, duration):
     timer duration action Function(close_input_screen)
 
     window:
+        id "window"
+
+        if another_view:
+            add "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
+            add "gui/another_view.png" xalign 0.5 yalign 1.0
+        else:
+            add "gui/textbox.png" xalign 0.5 yalign 1.0
+
+        if renpy.variant("small"):
+            yalign 1.0
 
         vbox:
             xanchor gui.dialogue_text_xalign
