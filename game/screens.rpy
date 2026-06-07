@@ -382,6 +382,7 @@ screen navigation():
             textbutton _("Continue") action Continue()
 
             
+            
         else:
 
             textbutton _("History") action ShowMenu("history")
@@ -410,6 +411,11 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("Main Menu") action MainMenu()
+        
+        if main_menu and persistent.debug_mode:
+
+                textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
+
 
         if renpy.variant("pc"):
 
@@ -1459,15 +1465,23 @@ screen nvl(dialogue, items=None):
 
     window:
         style "nvl_window"
+        if session_title is None:
+            padding gui.nvl_borders.padding
 
         has vbox:
             spacing gui.nvl_spacing
 
         ## Displays dialogue in either a vpgrid or the vbox.
         
-     
-        if gui.nvl_height:
+        if session_title:
+            frame:
+                xfill True
+                padding (20, 20)
+                background Solid((getattr(session_title, "session_title_color", None) or "#0080ff") + "80")
 
+                text str(session_title) xalign 0.5 text_align 0.5
+
+        if gui.nvl_height:
             vpgrid:
                 cols 1
                 yinitial 1.0
@@ -1526,7 +1540,6 @@ style nvl_window:
     yfill True
 
     background "gui/nvl.png"
-    padding gui.nvl_borders.padding
 
 style nvl_entry:
     xfill True
@@ -2111,3 +2124,4 @@ label show_chapter(title):
     with dissolve
     window auto
     return
+

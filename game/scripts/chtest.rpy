@@ -39,3 +39,8 @@ label chtest_exceptscreen:
     hide yangsy
 
     return
+
+label chtest_session_title:
+    nvl clear
+    $ session_title = gra
+    gra.nvl "这是什么颜色？"

@@ -6,9 +6,10 @@ init python:
     AFFECTION = CharacterDataKey("affection")
 
     class CharacterWithData(renpy.character.ADVCharacter):
-        def __init__(self, name, realname=None, meet_irl=False, meet_irl_nvl=False, is_dynamic=True, root=None, **raw_properties):
+        def __init__(self, name, realname=None, session_title_color=None, meet_irl=False, meet_irl_nvl=False, is_dynamic=True, root=None, **raw_properties):
             self.nickname = name
             self.realname = realname
+            self.session_title_color=session_title_color
             self.meet_irl = meet_irl
             self.meet_irl_nvl = meet_irl_nvl
             self.raw_properties = raw_properties
@@ -23,7 +24,7 @@ init python:
 
         def copy(self, **raw_properties):
             new_raw_properties = self.raw_properties | raw_properties
-            obj = self.__class__(self.nickname, self.realname, meet_irl=self.meet_irl, meet_irl_nvl=self.meet_irl_nvl, is_dynamic=self.is_dynamic, root=self.root, **new_raw_properties)
+            obj = self.__class__(self.nickname, self.realname, session_title_color=self.session_title_color, meet_irl=self.meet_irl, meet_irl_nvl=self.meet_irl_nvl, is_dynamic=self.is_dynamic, root=self.root, **new_raw_properties)
             obj.data = self.data
             return obj
 
@@ -129,7 +130,7 @@ default dwen = CharacterWithData("是动听D温呐", image="dwen", what_prefix="
 # image dwen = "char/dwen/normal.png"
 
 
-default gra = CharacterWithData("晴柚-Grafrustix", "晴安柚子", image="gra", what_prefix="< ", what_suffix=" 3")
+default gra = CharacterWithData("晴柚-Grafrustix", "晴安柚子", image="gra", what_prefix="< ", what_suffix=" 3", session_title_color="#FFAEC9")
 
 transform tcgra:
     yanchor 0.625 subpixel True

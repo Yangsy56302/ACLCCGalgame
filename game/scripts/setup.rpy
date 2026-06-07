@@ -183,50 +183,62 @@ label setup_naming_entered:
                             setup "我明白了，{w=0.5}你莫不是来消遣洒家？"
                             setup "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
+    # debug mode
+    elif player_input == persistent.password:
+        python:
+            persistent.debug_mode = True
+            renpy.notify("Debug Mode Enabled")
+        jump setup_naming_loop
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
-        # $ raise NameError("f'{player_input}' is already defined")
-        python:
-            duplicate_name_attempts += 1
-            quick_menu = False
-            error_message = "\n".join([
-                f'  {{a}}File "game/script.rpy", line ???{{/a}}, in script call',
-                f'    call setup_naming_start from _call_setup_naming_start',
-                f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in script',
-                f'    {player_input} = CharacterWithData(',
-                f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in <module>',
-                f'    {player_input} = CharacterWithData(',
-                f"NameError: '{player_input}' is already defined",
-            ])
-        # 显示错误提示（不再使用 raise）
-        window hide None
-        stop music
-        with None
-        show screen custom_exception(error_message)
-        python: 
-            quick_menu = True
-            renpy.block_rollback()
-        pause 1.0
-        window auto
-        if duplicate_name_attempts == 1:
-            setup "哦不{......}{w=0.5}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
-            setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
-            setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
-        elif duplicate_name_attempts == 2:
-            setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
-        elif duplicate_name_attempts == 3:
-            setup "喂，{w=1.0}你是故意的吧。"
-            setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
-            setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
+        if not persistent.debug_mode:
+            python:
+                duplicate_name_attempts += 1
+                quick_menu = False
+                error_message = "\n".join([
+                    f'  {{a}}File "game/script.rpy", line ???{{/a}}, in script call',
+                    f'    call setup_naming_start from _call_setup_naming_start',
+                    f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in script',
+                    f'    {player_input} = CharacterWithData(',
+                    f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in <module>',
+                    f'    {player_input} = CharacterWithData(',
+                    f"NameError: '{player_input}' is already defined",
+                ])
+            # 显示错误提示（不再使用 raise）
+            window hide None
+            stop music
+            with None
+            show screen custom_exception(error_message)
+            python: 
+                quick_menu = True
+                renpy.block_rollback()
+            pause 1.0
+            window auto
+            if duplicate_name_attempts == 1:
+                setup "哦不{......}{w=0.5}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
+                setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
+                setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
+            elif duplicate_name_attempts == 2:
+                setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
+            elif duplicate_name_attempts == 3:
+                setup "喂，{w=1.0}你是故意的吧。"
+                setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
+                setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
+            else:
+                setup "{......}"
+                $ mc.nickname = player_input
+            with None
+            play music "mus_setup.ogg" fadein 2.0
+            hide screen custom_exception with dissolve
+            # 返回重新输入
+            jump setup_naming_loop
+
         else:
-            setup "{......}"
+            "Now Intercepting Error{......}{w=1.0}{nw}"
+            "Success."
             $ mc.nickname = player_input
-        
-        play music "mus_setup.ogg" fadein 2.0
-        hide screen custom_exception with dissolve
-        # 返回重新输入
-        jump setup_naming_loop
+            jump setup_naming_confirm
     
     # 否则，如果输入的名字是administrator等管理员用户名：
     elif player_input.lower() in ("admin", "administrator", "system", "root", "wheel"):
