@@ -194,7 +194,7 @@ label setup_naming_entered:
             setup "？"
             setup "你刚刚{w=0.25}，是不是输入了什么东西{w=0.5}，然后弹出了一个奇怪的界面？"
             setup "我想你可能是有什么特殊的身份吧。"
-            $ persistent.setup_saw_debug_screen = 
+            $ persistent.setup_saw_debug_screen = True
         else:
             mwam.comment "你们来填吧，我想不出这里写什么"
         jump setup_naming_loop
