@@ -12,6 +12,10 @@ label setup_naming_start:
     
     scene black with fade
 
+    python:
+        duplicate_name_attempts = 0
+        empty_name_attempts = 0
+
     """
     {cps=8}{nw}· · · · · ·{w=1}
 
@@ -23,7 +27,7 @@ label setup_naming_start:
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · 
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
     """
-
+    define debug = CharacterWithData(None, kind=nvl, what_color="#00ff00")
     setup "噢，{w=0.25}嘿，{w=0.5}你好。"
 
     play music "mus_setup.ogg" fadein 2.0
@@ -180,71 +184,72 @@ label setup_naming_entered:
                             setup "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
     # debug mode
-    elif player_input == persistent.password:
-        $ _history_list.pop()
+    elif player_input == persistent.password and not persistent.debug_mode:
+        nvl clear
         $ persistent.debug_mode = True
-        debug "Debug Mode Enabled{w=0.5}{nw}"
+        debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
         jump setup_naming_loop
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
-        if persistent.duplicate_name_fixed:
-            setup "{...}又是游戏内的角色名吗？{w=1.0}有意思。"
-            setup "——不不不，{w=0.25}请不要误会，{w=0.5}我并没有什么要阻拦你使用这个名字的打算。"
-            setup "我只是单纯觉得这事很有意思，{w=0.25}仅此而已。"
-            $ mc.nickname = player_input
-            jump setup_naming_confirm
-        python:
-            duplicate_name_attempts += 1
-            quick_menu = False
-            error_message = "\n".join([
-                f'  {{a}}File "game/script.rpy", line ???{{/a}}, in script call',
-                f'    call setup_naming_start from _call_setup_naming_start',
-                f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in script',
-                f'    {player_input} = CharacterWithData(',
-                f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in <module>',
-                f'    {player_input} = CharacterWithData(',
-                f"NameError: '{player_input}' is already defined",
-            ])
-        # 显示错误提示（不再使用 raise）
-        window hide None
-        stop music
-        show screen custom_exception(error_message) with None
-        python: 
-            quick_menu = True
-            renpy.block_rollback()
-        pause 1.0
-        window auto
-        # 如果游戏处于调试模式：
-        if persistent.debug_mode:
-            setup "{......}等等。"
-            setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
-            setup "好吧，{w=0.5}虽说我不是很清楚你们为何没有修复这个漏洞，\n{w=0.5}但我可以稍微调整一下数据结构，{w=0.5}然后你应该就能够正常使用自己的名称了。"
-            setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
-            setup "稍等一下{......}{nw}"
-            $ persistent.duplicate_name_fixed = True
-            $ mc.nickname = player_input
+        if not persistent.debug_mode:
+            python:
+                duplicate_name_attempts += 1
+                quick_menu = False
+                error_message = "\n".join([
+                    f'  {{a}}File "game/script.rpy", line ???{{/a}}, in script call',
+                    f'    call setup_naming_start from _call_setup_naming_start',
+                    f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in script',
+                    f'    {player_input} = CharacterWithData(',
+                    f'  {{a}}File "game/scripts/setup.rpy", line ???{{/a}}, in <module>',
+                    f'    {player_input} = CharacterWithData(',
+                    f"NameError: '{player_input}' is already defined",
+                ])
+            # 显示错误提示（不再使用 raise）
+            window hide None
+            stop music
+            with None
+            show screen custom_exception(error_message)
+            python: 
+                quick_menu = True
+                renpy.block_rollback()
+            pause 1.0
+            window auto
+            if duplicate_name_attempts == 1:
+                setup "哦不{......}{w=0.5}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
+                setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
+                setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
+            elif duplicate_name_attempts == 2:
+                setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
+            elif duplicate_name_attempts == 3:
+                setup "喂，{w=1.0}你是故意的吧。"
+                setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
+                setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
+            else:
+                setup "{......}"
+                $ mc.nickname = player_input
+            with None
             play music "mus_setup.ogg" fadein 2.0
             hide screen custom_exception with dissolve
-            jump setup_naming_confirm
-        # 否则：根据尝试次数选择不同对话
-        elif duplicate_name_attempts == 1:
-            setup "哦不{......}{w=0.5}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
-            setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
-            setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
-        elif duplicate_name_attempts == 2:
-            setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
-        elif duplicate_name_attempts == 3:
-            setup "喂，{w=1.0}你是故意的吧。"
-            setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
-            setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
+            # 返回重新输入
+            jump setup_naming_loop
+
         else:
-            setup "{......}"
+            nvl clear
+            debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
+            debug "user@debugmode:~$ {fast}{w=0.5}sudo changename '[player_input]'{w=1.0}{nw}"
+            debug "[[sudo] Enter Password: {fast}{w=3.0}{nw}"
+            nvl clear
+            debug "{w=1.0}{nw}"
+            nvl clear
+            debug "[[changename] Now modify the storage of character data{fast}{......}{w=1.0}{nw}"
+            debug "[[changename] Success.{fast}{w=0.5}{nw}"
+            nvl clear
+            debug "[[changename] Now setting player name to '[player_input]'{fast}{......}{w=1.0}{nw}"
             $ mc.nickname = player_input
-        play music "mus_setup.ogg" fadein 2.0
-        hide screen custom_exception with dissolve
-        # 返回重新输入
-        jump setup_naming_loop
+            debug "[[changename] Success.{fast}{w=0.5}{nw}"
+            debug "Press any key to continue...{fast}"
+            jump setup_naming_confirm
     
     # 否则，如果输入的名字是administrator等管理员用户名：
     elif player_input.lower() in ("admin", "administrator", "system", "root", "wheel"):
@@ -313,7 +318,7 @@ label setup_naming_done:
     setup "不过我还是叫你玩家吧，{w=0.5}叫别人的名字我总感觉挺羞耻的。"
     setup "呃，{w=0.5}你还有其他疑问吗？{w=2}{nw}"
     setup "哦不对，{w=0.25}你又问不了我。（笑）"
-    setup "好吧，{w=0.5}稍等一下，{w=0.5}我得找找剧情被我放在哪了{......}{nw}"
+    setup "好吧，稍等一下，{w=0.5}我得找找剧情被我放在哪了{......}{nw}"
     stop music fadeout 2.0
     
     return
