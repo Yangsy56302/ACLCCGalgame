@@ -4,9 +4,6 @@ label start:
 
     default has_phone = False
 
-
-    # jump chtest
-
     call setup_naming_start from _call_setup_naming_start
     $ renpy.block_rollback()
     call ch0 from _call_ch0

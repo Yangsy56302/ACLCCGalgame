@@ -225,13 +225,13 @@ transform tcyangsy:
 layeredimage yangsy:
     at tcyangsy
     group body prefix body:
-        attribute _default default:
+        attribute normal default:
             "char/yangsy/body/default.png"
-        attribute without_bag:
+        attribute no_bag:
             "char/yangsy/body/without_bag.png"
-        attribute without_legwear:
+        attribute no_legwear:
             "char/yangsy/body/without_legwear.png"
-        attribute without_both:
+        attribute no_both:
             "char/yangsy/body/without_both.png"
     group brow prefix brow:
         attribute angry: 

@@ -321,6 +321,8 @@ label ch0_1:
                 call chplotadvice_yoosee
             "查看[yangsy]的建议":
                 call chplotadvice_yangsy
+            "测试":
+                call chtest
             "返回主菜单":
                 return
         
