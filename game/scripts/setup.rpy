@@ -234,7 +234,7 @@ label setup_naming_entered:
             # 返回重新输入
             jump setup_naming_loop
         else:
-            "Now Intercepting Error{...}"
+            "Now Intercepting Error{......}{w=1.0}{nw}"
             "Success."
             $ mc.nickname = player_input
             jump setup_naming_confirm
