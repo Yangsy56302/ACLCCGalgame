@@ -644,7 +644,7 @@ screen about():
     default scroll_enabled = True
 
     if scroll_enabled:
-        timer 1/240 repeat True action Function(do_auto_scroll_credits)
+        timer 1e-4 repeat True action Function(do_auto_scroll_credits)
 
     use game_menu(_("About")):
 
