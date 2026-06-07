@@ -8,6 +8,7 @@ init -99 python:
     import string
     import unicodedata
 
+
 label setup_naming_start:
     
     scene black with fade
@@ -68,7 +69,7 @@ label setup_naming_start:
     setup "抱歉，{w=0.25}我应该在这之前准备好的，{w=0.5}我总是这样。"
     setup "算了，{w=0.5}又不是什么重要的内容，{w=0.25}你直接取名算了。"
 
-
+    # 显示一秒取名界面
     "↓ 给自己想个名字？{nw}"
     python:
         start_time = time.time()
@@ -112,10 +113,12 @@ label setup_naming_start:
 
 label setup_naming_loop:
 
+    # 玩家输入名称{...}
     "↓ 给自己想个名字？{nw}"
     python:
         player_input = renpy.input(_("↓ 给自己想个名字？")).strip()
     jump setup_naming_entered
+
 
 label setup_naming_entered:
 
@@ -130,16 +133,19 @@ label setup_naming_entered:
     if not player_input:
         $ empty_name_attempts += 1
     
+        # 第一次：
         if empty_name_attempts == 1:
             setup "{......}奇怪，我的程序没对这种情况做出限制吗？{w=1.0}开发者还真是粗心。"
             setup "算了，{w=0.25}将就着用吧，{w=0.25}反正一个存档也只用一次。"
             jump setup_naming_loop
 
+        # 第二次：
         elif empty_name_attempts == 2:
             setup "你是故意的吗？{w=0.25}我可不觉得这很好玩。"
             setup "抱歉，{w=0.25}我不是在威胁你，{w=0.25}不过我们还是别在取名界面耽搁太久吧。"
             jump setup_naming_loop
             
+        # 否则：
         else:
             stop music fadeout 2.0
             setup "怎么，{w=0.25}你觉得这样会触发什么彩蛋吗？"
@@ -183,7 +189,8 @@ label setup_naming_entered:
                             setup "我明白了，{w=0.5}你莫不是来消遣洒家？"
                             setup "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
-        # debug mode
+    
+    # 否则，如果游戏目前处在调试模式：
     elif player_input == persistent.password and not persistent.debug_mode:
         python:
             _history_list.pop()
@@ -193,17 +200,19 @@ label setup_naming_entered:
         if not persistent.setup_saw_debug_screen:
             setup "？"
             setup "你刚刚{w=0.25}，是不是输入了什么东西{w=0.5}，然后弹出了一个奇怪的界面？"
-            setup "我想你可能是有什么特殊的身份吧。"
+            setup "我想{w=0.25}你可能是有什么特殊的身份吧。"
             $ persistent.setup_saw_debug_screen = True
         else:
             mwam.comment "你们来填吧，我想不出这里写什么"
         jump setup_naming_loop
 
-
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
+        # 并且，如果还没修改角色：
         if not persistent.duplicate_name_fixed:
+            # 并且，如果游戏目前不在调试模式：
             if not persistent.debug_mode:
+                # 显示错误提示
                 python:
                     duplicate_name_attempts += 1
                     quick_menu = False
@@ -216,7 +225,6 @@ label setup_naming_entered:
                         f'    {player_input} = CharacterWithData(',
                         f"NameError: '{player_input}' is already defined",
                     ])
-                # 显示错误提示（不再使用 raise）
                 window hide None
                 stop music
                 with None
@@ -226,16 +234,20 @@ label setup_naming_entered:
                     renpy.block_rollback()
                 pause 1.0
                 window auto
+                # 第一次：
                 if duplicate_name_attempts == 1:
                     setup "哦不{......}{w=0.5}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
                     setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
                     setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
+                # 第二次：
                 elif duplicate_name_attempts == 2:
                     setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
+                # 第三次：
                 elif duplicate_name_attempts == 3:
                     setup "喂，{w=1.0}你是故意的吧。"
                     setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
                     setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
+                # 否则
                 else:
                     setup "{......}"
                     $ mc.nickname = player_input
@@ -244,18 +256,20 @@ label setup_naming_entered:
                 hide screen custom_exception with dissolve
                 # 返回重新输入
                 jump setup_naming_loop
-            else: # 如果处于debug模式
+            # 撞名，未修改，调试模式：
+            else: 
                 nvl clear
                 debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
                 debug "user@debugmode:~$ {fast}{w=0.5}sudo data --ChangeStorage 'character' 2{w=1.0}{nw}"
                 debug "[[sudo] Enter Password: {fast}{w=3.0}{nw}"
                 nvl clear
                 debug "{w=1.0}{nw}"
+                $ _history_list.pop()
                 nvl clear
                 debug "[[data] Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
                 $ persistent.duplicate_name_fixed = True
                 debug "[[data] Success.{fast}{w=0.5}{nw}"
-                debug "Press any key to continue...{fast}"
+                debug "Press any key to continue..."
                 setup "{......}等等。"
                 setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
                 setup "那你刚刚是不是修改了角色的数据存储方式？"
@@ -263,7 +277,8 @@ label setup_naming_entered:
                 setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
                 $ mc.nickname = player_input
                 jump setup_naming_confirm
-        else:# 如果已经修改角色数据存储方式了
+        # 撞名，已修改，调试模式：
+        else:
             setup "{...}又是游戏内的角色名吗？{w=1.0}有意思。"
             setup "——不不不，{w=0.25}请不要误会，{w=0.5}我并没有什么要阻拦你使用这个名字的打算。"
             setup "我只是单纯觉得这事很有意思，{w=0.25}仅此而已。"
@@ -341,40 +356,3 @@ label setup_naming_done:
     stop music fadeout 2.0
     
     return
-
-
-# 自定义错误提示屏幕（在 screens.rpy 中添加，或直接加在这里）
-screen naming_error_message(error_message):
-    modal True
-    frame:
-        background "#ffffff"
-        xfill True
-        yfill True
-        padding (50, 50)
-        
-        vbox:
-            spacing 15
-            xfill True
-            
-            text "Something went wrong.":
-                size 60
-                color "#000000"
-                font debug_gui_font
-            
-            frame:
-                background "#eeeeee"
-                padding (15, 15)
-                xfill True
-                
-                text "[error_message]":
-                    size 30
-                    color "#000000"
-                    font debug_gui_font
-            
-            hbox:
-                spacing 20
-                xalign 0.0
-                textbutton "Rollback" action Rollback() text_color "#000000" text_hover_color "#555555" text_font debug_gui_font
-                textbutton "Ignore" action Return() text_color "#000000" text_hover_color "#555555" text_font debug_gui_font
-                textbutton "Reload" action None text_color "#aaaaaa" text_font debug_gui_font
-                textbutton "Console" action None text_color "#aaaaaa" text_font debug_gui_font
