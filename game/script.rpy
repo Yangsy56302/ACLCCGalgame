@@ -32,6 +32,8 @@ label to_be_continued(chp):
                 call chplotadvice_yoosee
             "查看[yangsy]的建议":
                 call chplotadvice_yangsy
+            # "查看测试（chtest）":
+            #     call chtest
             "返回主菜单":
                 return
 
