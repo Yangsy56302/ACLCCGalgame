@@ -242,7 +242,7 @@ label setup_naming_entered:
             nvl clear
             debug "{w=1.0}{nw}"
             nvl clear
-            debug "[[changename] Now intercepting error{fast}{......}{w=1.0}{nw}"
+            debug "[[changename] Now modify the storage of character data{fast}{......}{w=1.0}{nw}"
             debug "[[changename] Success.{fast}{w=0.5}{nw}"
             nvl clear
             debug "[[changename] Now setting player name to '[player_input]'{fast}{......}{w=1.0}{nw}"
