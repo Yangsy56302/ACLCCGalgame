@@ -1471,9 +1471,9 @@ screen nvl(dialogue, items=None):
             frame:
                 xfill True
                 padding (20, 20)
-                background Solid("#0080ff80")
+                background Solid((getattr(session_title, "session_title_color", None) or "#0080ff") + "80")
 
-                text "终究是摆了" xalign 0.5 text_align 0.5
+                text str(session_title) xalign 0.5 text_align 0.5
 
         if gui.nvl_height:
             vpgrid:
