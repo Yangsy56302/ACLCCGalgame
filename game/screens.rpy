@@ -381,6 +381,10 @@ screen navigation():
 
             textbutton _("Continue") action Continue()
 
+            if persistent.debug_mode:
+
+                textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
+
             
         else:
 
@@ -410,6 +414,7 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("Main Menu") action MainMenu()
+        
 
         if renpy.variant("pc"):
 
@@ -2118,3 +2123,4 @@ label show_chapter(title):
     with dissolve
     window auto
     return
+
