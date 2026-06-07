@@ -249,4 +249,4 @@ define config.autosave_on_quit = True
 
 define config.check_conflicting_properties = True
 
-define config.auto_voice = "voice/{id}.ogg"
+# define config.auto_voice = "voice/{id}.ogg"
