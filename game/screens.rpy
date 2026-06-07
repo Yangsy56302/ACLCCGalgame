@@ -381,10 +381,7 @@ screen navigation():
 
             textbutton _("Continue") action Continue()
 
-            if persistent.debug_mode:
-
-                textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
-
+            
             
         else:
 
@@ -415,6 +412,10 @@ screen navigation():
 
             textbutton _("Main Menu") action MainMenu()
         
+        if main_menu and persistent.debug_mode:
+
+                textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
+
 
         if renpy.variant("pc"):
 
