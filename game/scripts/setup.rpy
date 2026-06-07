@@ -184,9 +184,10 @@ label setup_naming_entered:
                             setup "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
     # debug mode
-    elif player_input == persistent.password:
+    elif player_input == persistent.password and not persistent.debug_mode:
+        nvl clear
         $ persistent.debug_mode = True
-        debug "Debug Mode Enabled{w=0.5}{nw}"
+        debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
         jump setup_naming_loop
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
