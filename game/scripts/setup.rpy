@@ -245,9 +245,9 @@ label setup_naming_entered:
             debug "[[changename] Success.{fast}{w=0.5}{nw}"
             nvl clear
             debug "[[changename] Now setting player name to '[player_input]'{fast}{......}{w=1.0}{nw}"
+            $ mc.nickname = player_input
             debug "[[changename] Success.{fast}{w=0.5}{nw}"
             debug "Press any key to continue...{fast}"
-            $ mc.nickname = player_input
             jump setup_naming_confirm
     
     # 否则，如果输入的名字是administrator等管理员用户名：
