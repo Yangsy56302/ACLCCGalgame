@@ -61,9 +61,10 @@ label ch1_bored:
             system.nvl "群主拒绝了你的入群申请"
             jump ch1_bored
 
-    baile "我是后背喵~"
-    baile "{......}"
-    baile "bro怎么进ACLC了喵？"
+    nvl clear
+    baile.nvl "我是后背喵~"
+    baile.nvl "{......}"
+    baile.nvl "bro怎么进ACLC了喵？"
 
     $ another_view = False
     scene bg star with dissolve
