@@ -56,17 +56,17 @@ label setup_naming_start:
                 setup "好吧，{w=0.5}换个身份也是个很好的选择。{w=0.25}稍等一下，{w=0.25}谢谢。\n{w=1}{color=#cccccc}（我把取名界面丢到哪去了{......}）"
                 jump setup_naming_loop
 
-    setup "呃，{w=0.25}所以，{cps=*0.9}{w=0.25}我应该叫你{......}{w=0.5}{cps=*0.9}玩家？"
-    setup "{cps=*0.9}行吧，{w=0.5}好吧，{w=0.5}你好玩家，{w=0.5}玩家你好，{w=0.5}嗯。"
-    setup "那么首先，{w=0.25}呃，{w=0.25}谢谢你愿意游玩我们的作品，{w=0.25}我想是的。"
+    setup "呃，{w=0.25}所以，{w=0.5}我应该叫你{......}{w=0.5}玩家？"
+    setup "行吧，{w=0.5}好吧，{w=0.5}你好玩家，{w=0.5}玩家你好，{w=0.5}嗯。"
+    setup "那么首先，{w=0.25}呃，{w=0.5}谢谢你愿意游玩我们的作品，{w=0.25}我想是的。"
     stop music fadeout 2.0
-    setup "然后，{w=1}{cps=*0.8}呃{......}{w=2}{nw}"
-    setup "{cps=*0.7}呃{......}{w=2}{nw}"
-    setup "{cps=*0.5}呃{......}{......}{w=1}{nw}"
-    setup "啊，该死的，我又忘记我要说什么了。"
+    setup "然后，{w=0.5}{cps=*0.875}呃{......}{w=1.0}{/cps}{nw}"
+    setup "{cps=*0.75}呃{......}{...}{w=1.0}{/cps}{nw}"
+    setup "{cps=*0.5}呃{......}{......}{w=1.0}{/cps}{nw}"
+    setup "啊，{w=0.25}该死的，{w=0.25}我又忘记我要说什么了。"
     play music "mus_setup.ogg" fadein 2.0
-    setup "抱歉，{w=0.25}我应该在这之前准备好的，{w=0.25}我总是这样。"
-    setup "算了，{w=0.25}又不是什么重要的内容，{w=0.25}你直接取名算了。"
+    setup "抱歉，{w=0.25}我应该在这之前准备好的，{w=0.5}我总是这样。"
+    setup "算了，{w=0.5}又不是什么重要的内容，{w=0.25}你直接取名算了。"
 
 
     "↓ 给自己想个名字？{nw}"
@@ -91,8 +91,10 @@ label setup_naming_start:
 
     setup "——啊，{w=0.25}不好意思，{w=0.5}我得提醒你一下。"
     setup "尽管这个游戏理论上是完全离线的，{w=0.5}但是——"
-    stop music fadeout 2.0
-    setup "不论如何，{w=0.5}在任何的地方暴露你的真实姓名都是\n{red}{cps=*0.5}极其危险的行为{/cps}{/red}。"
+    setup "不论如何，{w=0.5}在任何的地方暴露你的真实姓名都是{nw}"
+    $ _history_list.pop()
+    stop music
+    setup "不论如何，在任何的地方暴露你的真实姓名都是{fast}{red}{cps=*0.5}极其危险的行为{/cps}{/red}。"
     setup "尽管我并不会限制你输入自己的名字{w=0.25}（我的程序也没办法识别），\n{w=0.25}但还是请你{red}{cps=*0.5}一定一定不要这么做{/cps}{/red}，{cps=*0.5}{w=0.25}好吗？{nw}"
     $ _history_list.pop()
     menu:
@@ -189,7 +191,6 @@ label setup_naming_entered:
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
-        # $ raise NameError("f'{player_input}' is already defined")
         if not persistent.debug_mode:
             python:
                 duplicate_name_attempts += 1
@@ -214,24 +215,24 @@ label setup_naming_entered:
             pause 1.0
             window auto
             if duplicate_name_attempts == 1:
-                setup "哦不{......}{w=0.5}我没考虑到这一点。\n{w=1.0}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
+                setup "哦不{......}{w=0.5}大概是你的名字和游戏内角色冲突了，{w=0.5}我的程序没考虑到这点。"
                 setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
                 setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
             elif duplicate_name_attempts == 2:
                 setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
             elif duplicate_name_attempts == 3:
-                setup "喂，{w=0.25}你是故意的吧。"
+                setup "喂，{w=1.0}你是故意的吧。"
                 setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
                 setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
             else:
                 setup "{......}"
                 $ mc.nickname = player_input
-
             with None
-            hide screen custom_exception
-            play music "mus_setup.ogg"
+            play music "mus_setup.ogg" fadein 2.0
+            hide screen custom_exception with dissolve
             # 返回重新输入
             jump setup_naming_loop
+
         else:
             nvl clear
 
