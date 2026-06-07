@@ -27,7 +27,7 @@ label setup_naming_start:
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · 
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
     """
-
+    define debug = CharacterWithData(None, kind=nvl, what_color="#00ff00")
     setup "噢，{w=0.25}嘿，{w=0.5}你好。"
 
     play music "mus_setup.ogg" fadein 2.0
@@ -183,9 +183,8 @@ label setup_naming_entered:
                             return
     # debug mode
     elif player_input == persistent.password:
-        python:
-            persistent.debug_mode = True
-            renpy.notify("Debug Mode Enabled")
+        $ persistent.debug_mode = True
+        debug "Debug Mode Enabled{w=0.5}{nw}"
         jump setup_naming_loop
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
@@ -234,8 +233,10 @@ label setup_naming_entered:
             # 返回重新输入
             jump setup_naming_loop
         else:
-            "Now Intercepting Error{......}{w=1.0}{nw}"
-            "Success."
+            nvl clear
+
+            debug "Now intercepting error{......}{w=1.0}{nw}"
+            debug "Success."
             $ mc.nickname = player_input
             jump setup_naming_confirm
     
