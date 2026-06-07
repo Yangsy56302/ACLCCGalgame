@@ -182,7 +182,7 @@ label setup_naming_entered:
                             setup "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
     # debug mode
-    elif player_input == "VGVhbSBBQ0xDQyBNZW1iZXI=":
+    elif player_input == persistent.password:
         python:
             persistent.debug_mode = True
             renpy.notify("Debug Mode Enabled")
