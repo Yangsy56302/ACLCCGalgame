@@ -239,7 +239,7 @@ label setup_naming_entered:
                 hide screen custom_exception with dissolve
                 # 返回重新输入
                 jump setup_naming_loop
-            else: # 如果已经修改角色数据存储方式了
+            else: # 如果处于debug模式
                 nvl clear
                 debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
                 debug "user@debugmode:~$ {fast}{w=0.5}sudo data --ChangeStorage 'character' 2{w=1.0}{nw}"
@@ -258,7 +258,7 @@ label setup_naming_entered:
                 setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
                 $ mc.nickname = player_input
                 jump setup_naming_confirm
-        else:# 如果处于debug模式
+        else:# 如果已经修改角色数据存储方式了
             setup "{...}又是游戏内的角色名吗？{w=1.0}有意思。"
             setup "——不不不，{w=0.25}请不要误会，{w=0.5}我并没有什么要阻拦你使用这个名字的打算。"
             setup "我只是单纯觉得这事很有意思，{w=0.25}仅此而已。"
