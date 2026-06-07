@@ -71,6 +71,7 @@ label ch1:
 label ch1_baick:
 
     nvl clear
+    system.nvl "终究是摆了{fast}{nw}"
     baile.nvl "我是后背喵~"
     baile.nvl "{......}"
     baile.nvl "bro怎么进ACLC了喵？"
