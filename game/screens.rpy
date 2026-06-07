@@ -685,7 +685,7 @@ screen about():
                     null height 1080
 
             # 控制按钮（只在你想要的时候显示）
-            textbutton "自动滚动开关" action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95
+            textbutton _("自动滚动开关") action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95 style "check_button"
             # textbutton "自动滚动开关" action Function(scroll_test) xalign 0.5 yalign 0.95
 
 style about_label is gui_label
