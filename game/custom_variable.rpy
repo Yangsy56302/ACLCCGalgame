@@ -4,3 +4,4 @@ default persistent.debug_mode = False
 default persistent.password = "VGVhbSBBQ0xDQyBNZW1iZXI="
 default session_title = None
 default persistent.has_seen_ending = False
+default persistent.duplicate_name_fixed = False
