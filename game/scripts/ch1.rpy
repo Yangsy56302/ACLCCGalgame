@@ -93,12 +93,12 @@ label ch1_baick:
 
     nvl clear
     $ session_title = None
-    system.nvl "[myworldzycpc]加入了群聊{fast}"
-    gra.nvl "你说ACLC网站？你是怎么知道的？{fast}"
-    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
-    gra.nvl "哦，是 [baile] 告诉你的？{fast}"
-    gra.nvl "这样啊{...}{fast}"
-    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
+    system.nvl "[myworldzycpc]加入了群聊{fast}{nw}"
+    gra.nvl "你说ACLC网站？你是怎么知道的？{fast}{nw}"
+    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}{nw}"
+    gra.nvl "哦，是 [baile] 告诉你的？{fast}{nw}"
+    gra.nvl "这样啊{...}{fast}{nw}"
+    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}{nw}"
     mc "{cps=*0.25}{......}{/cps}"
 
     myworldzycpc.nvl "另外我还在摆了的Clever Box地图介绍里看到了群号呢"
