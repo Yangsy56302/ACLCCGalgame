@@ -270,7 +270,7 @@ label setup_naming_entered:
                 debug "[[data] Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
                 $ persistent.duplicate_name_fixed = True
                 debug "[[data] Success.{fast}{w=0.5}{nw}"
-                debug "Press any key to continue..."
+                debug "Press any key to continue...{fast}"
                 setup "{......}等等。"
                 setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
                 setup "那你刚刚是不是修改了角色的数据存储方式？"
