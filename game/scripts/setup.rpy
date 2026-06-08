@@ -28,7 +28,7 @@ label setup_naming_start:
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · 
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·
     """
-    define debug = CharacterWithData(None, kind=nvl, what_color="#00ff00")
+    
     setup "噢，{w=0.25}嘿，{w=0.5}你好。"
 
     play music "mus_setup.ogg" fadein 2.0
