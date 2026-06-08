@@ -268,7 +268,7 @@ label setup_naming_entered:
                 debug "{w=1.0}{nw}"
                 $ _history_list.pop()
                 nvl clear
-                debug "info: changestorage.sh begin"
+                debug "info: changestorage.sh begin{fast}{w=1.0}{nw}"
                 debug "data: Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
                 $ persistent.duplicate_name_fixed = True
                 debug "data: Success.{fast}{w=0.5}{nw}"
