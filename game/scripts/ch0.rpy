@@ -171,7 +171,7 @@ label ch0_1:
     scene black with dissolve
     "{......}"
     scene bg home_midnight with dissolve
-
+    voice "voice/message_prompt.ogg"
     "——突然响起的QQ提示音将你的意识拉回现实。"
     "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
     "你满怀期待地打开了QQ——{nw}"
@@ -189,6 +189,7 @@ label ch0_1:
     #         jump chex_unknown_not_join
 
     "不信邪的你又发了一遍入群申请——{nw=0.5}"
+    voice "voice/message_prompt.ogg"
     extend "这次的提示音倒是没过多久就出现了。"
     "QQ的群聊一栏多出了个名叫“Grafrustix的聊天群”的群。\n{w=1.0}你点进群内，{w=0.5}很快就看到了第一条消息："
 

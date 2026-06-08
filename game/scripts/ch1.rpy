@@ -45,17 +45,20 @@ label ch1:
                 $ no_group_message = False
                 myworldzycpc.nvl "我在网上看到的"
                 "[myworldzycpc] 等了很久，{nw=0.5}"
+                voice "voice/message_prompt.ogg"
                 extend "终于收到了回复："
                 system.nvl "群主拒绝了你的入群申请：\n{w=1.0}“不欢迎水军。”"
             "我朋友告诉我的":
                 $ no_group_message = False
                 myworldzycpc.nvl "我朋友告诉我的"
                 "[myworldzycpc] 等了很久，{nw=0.5}"
+                voice "voice/message_prompt.ogg"
                 extend "终于收到了回复："
                 system.nvl "群主拒绝了你的入群申请：\n{w=1.0}“不好有内鬼。”"
             "从ACLC网站":
                 myworldzycpc.nvl "从ACLC网站"
                 "不一会，{nw=0.25}"
+                voice "voice/message_prompt.ogg"
                 extend "[myworldzycpc] 的入群申请就被通过了。"
                 system.nvl "你已经是群成员了"
                 gra.nvl "你说ACLC网站？{w=1.0}你是怎么知道的？"
@@ -68,6 +71,7 @@ label ch1:
                 $ no_group_message = True
                 "[myworldzycpc] 没有写入群消息。"
                 "[myworldzycpc] 等了很久，{nw=0.5}"
+                voice "voice/message_prompt.ogg"
                 extend "终于收到了回复："
                 system.nvl "群主拒绝了你的入群申请"
 
@@ -89,12 +93,12 @@ label ch1_baick:
 
     nvl clear
     $ session_title = None
-    system.nvl "[myworldzycpc]加入了群聊{fast}"
-    gra.nvl "你说ACLC网站？你是怎么知道的？{fast}"
-    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
-    gra.nvl "哦，是 [baile] 告诉你的？{fast}"
-    gra.nvl "这样啊{...}{fast}"
-    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
+    system.nvl "[myworldzycpc]加入了群聊{fast}{nw}"
+    gra.nvl "你说ACLC网站？你是怎么知道的？{fast}{nw}"
+    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}{nw}"
+    gra.nvl "哦，是 [baile] 告诉你的？{fast}{nw}"
+    gra.nvl "这样啊{...}{fast}{nw}"
+    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}{nw}"
     mc "{cps=*0.25}{......}{/cps}"
 
     myworldzycpc.nvl "话说回来，之前另外我还在摆了的Clever Box地图介绍里看到过群号呢"
