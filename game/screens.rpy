@@ -412,10 +412,7 @@ screen navigation():
 
             textbutton _("Main Menu") action MainMenu()
         
-        if main_menu and persistent.debug_mode:
-
-                textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
-
+        
 
         if renpy.variant("pc"):
 
@@ -947,6 +944,16 @@ screen preferences():
                             
                             textbutton _("Audio when Unfocused") action Preference("audio when unfocused", "toggle")
                             textbutton _("Mute All") action Preference("all mute", "toggle") style "mute_all_button"
+
+            hbox:
+                if persistent.debug_mode:
+                    style_prefix "check"
+                    vbox:
+                        label "Debug Mode"
+                        textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
+                        textbutton _("Unlock All Music") action Call("debug_unlock","Music")
+                        textbutton _("Unlock All CG") action Call("debug_unlock","CG")
+                        textbutton _("Enable Extra Mode") action Call("debug","Extra Mode")
 
 
 style pref_label is gui_label

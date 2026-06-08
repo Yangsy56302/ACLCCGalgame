@@ -58,6 +58,36 @@ label splashscreen:
 
     return
 
+label debug_unlock(Type):
+    nvl clear
+    debug "unlock: Now unlocking all [Type]{fast}{w=1.0}{nw}"
+    if Type == "CG":
+        scene bg home_midnight
+        scene bg home_night
+        scene bg home_noon
+        scene bg sbeam
+        scene bg sky
+        scene bg sky_night
+        scene bg star
+        scene bg that_video
+        scene black
+        debug "unlock: Success.{fast}{w=1.0}{nw}"
+    elif Type == "Music":
+        play music "mus_astral_calm.mp3"
+        play music "mus_aurora.mp3"
+        play music "mus_setup.ogg"
+        stop music
+        debug "unlock: Success.{fast}{w=1.0}{nw}"
+    else:
+        debug "unlock: Failed to find [Type]{fast}{w=1.0}{nw}"
+    $ renpy.full_restart()
+
+label debug(thing):
+    if thing == "Extra Mode":
+        debug "Success.{fast}{w=1.0}{nw}"
+        python:
+            persistent.has_seen_ending = True
+            renpy.full_restart()
 
 init -999 python:
     class Continue(Action):
