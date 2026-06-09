@@ -98,7 +98,7 @@ label ch1_baick:
     myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}{nw}"
     gra.nvl "哦，是 [baile] 告诉你的？{fast}{nw}"
     gra.nvl "这样啊{...}{fast}{nw}"
-    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}{nw}"
+    gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
     mc "{cps=*0.25}{......}{/cps}"
 
     myworldzycpc.nvl "话说回来，之前另外我还在摆了的Clever Box地图介绍里看到过群号呢"
