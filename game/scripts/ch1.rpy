@@ -1,6 +1,8 @@
 label ch1:
     scene black with dissolve
     $ another_view = True
+    $ current_perspective = myworldzycpc
+
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
     myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
@@ -25,8 +27,6 @@ label ch1:
 
 
     while True:
-
-        $ current_perspective = myworldzycpc
 
         "有一天，{w=0.5}[baile] 不在，{w=0.5}[myworldzycpc] 觉得有点无聊。"
         myworldzycpc "（要不我再去试试加那个群吧）"
@@ -141,16 +141,76 @@ label ch1_baick:
 
     myworldzycpc.nvl.comment "等等，不能把摆了写死了…"
 
-    myworldzycpc.nvl "没关系的，你看，如果没有你的创意，ACLC也不会有网站，CB也不可能到这一步啊，你其实一直发挥着很重要的作用"
-    baile.nvl "是这样吗喵？"
-    myworldzycpc.nvl "而我感觉我除了机械的写指令以外好像也没有很多创造性的东西"
-    myworldzycpc.nvl "没有你，我也做不下去了"
-    baile.nvl "感觉你说的有点道理喵…"
+    menu(nvl=True):
+        "你其实一直发挥着很重要的作用":
+            mc.nvl "没关系的，你看，如果没有你的创意，ACLC也不会有网站，CB也不可能到这一步啊，你其实一直发挥着很重要的作用"
+            baile.nvl "是这样吗喵？"
+            myworldzycpc.nvl "其实我感觉我除了机械的写指令以外好像也没有很多创造性的东西"
+            myworldzycpc.nvl "没有你，我也做不下去了"
+            baile.nvl "感觉你们说的有点道理喵…"
 
     myworldzycpc.nvl.comment "-------分割线------"
 
     myworldzycpc.nvl "qwq，听说你们有个MC服务器？"
+    myworldzycpc.nvl.comment "这就是摆了之前提到的服务器了？"
     gra.nvl "是的，欢迎你来玩"
+    myworldzycpc.nvl "我是新来的，不过我在服务器里翻箱倒柜只找到5块牛排，还是生的，想问一下这个服务器有提供食物的地方吗…"
+    gra.nvl "应该没有（"
+    myworldzycpc.nvl "你们平时都吃什么呢？"
+    mwam.nvl "将军肉"
+    myworldzycpc.nvl "好"
+    myworldzycpc.nvl "我去偷村民的胡萝卜炖金子吃了（"
+    mwam.nvl "66"
+    mwam.nvl "金胡萝卜就金胡萝卜"
+    mwam.nvl "神TM胡萝卜炖金子"
+
+    "没想到刚进群第二天，[mc]就遇到了一个和自己一样的新人。"
+
+    scene black with fade
+
+    "是的，群里总是时不时的出现一些小事，但是呢，又能很快和解。"
+    myworldzycpc.comment "话说这算得上事吗（"
+
+    scene bg sky with fade
+    nvl clear
+
+    menu:
+        "也许是时候了解一下群内的情况了，你想直接问还是先观望一会呢？"
+        "直接问":
+            mc.nvl "话说，我好像还不太认识你们呢，也对这个群的历史不太了解"
+            myworldzycpc.nvl "我也是…"
+            gra.nvl "没关系，我们给你介绍一下"
+            gra.nvl "首先这个群呢"
+            gra.nvl "是当初Yangsy…"
+            yangsy.nvl "(嘘{...})"
+            gra.nvl "是一群对魔改都感兴趣的人，彼此聚在一起，构成的一个社区"
+            gra.nvl "首先是Yangsy，她是我们这个社区的前身，没有她就不可能有我们这个社区，她的魔改系列叫做“文字魔改”。"
+            mc.nvl "文字…魔改？"
+            gra.nvl "是的，魔改有许多许多的系列，而每个系列都有它的名字，这样我们就可以区分来自不同人的魔改了。"
+            gra.nvl '同样的，体现在关卡名上，就是用各种符号来表示，我们把它叫做“魔改标识符”。比如Yangsy做的1-X文字魔改，加上标识符就是\n{color=#ffffcc}{i}"1-X" 冰与火之舞，但判定限制是变化之神{/i}{/color}'
+            mc.nvl "这样啊…"
+            voice "voice/crab_mine_and_qing/prelude.ogg"
+            lv.nvl "{nw}"
+            $ nvl_erase()
+            voice "voice/crab_mine_and_qing/1.ogg"
+            extend "{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}螃蟹? 地雷* 还有<晴小姐3 ~{/i} 🎵{nw}"
+            voice "voice/crab_mine_and_qing/2.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}"文字" 萝卜 还有火柴人 ~{/i} 🎵{nw}'
+            voice "voice/crab_mine_and_qing/3.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}改曲无授权，根本不是人{/i} 🎵{nw}'
+            voice "voice/crab_mine_and_qing/4.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}随便乱改圈子被骂有可能{/i} 🎵{nw}'
+            voice "voice/crab_mine_and_qing/5.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}乱改谱面，tm的过分{/i} 🎵{nw}'
+            voice "voice/crab_mine_and_qing/6.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}未经授权，小行星无能{/i} 🎵{nw}'
+            voice "voice/crab_mine_and_qing/7.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}改曲有授权，圈子爽一爽{/i} 🎵{nw}'
+            voice "voice/crab_mine_and_qing/8.ogg"
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}魔改谱面，我们共建ACL！{/i} 🎵{nw}'
+            gra.nvl "{cps=*0.25}{......}{/cps}"
+        "观望":
+            pass 
 
     call to_be_continued("ch1")
         

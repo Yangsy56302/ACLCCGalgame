@@ -12,9 +12,10 @@ label start:
 
 label to_be_continued(chp):
     
+    stop music fadeout 1.0
+    scene black with dissolve
+    
     while True:
-        stop music fadeout 1.0
-        scene black with dissolve
         menu:
             "查看第一章剧情" if chp == "ch0":
                 jump ch1
