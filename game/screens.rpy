@@ -576,8 +576,8 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 style game_menu_outer_frame is empty
 style game_menu_navigation_frame is empty
 style game_menu_content_frame is empty
-style admire_navigation_frame is empty
-style admire_content_frame is empty
+# style admire_navigation_frame is empty
+# style admire_content_frame is empty
 style game_menu_viewport is gui_viewport
 style game_menu_side is gui_side
 style game_menu_scrollbar is gui_vscrollbar
@@ -594,19 +594,19 @@ style game_menu_outer_frame:
 
     background "gui/overlay/game_menu.png"
 
-style admire_outer_frame:
-    bottom_padding 45
-    top_padding 180
+# style admire_outer_frame:
+#     bottom_padding 45
+#     top_padding 180
 
-    background "gui/overlay/game_menu.png"
+#     background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
     xsize 420
     yfill True
 
-style admire_navigation_frame:
-    xsize 420
-    yfill True
+# style admire_navigation_frame:
+#     xsize 420
+#     yfill True
 
 
 style game_menu_content_frame:
@@ -614,10 +614,10 @@ style game_menu_content_frame:
     right_margin 30
     top_margin 15
 
-style admire_content_frame:
-    left_margin 60
-    right_margin 30
-    top_margin 15
+# style admire_content_frame:
+#     left_margin 60
+#     right_margin 30
+#     top_margin 15
 
 style game_menu_viewport:
     xsize 1380
@@ -953,7 +953,8 @@ screen preferences():
                         textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
                         textbutton _("Unlock All Music") action Call("debug_unlock","Music")
                         textbutton _("Unlock All CG") action Call("debug_unlock","CG")
-                        textbutton _("Enable Extra Mode") action Call("debug","Extra Mode")
+                        textbutton _("Change Variable") action Show("per_variable")
+                        textbutton "Clear All Persistent Data" action Call("debug", "reset")
 
 
 style pref_label is gui_label
@@ -1654,17 +1655,17 @@ style game_menu_navigation_frame:
     variant "small"
     xsize 420
 
-style admire_navigation_frame:
-    variant "small"
-    xsize 420
+# style admire_navigation_frame:
+#     variant "small"
+#     xsize 420
 
 style game_menu_content_frame:
     variant "small"
     top_margin 0
 
-style admire_content_frame:
-    variant "small"
-    top_margin 0
+# style admire_content_frame:
+#     variant "small"
+#     top_margin 0
 
 
 style pref_vbox:
@@ -1724,13 +1725,13 @@ screen admire_mode(title, scroll=None, yinitial=0.0):
     else:
         add gui.game_menu_background 
     frame:
-        style "admire_outer_frame"
+        style "game_menu_outer_frame"
         hbox:
             frame:
-                style "admire_navigation_frame"
+                style "game_menu_navigation_frame"
 
             frame:
-                style "admire_content_frame"
+                style "game_menu_content_frame"
                 if scroll == "viewport":
 
                     viewport:
@@ -2132,3 +2133,158 @@ label show_chapter(title):
     window auto
     return
 
+
+screen debug_mode(title, scroll=None, yinitial=0.0):
+    tag menu
+    style_prefix "game_menu" 
+    
+    if main_menu:
+        add gui.main_menu_background 
+    else:
+        add gui.game_menu_background 
+    frame:
+        style "game_menu_outer_frame"
+        hbox:
+            frame:
+                style "game_menu_navigation_frame"
+
+            frame:
+                style "game_menu_content_frame"
+                if scroll == "viewport":
+
+                    viewport:
+                        yinitial yinitial
+                        scrollbars "vertical"
+                        mousewheel True
+                        draggable True
+                        pagekeys True
+
+                        side_yfill True
+
+                        vbox:
+                            transclude
+
+                elif scroll == "vpgrid":
+
+                    vpgrid:
+                        cols 1
+                        yinitial yinitial
+
+                        scrollbars "vertical"
+                        mousewheel True
+                        draggable True
+                        pagekeys True
+
+                        side_yfill True
+
+                        transclude
+
+                else:
+
+                    transclude
+    vbox:
+        style_prefix "navigation"
+        xpos gui.navigation_xpos
+        yalign 0.5
+        spacing gui.navigation_spacing
+        if is_ingame:
+            textbutton _("Variable") action ShowMenu("variable") text_font debug_gui_font
+
+            textbutton _("Persistent Variable") action ShowMenu("per_variable") text_font debug_gui_font
+
+    textbutton _("Return"):
+        style "return_button"
+        text_font debug_gui_font
+        action Return()
+            
+
+    label title text_font debug_gui_font
+
+screen variable:
+    tag menu
+    use debug_mode("Variable"):
+        vbox:
+            text "another_view:" font debug_gui_font
+            if another_view:
+                textbutton "True":
+                    action SetVariable("another_view",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("another_view",True)
+                    text_font debug_gui_font
+
+screen per_variable:
+    tag menu
+    use debug_mode("Persistent Variable"):
+        vbox:
+            text "has_seen_ending:" font debug_gui_font
+            if persistent.has_seen_ending:
+                textbutton "True":
+                    action SetVariable("persistent.has_seen_ending",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("persistent.has_seen_ending",True)
+                    text_font debug_gui_font
+
+            text "duplicate_name_fixed:" font debug_gui_font
+            if persistent.duplicate_name_fixed:
+                textbutton "True":
+                    action SetVariable("persistent.duplicate_name_fixed",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("persistent.duplicate_name_fixed",True)
+                    text_font debug_gui_font
+
+            text "setup_saw_debug_screen:" font debug_gui_font
+            if persistent.setup_saw_debug_screen:
+                textbutton "True":
+                    action SetVariable("persistent.setup_saw_debug_screen",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("persistent.setup_saw_debug_screen",True)
+                    text_font debug_gui_font
+
+label debug_unlock(Type):
+    nvl clear
+    debug "unlock: Now unlocking all [Type]{fast}{w=1.0}{nw}"
+    if Type == "CG":
+        scene bg home_midnight
+        scene bg home_night
+        scene bg home_noon
+        scene bg sbeam
+        scene bg sky
+        scene bg sky_night
+        scene bg star
+        scene bg that_video
+        scene black
+        debug "unlock: Success.{fast}{w=1.0}{nw}"
+    elif Type == "Music":
+        play music "mus_astral_calm.mp3"
+        play music "mus_aurora.mp3"
+        play music "mus_setup.ogg"
+        stop music
+        debug "unlock: Success.{fast}{w=1.0}{nw}"
+    else:
+        debug "unlock: Failed to find [Type]{fast}{w=1.0}{nw}"
+    if is_ingame:
+        return
+    else:
+        $ renpy.full_restart()
+
+label debug(thing):
+    if thing == "reset":
+        menu:
+            "Do you want to Clear All Persistent Data?{fast}"
+            "True":
+                $ persistent._clear(progress=True)
+            "False":
+                pass
+        $ persistent.debug_mode = True
+    if is_ingame:
+        return
+    else:
+        $ renpy.full_restart()

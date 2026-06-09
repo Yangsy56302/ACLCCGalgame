@@ -6,3 +6,4 @@ default session_title = None
 default persistent.has_seen_ending = False
 default persistent.duplicate_name_fixed = False
 default persistent.setup_saw_debug_screen = False
+default is_ingame = False
