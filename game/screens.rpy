@@ -947,14 +947,15 @@ screen preferences():
 
             hbox:
                 if persistent.debug_mode:
-                    style_prefix "check"
                     vbox:
-                        label "Debug Mode"
-                        textbutton _("Disable Debug Mode") action ShowTransient("confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide())
-                        textbutton _("Unlock All Music") action Call("debug_unlock","Music")
-                        textbutton _("Unlock All CG") action Call("debug_unlock","CG")
-                        textbutton _("Change Variable") action Show("per_variable")
-                        textbutton "Clear All Persistent Data" action Call("debug", "reset")
+                        label "Debug Mode" text_font debug_gui_font
+                        textbutton _("Disable Debug Mode") action Show("debug_confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide()) text_font debug_gui_font
+                        textbutton _("Unlock All Music") action Call("debug_unlock","Music") text_font debug_gui_font
+                        textbutton _("Unlock All CG") action Call("debug_unlock","CG") text_font debug_gui_font
+                        textbutton _("Change Variable") action Show("per_variable") text_font debug_gui_font
+                        textbutton "Clear All Persistent Data" action Call("debug", "reset") text_font debug_gui_font
+
+
 
 
 style pref_label is gui_label
@@ -2288,3 +2289,33 @@ label debug(thing):
         return
     else:
         $ renpy.full_restart()
+
+screen debug_confirm(message, yes_action, no_action):
+
+    ## Ensure other screens do not get input while this screen is displayed.
+    modal True
+
+    zorder 200
+
+    style_prefix "confirm"
+
+    add "gui/overlay/confirm.png"
+
+    frame:
+
+        vbox:
+            xalign .5
+            yalign .5
+            spacing 45
+
+            label _(message):
+                style "confirm_prompt"
+                xalign 0.5
+                text_font debug_gui_font
+
+            hbox:
+                xalign 0.5
+                spacing 150
+
+                textbutton _("Yes") action yes_action text_font debug_gui_font
+                textbutton _("No") action no_action text_font debug_gui_font
