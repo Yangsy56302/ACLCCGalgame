@@ -169,6 +169,12 @@ default lv = CharacterWithData("小绿君", image="lv", what_prefix="# ", what_s
 # image lv = "char/lv/normal.png"
 
 
+default grass = CharacterWithData("小绿草", image="grass", what_prefix="", what_suffix="")
+
+# image side grass = "char/grass/avatar.jpg"
+# image grass = "char/grass/normal.png"
+
+
 default maoyuna = CharacterWithData("MaoYuNa133", image="maoyuna", what_prefix="", what_suffix="")
 
 # image side maoyuna = "char/maoyuna/avatar.jpg"

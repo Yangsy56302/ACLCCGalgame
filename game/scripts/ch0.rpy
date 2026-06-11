@@ -224,8 +224,9 @@ label ch0_1:
     lingyun.nvl "神TM线下粉丝"
 
     gra.nvl "话说 {w=0.5}我该怎么叫你？"
-    default gra_chemistry_name = False
+    
     # yangsy.comment "Yangsy也不知道该在哪存剧情分支信息，目前就先这样吧（"
+    # myworldzycpc.comment "帮你搬到game/custom_variable.rpy了"
 
     if mc.nickname == "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
         $ gra_chemistry_name = True
