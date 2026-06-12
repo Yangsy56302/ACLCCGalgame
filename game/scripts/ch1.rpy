@@ -284,6 +284,8 @@ label ch1_baick:
     image gra_birthday baile = Transform('images/icon/gra_birthday/baile.png', zoom=0.5)
     baile.nvl "{image=gra_birthday baile}"
     yoosee.nvl "生日快乐\n祝你明天不会死\n明天的明天也不会死\nwhile {rb}{u}true{/u}{/rb}{rt}[[原文如此]{/rt}"
+    pumi.nvl "日了什么时候快生\n以及\n#1.2*大天空转adofai when"
+    
 
     call to_be_continued("ch1")
         
