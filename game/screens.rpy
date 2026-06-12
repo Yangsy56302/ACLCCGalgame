@@ -2201,7 +2201,7 @@ screen debug_mode(title, scroll=None, yinitial=0.0):
 
     label title text_font debug_gui_font
 
-screen variable:
+screen variable():
     tag menu
     use debug_mode("Variable"):
         vbox:
@@ -2215,7 +2215,7 @@ screen variable:
                     action SetVariable("another_view",True)
                     text_font debug_gui_font
 
-screen per_variable:
+screen per_variable():
     tag menu
     use debug_mode("Persistent Variable"):
         vbox:
