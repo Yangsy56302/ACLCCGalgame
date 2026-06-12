@@ -2191,7 +2191,10 @@ screen debug_mode(title, scroll=None, yinitial=0.0):
         if is_ingame:
             textbutton _("Variable") action ShowMenu("variable") text_font debug_gui_font
 
-            textbutton _("Persistent Variable") action ShowMenu("per_variable") text_font debug_gui_font
+            textbutton _("Persistent Variable"):
+                action ShowMenu("per_variable")
+                text_font debug_gui_font
+                text_size 27
 
     textbutton _("Return"):
         style "return_button"
@@ -2278,11 +2281,19 @@ label debug_unlock(Type):
 
 label debug(thing):
     if thing == "reset":
-        menu:
-            "Do you want to Clear All Persistent Data?{fast}"
-            "True":
+        nvl clear
+        menu(nvl=True):
+            debug "clean: Do you want to Clear All Persistent Data?(Y/N){fast}"
+            "{font=MapleMono.otf}Yes{/font}":
+                nvl clear
+                $ _history_list.pop()
+                debug "clean: Do you want to Clear All Persistent Data?(Y/N) Yes{fast}{w=1.0}{nw}"
+                debug "clean: Success.{fast}{w=1.0}{nw}"
                 $ persistent._clear(progress=True)
-            "False":
+            "{font=MapleMono.otf}No{/font}":
+                nvl clear
+                $ _history_list.pop()
+                debug "clean: Do you want to Clear All Persistent Data?(Y/N) No{fast}{w=1.0}{nw}"
                 pass
         $ persistent.debug_mode = True
     if is_ingame:
