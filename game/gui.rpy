@@ -63,7 +63,7 @@ define gui.interface_text_color = "#ffffff"
 
 ## Fonts and Font Sizes ########################################################
 
-define debug_gui_english_font = "consola.ttf"
+define debug_gui_english_font = "MapleMono.otf"
 define debug_gui_chinese_font = "SYBlack.otf"
 define debug_gui_font = FontGroup().add(debug_gui_english_font, "\x00", "\x7F").add(debug_gui_english_font, "\u1100", "\u11FF").add(debug_gui_english_font, "\u3130", "\u318F").add(debug_gui_english_font, "\uAC00", "\uD7FF").add(debug_gui_chinese_font, None, None)
 define adofai_english_font = "godoMaum.ttf"
