@@ -2217,7 +2217,33 @@ screen variable():
                 textbutton "False":
                     action SetVariable("another_view",True)
                     text_font debug_gui_font
-
+            text "gra_chemistry_name:" font debug_gui_font
+            if gra_chemistry_name:
+                textbutton "True":
+                    action SetVariable("gra_chemistry_name",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("gra_chemistry_name",True)
+                    text_font debug_gui_font
+            text "overwatch_first:" font debug_gui_font
+            if overwatch_first:
+                textbutton "True":
+                    action SetVariable("overwatch_first",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("overwatch_first",True)
+                    text_font debug_gui_font
+            text "volunteer_to_do_curse:" font debug_gui_font
+            if volunteer_to_do_curse:
+                textbutton "True":
+                    action SetVariable("volunteer_to_do_curse",False)
+                    text_font debug_gui_font
+            else:
+                textbutton "False":
+                    action SetVariable("volunteer_to_do_curse",True)
+                    text_font debug_gui_font
 screen per_variable():
     tag menu
     use debug_mode("Persistent Variable"):
