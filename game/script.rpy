@@ -60,7 +60,9 @@ label splashscreen:
 
     return
 
-
+init 999 python:
+    if not is_debug_installed:
+        persistent.debug_mode = False
 
 init -999 python:
     class Continue(Action):
@@ -85,5 +87,5 @@ init -999 python:
             if newest:
                 page, name = newest.split("-")
                 return page, name
-    
+    is_debug_installed = False
     names = ["祐荽", "Yangsy56302", "小绿君", "飞雨凌云", "莫邪Morin", "ms_win_and_mc", "是动听D温呐", "晴柚-Grafrustix", "TheHale", "终究是摆了", "阿希尔Ashell", "myworldzycpc"]

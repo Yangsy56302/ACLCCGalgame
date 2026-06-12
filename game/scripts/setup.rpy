@@ -191,7 +191,7 @@ label setup_naming_entered:
                             return
     
     # 否则，如果游戏目前处在调试模式：
-    elif player_input == persistent.password and not persistent.debug_mode:
+    elif player_input == persistent.password and not persistent.debug_mode and is_debug_installed:
         python:
             _history_list.pop()
             persistent.debug_mode = True
