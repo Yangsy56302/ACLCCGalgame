@@ -88,4 +88,4 @@ init -999 python:
                 page, name = newest.split("-")
                 return page, name
     is_debug_installed = False
-    names = ["祐荽", "Yangsy56302", "小绿君", "飞雨凌云", "莫邪Morin", "ms_win_and_mc", "是动听D温呐", "晴柚-Grafrustix", "TheHale", "终究是摆了", "阿希尔Ashell", "myworldzycpc"]
+    names = ["祐荽", "Yangsy56302", "小绿君", "飞雨凌云", "莫邪Morin", "ms_win_and_mc", "是动听D温呐", "晴柚-Grafrustix", "TheHale", "终究是摆了", "阿希尔Ashell", "myworldzycpc","李星眠","晴安柚子","凌云","莫邪","李婉清","杨曦","小绿草","MaoYuNa133","怃","Pumi","UNI","Happylamb029"]
