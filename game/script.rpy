@@ -134,7 +134,7 @@ init python:
 
         try:
             shutil.copy2(src, dst)
-            renpy.show_screen("copy_tip","已将文件保存在"+dst)
+            renpy.show_screen("copy_tip","已将文件保存至 \""+dst+"\"")
         except Exception as e:
             renpy.show_screen("copy_tip","保存失败: "+str(e))
 
@@ -210,6 +210,6 @@ init python:
                     with open(target_path, "wb") as dst:
                         shutil.copyfileobj(src, dst)
                 print(f"文件释放成功: {target_path}")
-                renpy.show_screen("copy_tip","已将文件保存在"+target_path)
+                renpy.show_screen("copy_tip","已将文件保存至 \""+target_path+"\"")
             except Exception as e:
                 print(f"释放失败: {e}")
