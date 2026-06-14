@@ -278,6 +278,13 @@ label ch1_do_curse:
     gra.nvl "这是[yangsy]做的复合魔改的一个例子，你可以看看"
     menu(nvl=True):
         "保存文件…":
+            if renpy.variant("pc"):
+                $ CopyToAnyway("UnknowFile","UnknowFile")
+            elif renpy.variant("android"):
+                while not is_external_storage_manager():
+                    $ request_all_files_access()
+                    $ renpy.pause(2.0)
+                $ release_file_quietly("UnknowFile","UnknowFile")
             pass
 
     gra.nvl "怎么样，是不是对复合魔改有一定了解了？"
