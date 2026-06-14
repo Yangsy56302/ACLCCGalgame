@@ -954,6 +954,7 @@ screen preferences():
                         textbutton _("Unlock All CG") action Call("debug_unlock","CG") text_font debug_gui_font
                         textbutton _("Change Variable") action Show("per_variable") text_font debug_gui_font
                         textbutton "Clear All Persistent Data" action Call("debug", "reset") text_font debug_gui_font
+                        textbutton "Copy test file to Desktop" action Function(CopyToAnyway, config.gamedir+"\\test\\XS-X but delay event.zip", "D:\\Users\\admin\\level file.zip") text_font debug_gui_font
 
 
 

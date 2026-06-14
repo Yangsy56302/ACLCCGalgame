@@ -92,3 +92,48 @@ init -999 python:
             "是动听D温呐","晴柚-Grafrustix","TheHale","终究是摆了","阿希尔Ashell",
             "myworldzycpc","李星眠","晴安柚子","凌云","莫邪","李婉清","杨曦","小绿草",
             "MaoYuNa133","怃","Pumi","UNI","Happylamb029"]
+
+init python:
+    import os
+    import shutil
+    import sys
+
+    def get_desktop_path():
+        """获取当前用户的真实桌面路径（支持Windows重定向）"""
+        if renpy.windows:
+            # 优先读取注册表
+            try:
+                import winreg
+                key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, 
+                                    r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders")
+                desktop, _ = winreg.QueryValueEx(key, "Desktop")
+                winreg.CloseKey(key)
+                # 如果路径包含 %USERPROFILE% 环境变量，需要展开
+                desktop = os.path.expandvars(desktop)
+                if os.path.isdir(desktop):
+                    return desktop
+            except Exception:
+                pass
+            # 备用：通过环境变量
+            profile = os.environ.get("USERPROFILE")
+            if profile:
+                candidate = os.path.join(profile, "Desktop")
+                if os.path.isdir(candidate):
+                    return candidate
+        # 非Windows或上述都失败：用默认方法
+        return os.path.expanduser("~/Desktop")
+
+    def CopyToAnyway(source_rel_path, dest_filename):
+
+        src = os.path.join(source_rel_path)
+        dst = os.path.join(dest_filename)
+
+        if not os.path.exists(src):
+            renpy.notify(f"源文件不存在: {source_rel_path}")
+            return
+
+        try:
+            shutil.copy2(src, dst)
+            renpy.notify(f"已保存到: {dst}")
+        except Exception as e:
+            renpy.notify(f"保存失败: {e}")

@@ -1,6 +1,6 @@
 init python:
     is_debug_installed = True
-
+    
 
 screen debug_mode(title, scroll=None, yinitial=0.0):
     tag menu
