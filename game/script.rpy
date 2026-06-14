@@ -148,29 +148,69 @@ init python:
 label request_manage_storage:
     if renpy.variant("android"):
         python:
-            from jnius import autoclass
-            
-            PythonSDLActivity = autoclass('org.renpy.android.PythonSDLActivity')
-            Environment = autoclass('android.os.Environment')
-            Settings = autoclass('android.provider.Settings')
-            Intent = autoclass('android.content.Intent')
-            Uri = autoclass('android.net.Uri')
-            activity = PythonSDLActivity.mActivity
-            
-            # 检查是否已被授予
-            if Environment.isExternalStorageManager():
+            if is_external_storage_manager():
                 print("所有文件访问权限已授予")
             else:
                 print("正在请求所有文件访问权限...")
-                # 引导用户到设置页面
-                intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
-                activity.startActivity(intent)
-            # 等待用户操作，等待3秒
+                request_all_files_access()
+            
             renpy.pause(3.0)
 
 
-            # 再次检查授权状态
-            if Environment.isExternalStorageManager():
+        # 再次检查授权状态
+            if is_external_storage_manager():
                 print("权限已授予")
             else:
                 print("权限未被授予")
+
+init python:
+    if renpy.variant("android"):
+        import os
+        import shutil
+        from jnius import autoclass
+
+        PythonSDLActivity = autoclass('org.renpy.android.PythonSDLActivity')
+        Intent = autoclass('android.content.Intent')
+        Settings = autoclass('android.provider.Settings')
+        Uri = autoclass('android.net.Uri')
+
+        def request_all_files_access():
+            """跳转到系统设置页面，请求 '所有文件访问权限'"""
+            intent = Intent()
+            intent.setAction(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+            current_activity = PythonSDLActivity.mActivity
+            current_activity.startActivity(intent)
+
+        def is_external_storage_manager():
+            """检查是否已获得 MANAGE_EXTERNAL_STORAGE 权限"""
+            Environment = autoclass('android.os.Environment')
+            return Environment.isExternalStorageManager()
+
+        def release_file_quietly(source_file, target_subdir, target_filename):
+            """在持有 MANAGE_EXTERNAL_STORAGE 权限的前提下，静默写入文件。"""
+            if not renpy.android:
+                print("非安卓环境")
+                return
+
+            # 1. 检查并请求权限
+            if not is_external_storage_manager():
+                request_all_files_access()
+                renpy.notify("请在新页面中授权“所有文件访问权限”")
+                return
+            
+            # 2. 获取公共目录根路径并构建目标目录
+            Environment = autoclass('android.os.Environment')
+            ext_root = Environment.getExternalStorageDirectory().getAbsolutePath()
+            target_dir = os.path.join(ext_root, target_subdir)
+            os.makedirs(target_dir, exist_ok=True)
+            target_path = os.path.join(target_dir, target_filename)
+
+            # 3. 写入文件
+            try:
+                with renpy.file(source_file) as src:
+                    with open(target_path, "wb") as dst:
+                        shutil.copyfileobj(src, dst)
+                print(f"文件释放成功: {target_path}")
+                renpy.notify("已将文件保存在"+target_path)
+            except Exception as e:
+                print(f"释放失败: {e}")
