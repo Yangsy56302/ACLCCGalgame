@@ -44,3 +44,10 @@ label chtest_session_title:
     nvl clear
     $ session_title = gra
     gra.nvl "这是什么颜色？"
+
+label chtest_select_file:
+    nvl clear
+    gra.nvl "给我看看你做的？"
+    menu(nvl=True):
+        "选择文件上传…":
+            pass
