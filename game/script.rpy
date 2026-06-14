@@ -42,7 +42,7 @@ label to_be_continued(chp):
 image splash = "splash.png"
 image attention = "attention.png"
 label splashscreen: 
-    
+    call request_manage_storage
     scene black 
     with Pause(1) 
 
@@ -137,3 +137,40 @@ init python:
             renpy.notify(f"已保存到: {dst}")
         except Exception as e:
             renpy.notify(f"保存失败: {e}")
+
+init python:
+    if renpy.android:
+        import jnius
+        mActivity = jnius.autoclass("org.renpy.android.PythonSDLActivity").mActivity
+    else:
+        mActivity = None
+
+label request_manage_storage:
+    if renpy.variant("android"):
+        python:
+            from jnius import autoclass
+            
+            PythonSDLActivity = autoclass('org.renpy.android.PythonSDLActivity')
+            Environment = autoclass('android.os.Environment')
+            Settings = autoclass('android.provider.Settings')
+            Intent = autoclass('android.content.Intent')
+            Uri = autoclass('android.net.Uri')
+            activity = PythonSDLActivity.mActivity
+            
+            # 检查是否已被授予
+            if Environment.isExternalStorageManager():
+                print("所有文件访问权限已授予")
+            else:
+                print("正在请求所有文件访问权限...")
+                # 引导用户到设置页面
+                intent = Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION)
+                activity.startActivity(intent)
+            # 等待用户操作，等待3秒
+            renpy.pause(3.0)
+
+
+            # 再次检查授权状态
+            if Environment.isExternalStorageManager():
+                print("权限已授予")
+            else:
+                print("权限未被授予")

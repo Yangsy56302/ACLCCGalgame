@@ -27,6 +27,13 @@ define config.version = "a0"
 
 define build.version = "0.0.1"
 
+define build.android_permissions = [
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.MANAGE_EXTERNAL_STORAGE"
+
+]
+
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
 
