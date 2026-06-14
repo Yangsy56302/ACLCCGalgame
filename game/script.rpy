@@ -125,7 +125,7 @@ init python:
 
     def CopyToAnyway(source_rel_path, dest_filename):
 
-        src = os.path.join(source_rel_path)
+        src = renpy.loader.transfn(source_rel_path)
         dst = os.path.join(dest_filename)
 
         if not os.path.exists(src):
@@ -134,9 +134,9 @@ init python:
 
         try:
             shutil.copy2(src, dst)
-            renpy.notify(f"已保存到: {dst}")
+            renpy.show_screen("copy_tip","已将文件保存至 \""+dst+"\"")
         except Exception as e:
-            renpy.notify(f"保存失败: {e}")
+            renpy.show_screen("copy_tip","保存失败: "+str(e))
 
 init python:
     if renpy.android:
@@ -173,6 +173,7 @@ init python:
         Intent = autoclass('android.content.Intent')
         Settings = autoclass('android.provider.Settings')
         Uri = autoclass('android.net.Uri')
+        Environment = autoclass('android.os.Environment')
 
         def request_all_files_access():
             """跳转到系统设置页面，请求 '所有文件访问权限'"""
@@ -183,7 +184,6 @@ init python:
 
         def is_external_storage_manager():
             """检查是否已获得 MANAGE_EXTERNAL_STORAGE 权限"""
-            Environment = autoclass('android.os.Environment')
             return Environment.isExternalStorageManager()
 
         def release_file_quietly(source_file, target_subdir, target_filename):
@@ -199,7 +199,6 @@ init python:
                 return
             
             # 2. 获取公共目录根路径并构建目标目录
-            Environment = autoclass('android.os.Environment')
             ext_root = Environment.getExternalStorageDirectory().getAbsolutePath()
             target_dir = os.path.join(ext_root, target_subdir)
             os.makedirs(target_dir, exist_ok=True)
@@ -211,6 +210,6 @@ init python:
                     with open(target_path, "wb") as dst:
                         shutil.copyfileobj(src, dst)
                 print(f"文件释放成功: {target_path}")
-                renpy.notify("已将文件保存在"+target_path)
+                renpy.show_screen("copy_tip","已将文件保存至 \""+target_path+"\"")
             except Exception as e:
                 print(f"释放失败: {e}")
