@@ -269,6 +269,17 @@ label ch1_do_curse:
 
     scene black with fade
 
-    myworldzycpc.comment "然后[mc]做了自己的魔改，为创作者线铺路。"
+    nvl clear
+    mc.nvl "可是我真的想不出来什么主意啊"
+    myworldzycpc.nvl "要不我们给你一些现成的魔改效果，你来试着应用到一个谱面上？"
+    myworldzycpc.nvl.comment "话说你是不是忘了我也是新来的（"
+    yangsy.nvl "正好咱们好像也有段时间没这么做了"
+    yangsy.nvl "毕竟大家都在做新魔改效果（"
+    gra.nvl "这是[yangsy]做的复合魔改的一个例子，你可以看看"
+    menu(nvl=True):
+        "保存文件…":
+            pass
+
+    gra.nvl "怎么样，是不是对复合魔改有一定了解了？"
 
     return
