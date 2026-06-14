@@ -134,9 +134,9 @@ init python:
 
         try:
             shutil.copy2(src, dst)
-            renpy.notify(f"已将文件保存在{dst}")
+            renpy.show_screen("copy_tip","已将文件保存在"+dst)
         except Exception as e:
-            renpy.notify(f"保存失败: {e}")
+            renpy.show_screen("copy_tip","保存失败: "+str(e))
 
 init python:
     if renpy.android:
@@ -210,6 +210,6 @@ init python:
                     with open(target_path, "wb") as dst:
                         shutil.copyfileobj(src, dst)
                 print(f"文件释放成功: {target_path}")
-                renpy.notify("已将文件保存在"+target_path)
+                renpy.show_screen("copy_tip","已将文件保存在"+target_path)
             except Exception as e:
                 print(f"释放失败: {e}")
