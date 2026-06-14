@@ -955,7 +955,7 @@ screen preferences():
                         textbutton _("Change Variable") action Show("per_variable") text_font debug_gui_font
                         textbutton "Clear All Persistent Data" action Call("debug", "reset") text_font debug_gui_font
                         if renpy.variant("pc"):
-                            textbutton "Copy test file to Desktop" action Function(CopyToAnyway, config.gamedir+"\\test\\XS-X but delay event.zip",get_desktop_path()+ "\\level file.zip") text_font debug_gui_font
+                            textbutton "Copy test file to Desktop" action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip") text_font debug_gui_font
                         elif renpy.variant("android"):
                             textbutton "Copy test file to Download" action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip") text_font debug_gui_font
 
