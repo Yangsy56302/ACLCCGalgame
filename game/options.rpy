@@ -27,12 +27,6 @@ define config.version = "a0"
 
 define build.version = "0.0.1"
 
-define build.android_permissions = [
-    "android.permission.WRITE_EXTERNAL_STORAGE",
-    "android.permission.READ_EXTERNAL_STORAGE",
-    "android.permission.MANAGE_EXTERNAL_STORAGE"
-
-]
 
 ## Text that is placed on the game's about screen. Place the text between the
 ## triple-quotes, and leave a blank line between paragraphs.
@@ -79,6 +73,29 @@ ADOFAI Cursed Levels (CN) Community
 
 define build.name = "ACLCCGalgame"
 
+
+## Build Config
+
+define build.android_permissions = [
+    "android.permission.WRITE_EXTERNAL_STORAGE",
+    "android.permission.READ_EXTERNAL_STORAGE",
+    "android.permission.MANAGE_EXTERNAL_STORAGE"
+]
+
+init python:
+    build.archive("script","all")
+    build.archive("resource","all")
+
+    build.classify("game/**.rpy", "script")
+    build.classify("game/**.rpyc", "script")
+    build.classify("game/**.jpg", "resource")
+    build.classify("game/**.png", "resource")
+    build.classify("game/**.ogg", "resource")
+    build.classify("game/**.ttf", "resource")
+    build.classify("game/**.otf", "resource")
+    build.classify("game/**.mp3", "resource")
+    build.classify("game/**.wav", "resource")
+    build.classify("game/**.zip", "resource")
 
 ## Sounds and music ############################################################
 

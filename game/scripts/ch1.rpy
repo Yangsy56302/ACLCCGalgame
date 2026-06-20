@@ -52,7 +52,7 @@ label ch1:
     $ current_perspective = mc
     scene bg star with dissolve
 
-    call show_chapter("第二天")
+    call show_chapter("第二天") from _call_show_chapter
 
     "又是一天，{w=0.5}你迫不及待的打开了群聊。"
 
@@ -209,20 +209,20 @@ label ch1:
 
                 menu(nvl=True):
                     "那我还是不做了吧…" if not overwatch_first:
-                        call ch1_dont_curse
+                        call ch1_dont_curse from _call_ch1_dont_curse
                     "我会试试的":
                         mc.nvl "你说的有道理，我会试试的。"
                         gra.nvl "嗯，希望你能在踩坑的过程中不断学习，走过这段坑坑洼洼的路，迎接你的将是光明大道。"
-                        call ch1_do_curse
+                        call ch1_do_curse from _call_ch1_do_curse
             else:
                 menu(nvl=True):
                     "我会试试的":
                         mc.nvl "我会试试的。"
                         gra.nvl "太好了，希望你早日做出自己的魔改"
-                        call ch1_do_curse
+                        call ch1_do_curse from _call_ch1_do_curse_1
 
         "我暂时还不太想做":
-            call ch1_dont_curse
+            call ch1_dont_curse from _call_ch1_dont_curse_1
 
     scene bg sky with fade
 
@@ -252,7 +252,7 @@ label ch1:
     pumi.nvl "日了什么时候快生\n以及\n#1.2*大天空转adofai when"
     
 
-    call to_be_continued("ch1")
+    call to_be_continued("ch1") from _call_to_be_continued_1
         
     return
 

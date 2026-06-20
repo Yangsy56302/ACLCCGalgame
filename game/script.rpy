@@ -25,15 +25,15 @@ label to_be_continued(chp):
             "查看游离的支线章节":
                 menu:
                     "chex_unknown_oi":
-                        call chex_unknown_oi
+                        call chex_unknown_oi from _call_chex_unknown_oi
                     "chex_unknown_baile_lefthanded":
-                        call chex_unknown_baile_lefthanded
+                        call chex_unknown_baile_lefthanded from _call_chex_unknown_baile_lefthanded
                     "返回":
                         pass
             "查看[yoosee]的建议":
-                call chplotadvice_yoosee
+                call chplotadvice_yoosee from _call_chplotadvice_yoosee
             "查看[yangsy]的建议":
-                call chplotadvice_yangsy
+                call chplotadvice_yangsy from _call_chplotadvice_yangsy
             # "查看测试（chtest）":
             #     call chtest
             "返回主菜单":
@@ -42,7 +42,7 @@ label to_be_continued(chp):
 image splash = "splash.png"
 image attention = "attention.png"
 label splashscreen: 
-    call request_manage_storage
+    call request_manage_storage from _call_request_manage_storage
     scene black 
     with Pause(1) 
 
