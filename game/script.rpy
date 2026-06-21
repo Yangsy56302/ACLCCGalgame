@@ -126,7 +126,7 @@ init python:
     def CopyToAnyway(filename, dest_filename):
 
         if not renpy.loadable(filename):
-            renpy.notify("❌ 错误：未找到文件 '{}'，请检查路径。".format(filename))
+            renpy.show_screen("copy_tip","未知或不存在的文件\"{}\"，请检查路径".format(filename))
             return
 
         # 只取文件名，防止路径里有奇怪的斜杠
