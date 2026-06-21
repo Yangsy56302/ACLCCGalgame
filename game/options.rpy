@@ -83,19 +83,20 @@ define build.android_permissions = [
 ]
 
 init python:
-    build.archive("script","all")
-    build.archive("resource","all")
+    build.archive("a","all")
+    build.archive("b","all")
+    build.archive("c","all")
 
-    build.classify("game/**.rpy", "script")
-    build.classify("game/**.rpyc", "script")
-    build.classify("game/**.jpg", "resource")
-    build.classify("game/**.png", "resource")
-    build.classify("game/**.ogg", "resource")
-    build.classify("game/**.ttf", "resource")
-    build.classify("game/**.otf", "resource")
-    build.classify("game/**.mp3", "resource")
-    build.classify("game/**.wav", "resource")
-    build.classify("game/**.zip", "resource")
+    build.classify("game/**.rpy", "a")
+    build.classify("game/**.rpyc", "a")
+    build.classify("game/**.jpg", "b")
+    build.classify("game/**.png", "b")
+    build.classify("game/**.ogg", "c")
+    build.classify("game/**.ttf", "a")
+    build.classify("game/**.otf", "a")
+    build.classify("game/**.mp3", "c")
+    build.classify("game/**.wav", "c")
+    build.classify("game/**.zip", "b")
 
 ## Sounds and music ############################################################
 
