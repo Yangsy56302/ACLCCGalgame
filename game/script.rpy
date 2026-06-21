@@ -135,12 +135,14 @@ init python:
 
         try:
             # 3. 核心步骤：从 Ren'Py 虚拟文件系统（含 RPA）读取文件字节流
+            # 分块读取（防止大文件内存溢出）
             with renpy.file(filename) as f:
-                file_data = f.read()  # 读取全部二进制内容
-            
-            # 4. 将字节流写入新文件（二进制写入）
-            with open(target_path, "wb") as out_file:
-                out_file.write(file_data)
+                with open(target_path, "wb") as out_file:
+                    while True:
+                        chunk = f.read(8192)  # 每次读 8KB
+                        if not chunk:
+                            break
+                        out_file.write(chunk)
             
             renpy.show_screen("copy_tip", "已将文件保存至 \""+target_path+"\"")
 
