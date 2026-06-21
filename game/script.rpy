@@ -123,20 +123,29 @@ init python:
         # 非Windows或上述都失败：用默认方法
         return os.path.expanduser("~/Desktop")
 
-    def CopyToAnyway(source_rel_path, dest_filename):
+    def CopyToAnyway(filename, dest_filename):
 
-        src = renpy.loader.transfn(source_rel_path)
-        dst = os.path.join(dest_filename)
-
-        if not os.path.exists(src):
-            renpy.notify(f"源文件不存在: {source_rel_path}")
+        if not renpy.loadable(filename):
+            renpy.notify("❌ 错误：未找到文件 '{}'，请检查路径。".format(filename))
             return
 
+        # 只取文件名，防止路径里有奇怪的斜杠
+        base_name = os.path.basename(filename)
+        target_path = os.path.join(dest_filename)
+
         try:
-            shutil.copy2(src, dst)
-            renpy.show_screen("copy_tip","已将文件保存至 \""+dst+"\"")
+            # 3. 核心步骤：从 Ren'Py 虚拟文件系统（含 RPA）读取文件字节流
+            with renpy.file(filename) as f:
+                file_data = f.read()  # 读取全部二进制内容
+            
+            # 4. 将字节流写入新文件（二进制写入）
+            with open(target_path, "wb") as out_file:
+                out_file.write(file_data)
+            
+            renpy.show_screen("copy_tip", "已将文件保存至 \""+target_path+"\"")
+
         except Exception as e:
-            renpy.show_screen("copy_tip","保存失败: "+str(e))
+            renpy.show_screen("copy_tip", "保存失败：{}".format(str(e)))
 
 init python:
     if renpy.android:
