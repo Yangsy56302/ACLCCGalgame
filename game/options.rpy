@@ -82,22 +82,6 @@ define build.android_permissions = [
     "android.permission.MANAGE_EXTERNAL_STORAGE"
 ]
 
-init python:
-    build.archive("a","all")
-    build.archive("b","all")
-    build.archive("c","all")
-
-    build.classify("game/**.rpy", "a")
-    build.classify("game/**.rpyc", "a")
-    build.classify("game/**.jpg", "b")
-    build.classify("game/**.png", "b")
-    build.classify("game/**.ogg", "c")
-    build.classify("game/**.ttf", "a")
-    build.classify("game/**.otf", "a")
-    build.classify("game/**.mp3", "c")
-    build.classify("game/**.wav", "c")
-    build.classify("game/**.zip", "b")
-
 ## Sounds and music ############################################################
 
 ## These three variables control, among other things, which mixers are shown
@@ -242,6 +226,21 @@ init python:
     build.classify("**/.**", None)
     build.classify("**/#**", None)
     build.classify("**/thumbs.db", None)
+
+    build.archive("a","all")
+    build.archive("b","all")
+    build.archive("c","all")
+
+    build.classify("game/**.rpy", "a")
+    build.classify("game/**.rpyc", "a")
+    build.classify("game/**.jpg", "b")
+    build.classify("game/**.png", "b")
+    build.classify("game/**.ogg", "c")
+    build.classify("game/**.ttf", "a")
+    build.classify("game/**.otf", "a")
+    build.classify("game/**.mp3", "c")
+    build.classify("game/**.wav", "c")
+    build.classify("game/**.zip", "b")
 
     ## To archive files, classify them as "archive".
 
