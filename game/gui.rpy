@@ -80,6 +80,9 @@ define gui.name_text_font = adofai_mixed_font
 ## The font used for out-of-game text.
 define gui.interface_text_font = adofai_mixed_font
 
+## The font used for system text.
+define gui.system_font = debug_gui_font
+
 ## The size of normal dialogue text.
 define gui.text_size = 33
 

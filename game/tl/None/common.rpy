@@ -1175,3 +1175,15 @@ translate None strings:
     # renpy/common/00gltest.rpy:273
     old "Change render options"
     new "改变渲染器选项"
+
+    # renpy/common/00console.rpy:501
+    old "Press <esc> to exit console. Type help for help.\n"
+    new "按 Esc 来退出控制台。输入 help 来查看帮助。\n"
+
+    # renpy/common/00console.rpy:505
+    old "Ren'Py script enabled."
+    new "Ren'Py 脚本已启用。"
+
+    # renpy/common/00console.rpy:507
+    old "Ren'Py script disabled."
+    new "Ren'Py 脚本已禁用。"
