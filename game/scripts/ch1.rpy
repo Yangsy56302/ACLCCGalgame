@@ -6,41 +6,161 @@ label ch1:
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
     myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
+    scene black with dissolve
+    $ current_perspective = yangsy
+
+    show yangsy at l11
+    pause 1.0
+    show yangsy at hf11
+    yangsy.comment brow_angry mouth_cat_sad_open "不是什么叫第二天一开始视角就换了？{w=0.5}这也太突兀了吧（"
+    show yangsy at d11
+    yangsy.comment brow_jitome mouth_cat_happy "Yangsy稍微试着改一下这段，抱歉了myworld（"
+    show yangsy at rhide
+    hide yangsy
+
+    scene black with dissolve
+    $ another_view = False
+    $ current_perspective = mc
+
+    call show_chapter("第二天") from _call_show_chapter
+
+    scene bg home_noon with dissolve
+
+    "又是一天，{w=0.5}你迫不及待的打开了群聊。"
+
+    window hide
+    $ session_title = None
     nvl clear
+    nvl show
+
+    mc.nvl "各位早上好"
+
+    # morin.nvl "[[早上好 上午好 中午好 下午好 晚上好 半夜好 凌晨好\n专门做了一张图 用来问好 适用于各类人群]{fast}{w=1.0}{nw}"
+    # gra.nvl "早{w=0.5}{nw}"
+    system.nvl "[yangsy.nvl]回应了你的消息：☀{fast}{w=0.5}{nw}"
+    yangsy.nvl "早（"
+    
+    yangsy.nvl "[mc.nvl]起的还挺早的\n{w=0.5}群里大部分成员现在这个时候都还在补觉呢（"
+
+    yangsy.nvl "话说 {w=0.25}昨天几乎没见你主动发言来着"
+    yangsy.nvl "别紧张 {w=0.5}进了群就都是自己人（\n{w=0.5}想说些什么的话放心说就是了（"
+
+    mc.nvl "{......}知道了"
+
+    yangsy.nvl "我们这些做魔改的{w=0.25}其实不太受冰与火之舞圈待见"
+    yangsy.nvl "那边普遍都觉得\n{w=0.5}所谓“魔改”什么的 {w=0.5}不过就是\n{w=0.25}这里随便塞点事件 {w=0.25}那里随便塞点轨道就行了的\n{w=0.5}对谱面的恶搞行为"
+    yangsy.nvl "该说是刻板印象吗{...}"
+    
+    yangsy.nvl "诶正好\n{w=1.0}[mc.nvl] {w=0.5}你对魔改的印象是？（"
+
+    menu(nvl=True):
+        "认为魔改用一句话就能大幅改变谱面很神奇":
+            mc.nvl "魔改关卡明明只是遵循着标题里那一句简单的改动描述\n关卡就会产生如此天差地别的变化"
+            mc.nvl "我觉得这种现象很奇妙"
+            pass
+        "魔改谱与原谱的反差感很有意思":
+            mc.nvl "我觉得魔改谱与原谱的那种反差感很有意思"
+            mc.nvl "就感觉像见到了平时所熟知的关卡的另一面这样"
+            pass
+        "对魔改这种创作方式感兴趣":
+            mc.nvl "我对魔改这种创作方式很感兴趣"
+            mc.nvl "毕竟其他作者也不会把已经完成的关卡作为创作素材"
+            pass
+        "说不太上来但就是喜欢":
+            mc.nvl "我也不太清楚该怎么描述{......}"
+            mc.nvl "或许就是单纯喜欢？"
+            pass
+        "诶魔改原来不是这里\n随便塞点事件那里随便塞点轨道就行了的吗":
+            mc.nvl "跟你说的那些人差不多"
+            yangsy.nvl "{......}"
+            pass
+    
+    yangsy.nvl.comment "感觉[mc.nvl]有些ooc了 希望下一位能改一下（"
+    yangsy.nvl.comment "总之这里要给主线剧情设目标"
+
+    yangsy.nvl "我希望 {w=0.5}有朝一日{w=0.25}我们魔改圈的成员{w=0.25}不会再被别人带着有色眼镜对待"
+    mc.nvl "{......}"
+    yangsy.nvl "啊{w=0.25}Yangsy是不是说着说着就跑题了 {w=0.25}抱歉（（（"
+    mc.nvl "没关系的"
+    yangsy.nvl "那就好（"
+    yangsy.nvl "总之 {w=0.5}既然其他成员还得过几个小时才醒\n{w=1.0}[mc.nvl]可以过会儿再来检查新消息（"
+    mc.nvl "嗯 感谢提醒"
+    yangsy.nvl "不用谢（"
+    
+    nvl hide
+
+    mc "{......}还是先做点作业吧。"
+    
+    jump ch1_before_myworld_view
+
+
+label ch1_before_myworld_view:
+
+    scene black with dissolve
+    call show_chapter("三小时后")
+    scene bg home_noon with dissolve
+    
+    "刚刚做完了英语作业的你突然意识到，{w=0.5}是时候检查一下QQ消息了。"
+
+    window hide
+    $ session_title = None
+    nvl clear
+    nvl show
+
+    morin.nvl "一日之计在于晨\n我醒了{fast}{nw}"
+    gra.nvl "早{fast}{nw}"
+    yangsy.nvl "早（{fast}{nw}"
+    system.nvl "[myworldzycpc]加入了群聊。{fast}{nw}"
+    morin.nvl "[[新人酱！新人酱！！.gif]{fast}{nw}"
+    mwam.nvl "欢迎新人{fast}{nw}"
+    yangsy.nvl "诶不是连着两天来新人这概率合理吗（{fast}{nw}"
+    gra.nvl "你说ACLC网站？\n你是怎么知道的？{fast}{nw}"
+    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
+
+    nvl hide
+
+    jump ch1_myworld_view
+
+
+label ch1_myworld_view:
+
+    scene black with pixellate
+    $ another_view = True
+    $ current_perspective = myworldzycpc
     $ session_title = baile
+    nvl clear
+    nvl show
 
     myworldzycpc.nvl "听说你要做个谱子下载网站，{w=0.5}是这样吗"
     baile.nvl "嗯是的喵~"
     voice sustain
     myworldzycpc.nvl "我可以看一下你做的吗"
     baile.nvl "行喵~"
-
     
     myworldzycpc.nvl "这个群号，{w=0.5}我加了一下，{w=0.5}为什么被拒了"
     baile.nvl "不知道，{w=0.5}大概是不能随便进人吧喵~"
     myworldzycpc.nvl "好吧{......}"
-    $ no_group_message = True
 
+    nvl hide
+    scene black with pixellate
+    $ renpy.notify("某一天")
+    nvl clear
+    nvl show
 
-    "有一天，{w=0.5}[baile] 不在，{w=0.5}[myworldzycpc] 觉得有点无聊。"
-    myworldzycpc "（要不我再去试试加那个群吧）"
-    if no_group_message:
-        myworldzycpc "（上次没通过可能是因为我没写入群消息）"
-    # yangsy.comment '这里的描述与后面的"[myworldzycpc]没有写入群消息。"冲突，所以Yangsy删了（'
-    "[myworldzycpc]又试了一次。"
+    myworldzycpc "（[baile]不在，总觉得有点无聊）"
+    myworldzycpc "（要不我再去试试加那个群吧）\n{w=1.0}（上次没通过可能是因为我没写入群消息）"
+
     nvl clear
     $ session_title = None
+    
     system.nvl "加入群聊之前，需要先回答问题：\n{w=1.0}你是怎么知道这个群的？{nw}"
     myworldzycpc.nvl "从ACLC网站"
-    "不一会，{nw=0.25}"
+    "{.....}"
+
+    nvl clear
+    $ session_title = None
     voice "voice/message_prompt.ogg"
-    extend "[myworldzycpc] 的入群申请就被通过了。"
-    system.nvl "你已经是群成员了"
-    gra.nvl "你说ACLC网站？{w=1.0}你是怎么知道的？"
-    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，{w=0.5}看到有个链接说可以加入群聊"
-    gra.nvl "哦，{w=0.25}是 [baile] 告诉你的？"
-    gra.nvl "这样啊{...}"
-    gra.nvl "不管怎样，{w=0.5}总之欢迎加入 ACLC！"
+    system.nvl "你已经是群成员了。"
 
     nvl clear
     $ session_title = baile
@@ -48,19 +168,20 @@ label ch1:
     baile.nvl "{......}"
     baile.nvl "bro怎么进ACLC了喵？"
 
+    nvl hide
+
+    jump ch1_after_myworld_view
+
+
+label ch1_after_myworld_view:
+
+    scene home_noon with pixelate
     $ another_view = False
     $ current_perspective = mc
-    scene bg star with dissolve
-
-    call show_chapter("第二天") from _call_show_chapter
-
-    "又是一天，{w=0.5}你迫不及待的打开了群聊。"
-
-    nvl clear
     $ session_title = None
-    system.nvl "[myworldzycpc]加入了群聊{fast}{nw}"
-    gra.nvl "你说ACLC网站？你是怎么知道的？{fast}{nw}"
-    myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}{nw}"
+    nvl clear
+    nvl show
+
     gra.nvl "哦，是 [baile] 告诉你的？{fast}{nw}"
     gra.nvl "这样啊{...}{fast}{nw}"
     gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
@@ -133,6 +254,17 @@ label ch1:
 
     "是的，群里总是时不时的出现一些小事，但是呢，又能很快和解。"
     myworldzycpc.comment "话说这算得上事吗（"
+    yangsy.comment "小事（指严重程度\n大事（指篇幅占比"
+    yangsy.comment "说实话CB这段偏题剧情放在剧情开头属实有点长了 可以做成中期的分支剧情（"
+
+    jump ch2
+
+
+
+label ch2:
+
+    yangsy.comment "Yangsy觉得有必要在这里分一下章节（"
+    yangsy.comment "以及这里的剧情Yangsy还没动过，之后再说（"
 
     scene bg sky with fade
     nvl clear
@@ -209,20 +341,20 @@ label ch1:
 
                 menu(nvl=True):
                     "那我还是不做了吧…" if not overwatch_first:
-                        call ch1_dont_curse from _call_ch1_dont_curse
+                        call ch2_dont_curse from _call_ch2_dont_curse
                     "我会试试的":
                         mc.nvl "你说的有道理，我会试试的。"
                         gra.nvl "嗯，希望你能在踩坑的过程中不断学习，走过这段坑坑洼洼的路，迎接你的将是光明大道。"
-                        call ch1_do_curse from _call_ch1_do_curse
+                        call ch2_do_curse from _call_ch2_do_curse
             else:
                 menu(nvl=True):
                     "我会试试的":
                         mc.nvl "我会试试的。"
                         gra.nvl "太好了，希望你早日做出自己的魔改"
-                        call ch1_do_curse from _call_ch1_do_curse_1
+                        call ch2_do_curse from _call_ch2_do_curse_1
 
         "我暂时还不太想做":
-            call ch1_dont_curse from _call_ch1_dont_curse_1
+            call ch2_dont_curse from _call_ch2_dont_curse_1
 
     scene bg sky with fade
 
@@ -256,7 +388,7 @@ label ch1:
         
     return
 
-label ch1_dont_curse:
+label ch2_dont_curse:
 
     mc.nvl "算了，我暂时还不太想做，我现在只想好好享受这个社区，和大家在一起就够了"
     gra.nvl "没关系，就算不做魔改，我们也一样欢迎！"
@@ -265,7 +397,7 @@ label ch1_dont_curse:
 
     return
 
-label ch1_do_curse:
+label ch2_do_curse:
 
     scene black with fade
 

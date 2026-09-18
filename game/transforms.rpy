@@ -254,6 +254,28 @@ transform d22:
 transform d11:
     dip(960)
 
+# These transforms causes the character to wobble on-screen.
+transform p41:
+    panic(300)
+transform p42:
+    panic(740)
+transform p43:
+    panic(1180)
+transform p44:
+    panic(1620)
+transform p31:
+    panic(360)
+transform p32:
+    panic(960)
+transform p33:
+    panic(1560)
+transform p21:
+    panic(600)
+transform p22:
+    panic(1320)
+transform p11:
+    panic(960)
+
 # These transforms makes the character fly in from the left.
 transform l41:
     leftin(300)

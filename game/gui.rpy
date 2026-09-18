@@ -65,7 +65,12 @@ define gui.interface_text_color = "#ffffff"
 
 define debug_gui_english_font = "MapleMono.otf"
 define debug_gui_chinese_font = "SYBlack.otf"
-define debug_gui_font = FontGroup().add(debug_gui_english_font, "\x00", "\x7F").add(debug_gui_english_font, "\u1100", "\u11FF").add(debug_gui_english_font, "\u3130", "\u318F").add(debug_gui_english_font, "\uAC00", "\uD7FF").add(debug_gui_chinese_font, None, None)
+define debug_gui_font = FontGroup()\
+    .add(debug_gui_english_font, "\x00", "\x7F")\
+    .add(debug_gui_english_font, "\u1100", "\u11FF")\
+    .add(debug_gui_english_font, "\u3130", "\u318F")\
+    .add(debug_gui_english_font, "\uAC00", "\uD7FF")\
+    .add(debug_gui_chinese_font, None, None)
 define adofai_english_font = "godoMaum.ttf"
 define adofai_chinese_font = "16FontSeto.ttf"
 define adofai_mixed_font = FontGroup().add("godoMaum.ttf", "\x00", "\x7F").add("godoMaum.ttf", "\u1100", "\u11FF").add("godoMaum.ttf", "\u3130", "\u318F").add("godoMaum.ttf", "\uAC00", "\uD7FF").add("16FontSeto.ttf", None, None)

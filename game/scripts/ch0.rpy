@@ -204,7 +204,7 @@ label ch0_1:
     mwam.nvl "这能点错也是没谁了{fast}{nw}"
     mc.nvl "没关系的"
     gra.nvl "总之欢迎新人入群[[doge]"
-    morin.nvl "[[新人酱！新人酱！！.gif]{w=0.25}{nw}"
+    morin.nvl "[[新人酱！新人酱！！.gif]{fast}{w=0.25}{nw}"
     mwam.nvl "欢迎新人{w=0.25}{nw}"
     lingyun.nvl "欢迎{w=0.25}{nw}"
     baile.nvl "欢迎"
@@ -256,29 +256,42 @@ label ch0_1:
     mc.nvl "可以详细讲一讲吗？"
     gra.nvl "可以的可以的"
 
-    gra.nvl "首先{...}你应该知道冰与火之舞吧？"
+    nvl clear
+
+    gra.nvl "{w=0.5}首先{...}你应该知道冰与火之舞吧？"
     mc.nvl "知道"
     gra.nvl "那就好，{w=0.5}省的我把整个游戏机制给从头讲一遍了"
 
-    nvl clear
-    gra.nvl "魔改是一种对谱面进行修改的方式{nw}"
-    gra.nvl "通常会先在关卡标题后面加上“但如何如何”的描述{nw}"
-    gra.nvl "举个例子，Firestix有个魔改关卡，标题是\n“11-X 赫拉克勒斯但每一块地板上都有一个旋转”{nw}"
-    gra.nvl "其中的描述部分就是“但每一块地板上都有一个旋转”{nw}"
-    gra.nvl "然后对谱面进行修改，使谱面符合指定的描述{nw}"
-    gra.nvl "这里就需要给每块地板上都添加旋转{nw}"
-    gra.nvl "改完谱面之后还要修改音乐，确保与修改后的谱面所契合{nw}"
-    gra.nvl "这点很重要，毕竟冰与火之舞是一款音乐游戏\n音乐与关卡不一致是很严重的问题{nw}"
-    gra.nvl "魔改后的关卡会与原关卡产生一种强烈的反差感{nw}"
-    gra.nvl "我们喜欢这种反差感，并因此聚集在这里{nw}"
-    gra.nvl "其实我和另外几位成员也会自己制作魔改{nw}"
+    gra.nvl """
+    魔改{w=0.25}是{w=0.75}{cps=*2}一种对谱面进行修改的方式{/cps}{nw}
+
+    {cps=*2}通常会先在关卡标题后面加上“但如何如何”的描述{/cps}{nw}
+
+    {cps=*2}举个例子，Firestix有个魔改关卡，标题是\n“11-X 赫拉克勒斯但每一块地板上都有一个旋转”{/cps}{nw}
+
+    {cps=*2}其中的描述部分就是“但每一块地板上都有一个旋转”{/cps}{nw}
+
+    {cps=*2}然后对谱面进行修改，使谱面符合指定的描述{/cps}{nw}
+
+    {cps=*2}这里就需要给每块地板上都添加旋转{/cps}{nw}
+
+    {cps=*2}改完谱面之后还要修改音乐，确保与修改后的谱面所契合{/cps}{nw}
+
+    {cps=*2}这点很重要，毕竟冰与火之舞是一款音乐游戏\n音乐与关卡不一致是很严重的问题{/cps}{nw}
+
+    {cps=*2}魔改后的关卡会与原关卡产生一种强烈的反差感{/cps}{nw}
+
+    {cps=*2}我们喜欢这种反差感，并因此聚集在这里{/cps}{nw}
+
+    {cps=*2}其实我和另外几位成员也会自己制作魔改{/cps}{nw}
+    """
     if gra_chemistry_name:
-        gra.nvl "哪天你也该去试一试"
+        gra.nvl "{cps=*0.5}哪天你也该去试一试{/cps}"
     else:
-        gra.nvl "或许你也可以试一试"
+        gra.nvl "{cps=*0.5}或许你也可以试一试{/cps}"
     
-    mc.nvl "{......}谢谢Grafrustix，{w=0.5}我大概明白了"
-    gra.nvl "那就好\n{w=1.0}我还担心这么多字会不会把你给看迷糊呢"
+    mc.nvl "{......}{w=1.0}谢谢Grafrustix，{w=0.5}我大概明白了"
+    gra.nvl "那就好\n{w=0.5}我还担心这么多字会不会把你给看迷糊呢"
     yangsy.nvl "这年头持有长文本阅读能力的人确实不多了（"
     
     # if not has_phone:
@@ -300,7 +313,7 @@ label ch0_1:
     gra.nvl "那就祝你好梦{w=0.5}{nw}"
     mwam.nvl "明天见{w=0.25}{nw}"
     morin.nvl "晚安{w=0.25}{nw}"
-    yangsy.nvl "🌙"
+    system.nvl "[yangsy.nvl]回应了你的消息：🌙{fast}"
     
     scene black with dissolve
     "{......}"
