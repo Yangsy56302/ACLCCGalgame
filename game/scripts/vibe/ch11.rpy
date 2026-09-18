@@ -1,7 +1,7 @@
 label vibe_ch11:
     scene black with fade
 
-    play music "audio/mus_astral_calm.mp3" fadein 3.0
+    play music "audio/mus_astral_calm.mp3"
 
     $ renpy.notify("深圳电玩节 / Manka Life")
     pause 1.0

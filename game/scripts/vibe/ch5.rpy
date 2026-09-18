@@ -7,7 +7,7 @@ label vibe_ch5:
     pause 2.0
 
     scene bg group_photo with fade
-    play music "audio/mus_astral_calm.mp3" fadein 3.0
+    play music "audio/mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
     "ACLC 在几个月里成长了很多。\n新成员源源不断地加入，\n群里的消息记录一天比一天长。"
 

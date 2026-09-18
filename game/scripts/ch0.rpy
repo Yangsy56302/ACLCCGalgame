@@ -35,7 +35,7 @@ label ch0:
     pause 3.0
 
 
-    play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
+    play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
     "大概是2020年的某一天，{w=0.5}你偶然在某个视频网站上解接触到了一款游戏。"
@@ -61,12 +61,12 @@ label ch0:
 
     "最终，{w=0.25}在经历了几天的心理斗争之后，{w=0.5}你跟着网上的教程下载了Sbeam，\n{w=0.5}又偷偷用父母的信用卡笨拙地按照指示付了款。"
 
-    stop music fadeout 2.0
+    $ renpy.music.set_pause(True)
 
     "然而，{w=0.25}在你购买游戏后没几天，{w=0.5}国外论坛在国内有了{green}镜像服务器{/green}，\n{w=0.5}可以方便的下载谱面。"
     "这让你的心理斗争与购买游戏的行为显得如此愚蠢。"
-
-    play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
+    
+    $ renpy.music.set_pause(False)
 
     "虽然你在知道这则消息之后气的跳脚，{w=0.5}但是你并没有抛弃这款游戏。"
     "一方面是，{w=0.5}你认为这是第一个属于自己的东西。"
@@ -97,7 +97,8 @@ label ch0:
     $ renpy.notify("2022年某日，嘁哩嘁哩评论区")
     pause 1.0
 
-    play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
     
     "就像之前的每一天一样，{w=0.5}你百无聊赖的刷着嘁站。"
@@ -112,14 +113,14 @@ label ch0:
     "{cps=*0.75}怀着好奇心，{w=0.5}你点开了那个视频。{w=1.0}{nw}"
 
     scene black with dissolve
-    stop music fadeout 1.0
+    $ renpy.music.set_pause(True)
 
     mc "{......}{......}"
     "{cps=*1.0}你感觉像是被人喂了一口屎。{/cps}"
     # yangsy.comment "诶不是咱就是说这话是不是有点太糙了啊喂（{nw}"
 
     scene bg that_video with dissolve
-    play music "mus_astral_calm.mp3" volume 0.3 fadein 1.0
+    $ renpy.music.set_pause(False)
     
     "显然，{w=0.25}这是一个外网的转载视频。"
     "画面中，{w=0.25}你熟悉的一个个关卡被扭曲成了某种奇异而搞笑的风格，\n{w=0.5}加入了各种奇奇怪怪的机制。"
@@ -139,13 +140,16 @@ label ch0:
     gra.nvl "觉得有兴趣的话可以来我们群里玩哦[[doge]"
     # mwam.comment "他自己说的，不要问我（{nw}"
     
-    
     "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
     jump ch0_1
 
 
 label ch0_1:
     scene bg home_night with dissolve
+    
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
     # if has_phone:
     #     "你使用在视频简介里发现的群号找到了群。"
     # else:
@@ -176,6 +180,7 @@ label ch0_1:
     "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
     "你满怀期待地打开了QQ——{nw}"
 
+    stop music
     nvl clear
     system.nvl "{cps=*0.25}群主拒绝了你的入群申请{/cps}"
 
@@ -203,6 +208,10 @@ label ch0_1:
     morin.nvl "何意味{fast}{nw}"
     mwam.nvl "这能点错也是没谁了{fast}{nw}"
     mc.nvl "没关系的"
+    
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
     gra.nvl "总之欢迎新人入群[[doge]"
     morin.nvl "[[新人酱！新人酱！！.gif]{fast}{w=0.25}{nw}"
     mwam.nvl "欢迎新人{w=0.25}{nw}"
@@ -232,8 +241,10 @@ label ch0_1:
         $ gra_chemistry_name = True
         menu(nvl=True):
             "[mc]":
+                $ renpy.music.set_pause(True)
                 mc.nvl "[mc]"
                 gra.nvl "你这名字很有个性嘛"
+                $ renpy.music.set_pause(False)
                 gra.nvl "我感觉你很适合做魔改啊"
     else:
         menu(nvl=True):
@@ -241,9 +252,11 @@ label ch0_1:
                 mc.nvl "[mc]"
             "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
                 $ gra_chemistry_name = True
+                $ renpy.music.set_pause(True)
                 mc.nvl "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子"
                 gra.nvl "？"
                 gra.nvl "你这名字很有个性嘛"
+                $ renpy.music.set_pause(False)
                 gra.nvl "我感觉你很适合做魔改啊"
                 gra.nvl "不过你应该不叫这个吧？{w=1.0}我到底该怎么叫你？"
                 menu(nvl=True):
@@ -262,38 +275,43 @@ label ch0_1:
     mc.nvl "知道"
     gra.nvl "那就好，{w=0.5}省的我把整个游戏机制给从头讲一遍了"
 
+    stop music
+
     gra.nvl """
-    魔改{w=0.25}是{w=0.75}{cps=*2}一种对谱面进行修改的方式{/cps}{nw}
-
-    {cps=*2}通常会先在关卡标题后面加上“但如何如何”的描述{/cps}{nw}
-
-    {cps=*2}举个例子，Firestix有个魔改关卡，标题是\n“11-X 赫拉克勒斯但每一块地板上都有一个旋转”{/cps}{nw}
-
-    {cps=*2}其中的描述部分就是“但每一块地板上都有一个旋转”{/cps}{nw}
-
-    {cps=*2}然后对谱面进行修改，使谱面符合指定的描述{/cps}{nw}
-
-    {cps=*2}这里就需要给每块地板上都添加旋转{/cps}{nw}
-
-    {cps=*2}改完谱面之后还要修改音乐，确保与修改后的谱面所契合{/cps}{nw}
-
-    {cps=*2}这点很重要，毕竟冰与火之舞是一款音乐游戏\n音乐与关卡不一致是很严重的问题{/cps}{nw}
-
-    {cps=*2}魔改后的关卡会与原关卡产生一种强烈的反差感{/cps}{nw}
-
-    {cps=*2}我们喜欢这种反差感，并因此聚集在这里{/cps}{nw}
-
-    {cps=*2}其实我和另外几位成员也会自己制作魔改{/cps}{nw}
+    {cps=*2.5}魔改是一种对谱面进行修改的方式\n
+    通常会先在关卡标题后面加上“但如何如何”的描述{/cps}{nw}
+    """
+    gra.nvl """
+    {cps=*2.5}举个例子，Firestix有个魔改关卡，标题是\n
+    “11-X 赫拉克勒斯但每一块地板上都有一个旋转”\n
+    其中的描述部分就是“但每一块地板上都有一个旋转”{/cps}{nw}
+    """
+    gra.nvl """
+    {cps=*2.5}然后对谱面进行修改，使谱面符合指定的描述\n
+    这里就需要给每块地板上都添加旋转\n
+    改完谱面之后还要修改音乐，确保与修改后的谱面所契合\n
+    这点很重要，毕竟冰与火之舞是一款音乐游戏\n
+    音乐与关卡不一致是很严重的问题{/cps}{nw}
+    """
+    gra.nvl """
+    {cps=*2.5}魔改后的关卡会与原关卡产生一种强烈的反差感\n
+    我们喜欢这种反差感，并因此聚集在这里\n
+    其实我和另外几位成员也会自己制作魔改{/cps}{nw}
     """
     if gra_chemistry_name:
         gra.nvl "{cps=*0.5}哪天你也该去试一试{/cps}"
     else:
         gra.nvl "{cps=*0.5}或许你也可以试一试{/cps}"
     
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
     mc.nvl "{......}{w=1.0}谢谢Grafrustix，{w=0.5}我大概明白了"
     gra.nvl "那就好\n{w=0.5}我还担心这么多字会不会把你给看迷糊呢"
     yangsy.nvl "这年头持有长文本阅读能力的人确实不多了（"
     
+    nvl clear
+
     # if not has_phone:
     mc.nvl "哦对，{w=0.25}还有，{w=0.5}QQ应该怎么用？我不是很熟悉[[笑哭]"
 
@@ -318,6 +336,7 @@ label ch0_1:
     scene black with dissolve
     "{......}"
     scene bg star with dissolve
+    stop music fadeout 2.0
 
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"

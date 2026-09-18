@@ -68,7 +68,7 @@ label vibe_route_baile:
     stop music fadeout 3.0
 
     "李星眠线·结局"
-    play music "audio/mus_astral_calm.mp3" fadein 3.0
+    play music "audio/mus_astral_calm.mp3"
 
     "后来，你们经常一起做很多事。"
 
