@@ -12,7 +12,8 @@ default volunteer_to_do_curse = False
 
 # --- 持久化变量 ---
 default persistent.debug_mode = False
-default persistent.password = "VGVhbSBBQ0xDQyBNZW1iZXI="
+# yangsy.comment 不是谁想的把debug模式密码扔到persistent里的啊（
+# yangsy.comment Yangsy改成判断条件硬编码了（（（
 default persistent.has_seen_ending = False
 default persistent.duplicate_name_fixed = False
 default persistent.setup_saw_debug_screen = False

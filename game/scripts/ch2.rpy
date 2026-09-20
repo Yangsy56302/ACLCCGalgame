@@ -38,7 +38,7 @@ label ch2:
             voice "voice/crab_mine_and_qing/1.ogg"
             extend "{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}螃蟹? 地雷* 还有<晴小姐3 ~{/i} 🎵{nw}"
             voice "voice/crab_mine_and_qing/2.ogg"
-            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}"文字" 萝卜 还有火柴人 ~{/i} 🎵{nw}'
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}"文字" 萝卜∇ 还有火柴人 ~{/i} 🎵{nw}'
             voice "voice/crab_mine_and_qing/3.ogg"
             lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}改曲无授权，根本不是人{/i} 🎵{nw}'
             voice "voice/crab_mine_and_qing/4.ogg"

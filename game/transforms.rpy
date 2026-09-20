@@ -72,12 +72,12 @@ transform panic(x=640, z=0.80):
 
 # This transform causes the character to "fly in" (enter the scene) from the left.
 transform leftin(x=640, z=0.80):
-    xcenter -300 yoffset 0 ypos 1.03125 alpha 1.00 subpixel True
+    xcenter -700 yoffset 0 ypos 1.03125 alpha 1.00 subpixel True
     easein .25 xcenter x
 
 # This transform causes the character to "fly in" (enter the scene) from the right.
 transform rightin(x=640, z=0.80):
-    xcenter 2000 yoffset 0 ypos 1.03125 alpha 1.00 subpixel True
+    xcenter 2400 yoffset 0 ypos 1.03125 alpha 1.00 subpixel True
     easein .25 xcenter x
 
 # This transform hides the character from the screen.
@@ -91,13 +91,13 @@ transform thide(z=0.80):
 transform lhide:
     subpixel True
     on hide:
-        easeout .25 xcenter -300
+        easeout .25 xcenter -700
 
 # This transform hides the character by moving them to the left.
 transform rhide:
     subpixel True
     on hide:
-        easeout .25 xcenter 2000
+        easeout .25 xcenter 2400
 
 # These transforms have the characters stand still at a given position given
 # how many characters are on screen and which character number they are.

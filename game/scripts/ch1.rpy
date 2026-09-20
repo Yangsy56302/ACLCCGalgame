@@ -10,11 +10,11 @@ label ch1:
     $ current_perspective = yangsy
 
     show yangsy at l11
-    pause 1.0
-    show yangsy at hf11
-    yangsy.comment brow_angry mouth_cat_sad_open "不是什么叫第二天一开始视角就换了？{w=0.5}这也太突兀了吧（"
-    show yangsy at d11
-    yangsy.comment brow_jitome mouth_cat_happy "Yangsy稍微试着改一下这段，抱歉了myworld（"
+    pause 0.5
+    show yangsy brow_angry mouth_cat_sad_open at hf11
+    yangsy.comment "不是什么叫第二天一开始视角就换了？{w=0.5}这也太突兀了吧（"
+    show yangsy brow_sad mouth_cat_happy_open at d11
+    yangsy.comment "Yangsy稍微试着改一下这段，抱歉了myworld（"
     show yangsy at rhide
     hide yangsy
 

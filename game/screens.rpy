@@ -365,6 +365,30 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
+init -999 python:
+    class Continue(Action):
+        def __call__(self):
+            newest_page, newest_name = self.get_newest_slot()
+            FileLoad(newest_name, confirm = False, page = newest_page)()
+
+        def get_sensitive(self):
+            if not renpy.newest_slot():
+                return False
+
+            newest_page, newest_name = self.get_newest_slot()
+
+            if newest_page == '_reload':
+                return False
+
+            return FileLoadable(newest_name, page=newest_page)
+
+        def get_newest_slot(self):
+            newest = renpy.newest_slot()
+
+            if newest:
+                page, name = newest.split("-")
+                return page, name
+
 screen navigation():
 
     vbox:
@@ -380,8 +404,6 @@ screen navigation():
             textbutton _("Start") action Start()
 
             textbutton _("Continue") action Continue()
-
-            
             
         else:
 
@@ -411,8 +433,6 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("Main Menu") action MainMenu()
-        
-        
 
         if renpy.variant("pc"):
 
@@ -864,6 +884,63 @@ style slot_button_text:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
 
+init python:
+    import os
+    import shutil
+    import sys
+
+    def get_desktop_path():
+        """获取当前用户的真实桌面路径（支持Windows重定向）"""
+        if renpy.windows:
+            # 优先读取注册表
+            try:
+                import winreg
+                key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, 
+                                    r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders")
+                desktop, _ = winreg.QueryValueEx(key, "Desktop")
+                winreg.CloseKey(key)
+                # 如果路径包含 %USERPROFILE% 环境变量，需要展开
+                desktop = os.path.expandvars(desktop)
+                if os.path.isdir(desktop):
+                    return desktop
+            except Exception:
+                pass
+            # 备用：通过环境变量
+            profile = os.environ.get("USERPROFILE")
+            if profile:
+                candidate = os.path.join(profile, "Desktop")
+                if os.path.isdir(candidate):
+                    return candidate
+        # 非Windows或上述都失败：用默认方法
+        return os.path.expanduser("~/Desktop")
+
+    def CopyToAnyway(filename, dest_filename):
+
+        if not renpy.loadable(filename):
+            renpy.show_screen("copy_tip","未知或不存在的文件\"{}\"，请检查路径".format(filename))
+            return
+
+        # 只取文件名，防止路径里有奇怪的斜杠
+        base_name = os.path.basename(filename)
+        target_path = os.path.join(dest_filename)
+
+        try:
+            # 3. 核心步骤：从 Ren'Py 虚拟文件系统（含 RPA）读取文件字节流
+            # 分块读取（防止大文件内存溢出）
+            with renpy.file(filename) as f:
+                with open(target_path, "wb") as out_file:
+                    while True:
+                        chunk = f.read(8192)  # 每次读 8KB
+                        if not chunk:
+                            break
+                        out_file.write(chunk)
+            
+            renpy.show_screen("copy_tip", "已将文件保存至 \""+target_path+"\"")
+
+        except Exception as e:
+            renpy.show_screen("copy_tip", "保存失败：{}".format(str(e)))
+
+
 screen preferences():
 
     tag menu
@@ -958,7 +1035,6 @@ screen preferences():
                             textbutton "Copy test file to Desktop" action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip") text_font debug_gui_font
                         elif renpy.variant("android"):
                             textbutton "Copy test file to Download" action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip") text_font debug_gui_font
-
 
 
 style pref_label is gui_label
@@ -2019,10 +2095,10 @@ init python:
 
     # 可鉴赏的音乐
     room_musics = {
-        "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
-        "Before Beginning":"mus_setup.ogg",
-        "Astral Calm": "mus_astral_calm.mp3",
-        "Aurora": "mus_aurora.mp3"
+        _("Aurora (Title Ver.)"): "mus_aurora_part1.ogg",
+        _("Before Beginning"): "mus_setup.ogg",
+        _("Astral Calm"): "mus_astral_calm.mp3",
+        _("Aurora"): "mus_aurora.mp3"
         # 更多音乐请自行添加
     }
 

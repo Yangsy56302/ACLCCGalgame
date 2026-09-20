@@ -1,6 +1,15 @@
 # 向导 by 祐荽
 
 
+init -999 python:
+    names = [
+        "祐荽", "Yangsy56302", "小绿君", "飞雨凌云", "莫邪Morin", "ms_win_and_mc", 
+        "是动听D温呐", "晴柚-Grafrustix", "TheHale", "终究是摆了", "阿希尔Ashell", 
+        "myworldzycpc", "李星眠", "晴安柚子", "凌云", "莫邪", "李婉清", "杨曦", "小绿草", 
+        "MaoYuNa133", "怃", "Pumi", "UNI", "Happylamb029", 
+    ]
+
+
 init -99 python:
     import os
     import math
@@ -29,6 +38,8 @@ label setup_naming_start:
     · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · · ·{/cps}
     """
     
+    pause 1.0
+
     setup "{w=1.0}噢，{w=0.25}嘿，{w=0.5}你好。"
 
     play music "mus_setup.ogg" fadein 2.0
@@ -47,7 +58,7 @@ label setup_naming_start:
         """
 
         menu:
-            "要使用上次的名字吗？"
+            "要使用上次的名字（[mc.nickname]）吗？"
             "当然。":
                 $ mc.nickname = persistent.name_mc
                 setup "非常感谢，{w=0.5}这样我就不用再重新念一遍那无聊的稿子了。"
@@ -190,21 +201,31 @@ label setup_naming_entered:
                             setup "我已经没有耐心了，{w=0.25}你就叫玩家吧，{w=0.25}我不会给你选择的机会了。"
                             return
     
-    # 否则，如果游戏目前处在调试模式：
-    elif player_input == persistent.password and not persistent.debug_mode and is_debug_installed:
-        python:
-            _history_list.pop()
-            persistent.debug_mode = True
-        nvl clear
-        debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
+    # 否则，如果输入了调试码，且允许进入调试模式：
+    elif player_input == "VGVhbSBBQ0xDQyBNZW1iZXI=" and is_debug_installed:
+        # 如果游戏目前不处在调试模式：
+        if not persistent.debug_mode:
+            python:
+                _history_list.pop()
+                persistent.debug_mode = True
+            nvl clear
+            debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
+        # 否则：
+        else:
+            nvl clear
+            debug "Debug Mode Is Already Enabled{fast}{w=1.0}{nw}"
+        # 如果setup没见过调试模式触发信息：
         if not persistent.setup_saw_debug_screen:
             setup "？"
             setup "你刚刚{w=0.25}，是不是输入了什么东西{w=0.5}，然后弹出了一个奇怪的界面？"
             setup "我想{w=0.25}你可能是有什么特殊的身份吧。"
             $ persistent.setup_saw_debug_screen = True
+        # 否则：
         else:
             mwam.comment "你们来填吧，我想不出这里写什么"
+            yangsy.comment "总感觉这里留空就行了（"
         jump setup_naming_loop
+
 
     # 否则，如果输入的名字与剧情中存在的角色撞名：
     elif player_input in names:
@@ -232,7 +253,7 @@ label setup_naming_entered:
                 python: 
                     quick_menu = True
                     renpy.block_rollback()
-                pause 1.0
+                pause 6.0
                 window auto
                 # 第一次：
                 if duplicate_name_attempts == 1:
@@ -276,7 +297,7 @@ label setup_naming_entered:
                 setup "{......}等等。"
                 setup "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
                 setup "那你刚刚是不是修改了角色的数据存储方式？"
-                setup "{......}你现在应该可以正常使用你自己的名字了"
+                setup "{......}我猜你现在应该可以正常使用你自己的名字了。"
                 setup "不过可能因此而引起的其他问题我可就不负责了，{w=0.25}哈哈。"
                 $ mc.nickname = player_input
                 jump setup_naming_confirm
@@ -334,7 +355,6 @@ label setup_naming_entered:
         jump setup_naming_confirm
 
 
-
 label setup_naming_confirm:
 
     "确定要使用这个名字吗？{nw}"
@@ -353,9 +373,8 @@ label setup_naming_done:
     $ renpy.block_rollback()
     setup "好的，{w=0.25}看来你决定好自己叫什么了。"
     setup "不过我还是叫你玩家吧，{w=0.5}叫别人的名字我总感觉挺羞耻的。"
-    setup "呃，{w=0.5}你还有其他疑问吗？{w=2}{nw}"
-    setup "哦不对，{w=0.25}你又问不了我。（笑）"
-    setup "好吧，稍等一下，{w=0.5}我得找找剧情被我放在哪了{......}{nw}"
+    setup "呃，{w=0.5}你还有其他疑问吗？\n{w=2}哦不对，{w=0.25}你又问不了我。{w=0.5}（笑）"
+    setup "好吧，{w=0.25}稍等一下，{w=0.5}我得找找剧情被我放在哪了{......}{nw}"
     stop music fadeout 2.0
     
     return
