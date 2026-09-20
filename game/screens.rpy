@@ -662,44 +662,6 @@ style return_button:
     yalign 1.0
     yoffset -45
 
-
-# debug menu
-
-style debug_menu_outer_frame is game_menu_outer_frame
-style debug_menu_navigation_frame is game_menu_navigation_frame
-style debug_menu_content_frame is game_menu_content_frame
-style debug_menu_viewport is game_menu_viewport
-style debug_menu_side is game_menu_side
-style debug_menu_scrollbar is game_menu_scrollbar
-style debug_menu_text is gui_text
-
-style debug_menu_label is game_menu_label
-style debug_menu_label_text is game_menu_label_text
-
-style debug_menu_button is game_menu_button
-style debug_menu_button_text is game_menu_button_text
-
-style debug_menu_return_button is return_button
-style debug_menu_return_button_text is return_button_text
-
-style debug_menu_navigation_button is gui_button
-style debug_menu_navigation_button_text is gui_button_text
-
-style debug_menu_text:
-    font debug_gui_font
-
-style debug_menu_label_text:
-    font debug_gui_font
-
-style debug_menu_button_text:
-    font debug_gui_font
-
-style debug_menu_return_button_text:
-    font debug_gui_font
-
-style debug_menu_navigation_button_text:
-    font debug_gui_font
-
 ## About screen ################################################################
 ##
 ## This screen gives credit and copyright information about the game and Ren'Py.
@@ -1052,26 +1014,6 @@ screen preferences():
                             textbutton _("Mute All") action Preference("all mute", "toggle") style "mute_all_button"
 
 
-screen debug_screen():
-
-    tag menu
-
-    use game_menu(_("Debug Mode"), scroll="viewport"):
-
-        vbox:
-            style_prefix "debug_menu"
-        
-            textbutton _("Disable Debug Mode") action Show("debug_confirm", None, _("Disable debug mode?"), yes_action=[SetVariable("persistent.debug_mode", False), Hide()], no_action=Hide())
-            textbutton _("Unlock All Music") action Call("debug_unlock", "Music")
-            textbutton _("Unlock All CG") action Call("debug_unlock", "CG")
-            textbutton _("Edit Variables...") action Show("per_variable")
-            textbutton _("Clear Persistent Data") action Call("debug", "reset")
-            if renpy.variant("pc"):
-                textbutton _("Copy test file to Desktop") action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip")
-            elif renpy.variant("android"):
-                textbutton _("Copy test file to Download") action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip")
-
-
 style pref_label is gui_label
 style pref_label_text is gui_label_text
 style pref_vbox is vbox
@@ -1097,9 +1039,6 @@ style slider_pref_vbox is pref_vbox
 
 style mute_all_button is check_button
 style mute_all_button_text is check_button_text
-
-style debug_button is gui_button
-style debug_button_text is gui_button_text
 
 style gui_button:
     hover_sound gui.navigate_sound

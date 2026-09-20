@@ -2,6 +2,74 @@ init python:
     is_debug_installed = True
     
 
+style debug_menu_outer_frame is game_menu_outer_frame
+style debug_menu_navigation_frame is game_menu_navigation_frame
+style debug_menu_content_frame is game_menu_content_frame
+style debug_menu_viewport is game_menu_viewport
+style debug_menu_side is game_menu_side
+style debug_menu_scrollbar is game_menu_scrollbar
+style debug_menu_text is gui_text
+style debug_menu_label is game_menu_label
+style debug_menu_label_text is game_menu_label_text
+style debug_menu_button is gui_button
+style debug_menu_button_text is gui_button_text
+style debug_menu_return_button is return_button
+style debug_menu_return_button_text is return_button_text
+style debug_menu_navigation_button is gui_button
+style debug_menu_navigation_button_text is gui_button_text
+
+style debug_text is gui_text
+style debug_label is gui_label
+style debug_label_text is gui_label_text
+style debug_button is gui_button
+style debug_button_text is gui_button_text
+style debug_radio_button is radio_button
+style debug_radio_button_text is radio_button_text
+style debug_check_button is check_button
+style debug_check_button_text is check_button_text
+
+style debug_menu_text:
+    font debug_gui_font
+style debug_menu_label_text:
+    font debug_gui_font
+style debug_menu_button_text:
+    font debug_gui_font
+style debug_menu_return_button_text:
+    font debug_gui_font
+style debug_menu_navigation_button_text:
+    font debug_gui_font
+style debug_text:
+    font debug_gui_font
+style debug_label_text:
+    font debug_gui_font
+style debug_button_text:
+    font debug_gui_font
+style debug_radio_button_text:
+    font debug_gui_font
+style debug_check_button_text:
+    font debug_gui_font
+
+
+screen debug_screen():
+
+    tag menu
+
+    use game_menu(_("Debug Mode"), scroll="viewport"):
+
+        vbox:
+            style_prefix "debug"
+        
+            textbutton _("Disable Debug Mode") action Show("debug_confirm", None, _("Disable debug mode?"), yes_action=[SetVariable("persistent.debug_mode", False), Hide()], no_action=Hide())
+            textbutton _("Unlock All Music") action Call("debug_unlock", "Music")
+            textbutton _("Unlock All CG") action Call("debug_unlock", "CG")
+            textbutton _("Edit Variables...") action Show("per_variable")
+            textbutton _("Clear Persistent Data") action Call("debug", "reset")
+            if renpy.variant("pc"):
+                textbutton _("Copy test file to Desktop") action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip")
+            elif renpy.variant("android"):
+                textbutton _("Copy test file to Download") action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip")
+
+
 screen debug_menu(title, scroll=None, yinitial=0.0):
     tag menu
     style_prefix "debug_menu"
@@ -65,78 +133,44 @@ screen debug_menu(title, scroll=None, yinitial=0.0):
         style "return_button"
         action ShowMenu("debug_screen")
     
-    
     label title
 
+
+init python:
+    def SetGameplayVariable(var, val):
+        global variables
+        variables[var] = val
+    def SetPersistentVariable(var, val):
+        global persistent
+        persistent.variables[var] = val
 
 screen variable():
     tag menu
     use debug_menu("Variable"):
         vbox:
-            style_prefix "debug_menu"
-
-            text "another_view:"
-            if another_view:
-                textbutton "True":
-                    action SetVariable("another_view",False)
-            else:
-                textbutton "False":
-                    action SetVariable("another_view",True)
-
-            text "gra_chemistry_name:"
-            if gra_chemistry_name:
-                textbutton "True":
-                    action SetVariable("gra_chemistry_name",False)
-            else:
-                textbutton "False":
-                    action SetVariable("gra_chemistry_name",True)
-
-            text "overwatch_first:"
-            if overwatch_first:
-                textbutton "True":
-                    action SetVariable("overwatch_first",False)
-            else:
-                textbutton "False":
-                    action SetVariable("overwatch_first",True)
-
-            text "volunteer_to_do_curse:"
-            if volunteer_to_do_curse:
-                textbutton "True":
-                    action SetVariable("volunteer_to_do_curse",False)
-            else:
-                textbutton "False":
-                    action SetVariable("volunteer_to_do_curse",True)
-
+            style_prefix "debug"
+            for var, val in variables.items():
+                hbox:
+                    label "[var]"
+                    text ": [val]"
+                hbox:
+                    textbutton "None" action Function(SetGameplayVariable, var, None)
+                    textbutton "True" action Function(SetGameplayVariable, var, True)
+                    textbutton "False" action Function(SetGameplayVariable, var, False)
 
 screen per_variable():
     tag menu
     use debug_menu("Persistent Variable"):
         vbox:
-            style_prefix "debug_menu"
-
-            text "has_seen_ending:"
-            if persistent.has_seen_ending:
-                textbutton "True":
-                    action SetVariable("persistent.has_seen_ending",False)
-            else:
-                textbutton "False":
-                    action SetVariable("persistent.has_seen_ending",True)
-
-            text "duplicate_name_fixed:"
-            if persistent.duplicate_name_fixed:
-                textbutton "True":
-                    action SetVariable("persistent.duplicate_name_fixed",False)
-            else:
-                textbutton "False":
-                    action SetVariable("persistent.duplicate_name_fixed",True)
-
-            text "setup_saw_debug_screen:"
-            if persistent.setup_saw_debug_screen:
-                textbutton "True":
-                    action SetVariable("persistent.setup_saw_debug_screen",False)
-            else:
-                textbutton "False":
-                    action SetVariable("persistent.setup_saw_debug_screen",True)
+            style_prefix "debug"
+            for var, val in persistent.variables.items():
+                hbox:
+                    label "[var]"
+                    text ": [val]"
+                hbox:
+                    textbutton "None" action Function(SetPersistentVariable, var, None)
+                    textbutton "True" action Function(SetPersistentVariable, var, True)
+                    textbutton "False" action Function(SetPersistentVariable, var, False)
 
 
 label debug_unlock(Type):
