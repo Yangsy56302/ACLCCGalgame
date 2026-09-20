@@ -17,3 +17,4 @@
 
     old "A name has already been chosen."
     new "已经选择一个名字了。"
+# TODO: Translation updated at 2026-09-20 09:51

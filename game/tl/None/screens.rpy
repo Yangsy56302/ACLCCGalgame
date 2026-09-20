@@ -336,4 +336,71 @@ translate None strings:
     new "音乐鉴赏"
 
     old "Extra Mode"
-    new "鉴赏模式"
+    new "鉴赏模式"# TODO: Translation updated at 2026-09-20 09:51
+
+translate None strings:
+
+    # game/screens.rpy:726
+    old "Made with {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only]."
+    new "使用 {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only] 制作。"
+
+    # game/screens.rpy:728
+    old "[renpy.license!t]"
+    new "[renpy.license!t]"
+
+    # game/screens.rpy:732
+    old "Auto Scroll"
+    new "自动滚动"
+
+    # game/screens.rpy:1028
+    old "Debug Mode"
+    new "调试模式"
+
+    # game/screens.rpy:1029
+    old "Disable Debug Mode"
+    new "禁用调试模式"
+
+    # game/screens.rpy:1029
+    old "Are you sure you want to disable debug mode?"
+    new "你确定要禁用调试模式吗？"
+
+    # game/screens.rpy:1030
+    old "Unlock All Music"
+    new "解锁所有音乐"
+
+    # game/screens.rpy:1031
+    old "Unlock All CG"
+    new "解锁所有CG"
+
+    # game/screens.rpy:1032
+    old "Edit Variables..."
+    new "编辑变量..."
+
+    # game/screens.rpy:1033
+    old "Clear Persistent Data"
+    new "清除持久化数据"
+
+    # game/screens.rpy:1035
+    old "Copy test file to Desktop"
+    new "将测试文件复制到桌面"
+
+    # game/screens.rpy:1037
+    old "Copy test file to Download"
+    new "下载测试文件"
+
+    # game/screens.rpy:2097
+    old "Aurora (Title Ver.)"
+    new "Aurora (Title Ver.)"
+
+    # game/screens.rpy:2097
+    old "Before Beginning"
+    new "Before Beginning"
+
+    # game/screens.rpy:2097
+    old "Astral Calm"
+    new "Astral Calm"
+
+    # game/screens.rpy:2097
+    old "Aurora"
+    new "Aurora"
+

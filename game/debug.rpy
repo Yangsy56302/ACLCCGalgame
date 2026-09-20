@@ -2,22 +2,22 @@ init python:
     is_debug_installed = True
     
 
-screen debug_mode(title, scroll=None, yinitial=0.0):
+screen debug_menu(title, scroll=None, yinitial=0.0):
     tag menu
-    style_prefix "game_menu" 
+    style_prefix "debug_menu"
     
     if main_menu:
         add gui.main_menu_background 
     else:
         add gui.game_menu_background 
     frame:
-        style "game_menu_outer_frame"
+        style "debug_menu_outer_frame"
         hbox:
             frame:
-                style "game_menu_navigation_frame"
+                style "debug_menu_navigation_frame"
 
             frame:
-                style "game_menu_content_frame"
+                style "debug_menu_content_frame"
                 if scroll == "viewport":
 
                     viewport:
@@ -51,99 +51,93 @@ screen debug_mode(title, scroll=None, yinitial=0.0):
 
                     transclude
     vbox:
-        style_prefix "navigation"
+        style_prefix "debug_menu_navigation"
         xpos gui.navigation_xpos
         yalign 0.5
         spacing gui.navigation_spacing
         if is_ingame:
-            textbutton _("Variable") action ShowMenu("variable") text_font debug_gui_font
+            textbutton _("Variable") action ShowMenu("variable")
 
-            textbutton _("Persistent Variable"):
-                action ShowMenu("per_variable")
-                text_font debug_gui_font
-                text_size 27
+        textbutton _("Persistent Variable"):
+            action ShowMenu("per_variable")
 
     textbutton _("Return"):
         style "return_button"
-        text_font debug_gui_font
-        action Return()
-            
+        action ShowMenu("debug_screen")
+    
+    
+    label title
 
-    label title text_font debug_gui_font
 
 screen variable():
     tag menu
-    use debug_mode("Variable"):
+    use debug_menu("Variable"):
         vbox:
-            text "another_view:" font debug_gui_font
+            style_prefix "debug_menu"
+
+            text "another_view:"
             if another_view:
                 textbutton "True":
                     action SetVariable("another_view",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("another_view",True)
-                    text_font debug_gui_font
-            text "gra_chemistry_name:" font debug_gui_font
+
+            text "gra_chemistry_name:"
             if gra_chemistry_name:
                 textbutton "True":
                     action SetVariable("gra_chemistry_name",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("gra_chemistry_name",True)
-                    text_font debug_gui_font
-            text "overwatch_first:" font debug_gui_font
+
+            text "overwatch_first:"
             if overwatch_first:
                 textbutton "True":
                     action SetVariable("overwatch_first",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("overwatch_first",True)
-                    text_font debug_gui_font
-            text "volunteer_to_do_curse:" font debug_gui_font
+
+            text "volunteer_to_do_curse:"
             if volunteer_to_do_curse:
                 textbutton "True":
                     action SetVariable("volunteer_to_do_curse",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("volunteer_to_do_curse",True)
-                    text_font debug_gui_font
+
+
 screen per_variable():
     tag menu
-    use debug_mode("Persistent Variable"):
+    use debug_menu("Persistent Variable"):
         vbox:
-            text "has_seen_ending:" font debug_gui_font
+            style_prefix "debug_menu"
+
+            text "has_seen_ending:"
             if persistent.has_seen_ending:
                 textbutton "True":
                     action SetVariable("persistent.has_seen_ending",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("persistent.has_seen_ending",True)
-                    text_font debug_gui_font
 
-            text "duplicate_name_fixed:" font debug_gui_font
+            text "duplicate_name_fixed:"
             if persistent.duplicate_name_fixed:
                 textbutton "True":
                     action SetVariable("persistent.duplicate_name_fixed",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("persistent.duplicate_name_fixed",True)
-                    text_font debug_gui_font
 
-            text "setup_saw_debug_screen:" font debug_gui_font
+            text "setup_saw_debug_screen:"
             if persistent.setup_saw_debug_screen:
                 textbutton "True":
                     action SetVariable("persistent.setup_saw_debug_screen",False)
-                    text_font debug_gui_font
             else:
                 textbutton "False":
                     action SetVariable("persistent.setup_saw_debug_screen",True)
-                    text_font debug_gui_font
+
 
 label debug_unlock(Type):
     nvl clear
@@ -172,6 +166,7 @@ label debug_unlock(Type):
     else:
         $ renpy.full_restart()
 
+
 label debug(thing):
     if thing == "reset":
         nvl clear
@@ -179,13 +174,11 @@ label debug(thing):
             debug "clean: Do you want to Clear All Persistent Data? (Y/N){fast}"
             "{font=MapleMono.otf}Yes{/font}":
                 nvl clear
-
                 debug "clean: Do you want to Clear All Persistent Data? (Y/N) Y{fast}{w=1.0}{nw}"
                 debug "clean: Success.{fast}{w=1.0}{nw}"
                 $ persistent._clear(progress=True)
             "{font=MapleMono.otf}No{/font}":
                 nvl clear
-
                 debug "clean: Do you want to Clear All Persistent Data? (Y/N) N{fast}{w=1.0}{nw}"
                 pass
         $ persistent.debug_mode = True
@@ -193,6 +186,7 @@ label debug(thing):
         return
     else:
         $ renpy.full_restart()
+
 
 screen debug_confirm(message, yes_action, no_action):
 

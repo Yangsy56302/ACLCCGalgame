@@ -421,6 +421,9 @@ screen navigation():
 
         textbutton _("About") action ShowMenu("about")
 
+        if persistent.debug_mode:
+            textbutton _("Debug Mode") action ShowMenu("debug_screen")
+
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
@@ -445,9 +448,6 @@ style navigation_button is gui_button
 style navigation_button_text is gui_button_text
 
 style navigation_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     size_group "navigation"
     properties gui.button_properties("navigation_button")
 
@@ -658,12 +658,47 @@ style game_menu_label_text:
     yalign 0.5
 
 style return_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     xpos gui.navigation_xpos
     yalign 1.0
     yoffset -45
+
+
+# debug menu
+
+style debug_menu_outer_frame is game_menu_outer_frame
+style debug_menu_navigation_frame is game_menu_navigation_frame
+style debug_menu_content_frame is game_menu_content_frame
+style debug_menu_viewport is game_menu_viewport
+style debug_menu_side is game_menu_side
+style debug_menu_scrollbar is game_menu_scrollbar
+style debug_menu_text is gui_text
+
+style debug_menu_label is game_menu_label
+style debug_menu_label_text is game_menu_label_text
+
+style debug_menu_button is game_menu_button
+style debug_menu_button_text is game_menu_button_text
+
+style debug_menu_return_button is return_button
+style debug_menu_return_button_text is return_button_text
+
+style debug_menu_navigation_button is gui_button
+style debug_menu_navigation_button_text is gui_button_text
+
+style debug_menu_text:
+    font debug_gui_font
+
+style debug_menu_label_text:
+    font debug_gui_font
+
+style debug_menu_button_text:
+    font debug_gui_font
+
+style debug_menu_return_button_text:
+    font debug_gui_font
+
+style debug_menu_navigation_button_text:
+    font debug_gui_font
 
 ## About screen ################################################################
 ##
@@ -729,7 +764,7 @@ screen about():
                     null height 1080
 
             # 控制按钮（只在你想要的时候显示）
-            textbutton _("自动滚动开关") action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95 style "check_button"
+            textbutton _("Auto Scroll") action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95 style "check_button"
             # textbutton "自动滚动开关" action Function(scroll_test) xalign 0.5 yalign 0.95
 
 style about_label is gui_label
@@ -859,18 +894,12 @@ style page_label_text:
     hover_color gui.hover_color
 
 style page_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("page_button")
 
 style page_button_text:
     properties gui.button_text_properties("page_button")
 
 style slot_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
@@ -1022,19 +1051,25 @@ screen preferences():
                             textbutton _("Audio when Unfocused") action Preference("audio when unfocused", "toggle")
                             textbutton _("Mute All") action Preference("all mute", "toggle") style "mute_all_button"
 
-            hbox:
-                if persistent.debug_mode:
-                    vbox:
-                        label "Debug Mode" text_font debug_gui_font
-                        textbutton _("Disable Debug Mode") action Show("debug_confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide()) text_font debug_gui_font
-                        textbutton _("Unlock All Music") action Call("debug_unlock","Music") text_font debug_gui_font
-                        textbutton _("Unlock All CG") action Call("debug_unlock","CG") text_font debug_gui_font
-                        textbutton _("Change Variable") action Show("per_variable") text_font debug_gui_font
-                        textbutton "Clear All Persistent Data" action Call("debug", "reset") text_font debug_gui_font
-                        if renpy.variant("pc"):
-                            textbutton "Copy test file to Desktop" action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip") text_font debug_gui_font
-                        elif renpy.variant("android"):
-                            textbutton "Copy test file to Download" action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip") text_font debug_gui_font
+
+screen debug_screen():
+
+    tag menu
+
+    use game_menu(_("Debug Mode"), scroll="viewport"):
+
+        vbox:
+            style_prefix "debug_menu"
+        
+            textbutton _("Disable Debug Mode") action Show("debug_confirm", None, _("Disable debug mode?"), yes_action=[SetVariable("persistent.debug_mode", False), Hide()], no_action=Hide())
+            textbutton _("Unlock All Music") action Call("debug_unlock", "Music")
+            textbutton _("Unlock All CG") action Call("debug_unlock", "CG")
+            textbutton _("Edit Variables...") action Show("per_variable")
+            textbutton _("Clear Persistent Data") action Call("debug", "reset")
+            if renpy.variant("pc"):
+                textbutton _("Copy test file to Desktop") action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip")
+            elif renpy.variant("android"):
+                textbutton _("Copy test file to Download") action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip")
 
 
 style pref_label is gui_label
@@ -1063,6 +1098,17 @@ style slider_pref_vbox is pref_vbox
 style mute_all_button is check_button
 style mute_all_button_text is check_button_text
 
+style debug_button is gui_button
+style debug_button_text is gui_button_text
+
+style gui_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.squelch_sound
+    
+style gui_slider:
+    hover_sound gui.navigate_sound
+    activate_sound gui.navigate_sound
+
 style pref_label:
     top_margin gui.pref_spacing
     bottom_margin 3
@@ -1077,9 +1123,6 @@ style radio_vbox:
     spacing gui.pref_button_spacing
 
 style radio_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.squelch_sound
-
     properties gui.button_properties("radio_button")
     foreground "gui/button/radio_[prefix_]foreground.png"
 
@@ -1090,9 +1133,6 @@ style check_vbox:
     spacing gui.pref_button_spacing
 
 style check_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.squelch_sound
-
     properties gui.button_properties("check_button")
     foreground "gui/button/check_[prefix_]foreground.png"
 
@@ -1100,9 +1140,6 @@ style check_button_text:
     properties gui.button_text_properties("check_button")
 
 style slider_slider:
-    hover_sound gui.navigate_sound
-    activate_sound gui.navigate_sound
-
     xsize 525
 
 style slider_button:
@@ -1356,9 +1393,6 @@ style help_label_text is gui_label_text
 style help_text is gui_text
 
 style help_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("help_button")
     xmargin 12
 
@@ -1438,9 +1472,6 @@ style confirm_prompt_text:
     layout "subtitle"
 
 style confirm_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("confirm_button")
 
 style confirm_button_text:
@@ -2193,6 +2224,7 @@ screen music_room():
 
         # 进入音乐空间时自动播放音乐……？
         # on "replace" action mr.Play()
+
 
 screen chapter_title(title_text):
 
