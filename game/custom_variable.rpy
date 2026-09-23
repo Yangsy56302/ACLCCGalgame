@@ -9,6 +9,7 @@ default is_ingame = False
 default gra_chemistry_name = False
 default overwatch_first = False
 default volunteer_to_do_curse = False
+default yangsy_curse_impression = None
 
 # --- 持久化变量 ---
 default persistent.debug_mode = False
