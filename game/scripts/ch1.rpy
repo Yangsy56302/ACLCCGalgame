@@ -26,7 +26,9 @@ label ch1:
 
     scene bg home_noon with dissolve
 
-    "又是一天，{w=0.5}你迫不及待的打开了群聊。"
+    "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为你升起。"
+    "阳光照亮到了你的房间，\n{w=0.5}也照亮了你那沉睡的意识。"
+    "你揉了揉眼睛，{w=0.5}环顾了一下四周以适应早晨的光线，\n{w=0.5}然后迫不及待地拿出手机，{w=0.25}打开了群聊。"
 
     window hide
     $ session_title = None
@@ -35,59 +37,93 @@ label ch1:
 
     mc.nvl "各位早上好"
 
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
     # morin.nvl "[[早上好 上午好 中午好 下午好 晚上好 半夜好 凌晨好\n专门做了一张图 用来问好 适用于各类人群]{fast}{w=1.0}{nw}"
     # gra.nvl "早{w=0.5}{nw}"
+
     system.nvl "[yangsy.nvl]回应了你的消息：☀{fast}{w=0.5}{nw}"
-    yangsy.nvl "早（"
+    yangsy.nvl "早啊（"
     
-    yangsy.nvl "[mc.nvl]你起的还挺早的\n{w=0.5}群里大部分成员现在这个时候都还在补觉呢（"
+    nvl hide
+    window show
+
+    "{......}"
+
+    window hide
+    nvl show
+
+    mc.nvl "其他成员呢？"
+    yangsy.nvl "大部分估计都还在补觉吧（"
+    yangsy.nvl "毕竟基本都刚连着上了五天的学 {w=0.5}休息日休息是很正常的事（"
+    mc.nvl "这样吗"
+
+    nvl hide
+    window show
+
+    "早上的群聊确实很冷寂——{w=0.5}与记忆中昨晚的盛况简直是天差地别。"
+
+    window hide
+    nvl show
+
+    mc.nvl "Yangsy为什么这么早就醒了呢？"
+    yangsy.nvl "问得好\n{w=0.5}Yangsy自己也不知道（"
+    yangsy.nvl "或许是因为潜意识里想早点见到大家吧\n{w=1.0}虽说起得这么早通常谁也见不到的说（"
 
     yangsy.nvl "话说 {w=0.25}昨天几乎没见你主动发言来着"
     yangsy.nvl "别紧张 {w=0.5}进了群就都是自己人（\n{w=0.5}想说些什么的话放心说就是了（"
-
-    mc.nvl "{......}知道了"
-
-    yangsy.nvl "我们这些做魔改的{w=0.25}其实不太受冰与火之舞圈待见"
-    yangsy.nvl "那边普遍都觉得\n{w=0.5}所谓“魔改”什么的 {w=0.5}不过就是\n{w=0.25}这里随便塞点事件 {w=0.25}那里随便塞点轨道就行了的\n{w=0.5}对谱面的恶搞行为"
-    yangsy.nvl "该说是刻板印象吗{...}"
+    mc.nvl "知道了"
     
-    yangsy.nvl "诶正好\n{w=1.0}[mc.nvl] {w=0.5}你对魔改的印象是？（"
+    yangsy.nvl "诶突然想到个问题"
+    yangsy.nvl "[mc.nvl] {w=0.5}你对魔改的印象是...？（"
+    yangsy.nvl.comment "这里的选项主要用来暗示普通线与作者线两条路线\n现在就分开两条线还是太早了（"
 
+    $ yangsy_curse_impression = None
     menu(nvl=True):
-        "认为魔改用一句话就能大幅改变谱面很神奇":
-            mc.nvl "魔改关卡明明只是遵循着标题里那一句简单的改动描述\n关卡就会产生如此天差地别的变化"
-            mc.nvl "我觉得这种现象很奇妙"
-            pass
-        "魔改谱与原谱的反差感很有意思":
+        "反差感很有意思":
+            $ yangsy_curse_impression = 1
             mc.nvl "我觉得魔改谱与原谱的那种反差感很有意思"
             mc.nvl "就感觉像见到了平时所熟知的关卡的另一面这样"
-            pass
-        "对魔改这种创作方式感兴趣":
-            mc.nvl "我对魔改这种创作方式很感兴趣"
+            yangsy.nvl "入坑原因跟大家差不多呢（"
+        "对魔改创作很感兴趣":
+            $ yangsy_curse_impression = 2
+            mc.nvl "我对魔改这种用一句话改变谱面的这种创作方式很感兴趣"
             mc.nvl "毕竟其他作者也不会把已经完成的关卡作为创作素材"
-            pass
+            yangsy.nvl "很少有一上来就对魔改这么感兴趣的人呢（"
+            if gra_chemistry_name is True:
+                yangsy.nvl "看来Gra昨天的预感还挺准的？（（（"
+            yangsy.nvl "等哪天有想法了你或许可以试试自己做一个？（"
         "说不太上来但就是喜欢":
+            $ yangsy_curse_impression = 0
             mc.nvl "我也不太清楚该怎么描述{......}"
             mc.nvl "或许就是单纯喜欢？"
-            pass
+            yangsy.nvl "目前还说不太上来吗\n{w=1.0}没关系的 {w=0.25}很正常（"
+            yangsy.nvl "以后说不定哪一天你可能就明白了呢（（"
         "诶魔改原来不是这里\n随便塞点事件那里随便塞点轨道就行了的吗":
+            $ yangsy_curse_impression = -1
             mc.nvl "跟你说的那些人差不多"
             yangsy.nvl "{......}"
-            pass
     
     yangsy.nvl.comment "感觉[mc.nvl]有些ooc了 希望下一位能改一下（"
     yangsy.nvl.comment "总之这里要给主线剧情设目标"
 
-    yangsy.nvl "我希望 {w=0.5}有朝一日{w=0.25}我们魔改圈的成员{w=0.25}不会再被别人带着有色眼镜对待"
+    yangsy.nvl "其实吧\n{w=0.5}我们这些做魔改的\n{w=0.25}其实不太受冰与火之舞圈待见"
+    yangsy.nvl "那边普遍都觉得\n{w=0.5}所谓“魔改”什么的 {w=0.5}不过就是\n{w=0.25}这里随便塞点事件 {w=0.25}那里随便塞点轨道就行了的\n{w=0.5}对谱面的恶搞行为"
+    yangsy.nvl "但魔改明明就不是随便乱改！\n{w=1.0}我们明明也不是为了恶心观众才这么做的！"
+    yangsy.nvl "就因为“魔改”这个名字不太好听\n{w=0.5}连自己骂的到底是什么都不去了解\n{w=0.25}就带着刻板印象去攻击我们"
+    yangsy.nvl "到底谁才是恶魔啊喂！"
+
     mc.nvl "{......}"
-    yangsy.nvl "啊{w=0.25}Yangsy是不是说着说着就跑题了 {w=0.25}抱歉（（（"
+    yangsy.nvl "啊 {w=0.25}抱歉（（（\n{w=0.5}Yangsy说着说着就跑题了（（（（（"
     mc.nvl "没关系的"
-    yangsy.nvl "那就好（"
+    yangsy.nvl "那就好（（（"
     yangsy.nvl "总之 {w=0.5}既然其他成员还得过几个小时才醒\n{w=1.0}[mc.nvl]可以过会儿再来检查新消息（"
     mc.nvl "嗯 感谢提醒"
     yangsy.nvl "不用谢（"
     
     nvl hide
+    window show
 
     mc "{......}还是先做点作业吧。"
 
@@ -95,7 +131,7 @@ label ch1:
     call show_chapter("三小时后")
     scene bg home_noon with dissolve
     
-    "刚刚做完了英语作业的你突然意识到，{w=0.5}是时候检查一下QQ消息了。"
+    "刚刚写完英语作业的你突然意识到，{w=0.5}差不多也是时候去检查一下QQ消息了。"
 
     window hide
     $ session_title = None
@@ -112,10 +148,9 @@ label ch1:
     gra.nvl "你说ACLC网站？\n你是怎么知道的？{fast}{nw}"
     myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
 
-    nvl hide
-
     call ch1_myworld_view
 
+    window hide
     scene home_noon with pixelate
     $ another_view = False
     $ current_perspective = mc

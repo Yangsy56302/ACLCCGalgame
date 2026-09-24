@@ -10,6 +10,7 @@ default variables = {
     "gra_chemistry_name": None,
     "overwatch_first": None,
     "volunteer_to_do_curse": None,
+    "yangsy_curse_impression": None,
 }
 
 # --- 持久化变量 ---

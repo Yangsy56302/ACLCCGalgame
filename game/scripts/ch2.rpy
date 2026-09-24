@@ -8,11 +8,14 @@ label ch2:
     nvl clear
 
     $ variables["overwatch_first"] = None
+    mc "（也许{w=0.5}是时候了解一下群内的情况了......）{nw}"
     menu:
-        "也许{w=0.5}是时候了解一下群内的情况了。"
+        "（也许是时候了解一下群内的情况了......）{fast}"
         "询问群内成员":
             $ variables["overwatch_first"] = False
             window hide
+            nvl show
+
             mc.nvl "话说，{w=0.25}我好像还不太认识你们呢，{w=0.5}也对这个群的历史不太了解"
             myworldzycpc.nvl "我也是{...}"
             gra.nvl "没关系 {w=0.5}我们给你介绍一下"
@@ -52,9 +55,12 @@ label ch2:
             voice "voice/crab_mine_and_qing/8.ogg"
             lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}魔改谱面，我们共建ACL！{/i} 🎵{nw}'
             gra.nvl "{cps=*0.25}{......}{/cps}"
+
         "暗中观察":
             $ variables["overwatch_first"] = True
             window hide
+            nvl show
+
             nona.nvl "[[level.zip]\n{w=1.0}我的新魔改做好了！\n{w=1.0}哪个好宝宝帮我测试一下呀"
             yangsy.nvl "Yangsy试试（"
             nona.nvl "谢谢Yangsy！\n{w=1.0}我喜欢你！"
