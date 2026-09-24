@@ -6,14 +6,13 @@ label ch2:
     yangsy.comment "以及这里的剧情Yangsy还没动过，之后再说（"
 
     nvl clear
-    
+
+    $ variables["overwatch_first"] = None
     mc "（也许{w=0.5}是时候了解一下群内的情况了......）{nw}"
-    $ overwatch_first = None
     menu:
         "（也许是时候了解一下群内的情况了......）{fast}"
         "询问群内成员":
-
-            $ overwatch_first = False
+            $ variables["overwatch_first"] = False
             window hide
             nvl show
 
@@ -42,7 +41,7 @@ label ch2:
             voice "voice/crab_mine_and_qing/1.ogg"
             extend "{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}螃蟹? 地雷* 还有<晴小姐3 ~{/i} 🎵{nw}"
             voice "voice/crab_mine_and_qing/2.ogg"
-            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}"文字" 萝卜 还有火柴人 ~{/i} 🎵{nw}'
+            lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}"文字" 萝卜∇ 还有火柴人 ~{/i} 🎵{nw}'
             voice "voice/crab_mine_and_qing/3.ogg"
             lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}改曲无授权，根本不是人{/i} 🎵{nw}'
             voice "voice/crab_mine_and_qing/4.ogg"
@@ -58,7 +57,7 @@ label ch2:
             gra.nvl "{cps=*0.25}{......}{/cps}"
 
         "暗中观察":
-            $ overwatch_first = True
+            $ variables["overwatch_first"] = True
             window hide
             nvl show
 
@@ -78,9 +77,9 @@ label ch2:
     yangsy.nvl.comment "不是等会让才进群两天还啥都没学会的新人去做魔改也有点太离谱了吧（"
     dwen.nvl "也许会有我们都想不到的点子呢"
 
+    $ variables["volunteer_to_do_curse"] = None
     menu(nvl=True):
         "好的，我会尝试去做的":
-            $ volunteer_to_do_curse = True
             mc.nvl "好的，我争取做出属于自己的魔改作品"
             myworldzycpc.nvl "😰"
             mc.nvl "话说…可以教我怎么做吗？"
@@ -91,26 +90,30 @@ label ch2:
             nona.nvl "是啊，我还在用Au改音乐呢"
             yangsy.nvl "你那是特例（"
 
-            if not overwatch_first:
+            if not variables["overwatch_first"]:
                 mc.nvl "话说，刚刚听小绿君说的那些，感觉好可怕…"
                 gra.nvl "没关系的，做魔改踩坑是很正常的，你问问这些作者，好多人都或多或少踩过坑、撞过魔改创意呢？"
                 mc.nvl "这样吗…"
 
                 menu(nvl=True):
-                    "那我还是不做了吧…" if not overwatch_first:
+                    "那我还是不做了吧…" if not variables["overwatch_first"]:
+                        $ variables["volunteer_to_do_curse"] = False
                         call ch2_dont_curse from _call_ch2_dont_curse
                     "我会试试的":
+                        $ variables["volunteer_to_do_curse"] = True
                         mc.nvl "你说的有道理，我会试试的。"
                         gra.nvl "嗯，希望你能在踩坑的过程中不断学习，走过这段坑坑洼洼的路，迎接你的将是光明大道。"
                         call ch2_do_curse from _call_ch2_do_curse
             else:
                 menu(nvl=True):
                     "我会试试的":
+                        $ variables["volunteer_to_do_curse"] = True
                         mc.nvl "我会试试的。"
                         gra.nvl "太好了，希望你早日做出自己的魔改"
                         call ch2_do_curse from _call_ch2_do_curse_1
 
         "我暂时还不太想做":
+            $ variables["volunteer_to_do_curse"] = False
             call ch2_dont_curse from _call_ch2_dont_curse_1
 
     call gra_birthday

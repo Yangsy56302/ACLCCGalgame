@@ -365,6 +365,30 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
+init -999 python:
+    class Continue(Action):
+        def __call__(self):
+            newest_page, newest_name = self.get_newest_slot()
+            FileLoad(newest_name, confirm = False, page = newest_page)()
+
+        def get_sensitive(self):
+            if not renpy.newest_slot():
+                return False
+
+            newest_page, newest_name = self.get_newest_slot()
+
+            if newest_page == '_reload':
+                return False
+
+            return FileLoadable(newest_name, page=newest_page)
+
+        def get_newest_slot(self):
+            newest = renpy.newest_slot()
+
+            if newest:
+                page, name = newest.split("-")
+                return page, name
+
 screen navigation():
 
     vbox:
@@ -380,8 +404,6 @@ screen navigation():
             textbutton _("Start") action Start()
 
             textbutton _("Continue") action Continue()
-
-            
             
         else:
 
@@ -399,6 +421,9 @@ screen navigation():
 
         textbutton _("About") action ShowMenu("about")
 
+        if persistent.debug_mode:
+            textbutton _("Debug Mode") action ShowMenu("debug_screen")
+
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Help isn't necessary or relevant to mobile devices.
@@ -411,8 +436,6 @@ screen navigation():
         elif not main_menu:
 
             textbutton _("Main Menu") action MainMenu()
-        
-        
 
         if renpy.variant("pc"):
 
@@ -425,9 +448,6 @@ style navigation_button is gui_button
 style navigation_button_text is gui_button_text
 
 style navigation_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     size_group "navigation"
     properties gui.button_properties("navigation_button")
 
@@ -638,9 +658,6 @@ style game_menu_label_text:
     yalign 0.5
 
 style return_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     xpos gui.navigation_xpos
     yalign 1.0
     yoffset -45
@@ -709,7 +726,7 @@ screen about():
                     null height 1080
 
             # 控制按钮（只在你想要的时候显示）
-            textbutton _("自动滚动开关") action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95 style "check_button"
+            textbutton _("Auto Scroll") action ToggleScreenVariable("scroll_enabled") xalign 0.5 yalign 0.95 style "check_button"
             # textbutton "自动滚动开关" action Function(scroll_test) xalign 0.5 yalign 0.95
 
 style about_label is gui_label
@@ -839,18 +856,12 @@ style page_label_text:
     hover_color gui.hover_color
 
 style page_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("page_button")
 
 style page_button_text:
     properties gui.button_text_properties("page_button")
 
 style slot_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
@@ -863,6 +874,63 @@ style slot_button_text:
 ## themselves.
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#preferences
+
+init python:
+    import os
+    import shutil
+    import sys
+
+    def get_desktop_path():
+        """获取当前用户的真实桌面路径（支持Windows重定向）"""
+        if renpy.windows:
+            # 优先读取注册表
+            try:
+                import winreg
+                key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, 
+                                    r"Software\Microsoft\Windows\CurrentVersion\Explorer\User Shell Folders")
+                desktop, _ = winreg.QueryValueEx(key, "Desktop")
+                winreg.CloseKey(key)
+                # 如果路径包含 %USERPROFILE% 环境变量，需要展开
+                desktop = os.path.expandvars(desktop)
+                if os.path.isdir(desktop):
+                    return desktop
+            except Exception:
+                pass
+            # 备用：通过环境变量
+            profile = os.environ.get("USERPROFILE")
+            if profile:
+                candidate = os.path.join(profile, "Desktop")
+                if os.path.isdir(candidate):
+                    return candidate
+        # 非Windows或上述都失败：用默认方法
+        return os.path.expanduser("~/Desktop")
+
+    def CopyToAnyway(filename, dest_filename):
+
+        if not renpy.loadable(filename):
+            renpy.show_screen("copy_tip","未知或不存在的文件\"{}\"，请检查路径".format(filename))
+            return
+
+        # 只取文件名，防止路径里有奇怪的斜杠
+        base_name = os.path.basename(filename)
+        target_path = os.path.join(dest_filename)
+
+        try:
+            # 3. 核心步骤：从 Ren'Py 虚拟文件系统（含 RPA）读取文件字节流
+            # 分块读取（防止大文件内存溢出）
+            with renpy.file(filename) as f:
+                with open(target_path, "wb") as out_file:
+                    while True:
+                        chunk = f.read(8192)  # 每次读 8KB
+                        if not chunk:
+                            break
+                        out_file.write(chunk)
+            
+            renpy.show_screen("copy_tip", "已将文件保存至 \""+target_path+"\"")
+
+        except Exception as e:
+            renpy.show_screen("copy_tip", "保存失败：{}".format(str(e)))
+
 
 screen preferences():
 
@@ -945,21 +1013,6 @@ screen preferences():
                             textbutton _("Audio when Unfocused") action Preference("audio when unfocused", "toggle")
                             textbutton _("Mute All") action Preference("all mute", "toggle") style "mute_all_button"
 
-            hbox:
-                if persistent.debug_mode:
-                    vbox:
-                        label "Debug Mode" text_font debug_gui_font
-                        textbutton _("Disable Debug Mode") action Show("debug_confirm",None,"Disable debug mode?", yes_action=[SetVariable("persistent.debug_mode", False),Hide()], no_action=Hide()) text_font debug_gui_font
-                        textbutton _("Unlock All Music") action Call("debug_unlock","Music") text_font debug_gui_font
-                        textbutton _("Unlock All CG") action Call("debug_unlock","CG") text_font debug_gui_font
-                        textbutton _("Change Variable") action Show("per_variable") text_font debug_gui_font
-                        textbutton "Clear All Persistent Data" action Call("debug", "reset") text_font debug_gui_font
-                        if renpy.variant("pc"):
-                            textbutton "Copy test file to Desktop" action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip") text_font debug_gui_font
-                        elif renpy.variant("android"):
-                            textbutton "Copy test file to Download" action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCC Galgame", "level file.zip") text_font debug_gui_font
-
-
 
 style pref_label is gui_label
 style pref_label_text is gui_label_text
@@ -987,6 +1040,14 @@ style slider_pref_vbox is pref_vbox
 style mute_all_button is check_button
 style mute_all_button_text is check_button_text
 
+style gui_button:
+    hover_sound gui.navigate_sound
+    activate_sound gui.squelch_sound
+    
+style gui_slider:
+    hover_sound gui.navigate_sound
+    activate_sound gui.navigate_sound
+
 style pref_label:
     top_margin gui.pref_spacing
     bottom_margin 3
@@ -1001,9 +1062,6 @@ style radio_vbox:
     spacing gui.pref_button_spacing
 
 style radio_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.squelch_sound
-
     properties gui.button_properties("radio_button")
     foreground "gui/button/radio_[prefix_]foreground.png"
 
@@ -1014,9 +1072,6 @@ style check_vbox:
     spacing gui.pref_button_spacing
 
 style check_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.squelch_sound
-
     properties gui.button_properties("check_button")
     foreground "gui/button/check_[prefix_]foreground.png"
 
@@ -1024,9 +1079,6 @@ style check_button_text:
     properties gui.button_text_properties("check_button")
 
 style slider_slider:
-    hover_sound gui.navigate_sound
-    activate_sound gui.navigate_sound
-
     xsize 525
 
 style slider_button:
@@ -1280,9 +1332,6 @@ style help_label_text is gui_label_text
 style help_text is gui_text
 
 style help_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("help_button")
     xmargin 12
 
@@ -1362,9 +1411,6 @@ style confirm_prompt_text:
     layout "subtitle"
 
 style confirm_button:
-    hover_sound gui.navigate_sound
-    activate_sound gui.enter_sound
-
     properties gui.button_properties("confirm_button")
 
 style confirm_button_text:
@@ -2019,10 +2065,10 @@ init python:
 
     # 可鉴赏的音乐
     room_musics = {
-        "Aurora (Title Ver.)": "mus_aurora_part1.ogg",
-        "Before Beginning":"mus_setup.ogg",
-        "Astral Calm": "mus_astral_calm.mp3",
-        "Aurora": "mus_aurora.mp3"
+        _("Aurora (Title Ver.)"): "mus_aurora_part1.ogg",
+        _("Before Beginning"): "mus_setup.ogg",
+        _("Astral Calm"): "mus_astral_calm.mp3",
+        _("Aurora"): "mus_aurora.mp3"
         # 更多音乐请自行添加
     }
 
@@ -2117,6 +2163,7 @@ screen music_room():
 
         # 进入音乐空间时自动播放音乐……？
         # on "replace" action mr.Play()
+
 
 screen chapter_title(title_text):
 

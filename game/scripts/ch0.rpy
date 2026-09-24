@@ -237,8 +237,10 @@ label ch0_1:
     # yangsy.comment "Yangsy也不知道该在哪存剧情分支信息，目前就先这样吧（"
     # myworldzycpc.comment "帮你搬到game/custom_variable.rpy了"
 
+    $ variables["gra_chemistry_name"] = None
+
     if mc.nickname == "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
-        $ gra_chemistry_name = True
+        $ variables["gra_chemistry_name"] = True
         menu(nvl=True):
             "[mc]":
                 $ renpy.music.set_pause(True)
@@ -249,9 +251,10 @@ label ch0_1:
     else:
         menu(nvl=True):
             "[mc]":
+                $ variables["gra_chemistry_name"] = False
                 mc.nvl "[mc]"
             "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子":
-                $ gra_chemistry_name = True
+                $ variables["gra_chemistry_name"] = True
                 $ renpy.music.set_pause(True)
                 mc.nvl "奥苯海墨与孙笑氚发明了铅早砹音和丰氚箱子"
                 gra.nvl "？"
@@ -298,7 +301,7 @@ label ch0_1:
     我们喜欢这种反差感，并因此聚集在这里\n
     其实我和另外几位成员也会自己制作魔改{/cps}{nw}
     """
-    if gra_chemistry_name:
+    if variables["gra_chemistry_name"]:
         gra.nvl "{cps=*0.5}哪天你也该去试一试{/cps}"
     else:
         gra.nvl "{cps=*0.5}或许你也可以试一试{/cps}"

@@ -280,6 +280,7 @@ label chex_unknown_oi:
 
     return
 
+
 label chex_unknown_baile_lefthanded:
     '有一天，[baile]给[myworldzycpc]介绍了一款叫做"人生重开器"的游戏'
     '[myworldzycpc]看到在"天赋点"中，有一个"左撇子（习惯使用左手）"'
