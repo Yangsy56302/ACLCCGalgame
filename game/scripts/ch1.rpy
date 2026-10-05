@@ -91,7 +91,7 @@ label ch1:
             mc.nvl "我对魔改这种用一句话改变谱面的这种创作方式很感兴趣"
             mc.nvl "毕竟其他作者也不会把已经完成的关卡作为创作素材"
             yangsy.nvl "很少有一上来就对魔改这么感兴趣的人呢（"
-            if gra_chemistry_name is True:
+            if variables["gra_chemistry_name"] is True:
                 yangsy.nvl "看来Gra昨天的预感还挺准的？（（（"
             yangsy.nvl "等哪天有想法了你或许可以试试自己做一个？（"
         "说不太上来但就是喜欢":
