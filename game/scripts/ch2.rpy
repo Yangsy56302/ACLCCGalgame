@@ -35,6 +35,7 @@ label ch2:
             gra.nvl "同样的 {w=0.25}体现在关卡名上时 {w=0.5}就是用各种符号来表示\n{w=1.0}我们把它叫做“魔改标识符”"
             gra.nvl '比如Yangsy为1-X关卡做的魔改：{w=0.5}{color=#ffffcc}{i}1-X 冰与火之舞，但判定限制是变化之神{/i}{/color}\n{w=1.0}加上标识符就是{color=#ffffcc}{i}"1-X" 冰与火之舞，但判定限制是变化之神{/i}{/color}'
             mc.nvl "这样啊{...}"
+            $ renpy.music.set_pause(True)
             voice "voice/crab_mine_and_qing/prelude.ogg"
             lv.nvl "{nw}"
             $ nvl_erase()
@@ -55,6 +56,7 @@ label ch2:
             voice "voice/crab_mine_and_qing/8.ogg"
             lv.nvl '{a=https://www.bilibili.com/video/BV1qNUmYRE8v}🎵 {i}魔改谱面，我们共建ACL！{/i} 🎵{nw}'
             gra.nvl "{cps=*0.25}{......}{/cps}"
+            $ renpy.music.set_pause(False)
 
         "暗中观察":
             $ variables["overwatch_first"] = True
