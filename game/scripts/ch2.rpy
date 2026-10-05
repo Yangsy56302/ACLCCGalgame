@@ -84,7 +84,7 @@ label ch2:
             myworldzycpc.nvl "😰"
             mc.nvl "话说…可以教我怎么做吗？"
             gra.nvl "魔改没有一成不变的做法，主要得看创造力"
-            mc.nvl "但我连怎么该音乐都不会呢"
+            mc.nvl "但我连怎么改音乐都不会呢"
             gra.nvl "emm"
             gra.nvl "用你自己的方式就行，方式远不止一种，现在互联网这么发达，有什么问题不能上网解决呢…"
             nona.nvl "是啊，我还在用Au改音乐呢"
