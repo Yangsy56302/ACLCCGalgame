@@ -155,7 +155,7 @@ label ch1:
     call ch1_myworld_view
 
     window hide
-    scene home_noon with pixelate
+    scene home_noon with pixellate
     $ another_view = False
     $ current_perspective = mc
     $ session_title = None
