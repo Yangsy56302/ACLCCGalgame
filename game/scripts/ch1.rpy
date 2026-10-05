@@ -207,7 +207,7 @@ label ch1_myworld_view:
     
     system.nvl "加入群聊之前，需要先回答问题：\n{w=1.0}你是怎么知道这个群的？{nw}"
     myworldzycpc.nvl "从ACLC网站"
-    "{.....}"
+    "{......}"
 
     nvl clear
     $ session_title = None
