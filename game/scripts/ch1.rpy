@@ -138,6 +138,8 @@ label ch1:
     nvl clear
     nvl show
 
+    $ config.nvl_list_length = 9
+
     morin.nvl "一日之计在于晨\n我醒了{fast}{nw}"
     gra.nvl "早{fast}{nw}"
     yangsy.nvl "早（{fast}{nw}"
@@ -147,6 +149,8 @@ label ch1:
     yangsy.nvl "诶不是连着两天来新人这概率合理吗（{fast}{nw}"
     gra.nvl "你说ACLC网站？\n你是怎么知道的？{fast}{nw}"
     myworldzycpc.nvl "我的朋友 [baile] 告诉我的，看到有个链接说可以加入群聊{fast}"
+
+    $ config.nvl_list_length = 6
 
     call ch1_myworld_view
 
