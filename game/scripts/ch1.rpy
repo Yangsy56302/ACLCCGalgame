@@ -195,8 +195,7 @@ label ch1:
     gra.nvl "{cps=*0.25}{......}{/cps}"
     $ renpy.music.set_pause(False)
 
-    gra.nvl "{color=#0080FF}@[mc]{/color} 诶，{w=0.5}话说{w=0.25}你要不要做个魔改试试水？"
-    yangsy.nvl.comment "{...}Yangsy要不做一个{{at=[[mc]}这样的标签？（"
+    gra.nvl "{at=[mc]} 诶，{w=0.5}话说{w=0.25}你要不要做个魔改试试水？"
     mc.nvl "我？"
     gra.nvl "对啊"
     gra.nvl "毕竟都加入ACLC了"
