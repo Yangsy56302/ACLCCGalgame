@@ -68,7 +68,7 @@ label ch2:
             \ngra.nvl "哈，这是[nona]的习惯用语而已，别误会了（"
             """
 
-    gra.nvl "{color=#0080FF}@[mc]{/color} 诶，话说你要不要做个魔改试试水？"
+    gra.nvl "{at=[mc]} 诶，话说你要不要做个魔改试试水？"
     mc.nvl "我？"
     gra.nvl "对啊，既然来到了这里，就试着融入我们吧"
     yangsy.nvl "我们很期待你做出自己的作品"
