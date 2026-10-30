@@ -3,8 +3,6 @@ label start:
     $ is_ingame = True
     stop music
 
-    default has_phone = False
-
     call setup_naming_start from _call_setup_naming_start
     $ renpy.block_rollback()
     call ch0 from _call_ch0

@@ -313,7 +313,8 @@ label ch0_1:
     gra.nvl "那就好\n{w=0.5}我还担心这么多字会不会把你给看迷糊呢"
     yangsy.nvl "这年头持有长文本阅读能力的人确实不多了（"
     
-    nvl clear
+    # nvl clear
+    # yangsy.nvl.comment "一页就一句话还是太诡异了（"
 
     # if not has_phone:
     mc.nvl "哦对，{w=0.25}还有，{w=0.5}QQ应该怎么用？我不是很熟悉[[笑哭]"
@@ -329,7 +330,7 @@ label ch0_1:
     baile.nvl "睡啥睡{w=0.5}{nw}"
     baile.nvl "起来嗨{w=1.0}{nw}"
     mwam.nvl "养生呢搁这"
-    mc.nvl "不是，是{w=0.5}我['妈' if has_phone else '母亲']叫我睡觉了"
+    mc.nvl "不是，是{w=0.5}我母亲叫我睡觉了"
     gra.nvl "哦，{w=0.25}好吧"
     gra.nvl "那就祝你好梦{w=0.5}{nw}"
     mwam.nvl "明天见{w=0.25}{nw}"
