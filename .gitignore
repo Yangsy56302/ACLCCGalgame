@@ -4,6 +4,7 @@
 /game/cache/**
 /errors.txt
 /log.txt
+/files.txt
 /traceback.txt
 /.vscode/
 *.keystore
