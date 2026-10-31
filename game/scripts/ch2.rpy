@@ -114,7 +114,7 @@ label ch2:
             $ variables["volunteer_to_do_curse"] = False
             call ch2_dont_curse from _call_ch2_dont_curse_1
 
-    call gra_birthday
+    call gra_birthday from _call_gra_birthday
 
     call to_be_continued("ch2") from _call_to_be_continued_2
         
@@ -181,10 +181,17 @@ label ch2_do_curse:
             if renpy.variant("pc"):
                 $ CopyToAnyway("UnknowFile","UnknowFile")
             elif renpy.variant("android"):
-                while not is_external_storage_manager():
-                    $ request_all_files_access()
-                    $ renpy.pause(2.0)
-                $ release_file_quietly("UnknowFile","UnknowFile")
+                python:
+                    for attempt in range(3):
+                        if is_external_storage_manager():
+                            break
+                        request_all_files_access()
+                        renpy.pause(2.0)
+                if is_external_storage_manager():
+                    $ release_file_quietly("UnknowFile","UnknowFile")
+                else:
+                    $ release_file_quietly("UnknowFile","UnknowFile")
+                # 先这么写，以后按剧情来改
             pass
 
     gra.nvl "怎么样，是不是对复合魔改有一定了解了？"

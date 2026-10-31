@@ -111,7 +111,7 @@ label ch1:
     mc "{......}还是先做点作业吧。"
 
     scene black with dissolve
-    call show_chapter("三小时后")
+    call show_chapter("三小时后") from _call_show_chapter_1
     scene bg home_noon with dissolve
     
     "刚刚写完英语作业的你突然意识到，{w=0.5}差不多也是时候去检查一下QQ消息了。"
@@ -133,7 +133,7 @@ label ch1:
 
     $ config.nvl_list_length = 6
 
-    call ch1_myworld_view
+    call ch1_myworld_view from _call_ch1_myworld_view
 
     scene home_noon with pixellate
     $ another_view = False
@@ -146,7 +146,7 @@ label ch1:
     gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
     mc "{cps=*0.25}{......}{/cps}"
 
-    call ch1_clever_box
+    call ch1_clever_box from _call_ch1_clever_box
     yangsy.comment "小事（指严重程度\n大事（指篇幅占比"
     yangsy.comment "说实话CB这段偏题剧情放在剧情开头属实有些长了\n这段可以做成中期的分支剧情（"
 

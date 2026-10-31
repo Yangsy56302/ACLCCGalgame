@@ -15,7 +15,7 @@ default variables = {
 
 # --- 持久化变量 ---
 default persistent.debug_mode = False
-
+default persistent.setup_saw_debug_screen = False
 # yangsy.comment 不是谁想的把debug模式密码扔到persistent里的啊（
 # yangsy.comment Yangsy改成判断条件硬编码了（（（
 

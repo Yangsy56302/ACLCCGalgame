@@ -232,13 +232,16 @@ init python:
     build.classify("**/.**", None)
     build.classify("**/#**", None)
     build.classify("**/thumbs.db", None)
-    build.classify("debug.rpy", None)
+    build.classify("game/debug.rpy", None)
+    build.classify("game/debug.rpyc", None)
+    build.classify("game/**.rpy", None)
+    build.classify("game/**.rpym", None)
 
     build.archive("a","all")
     build.archive("b","all")
     build.archive("c","all")
 
-    build.classify("game/**.rpy", "a")
+    build.classify("game/**.rpymc", "a")
     build.classify("game/**.rpyc", "a")
     build.classify("game/**.jpg", "b")
     build.classify("game/**.png", "b")

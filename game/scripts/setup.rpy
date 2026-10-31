@@ -293,13 +293,19 @@ label setup_naming_entered:
             jump setup_naming_loop
 
 
-    # 否则，如果游戏目前处在调试模式：
-    elif player_input == persistent.password and not persistent.debug_mode and is_debug_installed:
-        python:
-            _history_list.pop()
-            persistent.debug_mode = True
-        nvl clear
-        debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
+    # 否则，如果输入了调试码，且允许进入调试模式：
+    elif player_input == "VGVhbSBBQ0xDQyBNZW1iZXI=" and is_debug_installed:
+        # 如果游戏目前不处在调试模式：
+        if not persistent.debug_mode:
+            python:
+                _history_list.pop()
+                persistent.debug_mode = True
+            nvl clear
+            debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
+        # 否则：
+        else:
+            nvl clear
+            debug "Debug Mode Is Already Enabled{fast}{w=1.0}{nw}"
         if not persistent.setup_saw_debug_screen:
 
             # setup "？"
@@ -384,8 +390,8 @@ label setup_naming_entered:
             else: 
                 nvl clear
                 debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
-                debug "user@debugmode:~$ {fast}su root{w=1.0}{nw}"
-                debug "Enter Password: {fast}{w=3.0}{nw}"
+                debug "user@debugmode:~$ {fast}su - root{w=1.0}{nw}"
+                debug "Password: {fast}{w=3.0}{nw}"
                 debug "root@debugmode:~$ {fast}{w=0.5}chmod 777 changestorage.sh{w=1.0}{nw}"
                 debug "root@debugmode:~$ {fast}{w=0.5}./changestorage.sh{w=1.0}{nw}"
                 nvl clear
