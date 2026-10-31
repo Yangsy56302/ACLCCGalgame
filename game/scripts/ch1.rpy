@@ -1,6 +1,6 @@
 label ch1:
     scene black with dissolve
-    $ another_view = True
+    $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
 
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
@@ -19,7 +19,7 @@ label ch1:
     hide yangsy
 
     scene black with dissolve
-    $ another_view = False
+    $ variables["another_view"] = False
     $ current_perspective = mc
 
     call show_chapter("第二天") from _call_show_chapter
@@ -136,7 +136,7 @@ label ch1:
     call ch1_myworld_view from _call_ch1_myworld_view
 
     scene home_noon with pixellate
-    $ another_view = False
+    $ variables["another_view"] = False
     $ current_perspective = mc
     $ session_title = None
     # nvl clear
@@ -156,7 +156,7 @@ label ch1:
 label ch1_myworld_view:
 
     scene black with pixellate
-    $ another_view = True
+    $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
     $ session_title = baile
     nvl clear

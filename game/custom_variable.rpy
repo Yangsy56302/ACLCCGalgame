@@ -1,12 +1,12 @@
 # mwam.comment "之后的变量就加这吧"
 
 # --- 某些状态 ---
-default another_view = False
 default session_title = None
 default is_ingame = False
 
 # --- 分支变量 ---
 default variables = {
+    "another_view": False,
     "gra_chemistry_name": None,
     "overwatch_first": None,
     "volunteer_to_do_curse": None,

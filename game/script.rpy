@@ -147,3 +147,19 @@ init python:
                 renpy.show_screen("copy_tip","已将文件保存至 \""+target_path+"\"")
             except Exception as e:
                 print(f"释放失败: {e}")
+
+
+label after_load:
+    python:
+        current_vars = getattr(renpy.store, "variables", None)
+
+        if not isinstance(current_vars, dict):
+            current_vars = {}
+            renpy.store.variables = current_vars
+
+        if "another_view" not in current_vars:
+            current_vars["another_view"] = bool(getattr(renpy.store, "another_view", False))
+
+        if hasattr(renpy.store, "another_view"):
+            del renpy.store.another_view
+    return
