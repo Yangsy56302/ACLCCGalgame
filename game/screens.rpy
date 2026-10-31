@@ -413,7 +413,7 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        if main_menu and persistent.has_seen_ending:
+        if main_menu and persistent.variables.get("has_seen_ending", False):
 
             textbutton _("Extra Mode") action ShowMenu("gallery")
 

@@ -306,7 +306,7 @@ label setup_naming_entered:
         else:
             nvl clear
             debug "Debug Mode Is Already Enabled{fast}{w=1.0}{nw}"
-        if not persistent.setup_saw_debug_screen:
+        if not persistent.variables["setup_saw_debug_screen"]:
 
             # setup "？"
             # setup "你刚刚{w=0.25}，是不是输入了什么东西{w=0.5}，然后弹出了一个奇怪的界面？"
@@ -317,7 +317,7 @@ label setup_naming_entered:
             "{......}"
             "哎，算了，你都知道这个了，我也没资格再问你了，你爱干啥干啥吧。"
 
-            $ persistent.setup_saw_debug_screen = True
+            $ persistent.variables["setup_saw_debug_screen"] = True
         else:
             mwam.comment "你们来填吧，我想不出这里写什么"
             yangsy.comment "总感觉这里留空就行了（"

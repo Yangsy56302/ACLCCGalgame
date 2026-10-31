@@ -44,6 +44,7 @@ label to_be_continued(chp):
 image splash = "splash.png"
 image attention = "attention.png"
 label splashscreen: 
+    $ migrate_persistent_variables()
     call request_manage_storage from _call_request_manage_storage
     scene black 
     with Pause(1) 

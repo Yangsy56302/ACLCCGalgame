@@ -236,6 +236,7 @@ init python:
     build.classify("game/debug.rpyc", None)
     build.classify("game/**.rpy", None)
     build.classify("game/**.rpym", None)
+    build.classify("docs/**", None)
 
     build.archive("a","all")
     build.archive("b","all")

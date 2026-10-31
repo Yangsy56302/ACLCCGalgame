@@ -56,7 +56,7 @@ label vibe_epilogue:
 
     pause 1.5
 
-    $ persistent.has_seen_ending = True
+    $ persistent.variables["has_seen_ending"] = True
 
     scene black with fade
 
