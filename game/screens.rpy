@@ -105,7 +105,7 @@ screen say(who, what):
     window:
         id "window"
 
-        if another_view:
+        if variables.get("another_view", False):
             background "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
@@ -193,7 +193,7 @@ screen input(prompt):
     window:
         id "window"
 
-        if another_view:
+        if variables.get("another_view", False):
             add "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
@@ -229,7 +229,7 @@ screen volatile_input_screen(prompt, duration):
     window:
         id "window"
 
-        if another_view:
+        if variables.get("another_view", False):
             add "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
@@ -275,7 +275,7 @@ init python:
 screen choice(items):
     style_prefix "choice"
 
-    if another_view:
+    if variables.get("another_view", False):
         add "gui/another_view.png" xalign 0.5 yalign 1.0
     else:
         pass
@@ -413,7 +413,7 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        if main_menu and persistent.has_seen_ending:
+        if main_menu and persistent.variables.get("has_seen_ending", False):
 
             textbutton _("Extra Mode") action ShowMenu("gallery")
 

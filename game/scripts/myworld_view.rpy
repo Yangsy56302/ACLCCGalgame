@@ -19,7 +19,7 @@ label myworld:
     call myworld_view
 
     scene home_noon with pixellate
-    $ another_view = False
+    $ variables["another_view"] = False
     $ current_perspective = mc
     $ session_title = None
     # nvl clear
@@ -39,7 +39,7 @@ label myworld:
 label myworld_view:
 
     scene black with pixellate
-    $ another_view = True
+    $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
     $ session_title = baile
     nvl clear

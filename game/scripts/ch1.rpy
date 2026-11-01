@@ -1,6 +1,6 @@
 label ch1:
     scene black with dissolve
-    $ another_view = True
+    $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
 
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
@@ -19,7 +19,7 @@ label ch1:
     hide yangsy
 
     scene black with dissolve
-    $ another_view = False
+    $ variables["another_view"] = False
     $ current_perspective = mc
 
     call show_chapter("第二天") from _call_show_chapter
@@ -111,7 +111,7 @@ label ch1:
     mc "{......}还是先做点作业吧。"
 
     scene black with dissolve
-    call show_chapter("三小时后")
+    call show_chapter("三小时后") from _call_show_chapter_1
     scene bg home_noon with dissolve
     
     "刚刚写完英语作业的你突然意识到，{w=0.5}也许是时候检查一下群内的情况了。"

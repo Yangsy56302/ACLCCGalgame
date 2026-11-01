@@ -20,18 +20,26 @@ label ch2_do_curse:
     yangsy.nvl "好主意啊Gra"
     yangsy.nvl "咱们也有段时间没做过多效果魔改了\n{w=0.5}毕竟都在给自己的系列构思新魔改效果（"
     gra.nvl "[[nfgtr.zip]{fast}{w=1.0}这是[yangsy]做的复合魔改的一个例子，{w=0.25}你可以看看{w=1.0}{nw}"
+    
     menu(nvl=True):
         "保存文件…":
             if renpy.variant("pc"):
-                $ CopyToAnyway("UnknowFile", "UnknowFile")
+                $ CopyToAnyway("UnknowFile","UnknowFile")
             elif renpy.variant("android"):
-                while not is_external_storage_manager():
-                    $ request_all_files_access()
-                    $ renpy.pause(2.0)
-                $ release_file_quietly("UnknowFile", "UnknowFile")
+                python:
+                    for attempt in range(3):
+                        if is_external_storage_manager():
+                            break
+                        request_all_files_access()
+                        renpy.pause(2.0)
+                if is_external_storage_manager():
+                    $ release_file_quietly("UnknowFile","UnknowFile")
+                else:
+                    $ release_file_quietly("UnknowFile","UnknowFile")
+                # 先这么写，以后按剧情来改
             pass
 
-    # gra.nvl "怎么样，是不是对复合魔改有一定了解了？"
+    gra.nvl "怎么样，是不是对复合魔改有一定了解了？"
     mc.nvl "感觉还是有些难"
     yangsy.nvl "要不 {w=0.5}再削弱一下？"
     gra.nvl "那就单独挑个做起来简单些的魔改来用吧"
