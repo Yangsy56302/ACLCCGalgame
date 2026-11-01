@@ -323,6 +323,8 @@ label setup_naming_entered:
             # mwam.comment "你们来填吧，我想不出这里写什么"
             # yangsy.comment "总感觉这里留空就行了（"
             # mwam.comment "留空的话那我注释了（"
+            # mwam.comment "全空会报错这谁绷得住，算了，加个pass吧（）"
+            pass
         jump setup_naming_loop
 
 
