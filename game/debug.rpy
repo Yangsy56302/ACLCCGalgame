@@ -60,8 +60,8 @@ screen debug_screen():
             style_prefix "debug"
         
             textbutton _("Disable Debug Mode") action Show("debug_confirm", None, _("Disable debug mode?"), yes_action=[SetVariable("persistent.debug_mode", False), Hide()], no_action=Hide())
-            textbutton _("Unlock All Music") action Call("debug_unlock", "Music")
-            textbutton _("Unlock All CG") action Call("debug_unlock", "CG")
+            textbutton _("Unlock All Music") action Function(unlock_all_music)
+            textbutton _("Unlock All CG") action Function(unlock_all_cg)
             textbutton _("Edit Variables...") action Show("per_variable")
             textbutton _("Clear Persistent Data") action Call("debug", "reset")
             if renpy.variant("pc"):
@@ -144,6 +144,19 @@ init python:
         global persistent
         persistent.variables[var] = val
 
+    def unlock_all_music():
+        for music_file in room_musics.values():
+            renpy.mark_audio_seen(music_file)
+        renpy.save_persistent()
+        renpy.show_screen("debug_tip",("All music unlocked"))
+
+    def unlock_all_cg():
+        for group_images in gallery_images.values():
+            for img in group_images:
+                renpy.mark_image_seen(img)
+        renpy.save_persistent()
+        renpy.show_screen("debug_tip",("All CG unlocked"))
+
 screen variable():
     tag menu
     use debug_menu("Variable"):
@@ -173,32 +186,32 @@ screen per_variable():
                     textbutton "False" action Function(SetPersistentVariable, var, False)
 
 
-label debug_unlock(Type):
-    nvl clear
-    debug "unlock: Now unlocking all [Type]{fast}{w=1.0}{nw}"
-    if Type == "CG":
-        scene bg home_midnight
-        scene bg home_night
-        scene bg home_noon
-        scene bg sbeam
-        scene bg sky
-        scene bg sky_night
-        scene bg star
-        scene bg that_video
-        scene black
-        debug "unlock: Success.{fast}{w=1.0}{nw}"
-    elif Type == "Music":
-        play music "mus_astral_calm.mp3"
-        play music "mus_aurora.mp3"
-        play music "mus_setup.ogg"
-        stop music
-        debug "unlock: Success.{fast}{w=1.0}{nw}"
-    else:
-        debug "unlock: Failed to find [Type]{fast}{w=1.0}{nw}"
-    if is_ingame:
-        return
-    else:
-        $ renpy.full_restart()
+# label debug_unlock(Type):
+#     nvl clear
+#     debug "unlock: Now unlocking all [Type]{fast}{w=1.0}{nw}"
+#     if Type == "CG":
+#         scene bg home_midnight
+#         scene bg home_night
+#         scene bg home_noon
+#         scene bg sbeam
+#         scene bg sky
+#         scene bg sky_night
+#         scene bg star
+#         scene bg that_video
+#         scene black
+#         debug "unlock: Success.{fast}{w=1.0}{nw}"
+#     elif Type == "Music":
+#         play music "mus_astral_calm.mp3"
+#         play music "mus_aurora.mp3"
+#         play music "mus_setup.ogg"
+#         stop music
+#         debug "unlock: Success.{fast}{w=1.0}{nw}"
+#     else:
+#         debug "unlock: Failed to find [Type]{fast}{w=1.0}{nw}"
+#     if is_ingame:
+#         return
+#     else:
+#         $ renpy.full_restart()
 
 
 label debug(thing):

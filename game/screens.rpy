@@ -2195,3 +2195,14 @@ screen copy_tip(message):
             font "SYBlack.otf"
 
     timer 3.25 action Hide("copy_tip")
+
+screen debug_tip(message):
+
+    zorder 100
+    style_prefix "notify"
+
+    frame at notify_appear:
+        text "[message!tq]":
+            font debug_gui_font
+
+    timer 3.25 action Hide("debug_tip")
