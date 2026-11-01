@@ -1,4 +1,4 @@
-﻿# TODO: Translation updated at 2026-05-17 18:58
+# TODO: Translation updated at 2026-05-17 18:58
 
 translate None strings:
 
@@ -387,6 +387,12 @@ translate None strings:
     # game/screens.rpy:1037
     old "Copy test file to Download"
     new "下载测试文件"
+
+    old "All music unlocked"
+    new "已解锁所有音乐"
+
+    old "All CG unlocked"
+    new "已解锁所有CG"
 
     # game/screens.rpy:2097
     old "Aurora (Title Ver.)"
