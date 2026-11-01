@@ -162,10 +162,4 @@ label after_load:
 
         if hasattr(renpy.store, "another_view"):
             del renpy.store.another_view
-
-        if "in_setup" not in current_vars:
-            current_vars["in_setup"] = bool(getattr(renpy.store, "in_setup", False))
-
-        if hasattr(renpy.store, "in_setup"):
-            del renpy.store.in_setup
     return
