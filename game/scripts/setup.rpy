@@ -19,7 +19,8 @@ init -99 python:
 
 
 label setup_naming_start:
-    
+    $ variables["in_setup"] = True
+
     scene black with fade
 
     python:
@@ -312,15 +313,18 @@ label setup_naming_entered:
             # setup "你刚刚{w=0.25}，是不是输入了什么东西{w=0.5}，然后弹出了一个奇怪的界面？"
             # setup "我想{w=0.25}你可能是有什么特殊的身份吧。"
 
-            "{......}？"
-            "你怎么知道这个？你到底是谁？"
-            "{......}"
-            "哎，算了，你都知道这个了，我也没资格再问你了，你爱干啥干啥吧。"
+            setup "{......}？"
+            setup "你怎么知道这个？你到底是谁？"
+            setup "{......}"
+            setup "哎，算了，你都知道这个了，我也没资格再问你了，你爱干啥干啥吧。"
 
             $ persistent.variables["setup_saw_debug_screen"] = True
         else:
-            mwam.comment "你们来填吧，我想不出这里写什么"
-            yangsy.comment "总感觉这里留空就行了（"
+            # mwam.comment "你们来填吧，我想不出这里写什么"
+            # yangsy.comment "总感觉这里留空就行了（"
+            # mwam.comment "留空的话那我注释了（"
+            # mwam.comment "全空会报错这谁绷得住，算了，加个pass吧（）"
+            pass
         jump setup_naming_loop
 
 
@@ -469,7 +473,7 @@ label setup_naming_entered:
 
     # 否则，如果输入的名字长度小于3字节：
     elif len(bytes(player_input, encoding="utf-8")) < 3:
-        setup "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
+        "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
     
@@ -509,4 +513,5 @@ label setup_naming_done:
 
     stop music fadeout 2.0
     
+    $ variables["in_setup"] = False
     return

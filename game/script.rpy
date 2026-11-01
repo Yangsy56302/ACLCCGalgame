@@ -1,4 +1,4 @@
-﻿# The game starts here.
+# The game starts here.
 label start:
     $ is_ingame = True
     stop music

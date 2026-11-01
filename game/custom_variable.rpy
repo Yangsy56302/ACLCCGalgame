@@ -7,6 +7,7 @@ default is_ingame = False
 # --- 分支变量 ---
 default variables = {
     "another_view": False,
+    "in_setup": False,
     "gra_chemistry_name": None,
     "overwatch_first": None,
     "volunteer_to_do_curse": None,
