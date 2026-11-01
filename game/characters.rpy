@@ -89,7 +89,7 @@ default mc = CharacterWithData("undefined")
 default current_perspective = mc
 
 
-default setup = CharacterWithData("？？？", window_background="gui/textbox_setup.png")
+default setup = CharacterWithData("？？？")
 
 
 default ashell = CharacterWithData("阿希尔Ashell", image="ashell", what_prefix="a ", what_suffix="")
