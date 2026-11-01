@@ -256,7 +256,7 @@ translate None strings:
 
     # game/screens.rpy:1080
     old "Toggles assistive {a=https://www.renpy.org/l/voicing}self-voicing{/a}."
-    new "切换无障碍{a=https://www.renpy.org/l/voicing}自动语音{/a}。（{a=https://renpy.cn/doc/self_voicing.html}中文文档{/a}）"
+    new "切换无障碍{a=https://www.renpy.org/l/voicing}自动语音{/a}。（{a=https://doc.renpy.cn/zh-CN/self_voicing.html}中文文档{/a}）"
 
     # game/screens.rpy:????
     old "Opens the accessibility menu."
