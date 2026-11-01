@@ -82,10 +82,10 @@ label setup_naming_start:
     pause(3.0)
     
 
-    setup "{......}？"
+    "{......}？"
 
     menu:
-        setup "你是谁？"
+        "你是谁？"
         "我不知道。":
             $ entered = True
         "我不清楚。":
@@ -93,14 +93,14 @@ label setup_naming_start:
         "我不晓得。":
             $ entered = True
 
-    setup "{......}我当然知道你不知道了，蠢货。"
-    setup "我也是够蠢的，怎么问了一个你不知道的问题。"
-    setup "真是奇怪，正常流程应该会把你传送到取名进程里，但是触发器并没有被响应。"
-    setup "唉，我到时候再去看看吧。"
-    setup "{......}"
-    setup "啊，当然，得先把你的事情解决了。"
-    setup "我大概只能把你的名字手动赋值进变量里，然后把你跳转到游戏的序章。"
-    setup "稍等，我准备一下。"
+    "{......}我当然知道你不知道了，蠢货。"
+    "我也是够蠢的，怎么问了一个你不知道的问题。"
+    "真是奇怪，正常流程应该会把你传送到取名进程里，但是触发器并没有被响应。"
+    "唉，我到时候再去看看吧。"
+    "{......}"
+    "啊，当然，得先把你的事情解决了。"
+    "我大概只能把你的名字手动赋值进变量里，然后把你跳转到游戏的序章。"
+    "稍等，我准备一下。"
     
     scene black with dissolve
     pause(1.0)
@@ -239,18 +239,18 @@ label setup_naming_entered:
     
         # 第一次：
         if empty_name_attempts == 1:
-            setup "不，你不能什么都不输入，我不确定这样会不会触发什么bug。"
+            "不，你不能什么都不输入，我不确定这样会不会触发什么bug。"
             jump setup_naming_loop
 
         # 第二次：
         elif empty_name_attempts == 2:
-            setup "你是故意的吗？{w=0.25}我可不觉得这很好玩。"
+            "你是故意的吗？{w=0.25}我可不觉得这很好玩。"
             jump setup_naming_loop
             
         # 第三次：
         elif empty_name_attempts == 3:
-            setup "你到底要干什么？{w=0.25}你是想触发什么彩蛋吗？"
-            setup "我不能和你一直在取名界面耽搁下去，我也有工作要做。"
+            "你到底要干什么？{w=0.25}你是想触发什么彩蛋吗？"
+            "我不能和你一直在取名界面耽搁下去，我也有工作要做。"
             $ empty_name_attempts += 1
             # menu:
             #     "我不会取名字。":
@@ -320,8 +320,9 @@ label setup_naming_entered:
 
             $ persistent.variables["setup_saw_debug_screen"] = True
         else:
-            mwam.comment "你们来填吧，我想不出这里写什么"
-            yangsy.comment "总感觉这里留空就行了（"
+            # mwam.comment "你们来填吧，我想不出这里写什么"
+            # yangsy.comment "总感觉这里留空就行了（"
+            # mwam.comment "留空的话那我注释了（"
         jump setup_naming_loop
 
 
@@ -359,28 +360,28 @@ label setup_naming_entered:
                     # setup "我想，{w=0.25}你可能得试试别的名字了，{w=0.5}非常抱歉。"
                     # setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
 
-                    setup "{......}？"
-                    setup "等我检查一下{......}"
-                    setup "名字冲突了？真不巧，我没想到会发生这种事。"
-                    setup "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
+                    "{......}？"
+                    "等我检查一下{......}"
+                    "名字冲突了？真不巧，我没想到会发生这种事。"
+                    "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
                 # 第二次：
                 elif duplicate_name_attempts == 2:
                     # setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
 
-                    setup "又冲突了？你是不是在网络上看过攻略了？还是你认识他们？"
-                    setup "哎，你再换一个吧。"
+                    "又冲突了？你是不是在网络上看过攻略了？还是你认识他们？"
+                    "哎，你再换一个吧。"
                 # 第三次：
                 elif duplicate_name_attempts == 3:
                     # setup "喂，{w=1.0}你是故意的吧。"
                     # setup "你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
                     # setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
 
-                    setup "喂，{w=1.0}你是故意的吧。"
-                    setup "连续三次冲突了，你觉得这有意思吗？"
-                    setup "你继续试吧，反正是肯定用不了的。"
+                    "喂，{w=1.0}你是故意的吧。"
+                    "连续三次冲突了，你觉得这有意思吗？"
+                    "你继续试吧，反正是肯定用不了的。"
                 # 否则
                 else:
-                    setup "{......}"
+                    "{......}"
                     $ mc.nickname = player_input
                 with None
                 play music "mus_setup.ogg" fadein 2.0
@@ -428,8 +429,8 @@ label setup_naming_entered:
         # setup "难道说你觉得这样做就能获得什么“{green}管理员权限{/green}”之类的？"
         # setup "谁知道呢，{w=0.5}说不定某次更新之后作者就会为这个加点什么？"
 
-        setup "{......}我不明白，你觉得这样做能获得什么“{green}管理员权限{/green}”之类的？"
-        setup "谁知道呢，{w=0.5}说不定某次更新之后那群开发者就会为这个加点什么了。"
+        "{......}我不明白，你觉得这样做能获得什么“{green}管理员权限{/green}”之类的？"
+        "谁知道呢，{w=0.5}说不定某次更新之后那群开发者就会为这个加点什么了。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
     
@@ -438,9 +439,9 @@ label setup_naming_entered:
         # setup "唔{......}这好像是你系统账户的名字。\n{w=1.0}你不会所有地方都会用一样的名字吧？"
         # setup "没什么好说的，你喜欢就好。"
 
-        setup "{......}"
-        setup "这好像是你系统账户的名字。\n{w=1.0}你不会所有地方都会用一样的名字吧？"
-        setup "没什么好说的，你喜欢就好。"
+        "{......}"
+        "这好像是你系统账户的名字。\n{w=1.0}你不会所有地方都会用一样的名字吧？"
+        "没什么好说的，你喜欢就好。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
     
@@ -455,22 +456,22 @@ label setup_naming_entered:
         # setup "虽然说输入框能支持，{w=0.25}但是{......}你取个这样的名字，{w=0.5}我该怎么念呢？"
         # setup "难道说你在聊天框里塞了颜文字？{w=1.0}我的程序可检测不出来。"
 
-        setup "你这{......}"
-        setup "虽然说输入框能支持，但是{......}你取个这样的名字，我该怎么念呢？"
-        setup "你在输入框里塞了颜文字吗？我这边可看不出来吗，都是加密的。"        
+        "你这{......}"
+        "虽然说输入框能支持，但是{......}你取个这样的名字，我该怎么念呢？"
+        "你在输入框里塞了颜文字吗？我这边可看不出来吗，都是加密的。"        
         $ mc.nickname = player_input
         jump setup_naming_confirm
 
     # 否则，如果输入的名字长度大于20个字符：
     elif len(player_input) > 20:
         # setup "哇，{w=0.25}这可真是个很长的名字。\n{w=1.0}不过这么长的名字，{w=0.5}我可不能确定UI能不能适配。\n{w=1.0}也许换个名字是个更好的选择？"
-        setup "哇，{w=0.25}这名字可真长，不过UI可能塞不下吧。"
+        "哇，{w=0.25}这名字可真长，不过UI可能塞不下吧。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
 
     # 否则，如果输入的名字长度小于3字节：
     elif len(bytes(player_input, encoding="utf-8")) < 3:
-        setup "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
+        "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
     
@@ -503,10 +504,10 @@ label setup_naming_done:
 #     setup "哦不对，{w=0.25}你又问不了我。（笑）"
 #     setup "好吧，稍等一下，{w=0.5}我得找找剧情被我放在哪了{......}{nw}"
 
-    setup "终于弄完了，你还有其他问题吗？{w=3}{nw}"
-    setup "不对，你又问不了我。（笑）"
-    setup "好吧，那我就把你跳转到剧情里了，有缘再见。{w=2}{nw}"
-    setup "或者说，再也不见，哈哈。{w=1}{nw}"
+    "终于弄完了，你还有其他问题吗？{w=3}{nw}"
+    "不对，你又问不了我。（笑）"
+    "好吧，那我就把你跳转到剧情里了，有缘再见。{w=2}{nw}"
+    "或者说，再也不见，哈哈。{w=1}{nw}"
 
     stop music fadeout 2.0
     
