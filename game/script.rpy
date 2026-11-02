@@ -11,7 +11,9 @@ label start:
     call cutscene("ch1")
     call ch2 from _call_ch2
     call cutscene("ch2")
-    call to_be_continued("ch2")
+    call ch3 from _call_ch3
+    call cutscene("ch3")
+    call to_be_continued("ch3")
     return
 
 
