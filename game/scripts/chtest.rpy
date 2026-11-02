@@ -1,11 +1,9 @@
 label chtest:
-    if not (renpy.windows and is_debug_installed):
-        return
     jump test_console
 
 
 label test_console:
-    if not (renpy.windows and is_debug_installed):
+    if not renpy.windows:
         return
     python:
         console = CmdWindow("DEBUG MODE")
@@ -18,6 +16,15 @@ label test_console:
     python:
         console.Close()
     return
+
+
+label chany:
+    $ label_name = renpy.input("label:")
+    menu:
+        "renpy.call('[label_name]')":
+            $ renpy.call(label_name)
+        "renpy.jump('[label_name]')":
+            $ renpy.jump(label_name)
 
 
 label chtest_char:

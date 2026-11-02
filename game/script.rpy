@@ -3,8 +3,6 @@ label start:
     $ is_ingame = True
     stop music
 
-    default has_phone = False
-
     call setup_naming_start from _call_setup_naming_start
     $ renpy.block_rollback()
     call ch0 from _call_ch0
@@ -13,14 +11,11 @@ label start:
 
 
 label to_be_continued(chp):
-    
-    stop music fadeout 1.0
-    scene black with dissolve
-    
     while True:
+        stop music fadeout 1.0
+        scene black with dissolve
+
         menu:
-            "查看第一章剧情" if chp == "ch0":
-                jump ch1
             "查看已被废弃的AI剧情":
                 jump vibe_ch2
             "查看游离的支线章节":
@@ -29,14 +24,20 @@ label to_be_continued(chp):
                         call chex_unknown_oi from _call_chex_unknown_oi
                     "chex_unknown_baile_lefthanded":
                         call chex_unknown_baile_lefthanded from _call_chex_unknown_baile_lefthanded
+                    "chex_myworld":
+                        call chex_myworld from _call_chex_myworld
                     "返回":
                         pass
-            "查看[yoosee]的建议":
-                call chplotadvice_yoosee from _call_chplotadvice_yoosee
-            "查看[yangsy]的建议":
-                call chplotadvice_yangsy from _call_chplotadvice_yangsy
-            "查看测试（chtest）" if renpy.windows and is_debug_installed:
-                call chtest from _call_chtest
+            "查看剧情建议":
+                menu:
+                    "查看[yoosee]的建议":
+                        call chplotadvice_yoosee from _call_chplotadvice_yoosee
+                    "查看[yangsy]的建议":
+                        call chplotadvice_yangsy from _call_chplotadvice_yangsy
+                    "返回":
+                        pass
+            "输入以指定一个label来执行":
+                call chany from _call_chany
             "返回主菜单":
                 return
 
@@ -67,6 +68,7 @@ label splashscreen:
     with Pause(1)
 
     return
+
 
 label request_manage_storage:
     if renpy.variant("android"):
