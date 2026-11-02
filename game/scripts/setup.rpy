@@ -300,13 +300,13 @@ label setup_naming_entered:
         if not persistent.debug_mode:
             if renpy.windows:
                 python:
-                    debug_mode = CmdWindow("DEBUG MODE")
-                    debug_mode.Create()
-                    debug_mode.Color("0A")
+                    debug_cmd_window = CmdWindow("DEBUG MODE")
+                    debug_cmd_window.Create()
+                    debug_cmd_window.Color("0A")
                     persistent.debug_mode = True
-                    debug_mode.ShowText("Debug Mode Enabled")
+                    debug_cmd_window.ShowText("Debug Mode Enabled")
                 with Pause(1)
-                $ debug_mode.Break()
+                $ del debug_cmd_window
                 
             else:    
                 python:
@@ -318,12 +318,12 @@ label setup_naming_entered:
         else:
             if renpy.windows:
                 python:
-                    debug_mode = CmdWindow("DEBUG MODE")
-                    debug_mode.Create()
-                    debug_mode.Color("0A")
-                    debug_mode.ShowText("Debug Mode Is Already Enabled")
+                    debug_cmd_window = CmdWindow("DEBUG MODE")
+                    debug_cmd_window.Create()
+                    debug_cmd_window.Color("0A")
+                    debug_cmd_window.ShowText("Debug Mode Is Already Enabled")
                 with Pause(1)
-                $ debug_mode.Break()
+                $ del debug_cmd_window
                 
             else:    
                 nvl clear
@@ -415,22 +415,40 @@ label setup_naming_entered:
             else:
                 if renpy.windows:
                     python:
-                        debug_mode = CmdWindow("DEBUG MODE")
-                        debug_mode.Create()
-                        debug_mode.Color("0A")
-                        debug_mode.ShowText("Welcome to use Debug Mode Terminal.")
-                        debug_mode.ShowText("user@debugmode:~$")
-                    with Pause(0.1)
-                    python:
-                        debug_mode.Clear()
-                        debug_mode.ShowText("Welcome to use Debug Mode Terminal.")
-                        debug_mode.ShowText("user@debugmode:~$ su - root")
-                    with Pause(0.5)
-                    $ debug_mode.ShowText("Password:")
-                    with Pause(3)
-                    $ debug_mode.ShowText("user@debugmode:~$")
-                    with Pause(1)
-                    $ debug_mode.Break()
+                        debug_cmd_window = CmdWindow("DEBUG MODE")
+                        debug_cmd_window.Create()
+                        debug_cmd_window.Color("0A")
+
+                        for debug_cmd_page in (
+                            (
+                                (
+                                    "Welcome to use Debug Mode Terminal.\n"
+                                    "user@debugmode:~$ ", 0.1
+                                ),
+                                ( "su - root\n", 0.5 ),
+                                ( "Password:\n", 3 ),
+                                ( "user@debugmode:~$ ", 0.5 ),
+                                ( "chmod 777 changestorage.sh\n", 1.0 ),
+                                ( "user@debugmode:~$ ", 0.5 ),
+                                ( "./changestorage.sh\n", 1.0 ),
+                            ),
+                            (
+                                ( "info: changestorage.sh begin\n", 1.0 ),
+                                ( "data: Now modify the storage of character data from 'Normal' to 'Special'......\n", 1.0 ),
+                                ( "data: Success.\n", 0.5 ),
+                                ( "Press any key to continue...", 1.0 ),
+                            ),
+                        ):
+                            debug_cmd_content = ""
+                            for debug_cmd_extend, debug_cmd_pause in debug_cmd_page:
+                                debug_cmd_content += debug_cmd_extend
+                                debug_cmd_window.Clear()
+                                debug_cmd_window.ShowText(debug_cmd_content)
+                                renpy.with_statement(Pause(debug_cmd_pause))
+
+                        persistent.variables["duplicate_name_fixed"] = True
+                        debug_cmd_window.Close()
+                        del debug_cmd_window, debug_cmd_page, debug_cmd_content, debug_cmd_extend, debug_cmd_pause
                 else: 
                     nvl clear
                     debug "Welcome to use Debug Mode Terminal.{fast}{nw}"

@@ -377,34 +377,40 @@ init python:
                         f.write(msg + "\n")
                 except Exception:
                     pass
-
+        
+        @staticmethod
+        def CreateIfNeeded(func):
+            """装饰器，在被装饰的方法运行前先确保窗口是否存在"""
+            def wrapper(self, *args, **kwds):
+                if self.process is None or self.process.poll() is not None:
+                    self.Create()
+                ret = func(self, *args, **kwds)
+                return ret
+            return wrapper
+        
+        @CreateIfNeeded
         def ShowText(self, text=""):
             """在窗口中展示文本内容"""
-            if self.process is None or self.process.poll() is not None:
-                self.Create()
             for line in str(text).splitlines():
                 self._send_queue(f"__ECHO__ {line}")
 
+        @CreateIfNeeded
         def Clear(self):
             """清空控制台窗口中的文本"""
-            if self.process is None or self.process.poll() is not None:
-                self.Create()
             self._send_queue("__CLS__")
 
+        @CreateIfNeeded
         def Color(self, color_code="0A"):
             """修改窗口的背景与文字颜色 (cmd color 规范)"""
-            if self.process is None or self.process.poll() is not None:
-                self.Create()
             self._send_queue(f"__COLOR__ {color_code}")
 
+        @CreateIfNeeded
         def Title(self, title_text=""):
             """修改控制台窗口的标题"""
             self.title = str(title_text)
-            if self.process is None or self.process.poll() is not None:
-                self.Create()
             self._send_queue(f"__TITLE__ {self.title}")
 
-        def Break(self):
+        def Close(self):
             """关闭该命令提示符窗口"""
             self._send_queue("__EXIT__")
             if self.process is not None and self.process.poll() is None:
@@ -429,16 +435,3 @@ init python:
 
 init -1 python:
     _active_cmd_consoles = []
-
-label test_console:
-    python:
-        console = CmdWindow("DEBUG MODE")
-        console.Create()
-        console.Color("0A")
-        console.Clear()
-        console.ShowText("欢迎使用 RenPy 控制台！")
-        console.ShowText("你可以在这里执行调试命令。")
-    mwam.comment "控制台已弹出，点击继续以关闭控制台..."
-    python:
-        console.Break()
-    return
