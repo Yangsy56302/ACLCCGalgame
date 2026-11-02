@@ -4,7 +4,7 @@ label start:
     stop music
 
     call setup_naming_start from _call_setup_naming_start
-    call nocutscene("setup")
+    call nocutscene
     call ch0 from _call_ch0
     call cutscene("ch0")
     call ch1 from _call_ch1
@@ -26,7 +26,7 @@ label cutscene(chp):
     with Pause(1.0)
 
     play sound "snd_screen_wipe_in.wav"
-    scene bg expression "cutscene_[chp]" with wipeadofai
+    scene expression "images/cutscene/[chp].png" with wipeadofai
 
     with Pause(3.0)
     
@@ -38,7 +38,7 @@ label cutscene(chp):
     return
 
 
-label nocutscene(chp):
+label nocutscene:
 
     stop music fadeout 1.0
     play sound "snd_screen_wipe_out.wav"
