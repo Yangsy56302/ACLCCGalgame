@@ -280,13 +280,17 @@ init python:
             self.client_py = None
 
         def __getstate__(self):
-            return {"title": self.title}
+            return {
+                "title": self.title,
+                "queue_file": self.queue_file,
+                "client_py": self.client_py
+            }
 
         def __setstate__(self, state):
             self.title = state.get("title", "Console")
+            self.queue_file = state.get("queue_file", None)
+            self.client_py = state.get("client_py", None)
             self.process = None
-            self.queue_file = None
-            self.client_py = None
 
         def Create(self):
             """创建并弹出新的命令提示符窗口"""
