@@ -1,4 +1,4 @@
-label myworld:
+label chex_myworld:
     $ session_title = None
     nvl clear
 
@@ -16,7 +16,7 @@ label myworld:
 
     $ config.nvl_list_length = 6
 
-    call myworld_view
+    call chex_myworld_view
 
     scene home_noon with pixellate
     $ variables["another_view"] = False
@@ -29,14 +29,14 @@ label myworld:
     gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
     mc "{cps=*0.25}{......}{/cps}"
 
-    call myworld_clever_box
+    call chex_myworld_clever_box
     yangsy.comment "小事（指严重程度\n大事（指篇幅占比"
     yangsy.comment "说实话CB这段偏题剧情放在剧情开头属实有些长了\n这段可以做成中期的分支剧情（"
 
     return
 
 
-label myworld_view:
+label chex_myworld_view:
 
     scene black with pixellate
     $ variables["another_view"] = True
@@ -84,7 +84,7 @@ label myworld_view:
     return
 
 
-label myworld_clever_box:
+label chex_myworld_clever_box:
     
     myworldzycpc.nvl "话说回来，之前另外我还在摆了的Clever Box地图介绍里看到过群号呢"
     gra.nvl "什么？你说Clever Box吗？"

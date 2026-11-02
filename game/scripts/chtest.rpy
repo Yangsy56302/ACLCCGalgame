@@ -1,5 +1,14 @@
 label chtest:
-    jump chyangsy_1
+    jump chany
+
+
+label chany:
+    $ label_name = renpy.input("label:")
+    menu:
+        "renpy.call('[label_name]')":
+            $ renpy.call(label_name)
+        "renpy.jump('[label_name]')":
+            $ renpy.jump(label_name)
 
 
 label chtest_char:
