@@ -22,6 +22,16 @@ init python:
 
             self.data: dict[CharacterDataKey, object] = {}
 
+        def __getstate__(self):
+            state = self.__dict__.copy()
+            state.pop("show_function", None)
+            return state
+
+        def __setstate__(self, state):
+            self.__dict__.update(state)
+            if not hasattr(self, "show_function") or self.show_function is None:
+                self.show_function = getattr(renpy.character, "show_display_say", None)
+
         def copy(self, **raw_properties):
             new_raw_properties = self.raw_properties | raw_properties
             obj = self.__class__(self.nickname, self.realname, session_title_color=self.session_title_color, meet_irl=self.meet_irl, meet_irl_nvl=self.meet_irl_nvl, is_dynamic=self.is_dynamic, root=self.root, **new_raw_properties)

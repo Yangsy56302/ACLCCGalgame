@@ -66,6 +66,8 @@ screen debug_screen():
             textbutton _("Clear Persistent Data") action Call("debug", "reset")
             if renpy.variant("pc"):
                 textbutton _("Copy test file to Desktop") action Function(CopyToAnyway, "test/XS-X but delay event.zip", get_desktop_path() + "\\level file.zip")
+                if renpy.windows:
+                    textbutton ("test debug console") action Call("test_console")
             elif renpy.variant("android"):
                 textbutton _("Copy test file to Download") action Function(release_file_quietly, "test/XS-X but delay event.zip", "Download/ACLCCGame", "level file.zip")
 
