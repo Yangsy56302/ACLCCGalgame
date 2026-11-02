@@ -1,8 +1,12 @@
 label chtest:
+    if not (renpy.windows and is_debug_installed):
+        return
     jump test_console
 
 
 label test_console:
+    if not (renpy.windows and is_debug_installed):
+        return
     python:
         console = CmdWindow("DEBUG MODE")
         console.Create()
