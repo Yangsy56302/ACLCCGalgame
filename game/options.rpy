@@ -113,6 +113,12 @@ define config.main_menu_music = "mus_aurora_part1.ogg"
 ## Each variable should be set to a transition, or None to indicate that no
 ## transition should be used.
 
+## The transition that is used to display the main menu after the end of the 
+## splashscreen.
+
+define config.end_splash_transition = dissolve
+
+
 ## Entering or exiting the game menu.
 
 define config.enter_transition = None

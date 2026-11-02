@@ -1,6 +1,6 @@
 label ch0:
-    stop music
-    scene bg sky with fade
+    play sound "snd_screen_wipe_in.wav"
+    scene bg sky with wipeadofai
 
     "作为一个二线城市普通家庭的学生，\n{w=0.5}你比大多数人更容易接触到一些新潮的事物。"
     "同样的，{w=0.25}作为一个二线城市普通家庭的学生，\n{w=0.5}你的一些爱好往往并不能找到与你志同道合的伙伴。"
@@ -9,7 +9,14 @@ label ch0:
     "日子就这么普普通通的过着{......}"
 
 
-    scene bg home_noon with fade
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_noon with wipeadofai
+
 
     # "有一天，{w=0.25}你在网上冲浪的时候发现一个视频，{w=0.5}标题写着{w=0.25}“0基础编程教学”。{nw}"
     # $ _history_list.pop()
@@ -34,7 +41,6 @@ label ch0:
     $ renpy.notify("2020年某日")
     pause 3.0
 
-
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
@@ -46,7 +52,6 @@ label ch0:
     "在刷了几个下方的推荐视频后，{w=0.5}你萌生了尝试的想法，\n{w=0.5}不过那时的你并没有零花钱。"
     "尽管26元的游戏已经算是廉价，\n{w=0.5}但对于只在父母手机上玩过一些免费小游戏的你来说，{w=0.5}依然是一笔巨款。"
     "不得已，{w=0.25}你只能在搜索结果下的无数广告里下载了一个{w=0.25}{yellow}“渠道版”{/yellow}{w=0.25}将就着玩。"
-
 
     scene bg sbeam with dissolve
 
@@ -92,14 +97,20 @@ label ch0:
     "{cps=*0.5}日子依旧普普通通的过着{......}"
 
 
-    scene bg that_video with fade
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg that_video with wipeadofai
+
 
     $ renpy.notify("2022年某日，嘁哩嘁哩评论区")
     pause 1.0
 
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-
     
     "就像之前的每一天一样，{w=0.5}你百无聊赖的刷着嘁站。"
     "作为一个已经断断续续玩过两年的玩家，\n{w=0.5}你早已掌握了这款名为《冰与火之舞》的游戏的玩法，\n{w=0.5}并取得了一些你自认为满意的记录。"
@@ -141,11 +152,16 @@ label ch0:
     # mwam.comment "他自己说的，不要问我（{nw}"
     
     "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
-    jump ch0_1
 
 
-label ch0_1:
-    scene bg home_night with dissolve
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg that_video with wipeadofai
+    
     
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
@@ -347,8 +363,5 @@ label ch0_1:
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
     $ persistent.variables["has_seen_ending"] = True
 
-
-    call to_be_continued("ch0") from _call_to_be_continued
-        
     return
 

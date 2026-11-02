@@ -2175,16 +2175,16 @@ screen chapter_title(title_text):
 
     text title_text:
         xalign 0.5
-        yalign 0.5
-        size 72
+        ycenter 0.5
+        size 68
         color "#ffffff"
-        outlines [(2, "#000000", 0, 0)]  # 文字描边，增强可读性
+        outlines [(0, "#00000050", 3, 3)]
 
 label show_chapter(title):
     window hide
     show screen chapter_title(title)
     with dissolve
-    $ renpy.pause(2.0) # 'hard=True' 会忽略玩家的点击，确保效果停留
+    with Pause(2.0)
     hide screen chapter_title
     with dissolve
     window auto

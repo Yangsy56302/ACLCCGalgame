@@ -1,12 +1,13 @@
 label ch1:
-    scene black with dissolve
+    play sound "snd_screen_wipe_in.wav"
+    scene black with wipeadofai
+
     $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
 
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
     myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
-    scene black with dissolve
     $ current_perspective = yangsy
 
     show yangsy at l11
@@ -18,13 +19,17 @@ label ch1:
     show yangsy at rhide
     hide yangsy
 
-    scene black with dissolve
     $ variables["another_view"] = False
     $ current_perspective = mc
 
+
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
     call show_chapter("第二天") from _call_show_chapter
 
-    scene bg home_noon with dissolve
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_noon with wipeadofai
+
 
     "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为你升起。"
     "阳光照亮到了你的房间，\n{w=0.5}也照亮了你那沉睡的意识。"
@@ -110,9 +115,14 @@ label ch1:
     
     mc "{......}还是先做点作业吧。"
 
-    scene black with dissolve
-    call show_chapter("三小时后") from _call_show_chapter_1
-    scene bg home_noon with dissolve
+
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    call show_chapter("三小时后") from _call_show_chapter_2
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_noon with wipeadofai
     
     "刚刚写完英语作业的你突然意识到，{w=0.5}也许是时候检查一下群内的情况了。"
     
@@ -126,6 +136,7 @@ label ch1:
 
     mc.nvl "各位早上好"
     lv.nvl "早上好"
+
     gra.nvl "早安\n{w=1.0}看来你起得还挺早的嘛"
     yangsy.nvl "确实 {w=0.5}要不是Yangsy起得早 {w=0.5}[mc]就得等好几个小时了（"
     mc.nvl "话说，{w=0.25}我好像还不太认识你们呢\n{w=1.0}这个群的历史我也不太了解"
@@ -238,4 +249,4 @@ label ch1:
             # myworldzycpc.nvl "太好了，吓得我都不敢说话了…"
             # yangsy.nvl "至于吗…\n[['''.gif]"
 
-    jump ch2
+    return

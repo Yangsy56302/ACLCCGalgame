@@ -4,8 +4,45 @@ label start:
     stop music
 
     call setup_naming_start from _call_setup_naming_start
-    $ renpy.block_rollback()
+    call nocutscene("setup")
     call ch0 from _call_ch0
+    call cutscene("ch0")
+    call ch1 from _call_ch1
+    call cutscene("ch1")
+    call ch2 from _call_ch2
+    call cutscene("ch2")
+    call to_be_continued("ch2")
+    return
+
+
+label cutscene(chp):
+
+    stop music fadeout 1.0
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg expression "cutscene_[chp]" with wipeadofai
+
+    with Pause(3.0)
+    
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    return
+
+
+label nocutscene(chp):
+
+    stop music fadeout 1.0
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+    
+    with Pause(1.0)
 
     return
 
@@ -13,7 +50,8 @@ label start:
 label to_be_continued(chp):
     while True:
         stop music fadeout 1.0
-        scene black with dissolve
+        play sound "snd_screen_wipe_out.wav"
+        scene black with wipeadofai
 
         menu:
             "查看已被废弃的AI剧情":
@@ -50,16 +88,20 @@ label splashscreen:
     scene black 
     with Pause(1) 
 
-    show attention with dissolve
+    play sound "snd_screen_wipe_out.wav"
+    show attention with wipeadofai
     with Pause(2)
 
-    scene black with dissolve
+    play sound "snd_screen_wipe_in.wav"
+    scene black with wipeadofai
     with Pause(1)
     
-    show splash with dissolve
+    play sound "snd_screen_wipe_out.wav"
+    show splash with wipeadofai
     with Pause(2)
     
-    scene black with dissolve
+    play sound "snd_screen_wipe_in.wav"
+    scene black with wipeadofai
     with Pause(1)
 
     return

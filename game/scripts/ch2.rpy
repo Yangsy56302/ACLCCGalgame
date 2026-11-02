@@ -9,7 +9,8 @@ label ch2:
 
 label ch2_do_curse:
     
-    scene bg home_night with fade
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_night with wipeadofai
 
     nvl clear
     mc.nvl "我真的想不出来什么主意……"
@@ -51,7 +52,8 @@ label ch2_do_curse:
 
 label ch2_dont_do_curse:
     
-    scene bg home_night with fade
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_night with wipeadofai
 
     nvl clear
     nona.nvl "[[level.zip]\n{w=1.0}我的新魔改做好了！\n{w=1.0}哪个好宝宝帮我测试一下呀"
@@ -68,7 +70,8 @@ label ch2_dont_do_curse:
 
 label gra_birthday:
 
-    scene bg sky with fade
+    play sound "snd_screen_wipe_in.wav"
+    scene bg sky with wipeadofai
 
     "时间过得飞快，不久就到了[gra]的生日了。"
     yangsy.comment "不是等会这才两天剧情就开始加速了？别啊（"

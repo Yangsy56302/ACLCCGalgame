@@ -514,7 +514,7 @@ label setup_naming_done:
     "好吧，{w=0.5}那我就把你跳转到剧情里了，{w=0.5}有缘再见。{w=2}{nw}"
     "或者说，{w=0.25}再也不见，{w=0.25}哈哈。{w=1}{nw}"
 
-    stop music fadeout 2.0
-    
     $ variables["in_setup"] = False
+    $ renpy.block_rollback()
+
     return
