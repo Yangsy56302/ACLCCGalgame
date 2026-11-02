@@ -306,6 +306,7 @@ label setup_naming_entered:
                     persistent.debug_mode = True
                     debug_cmd_window.ShowText("Debug Mode Enabled")
                 with Pause(1)
+                $ debug_cmd_window.Close()
                 $ del debug_cmd_window
                 
             else:    
@@ -323,6 +324,7 @@ label setup_naming_entered:
                     debug_cmd_window.Color("0A")
                     debug_cmd_window.ShowText("Debug Mode Is Already Enabled")
                 with Pause(1)
+                $ debug_cmd_window.Close()
                 $ del debug_cmd_window
                 
             else:    
