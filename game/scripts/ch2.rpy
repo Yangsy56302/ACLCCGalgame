@@ -4,7 +4,7 @@ label ch2:
     else:
         call ch2_dont_do_curse
     
-    call to_be_continued("ch2") from _call_to_be_continued_2
+    return
 
 
 label ch2_do_curse:
