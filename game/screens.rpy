@@ -371,7 +371,7 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
-init -999 python:
+init -998 python:
     class Continue(Action):
         def __call__(self):
             newest_page, newest_name = self.get_newest_slot()
