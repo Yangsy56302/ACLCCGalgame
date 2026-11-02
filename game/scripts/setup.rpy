@@ -301,15 +301,38 @@ label setup_naming_entered:
     elif player_input == "VGVhbSBBQ0xDQyBNZW1iZXI=" and is_debug_installed:
         # 如果游戏目前不处在调试模式：
         if not persistent.debug_mode:
-            python:
-                _history_list.pop()
-                persistent.debug_mode = True
-            nvl clear
-            debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
+            if renpy.windows:
+                python:
+                    debug_cmd_window = CmdWindow("DEBUG MODE")
+                    debug_cmd_window.Create()
+                    debug_cmd_window.Color("0A")
+                    persistent.debug_mode = True
+                    debug_cmd_window.ShowText("Debug Mode Enabled")
+                with Pause(1)
+                $ debug_cmd_window.Close()
+                $ del debug_cmd_window
+                
+            else:    
+                python:
+                    _history_list.pop()
+                    persistent.debug_mode = True
+                nvl clear
+                debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
         # 否则：
         else:
-            nvl clear
-            debug "Debug Mode Is Already Enabled{fast}{w=1.0}{nw}"
+            if renpy.windows:
+                python:
+                    debug_cmd_window = CmdWindow("DEBUG MODE")
+                    debug_cmd_window.Create()
+                    debug_cmd_window.Color("0A")
+                    debug_cmd_window.ShowText("Debug Mode Is Already Enabled")
+                with Pause(1)
+                $ debug_cmd_window.Close()
+                $ del debug_cmd_window
+                
+            else:    
+                nvl clear
+                debug "Debug Mode Is Already Enabled{fast}{w=1.0}{nw}"
         if not persistent.variables["setup_saw_debug_screen"]:
 
             # setup "？"
@@ -394,22 +417,59 @@ label setup_naming_entered:
                 # 返回重新输入
                 jump setup_naming_loop
             # 撞名，未修改，调试模式：
-            else: 
-                nvl clear
-                debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
-                debug "user@debugmode:~$ {fast}su - root{w=1.0}{nw}"
-                debug "Password: {fast}{w=3.0}{nw}"
-                debug "root@debugmode:~$ {fast}{w=0.5}chmod 777 changestorage.sh{w=1.0}{nw}"
-                debug "root@debugmode:~$ {fast}{w=0.5}./changestorage.sh{w=1.0}{nw}"
-                nvl clear
-                debug "{w=1.0}{nw}"
-                $ _history_list.pop()
-                nvl clear
-                debug "info: changestorage.sh begin{fast}{w=1.0}{nw}"
-                debug "data: Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
-                $ persistent.variables["duplicate_name_fixed"] = True
-                debug "data: Success.{fast}{w=0.5}{nw}"
-                debug "Press any key to continue...{fast}"
+            else:
+                if renpy.windows:
+                    python:
+                        debug_cmd_window = CmdWindow("DEBUG MODE")
+                        debug_cmd_window.Create()
+                        debug_cmd_window.Color("0A")
+
+                        for debug_cmd_page in (
+                            (
+                                (
+                                    "Welcome to use Debug Mode Terminal.\n"
+                                    "user@debugmode:~$ ", 0.1
+                                ),
+                                ( "su - root\n", 0.5 ),
+                                ( "Password:\n", 3 ),
+                                ( "user@debugmode:~$ ", 0.5 ),
+                                ( "chmod 777 changestorage.sh\n", 1.0 ),
+                                ( "user@debugmode:~$ ", 0.5 ),
+                                ( "./changestorage.sh\n", 1.0 ),
+                            ),
+                            (
+                                ( "info: changestorage.sh begin\n", 1.0 ),
+                                ( "data: Now modify the storage of character data from 'Normal' to 'Special'......\n", 1.0 ),
+                                ( "data: Success.\n", 0.5 ),
+                                ( "Press any key to continue...", 1.0 ),
+                            ),
+                        ):
+                            debug_cmd_content = ""
+                            for debug_cmd_extend, debug_cmd_pause in debug_cmd_page:
+                                debug_cmd_content += debug_cmd_extend
+                                debug_cmd_window.Clear()
+                                debug_cmd_window.ShowText(debug_cmd_content)
+                                renpy.with_statement(Pause(debug_cmd_pause))
+
+                        persistent.variables["duplicate_name_fixed"] = True
+                        debug_cmd_window.Close()
+                        del debug_cmd_window, debug_cmd_page, debug_cmd_content, debug_cmd_extend, debug_cmd_pause
+                else: 
+                    nvl clear
+                    debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
+                    debug "user@debugmode:~$ {fast}su - root{w=1.0}{nw}"
+                    debug "Password: {fast}{w=3.0}{nw}"
+                    debug "root@debugmode:~$ {fast}{w=0.5}chmod 777 changestorage.sh{w=1.0}{nw}"
+                    debug "root@debugmode:~$ {fast}{w=0.5}./changestorage.sh{w=1.0}{nw}"
+                    nvl clear
+                    debug "{w=1.0}{nw}"
+                    $ _history_list.pop()
+                    nvl clear
+                    debug "info: changestorage.sh begin{fast}{w=1.0}{nw}"
+                    debug "data: Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
+                    $ persistent.variables["duplicate_name_fixed"] = True
+                    debug "data: Success.{fast}{w=0.5}{nw}"
+                    debug "Press any key to continue...{fast}"
                 "等等。"
                 "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
                 "那你刚刚是不是修改了角色的数据存储方式？"

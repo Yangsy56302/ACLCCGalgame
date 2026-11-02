@@ -1,5 +1,21 @@
 label chtest:
-    jump chany
+    jump test_console
+
+
+label test_console:
+    if not renpy.windows:
+        return
+    python:
+        console = CmdWindow("DEBUG MODE")
+        console.Create()
+        console.Color("0A")
+        console.Clear()
+        console.ShowText("欢迎使用 RenPy 控制台！")
+        console.ShowText("你可以在这里执行调试命令。")
+    mwam.comment "控制台已弹出，点击继续以关闭控制台..."
+    python:
+        console.Close()
+    return
 
 
 label chany:
