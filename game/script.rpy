@@ -85,13 +85,14 @@ label to_be_continued(chp):
 image splash = "splash.png"
 image attention = "attention.png"
 label splashscreen: 
-    if not renpy.windows and not renpy.variant("android"):
-        mwam.comment "唔……这个系统既不是 Windows 也不是 Android 呢。"
-        mwam.comment "Linux 或者 macOS 的话，我们可没怎么正经测过……"
-        mwam.comment "要是碰到什么奇怪的问题，就当是这片平台特有的彩蛋吧（"
-
     $ migrate_persistent_variables()
     call request_manage_storage from _call_request_manage_storage
+
+    if not renpy.windows and not renpy.variant("android"):
+        mwam.comment "唔……这个系统既不是Windows也不是Android呢。"
+        mwam.comment "不是Windows和Android的话，我们可没怎么正经测过……"
+        mwam.comment "要是碰到什么奇怪的问题，就当是这片平台特有的彩蛋吧（"
+
     scene black 
     with Pause(1) 
 
