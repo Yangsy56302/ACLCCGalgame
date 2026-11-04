@@ -4,16 +4,16 @@ label start:
     stop music
 
     call setup_naming_start from _call_setup_naming_start
-    call nocutscene
+    call nocutscene from _call_nocutscene
     call ch0 from _call_ch0
-    call cutscene("ch0")
+    call cutscene("ch0") from _call_cutscene
     call ch1 from _call_ch1
-    call cutscene("ch1")
+    call cutscene("ch1") from _call_cutscene_1
     call ch2 from _call_ch2
-    call cutscene("ch2")
+    call cutscene("ch2") from _call_cutscene_2
     call ch3 from _call_ch3
-    call cutscene("ch3")
-    call to_be_continued("ch3")
+    call cutscene("ch3") from _call_cutscene_3
+    call to_be_continued("ch3") from _call_to_be_continued
     return
 
 

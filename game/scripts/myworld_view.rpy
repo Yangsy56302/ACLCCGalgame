@@ -16,7 +16,7 @@ label chex_myworld:
 
     $ config.nvl_list_length = 6
 
-    call chex_myworld_view
+    call chex_myworld_view from _call_chex_myworld_view
 
     scene home_noon with pixellate
     $ variables["another_view"] = False
@@ -29,7 +29,7 @@ label chex_myworld:
     gra.nvl "不管怎样，总之欢迎加入 ACLC！{fast}"
     mc "{cps=*0.25}{......}{/cps}"
 
-    call chex_myworld_clever_box
+    call chex_myworld_clever_box from _call_chex_myworld_clever_box
     yangsy.comment "小事（指严重程度\n大事（指篇幅占比"
     yangsy.comment "说实话CB这段偏题剧情放在剧情开头属实有些长了\n这段可以做成中期的分支剧情（"
 

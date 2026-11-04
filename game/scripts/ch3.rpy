@@ -1,8 +1,8 @@
 label ch3:
     if variables["volunteer_to_do_curse"]:
-        call ch3_do_curse
+        call ch3_do_curse from _call_ch3_do_curse
     else:
-        call ch3_dont_do_curse
+        call ch3_dont_do_curse from _call_ch3_dont_do_curse
     
     return
 
