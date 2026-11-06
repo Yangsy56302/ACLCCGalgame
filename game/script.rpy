@@ -180,12 +180,13 @@ init python:
         # 控制台窗口里运行的客户端程序（写入临时目录，由 python.exe 在新控制台中执行）
         # 输出：tail 队列文件；输入：把用户敲的行追加到 <队列文件>.in，交给 Ren'Py 主线程处理
         _CMD_CLIENT_CODE = r'''
-import sys, os, time, threading
+import sys, os, time
 
 os.system('chcp 65001 >nul')
 
 q_file = sys.argv[1]
-in_file = q_file + '.in'
+interactive = len(sys.argv) > 2 and sys.argv[2] == '1'
+in_file = sys.argv[3] if len(sys.argv) > 3 else q_file + '.in'
 
 
 def _set_title(text):
@@ -196,68 +197,265 @@ def _set_title(text):
         pass
 
 
-def _reader():
-    while True:
-        try:
-            line = input()
-        except KeyboardInterrupt:
-            continue
-        except EOFError:
-            return
-
-        if line.startswith('!'):
-            try:
-                os.system(line[1:])
-            except Exception as e:
-                print(e)
-            sys.stdout.write('> ')
-            sys.stdout.flush()
-            continue
-
-        try:
-            with open(in_file, 'a', encoding='utf-8') as f:
-                f.write(line.replace('\r', ' ').replace('\n', ' ') + '\n')
-        except Exception:
-            pass
-
-
-threading.Thread(target=_reader, daemon=True).start()
-
-pos = 0
-
-while True:
+def _enable_vt():
+    """Enable ANSI escapes so the input line can be erased with ESC[2K."""
     try:
+        import ctypes
+        k32 = ctypes.windll.kernel32
+        handle = k32.GetStdHandle(-11)
+        mode = ctypes.c_uint32()
+        if not k32.GetConsoleMode(handle, ctypes.byref(mode)):
+            return False
+        return bool(k32.SetConsoleMode(handle, mode.value | 0x0004))
+    except Exception:
+        return False
+
+
+def _raw_ctrl_c():
+    """Deliver Ctrl+C as a character instead of a signal."""
+    try:
+        import ctypes
+        k32 = ctypes.windll.kernel32
+        handle = k32.GetStdHandle(-10)
+        mode = ctypes.c_uint32()
+        if k32.GetConsoleMode(handle, ctypes.byref(mode)):
+            k32.SetConsoleMode(handle, (mode.value & ~0x0001) | 0x0080)
+    except Exception:
+        pass
+
+
+VT = _enable_vt() if interactive else False
+
+try:
+    import unicodedata
+except ImportError:
+    unicodedata = None
+
+
+def _char_width(ch):
+    if unicodedata is None:
+        return 1
+    return 2 if unicodedata.east_asian_width(ch) in ('W', 'F') else 1
+
+
+def _text_width(text):
+    return sum(_char_width(c) for c in text)
+
+
+class LineEditor(object):
+    """Hand-drawn input line, so game output can pre-empt it cleanly."""
+
+    def __init__(self, out=None):
+        self.out = out if out is not None else sys.stdout
+        self.prompt = ''
+        self.buf = []
+        self.pos = 0
+        self.history = []
+        self.hist = None
+        self.drawn = 0
+
+    def text(self):
+        return ''.join(self.buf)
+
+    def active(self):
+        return self.prompt != ''
+
+    def clear(self):
+        if not self.drawn:
+            return
+        if VT:
+            self.out.write('\r\x1b[2K')
+        else:
+            self.out.write('\r' + ' ' * self.drawn + '\r')
+        self.out.flush()
+        self.drawn = 0
+
+    def draw(self):
+        self.clear()
+        if not self.active():
+            return
+        line = self.prompt + self.text()
+        self.out.write(line)
+        self.out.flush()
+        self.drawn = _text_width(line)
+
+    def redraw(self):
+        self.clear()
+        self.draw()
+
+    def insert(self, ch):
+        self.buf.insert(self.pos, ch)
+        self.pos += 1
+        self.redraw()
+
+    def backspace(self):
+        if self.pos > 0:
+            del self.buf[self.pos - 1]
+            self.pos -= 1
+            self.redraw()
+
+    def delete(self):
+        if self.pos < len(self.buf):
+            del self.buf[self.pos]
+            self.redraw()
+
+    def left(self):
+        if self.pos > 0:
+            self.pos -= 1
+            self.redraw()
+
+    def right(self):
+        if self.pos < len(self.buf):
+            self.pos += 1
+            self.redraw()
+
+    def home(self):
+        self.pos = 0
+        self.redraw()
+
+    def end(self):
+        self.pos = len(self.buf)
+        self.redraw()
+
+    def reset(self):
+        self.buf = []
+        self.pos = 0
+        self.hist = None
+        self.redraw()
+
+    def history_prev(self):
+        if not self.history:
+            return
+        if self.hist is None:
+            self.hist = len(self.history)
+        if self.hist > 0:
+            self.hist -= 1
+            self.buf = list(self.history[self.hist])
+            self.pos = len(self.buf)
+            self.redraw()
+
+    def history_next(self):
+        if self.hist is None:
+            return
+        self.hist += 1
+        if self.hist >= len(self.history):
+            self.hist = None
+            self.buf = []
+        else:
+            self.buf = list(self.history[self.hist])
+        self.pos = len(self.buf)
+        self.redraw()
+
+    def submit(self):
+        """Send the line to the game and go back to a plain idle console."""
+        text = self.text()
+        self.clear()
+        self.out.write('\n')
+        self.out.flush()
+        if text.strip():
+            self.history.append(text)
+            try:
+                with open(in_file, 'a', encoding='utf-8') as f:
+                    f.write(text.replace('\r', ' ').replace('\n', ' ') + '\n')
+            except Exception:
+                pass
+        self.prompt = ''
+        self.buf = []
+        self.pos = 0
+        self.hist = None
+
+    def handle(self, ch):
+        """Feed one character (or an extended-key prefix) to the editor."""
+        if not self.active():
+            return
+        if ch in ('\x00', '\xe0'):
+            code = msvcrt.getwch()
+            if code == 'H':
+                self.history_prev()
+            elif code == 'P':
+                self.history_next()
+            elif code == 'K':
+                self.left()
+            elif code == 'M':
+                self.right()
+            elif code == 'S':
+                self.delete()
+            elif code == 'G':
+                self.home()
+            elif code == 'O':
+                self.end()
+            return
+        if ch in ('\r', '\n'):
+            self.submit()
+        elif ch == '\x08':
+            self.backspace()
+        elif ch in ('\x03', '\x15', '\x1b'):
+            self.reset()
+        elif ch >= ' ':
+            self.insert(ch)
+
+
+def main():
+    import msvcrt
+
+    if interactive:
+        _raw_ctrl_c()
+
+    editor = LineEditor()
+    pos = 0
+
+    def pump_output():
+        """Print what the game queued; False means the queue file is gone."""
+        nonlocal pos
         if not os.path.exists(q_file):
-            break
+            return False
+        try:
+            with open(q_file, 'r', encoding='utf-8') as f:
+                f.seek(pos)
+                lines = f.readlines()
+                pos = f.tell()
+        except Exception:
+            return True
+        if not lines:
+            return True
 
-        with open(q_file, 'r', encoding='utf-8') as f:
-            f.seek(pos)
-            lines = f.readlines()
-            pos = f.tell()
-
+        editor.clear()
         for raw in lines:
             line = raw.rstrip('\n')
-
             if line == '__EXIT__':
+                editor.clear()
                 sys.stdout.flush()
                 os._exit(0)
             elif line == '__CLS__':
                 os.system('cls')
+                editor.drawn = 0
             elif line.startswith('__COLOR__ '):
                 os.system('color ' + line[10:])
             elif line.startswith('__TITLE__ '):
                 _set_title(line[10:])
             elif line.startswith('__PROMPT__ '):
-                sys.stdout.write(line[11:])
-                sys.stdout.flush()
+                editor.prompt = line[11:]
             elif line.startswith('__ECHO__ '):
                 print(line[9:], flush=True)
+        editor.draw()
+        return True
 
-        time.sleep(0.05)
-    except KeyboardInterrupt:
-        continue
-    except Exception:
-        time.sleep(0.05)
+    while True:
+        try:
+            if not pump_output():
+                break
+            if interactive:
+                while msvcrt.kbhit():
+                    editor.handle(msvcrt.getwch())
+            time.sleep(0.03)
+        except KeyboardInterrupt:
+            continue
+        except Exception:
+            time.sleep(0.05)
+
+
+if __name__ == '__main__':
+    main()
 '''
 
         class CmdWindow(object):
@@ -266,14 +464,16 @@ while True:
             通过独立 IPC 命令队列常驻运行，彻底杜绝管道关闭闪退
 
             输出：Ren'Py 往队列文件追加 __ECHO__/__COLOR__ 等指令，窗口里的客户端进程负责显示。
-            输入：客户端把用户敲的一行写进 <队列文件>.in，Ren'Py 在 config.periodic_callbacks
-                  里（主线程）读出来执行，再把结果和新的提示符写回窗口。
+            输入：拉取式——剧本里调用 `a = console.Input(">>> ")`，窗口显示提示符并等用户回车，
+                  函数把这行返回给剧本，由剧本自己决定显示还是执行（console.Python(a)）。
+                  只有 interactive=True 的窗口才读键盘；纯输出窗口敲什么都无效。
+                  客户端自己画提示符和输入行，游戏输出插进来时会擦掉重画，不会糊掉。
             """
-            PROMPT = "> "
             MAX_OUTPUT = 2000
 
-            def __init__(self, title="Console"):
+            def __init__(self, title="Console", interactive=False):
                 self.title = title
+                self.interactive = bool(interactive)
                 self.process = None
                 self.queue_file = None
                 self.input_file = None
@@ -284,6 +484,7 @@ while True:
             def __getstate__(self):
                 return {
                     "title": self.title,
+                    "interactive": self.interactive,
                     "queue_file": self.queue_file,
                     "input_file": self.input_file,
                     "client_py": self.client_py
@@ -291,6 +492,7 @@ while True:
 
             def __setstate__(self, state):
                 self.title = state.get("title", "Console")
+                self.interactive = state.get("interactive", False)
                 self.queue_file = state.get("queue_file", None)
                 self.input_file = state.get("input_file", None)
                 self.client_py = state.get("client_py", None)
@@ -316,7 +518,10 @@ while True:
                 self.input_pos = 0
                 self.input_buf = b""
 
-                for temp_path in (self.queue_file, self.input_file):
+                temp_paths = [self.queue_file]
+                if self.interactive:
+                    temp_paths.append(self.input_file)
+                for temp_path in temp_paths:
                     with open(temp_path, "w", encoding="utf-8"):
                         pass
 
@@ -340,7 +545,8 @@ while True:
                     if self not in _active_cmd_consoles:
                         _active_cmd_consoles.append(self)
                     self.process = subprocess.Popen(
-                        [py_exe, self.client_py, self.queue_file],
+                        [py_exe, self.client_py, self.queue_file,
+                         "1" if self.interactive else "0", self.input_file],
                         creationflags=CREATE_NEW_CONSOLE,
                         startupinfo=si
                     )
@@ -349,8 +555,6 @@ while True:
                     return
 
                 self._send_queue(f"__TITLE__ {self.title}")
-                self.ShowText("输入 help 查看可用命令；直接写 Python 语句会在当前 store 里执行。")
-                self._send_prompt()
 
             def _send_queue(self, msg):
                 if self.queue_file and os.path.exists(self.queue_file):
@@ -391,16 +595,38 @@ while True:
                 self.title = str(title_text)
                 self._send_queue(f"__TITLE__ {self.title}")
 
-            # ---- 输入侧 ----
+            # ---- 输入侧：由剧本主动拉取 ----
 
-            def _send_prompt(self):
-                """让窗口重新输出提示符（每处理完一批命令都要补一个）"""
-                self._send_queue("__PROMPT__ " + self.PROMPT)
-
-            def _poll_input(self):
-                """读取用户在窗口里敲的命令，只应在主线程调用"""
-                if not self.input_file or not os.path.exists(self.input_file):
+            def _send_prompt(self, prompt="> "):
+                """让窗口显示一个等待输入的提示符"""
+                if not self.interactive:
                     return
+                self._send_queue("__PROMPT__ " + str(prompt))
+
+            def _ensure_interactive(self):
+                """确保窗口里跑的是可接收键盘的客户端，不是就重建一个"""
+                alive = self.process is not None and self.process.poll() is None
+                if self.interactive and alive:
+                    return
+                if alive:
+                    self.Close()
+                self.interactive = True
+                self.Create()
+
+            def _drop_pending_input(self):
+                """丢掉窗口里还没被读走的旧输入，从文件末尾开始读"""
+                self.input_buf = b""
+                self.input_pos = 0
+                try:
+                    if self.input_file and os.path.exists(self.input_file):
+                        self.input_pos = os.path.getsize(self.input_file)
+                except Exception:
+                    self.input_pos = 0
+
+            def _take_line(self):
+                """取一行已经敲完的输入；还没有就返回 None"""
+                if not self.input_file or not os.path.exists(self.input_file):
+                    return None
 
                 try:
                     with open(self.input_file, "rb") as f:
@@ -408,66 +634,39 @@ while True:
                         data = f.read()
                         self.input_pos = f.tell()
                 except Exception:
-                    return
+                    return None
 
                 if not data:
-                    return
+                    return None
 
                 # 只处理完整的行，剩下的半行留到下一次（避免读到写了一半的内容）
                 buf = self.input_buf + data
                 if b"\n" not in buf:
                     self.input_buf = buf
-                    return
+                    return None
 
-                complete, _, rest = buf.rpartition(b"\n")
+                head, _, rest = buf.partition(b"\n")
                 self.input_buf = rest
+                return head.decode("utf-8", "replace").rstrip("\r")
 
-                closed = False
-                for raw in complete.split(b"\n"):
-                    line = raw.decode("utf-8", "replace").strip()
-                    if line:
-                        try:
-                            self._run_command(line)
-                        except Exception:
-                            self._report()
-                    # 这一行可能是 exit/quit，窗口已经关了就不再往下处理
-                    if self not in _active_cmd_consoles:
-                        closed = True
-                        break
+            def Input(self, prompt="> "):
+                """阻塞等待用户在控制台窗口敲一行，返回这一行（不含换行）。
 
-                if not closed:
-                    self._send_prompt()
+                用法：a = console.Input(">>> ")
+                窗口先显示提示符，用户回车后返回；窗口被关掉时返回空字符串。
+                只能在剧本里（python 块）调用，因为它会插入一段 renpy.pause 等待。
+                """
+                self._ensure_interactive()
+                self._drop_pending_input()
+                self._send_prompt(prompt)
 
-            def _run_command(self, line):
-                """把一行输入分发到内置命令或 Python"""
-                low = line.lower()
-
-                if low in ("help", "?", "？"):
-                    self._show_help()
-                elif low in ("cls", "clear", "清屏"):
-                    self.Clear()
-                elif low in ("exit", "quit", "关闭"):
-                    self.Close()
-                elif low.startswith("color "):
-                    self.Color(line.split(None, 1)[1].strip())
-                elif low.startswith("title "):
-                    self.Title(line.split(None, 1)[1].strip())
-                else:
-                    self.Python(line)
-
-            def _show_help(self):
-                self.ShowText(
-                    "内置命令：\n"
-                    "  help / ?          显示这段帮助\n"
-                    "  cls / clear       清屏\n"
-                    "  color <代码>      改颜色，例如 color 0A\n"
-                    "  title <文本>      改窗口标题\n"
-                    "  exit / quit       关闭窗口\n"
-                    "  !<命令>           在本机执行系统命令，例如 !dir\n"
-                    "  其余内容          作为 Python 在当前 store 中执行"
-                    "（先按表达式求值，失败再按语句执行）\n"
-                    "注意：这里不能 jump / call label，需要跳转请用内置控制台（Shift+O）。"
-                )
+                while True:
+                    line = self._take_line()
+                    if line is not None:
+                        return line
+                    if self.process is None or self.process.poll() is not None:
+                        return ""
+                    renpy.pause(0.05, hard=True, checkpoint=False)
 
             def Python(self, source):
                 """在当前 store 里执行一段 Python，把返回值或报错写回窗口"""
@@ -529,14 +728,3 @@ while True:
                         os.remove(self.client_py)
                 except Exception:
                     pass
-
-        def _poll_cmd_consoles():
-            """主线程里轮询所有控制台窗口的输入（config.periodic_callbacks，约 20Hz）"""
-            for console in list(_active_cmd_consoles):
-                try:
-                    console._poll_input()
-                except Exception:
-                    pass
-
-        if _poll_cmd_consoles not in config.periodic_callbacks:
-            config.periodic_callbacks.append(_poll_cmd_consoles)
