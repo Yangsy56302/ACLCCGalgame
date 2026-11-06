@@ -177,29 +177,126 @@ init python:
     if renpy.windows:
         _active_cmd_consoles = []
 
+        # 控制台窗口里运行的客户端程序（写入临时目录，由 python.exe 在新控制台中执行）
+        # 输出：tail 队列文件；输入：把用户敲的行追加到 <队列文件>.in，交给 Ren'Py 主线程处理
+        _CMD_CLIENT_CODE = r'''
+import sys, os, time, threading
+
+os.system('chcp 65001 >nul')
+
+q_file = sys.argv[1]
+in_file = q_file + '.in'
+
+
+def _set_title(text):
+    try:
+        import ctypes
+        ctypes.windll.kernel32.SetConsoleTitleW(text)
+    except Exception:
+        pass
+
+
+def _reader():
+    while True:
+        try:
+            line = input()
+        except KeyboardInterrupt:
+            continue
+        except EOFError:
+            return
+
+        if line.startswith('!'):
+            try:
+                os.system(line[1:])
+            except Exception as e:
+                print(e)
+            sys.stdout.write('> ')
+            sys.stdout.flush()
+            continue
+
+        try:
+            with open(in_file, 'a', encoding='utf-8') as f:
+                f.write(line.replace('\r', ' ').replace('\n', ' ') + '\n')
+        except Exception:
+            pass
+
+
+threading.Thread(target=_reader, daemon=True).start()
+
+pos = 0
+
+while True:
+    try:
+        if not os.path.exists(q_file):
+            break
+
+        with open(q_file, 'r', encoding='utf-8') as f:
+            f.seek(pos)
+            lines = f.readlines()
+            pos = f.tell()
+
+        for raw in lines:
+            line = raw.rstrip('\n')
+
+            if line == '__EXIT__':
+                sys.stdout.flush()
+                os._exit(0)
+            elif line == '__CLS__':
+                os.system('cls')
+            elif line.startswith('__COLOR__ '):
+                os.system('color ' + line[10:])
+            elif line.startswith('__TITLE__ '):
+                _set_title(line[10:])
+            elif line.startswith('__PROMPT__ '):
+                sys.stdout.write(line[11:])
+                sys.stdout.flush()
+            elif line.startswith('__ECHO__ '):
+                print(line[9:], flush=True)
+
+        time.sleep(0.05)
+    except KeyboardInterrupt:
+        continue
+    except Exception:
+        time.sleep(0.05)
+'''
+
         class CmdWindow(object):
             """
             命令提示符控制台窗口控制器
             通过独立 IPC 命令队列常驻运行，彻底杜绝管道关闭闪退
+
+            输出：Ren'Py 往队列文件追加 __ECHO__/__COLOR__ 等指令，窗口里的客户端进程负责显示。
+            输入：客户端把用户敲的一行写进 <队列文件>.in，Ren'Py 在 config.periodic_callbacks
+                  里（主线程）读出来执行，再把结果和新的提示符写回窗口。
             """
+            PROMPT = "> "
+            MAX_OUTPUT = 2000
+
             def __init__(self, title="Console"):
                 self.title = title
                 self.process = None
                 self.queue_file = None
+                self.input_file = None
                 self.client_py = None
+                self.input_pos = 0
+                self.input_buf = b""
 
             def __getstate__(self):
                 return {
                     "title": self.title,
                     "queue_file": self.queue_file,
+                    "input_file": self.input_file,
                     "client_py": self.client_py
                 }
 
             def __setstate__(self, state):
                 self.title = state.get("title", "Console")
                 self.queue_file = state.get("queue_file", None)
+                self.input_file = state.get("input_file", None)
                 self.client_py = state.get("client_py", None)
                 self.process = None
+                self.input_pos = 0
+                self.input_buf = b""
 
             def Create(self):
                 """创建并弹出新的命令提示符窗口"""
@@ -211,46 +308,20 @@ init python:
                 if self.process is not None and self.process.poll() is None:
                     return
 
-                # 创建临时命令队列文件与客户端执行脚本
+                # 创建临时命令队列文件、输入回传文件与客户端执行脚本
                 temp_dir = tempfile.gettempdir()
                 self.queue_file = os.path.join(temp_dir, f"renpy_cmd_q_{id(self)}.txt")
+                self.input_file = os.path.join(temp_dir, f"renpy_cmd_i_{id(self)}.txt")
                 self.client_py = os.path.join(temp_dir, f"renpy_cmd_c_{id(self)}.py")
+                self.input_pos = 0
+                self.input_buf = b""
 
-                with open(self.queue_file, "w", encoding="utf-8") as f:
-                    pass
-
-                client_code = (
-                    "import sys, os, time\n"
-                    "os.system('chcp 65001 >nul')\n"
-                    "q_file = sys.argv[1]\n"
-                    "pos = 0\n"
-                    "while True:\n"
-                    "    if not os.path.exists(q_file):\n"
-                    "        break\n"
-                    "    try:\n"
-                    "        with open(q_file, 'r', encoding='utf-8') as f:\n"
-                    "            f.seek(pos)\n"
-                    "            lines = f.readlines()\n"
-                    "            pos = f.tell()\n"
-                    "        for raw in lines:\n"
-                    "            line = raw.strip()\n"
-                    "            if line == '__EXIT__':\n"
-                    "                sys.exit(0)\n"
-                    "            elif line == '__CLS__':\n"
-                    "                os.system('cls')\n"
-                    "            elif line.startswith('__COLOR__ '):\n"
-                    "                os.system('color ' + line[10:])\n"
-                    "            elif line.startswith('__TITLE__ '):\n"
-                    "                os.system('title ' + line[10:])\n"
-                    "            elif line.startswith('__ECHO__ '):\n"
-                    "                print(line[9:])\n"
-                    "    except Exception:\n"
-                    "        pass\n"
-                    "    time.sleep(0.05)\n"
-                )
+                for temp_path in (self.queue_file, self.input_file):
+                    with open(temp_path, "w", encoding="utf-8"):
+                        pass
 
                 with open(self.client_py, "w", encoding="utf-8") as f:
-                    f.write(client_code)
+                    f.write(_CMD_CLIENT_CODE)
 
                 # 寻找同级目录的 python.exe 作为控制台程序载体
                 py_dir = os.path.dirname(sys.executable)
@@ -278,6 +349,8 @@ init python:
                     return
 
                 self._send_queue(f"__TITLE__ {self.title}")
+                self.ShowText("输入 help 查看可用命令；直接写 Python 语句会在当前 store 里执行。")
+                self._send_prompt()
 
             def _send_queue(self, msg):
                 if self.queue_file and os.path.exists(self.queue_file):
@@ -318,6 +391,120 @@ init python:
                 self.title = str(title_text)
                 self._send_queue(f"__TITLE__ {self.title}")
 
+            # ---- 输入侧 ----
+
+            def _send_prompt(self):
+                """让窗口重新输出提示符（每处理完一批命令都要补一个）"""
+                self._send_queue("__PROMPT__ " + self.PROMPT)
+
+            def _poll_input(self):
+                """读取用户在窗口里敲的命令，只应在主线程调用"""
+                if not self.input_file or not os.path.exists(self.input_file):
+                    return
+
+                try:
+                    with open(self.input_file, "rb") as f:
+                        f.seek(self.input_pos)
+                        data = f.read()
+                        self.input_pos = f.tell()
+                except Exception:
+                    return
+
+                if not data:
+                    return
+
+                # 只处理完整的行，剩下的半行留到下一次（避免读到写了一半的内容）
+                buf = self.input_buf + data
+                if b"\n" not in buf:
+                    self.input_buf = buf
+                    return
+
+                complete, _, rest = buf.rpartition(b"\n")
+                self.input_buf = rest
+
+                closed = False
+                for raw in complete.split(b"\n"):
+                    line = raw.decode("utf-8", "replace").strip()
+                    if line:
+                        try:
+                            self._run_command(line)
+                        except Exception:
+                            self._report()
+                    # 这一行可能是 exit/quit，窗口已经关了就不再往下处理
+                    if self not in _active_cmd_consoles:
+                        closed = True
+                        break
+
+                if not closed:
+                    self._send_prompt()
+
+            def _run_command(self, line):
+                """把一行输入分发到内置命令或 Python"""
+                low = line.lower()
+
+                if low in ("help", "?", "？"):
+                    self._show_help()
+                elif low in ("cls", "clear", "清屏"):
+                    self.Clear()
+                elif low in ("exit", "quit", "关闭"):
+                    self.Close()
+                elif low.startswith("color "):
+                    self.Color(line.split(None, 1)[1].strip())
+                elif low.startswith("title "):
+                    self.Title(line.split(None, 1)[1].strip())
+                else:
+                    self.Python(line)
+
+            def _show_help(self):
+                self.ShowText(
+                    "内置命令：\n"
+                    "  help / ?          显示这段帮助\n"
+                    "  cls / clear       清屏\n"
+                    "  color <代码>      改颜色，例如 color 0A\n"
+                    "  title <文本>      改窗口标题\n"
+                    "  exit / quit       关闭窗口\n"
+                    "  !<命令>           在本机执行系统命令，例如 !dir\n"
+                    "  其余内容          作为 Python 在当前 store 中执行"
+                    "（先按表达式求值，失败再按语句执行）\n"
+                    "注意：这里不能 jump / call label，需要跳转请用内置控制台（Shift+O）。"
+                )
+
+            def Python(self, source):
+                """在当前 store 里执行一段 Python，把返回值或报错写回窗口"""
+                source = str(source).strip()
+                if not source:
+                    return
+
+                try:
+                    value = renpy.python.py_eval(source)
+                except SyntaxError:
+                    # 不是表达式，按语句执行
+                    try:
+                        renpy.python.py_exec(source)
+                    except renpy.game.CONTROL_EXCEPTIONS:
+                        self.ShowText("控制台不支持跳转 / 调用，请用内置控制台（Shift+O）。")
+                    except Exception:
+                        self._report()
+                    return
+                except renpy.game.CONTROL_EXCEPTIONS:
+                    self.ShowText("控制台不支持跳转 / 调用，请用内置控制台（Shift+O）。")
+                    return
+                except Exception:
+                    self._report()
+                    return
+
+                if value is not None:
+                    text = repr(value)
+                    if len(text) > self.MAX_OUTPUT:
+                        text = text[:self.MAX_OUTPUT] + " ..."
+                    self.ShowText(text)
+
+            def _report(self):
+                """把刚才的异常精简后写进窗口"""
+                import traceback
+                for line in traceback.format_exc().rstrip().splitlines()[-8:]:
+                    self.ShowText(line)
+
             def Close(self):
                 """关闭该命令提示符窗口"""
                 self._send_queue("__EXIT__")
@@ -329,12 +516,27 @@ init python:
                     self.process = None
                 if self in _active_cmd_consoles:
                     _active_cmd_consoles.remove(self)
+                self.input_pos = 0
+                self.input_buf = b""
                 # 清理临时文件
                 try:
                     import os
                     if self.queue_file and os.path.exists(self.queue_file):
                         os.remove(self.queue_file)
+                    if self.input_file and os.path.exists(self.input_file):
+                        os.remove(self.input_file)
                     if self.client_py and os.path.exists(self.client_py):
                         os.remove(self.client_py)
                 except Exception:
                     pass
+
+        def _poll_cmd_consoles():
+            """主线程里轮询所有控制台窗口的输入（config.periodic_callbacks，约 20Hz）"""
+            for console in list(_active_cmd_consoles):
+                try:
+                    console._poll_input()
+                except Exception:
+                    pass
+
+        if _poll_cmd_consoles not in config.periodic_callbacks:
+            config.periodic_callbacks.append(_poll_cmd_consoles)

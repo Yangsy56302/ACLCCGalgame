@@ -11,7 +11,7 @@ label test_console:
         console.Color("0A")
         console.Clear()
         console.ShowText("欢迎使用 RenPy 控制台！")
-        console.ShowText("你可以在这里执行调试命令。")
+        console.ShowText("现在可以直接在窗口里输入：help 查看命令，其余按 Python 执行。")
     mwam.comment "控制台已弹出，点击继续以关闭控制台..."
     python:
         console.Close()
