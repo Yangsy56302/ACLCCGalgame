@@ -218,19 +218,36 @@ screen per_variable():
 
 label debug(thing):
     if thing == "reset":
-        nvl clear
-        menu(nvl=True):
-            debug "clean: Do you want to Clear All Persistent Data? (Y/N){fast}"
-            "{font=MapleMono.otf}Yes{/font}":
-                nvl clear
-                debug "clean: Do you want to Clear All Persistent Data? (Y/N) Y{fast}{w=1.0}{nw}"
-                debug "clean: Success.{fast}{w=1.0}{nw}"
-                $ persistent._clear(progress=True)
-            "{font=MapleMono.otf}No{/font}":
-                nvl clear
-                debug "clean: Do you want to Clear All Persistent Data? (Y/N) N{fast}{w=1.0}{nw}"
-                pass
-        $ persistent.debug_mode = True
+        if renpy.windows:
+            python:
+                debug_console = CmdWindow("Debug Mode", interactive=True)
+                debug_console.Create()
+                debug_console.Color("0a")
+                debug_console.ShowText("clean: Do you want to Clear All Persistent Data? (Y/N)")
+                choosen = debug_console.Input()
+            if choosen.strip().lower() in ("y", "yes"):
+                python:
+                    debug_console.ShowText("clean: Success.")
+                    persistent._clear(progress=True)
+                with Pause(1)
+                $ debug_console.Close()
+            else:
+                $ debug_console.Close()
+            $ persistent.debug_mode = True
+        else:
+            nvl clear
+            menu(nvl=True):
+                debug "clean: Do you want to Clear All Persistent Data? (Y/N){fast}"
+                "{font=MapleMono.otf}Yes{/font}":
+                    nvl clear
+                    debug "clean: Do you want to Clear All Persistent Data? (Y/N) Y{fast}{w=1.0}{nw}"
+                    debug "clean: Success.{fast}{w=1.0}{nw}"
+                    $ persistent._clear(progress=True)
+                "{font=MapleMono.otf}No{/font}":
+                    nvl clear
+                    debug "clean: Do you want to Clear All Persistent Data? (Y/N) N{fast}{w=1.0}{nw}"
+                    pass
+            $ persistent.debug_mode = True
     if is_ingame:
         return
     else:

@@ -465,9 +465,9 @@ if __name__ == '__main__':
 
             输出：Ren'Py 往队列文件追加 __ECHO__/__COLOR__ 等指令，窗口里的客户端进程负责显示。
             输入：拉取式——剧本里调用 `a = console.Input(">>> ")`，窗口显示提示符并等用户回车，
-                  函数把这行返回给剧本，由剧本自己决定显示还是执行（console.Python(a)）。
-                  只有 interactive=True 的窗口才读键盘；纯输出窗口敲什么都无效。
-                  客户端自己画提示符和输入行，游戏输出插进来时会擦掉重画，不会糊掉。
+            函数把这行返回给剧本，由剧本自己决定显示还是执行（console.Python(a)）。
+            只有 interactive=True 的窗口才读键盘；纯输出窗口敲什么都无效。
+            客户端自己画提示符和输入行，游戏输出插进来时会擦掉重画，不会糊掉。
             """
             MAX_OUTPUT = 2000
 
@@ -546,7 +546,7 @@ if __name__ == '__main__':
                         _active_cmd_consoles.append(self)
                     self.process = subprocess.Popen(
                         [py_exe, self.client_py, self.queue_file,
-                         "1" if self.interactive else "0", self.input_file],
+                        "1" if self.interactive else "0", self.input_file],
                         creationflags=CREATE_NEW_CONSOLE,
                         startupinfo=si
                     )
