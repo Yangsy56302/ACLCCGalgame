@@ -440,8 +440,7 @@ label setup_naming_entered:
                             (
                                 ( "info: changestorage.sh begin\n", 1.0 ),
                                 ( "data: Now modify the storage of character data from 'Normal' to 'Special'......\n", 1.0 ),
-                                ( "data: Success.\n", 0.5 ),
-                                ( "Press any key to continue...", 1.0 ),
+                                ( "data: Success.\n", 1.5 ),
                             ),
                         ):
                             debug_cmd_content = ""

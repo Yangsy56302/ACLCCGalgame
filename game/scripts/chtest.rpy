@@ -6,15 +6,15 @@ label test_console:
     if not renpy.windows:
         return
     python:
-        console = CmdWindow("DEBUG MODE")
+        console = CmdWindow("DEBUG MODE", interactive=True)
         console.Create()
         console.Color("0A")
         console.Clear()
         console.ShowText("欢迎使用 RenPy 控制台！")
-        console.ShowText("你可以在这里执行调试命令。")
-    mwam.comment "控制台已弹出，点击继续以关闭控制台..."
-    python:
+        console.ShowText("正在测试输入")
+        command = console.Input()
         console.Close()
+    mwam.comment "你刚才输入的是[command]"
     return
 
 
