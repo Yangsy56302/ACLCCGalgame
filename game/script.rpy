@@ -49,12 +49,11 @@ label splashscreen:
     call request_manage_storage from _call_request_manage_storage
 
     if not renpy.windows and not renpy.variant("android"):
-        $ in_setup = True
+        $ variables["in_setup"] = True
         mwam.comment "唔……这个系统既不是Windows也不是Android呢。"
         mwam.comment "其他平台的话，我们可没怎么正经测过……"
         mwam.comment "要是碰到什么奇怪的问题，就当是这片平台特有的彩蛋吧（"
-        $ del in_setup
-
+        $ variables["in_setup"] = None
     scene black 
     with Pause(1) 
 
