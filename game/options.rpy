@@ -113,6 +113,12 @@ define config.main_menu_music = "mus_aurora_part1.ogg"
 ## Each variable should be set to a transition, or None to indicate that no
 ## transition should be used.
 
+## The transition that is used to display the main menu after the end of the 
+## splashscreen.
+
+define config.end_splash_transition = dissolve
+
+
 ## Entering or exiting the game menu.
 
 define config.enter_transition = None
@@ -232,13 +238,17 @@ init python:
     build.classify("**/.**", None)
     build.classify("**/#**", None)
     build.classify("**/thumbs.db", None)
-    build.classify("debug.rpy", None)
+    build.classify("game/debug.rpy", None)
+    build.classify("game/debug.rpyc", None)
+    build.classify("game/**.rpy", None)
+    build.classify("game/**.rpym", None)
+    build.classify("docs/**", None)
 
     build.archive("a","all")
     build.archive("b","all")
     build.archive("c","all")
 
-    build.classify("game/**.rpy", "a")
+    build.classify("game/**.rpymc", "a")
     build.classify("game/**.rpyc", "a")
     build.classify("game/**.jpg", "b")
     build.classify("game/**.png", "b")

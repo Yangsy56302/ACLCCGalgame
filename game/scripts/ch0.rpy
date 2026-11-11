@@ -1,7 +1,6 @@
 label ch0:
-    stop music
-    # scene bg sky with fade
-    scene black with fade
+    play sound "snd_screen_wipe_in.wav"
+    scene bg sky with wipeadofai
 
     $ renpy.notify("部分背景图可能使用ai生成。")
 
@@ -12,7 +11,14 @@ label ch0:
     "日子就这么普普通通的过着{......}"
 
 
-    scene bg home_noon with fade
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_noon with wipeadofai
+
 
     # "有一天，{w=0.25}你在网上冲浪的时候发现一个视频，{w=0.5}标题写着{w=0.25}“0基础编程教学”。{nw}"
     # $ _history_list.pop()
@@ -37,7 +43,8 @@ label ch0:
 
     $ renpy.notify("2020年x月x日，某视频网站")
     # pause 3.0
-
+    #mwam.comment "这是要两个都留还是只留一个"
+    show screen chapter_title("2020年某日")
 
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
@@ -51,8 +58,13 @@ label ch0:
     "尽管26元的游戏不算昂贵，但对于只敢在父母手机上玩过一些免费小游戏的你来说，付费购买一款游戏对你而言是一道无法逾越的红线。"
     "不得已，你只能在搜索结果下的无数广告里下载了一个{yellow}“渠道版”{/yellow}将就着玩。"
 
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
 
-    scene bg sbeam with dissolve
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg sbeam with wipeadofai
 
     # play music "mus_astral_calm.mp3"
     # python:
@@ -114,12 +126,9 @@ label ch0:
     scene home_noon with fade
 
 
-    $ renpy.notify("2022年某日，嘁哩嘁哩评论区")
-    pause 1.0
 
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-
     
     "就像之前的每一天一样，你百无聊赖的刷着嘁站。"
     "作为一个已经断断续续玩过两年的玩家，你基本熟悉了这款名为《冰与火之舞》的游戏的玩法，并取得了一些你自认为满意的记录，空闲时你也会在视频网站上消磨时间。"
@@ -135,7 +144,7 @@ label ch0:
     "不过，如此“独特的”风格，谁能忍得住不看一看呢。"
     # "{cps=*0.75}怀着好奇心，{w=0.5}你点开了那个视频。{w=1.0}{nw}"
 
-    scene black with dissolve
+    scene black with None
     $ renpy.music.set_pause(True)
 
     mc "{......}"
@@ -165,5 +174,5 @@ label ch0:
     # mwam.comment "他自己说的，不要问我（{nw}"
     
     # "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
-    jump ch0_1
+    return
 

@@ -105,7 +105,9 @@ screen say(who, what):
     window:
         id "window"
 
-        if another_view:
+        if variables.get("in_setup", False):
+            background "gui/textbox_setup.png" xalign 0.5 yalign 1.0
+        elif variables.get("another_view", False):
             background "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
@@ -193,7 +195,9 @@ screen input(prompt):
     window:
         id "window"
 
-        if another_view:
+        if variables.get("in_setup", False):
+            add "gui/textbox_setup.png" xalign 0.5 yalign 1.0
+        elif variables.get("another_view", False):
             add "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
@@ -229,7 +233,9 @@ screen volatile_input_screen(prompt, duration):
     window:
         id "window"
 
-        if another_view:
+        if variables.get("in_setup", False):
+            add "gui/textbox_setup.png" xalign 0.5 yalign 1.0
+        elif variables.get("another_view", False):
             add "gui/textbox_another_view.png" xalign 0.5 yalign 1.0
             add "gui/another_view.png" xalign 0.5 yalign 1.0
         else:
@@ -275,7 +281,7 @@ init python:
 screen choice(items):
     style_prefix "choice"
 
-    if another_view:
+    if variables.get("another_view", False):
         add "gui/another_view.png" xalign 0.5 yalign 1.0
     else:
         pass
@@ -365,7 +371,7 @@ style quick_button_text:
 ## This screen is included in the main and game menus, and provides navigation
 ## to other menus, and to start the game.
 
-init -999 python:
+init -998 python:
     class Continue(Action):
         def __call__(self):
             newest_page, newest_name = self.get_newest_slot()
@@ -413,7 +419,7 @@ screen navigation():
 
         textbutton _("Load") action ShowMenu("load")
 
-        if main_menu and persistent.has_seen_ending:
+        if main_menu and persistent.variables.get("has_seen_ending", False):
 
             textbutton _("Extra Mode") action ShowMenu("gallery")
 
@@ -1679,27 +1685,27 @@ screen quick_menu():
 
 style window:
     variant "small"
-    # background "gui/phone/textbox.png"
+    # background "gui/textbox.png"
 
 style radio_button:
     variant "small"
-    foreground "gui/phone/button/radio_[prefix_]foreground.png"
+    foreground "gui/button/radio_[prefix_]foreground.png"
 
 style check_button:
     variant "small"
-    foreground "gui/phone/button/check_[prefix_]foreground.png"
+    foreground "gui/button/check_[prefix_]foreground.png"
 
 style nvl_window:
     variant "small"
-    background "gui/phone/nvl.png"
+    background "gui/nvl.png"
 
 style main_menu_frame:
     variant "small"
-    background "gui/phone/overlay/main_menu.png"
+    background "gui/overlay/main_menu.png"
 
 style game_menu_outer_frame:
     variant "small"
-    background "gui/phone/overlay/game_menu.png"
+    background "gui/overlay/game_menu.png"
 
 style game_menu_navigation_frame:
     variant "small"
@@ -1725,38 +1731,38 @@ style pref_vbox:
 style bar:
     variant "small"
     ysize gui.bar_size
-    left_bar Frame("gui/phone/bar/left.png", gui.bar_borders, tile=gui.bar_tile)
-    right_bar Frame("gui/phone/bar/right.png", gui.bar_borders, tile=gui.bar_tile)
+    left_bar Frame("gui/bar/left.png", gui.bar_borders, tile=gui.bar_tile)
+    right_bar Frame("gui/bar/right.png", gui.bar_borders, tile=gui.bar_tile)
 
 style vbar:
     variant "small"
     xsize gui.bar_size
-    top_bar Frame("gui/phone/bar/top.png", gui.vbar_borders, tile=gui.bar_tile)
-    bottom_bar Frame("gui/phone/bar/bottom.png", gui.vbar_borders, tile=gui.bar_tile)
+    top_bar Frame("gui/bar/top.png", gui.vbar_borders, tile=gui.bar_tile)
+    bottom_bar Frame("gui/bar/bottom.png", gui.vbar_borders, tile=gui.bar_tile)
 
 style scrollbar:
     variant "small"
     ysize gui.scrollbar_size
-    base_bar Frame("gui/phone/scrollbar/horizontal_[prefix_]bar.png", gui.scrollbar_borders, tile=gui.scrollbar_tile)
-    thumb Frame("gui/phone/scrollbar/horizontal_[prefix_]thumb.png", gui.scrollbar_borders, tile=gui.scrollbar_tile)
+    base_bar Frame("gui/scrollbar/horizontal_[prefix_]bar.png", gui.scrollbar_borders, tile=gui.scrollbar_tile)
+    thumb Frame("gui/scrollbar/horizontal_[prefix_]thumb.png", gui.scrollbar_borders, tile=gui.scrollbar_tile)
 
 style vscrollbar:
     variant "small"
     xsize gui.scrollbar_size
-    base_bar Frame("gui/phone/scrollbar/vertical_[prefix_]bar.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
-    thumb Frame("gui/phone/scrollbar/vertical_[prefix_]thumb.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
+    base_bar Frame("gui/scrollbar/vertical_[prefix_]bar.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
+    thumb Frame("gui/scrollbar/vertical_[prefix_]thumb.png", gui.vscrollbar_borders, tile=gui.scrollbar_tile)
 
 style slider:
     variant "small"
     ysize gui.slider_size
-    base_bar Frame("gui/phone/slider/horizontal_[prefix_]bar.png", gui.slider_borders, tile=gui.slider_tile)
-    thumb "gui/phone/slider/horizontal_[prefix_]thumb.png"
+    base_bar Frame("gui/slider/horizontal_[prefix_]bar.png", gui.slider_borders, tile=gui.slider_tile)
+    thumb "gui/slider/horizontal_[prefix_]thumb.png"
 
 style vslider:
     variant "small"
     xsize gui.slider_size
-    base_bar Frame("gui/phone/slider/vertical_[prefix_]bar.png", gui.vslider_borders, tile=gui.slider_tile)
-    thumb "gui/phone/slider/vertical_[prefix_]thumb.png"
+    base_bar Frame("gui/slider/vertical_[prefix_]bar.png", gui.vslider_borders, tile=gui.slider_tile)
+    thumb "gui/slider/vertical_[prefix_]thumb.png"
 
 style slider_vbox:
     variant "small"
@@ -2068,7 +2074,8 @@ init python:
         _("Aurora (Title Ver.)"): "mus_aurora_part1.ogg",
         _("Before Beginning"): "mus_setup.ogg",
         _("Astral Calm"): "mus_astral_calm.mp3",
-        _("Aurora"): "mus_aurora.mp3"
+        _("Aurora"): "mus_aurora.mp3",
+        _("Ammonium Cyanide"): "mus_ammonium_cyanide.mp3"
         # 更多音乐请自行添加
     }
 
@@ -2166,23 +2173,22 @@ screen music_room():
 
 
 screen chapter_title(title_text):
-
-    text title_text:
+    vbox at chapter_appear:
         xalign 0.5
-        yalign 0.5
-        size 72
-        color "#ffffff"
-        outlines [(2, "#000000", 0, 0)]  # 文字描边，增强可读性
+        ycenter 0.5
+        text title_text:
+            size 68
+            color "#ffffff"
+            outlines [(0, "#00000050", 3, 3)]
 
-label show_chapter(title):
-    window hide
-    show screen chapter_title(title)
-    with dissolve
-    $ renpy.pause(2.0) # 'hard=True' 会忽略玩家的点击，确保效果停留
-    hide screen chapter_title
-    with dissolve
-    window auto
-    return
+    timer 3.25 action Hide("chapter_title")
+
+transform chapter_appear:
+    on show:
+        alpha 0
+        linear 0.25 alpha 1.0
+    on hide:
+        linear 0.5 alpha 0.0
 
 
 screen copy_tip(message):
@@ -2195,3 +2201,14 @@ screen copy_tip(message):
             font "SYBlack.otf"
 
     timer 3.25 action Hide("copy_tip")
+
+screen debug_tip(message):
+
+    zorder 100
+    style_prefix "notify"
+
+    frame at notify_appear:
+        text "[message!tq]":
+            font debug_gui_font
+
+    timer 3.25 action Hide("debug_tip")

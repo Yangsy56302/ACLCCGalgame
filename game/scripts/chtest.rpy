@@ -1,5 +1,30 @@
 label chtest:
-    jump chyangsy_1
+    jump test_console
+
+
+label test_console:
+    if not renpy.windows:
+        return
+    python:
+        console = CmdWindow("DEBUG MODE", interactive=True)
+        console.Create()
+        console.Color("0A")
+        console.Clear()
+        console.ShowText("欢迎使用 RenPy 控制台！")
+        console.ShowText("正在测试输入")
+        command = console.Input()
+        console.Close()
+    mwam.comment "你刚才输入的是[command]"
+    return
+
+
+label chany:
+    $ label_name = renpy.input("label:")
+    menu:
+        "renpy.call('[label_name]')":
+            $ renpy.call(label_name)
+        "renpy.jump('[label_name]')":
+            $ renpy.jump(label_name)
 
 
 label chtest_char:

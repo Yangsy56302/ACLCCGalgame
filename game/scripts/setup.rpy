@@ -19,7 +19,8 @@ init -99 python:
 
 
 label setup_naming_start:
-    
+    $ variables["in_setup"] = True
+
     scene black with fade
 
     python:
@@ -83,8 +84,9 @@ label setup_naming_start:
 
     "{......}？"
 
+    "你{w=0.25}是谁？{nw}"
     menu:
-        "你是谁？"
+        "你是谁？{fast}"
         "我不知道。":
             $ entered = True
         "我不清楚。":
@@ -92,14 +94,14 @@ label setup_naming_start:
         "我不晓得。":
             $ entered = True
 
-    "{......}我当然知道你不知道了，蠢货。"
-    "我也是够蠢的，怎么问了一个你不知道的问题。"
-    "真是奇怪，正常流程应该会把你传送到取名进程里，但是触发器并没有被响应。"
-    "唉，我到时候再去看看吧。"
+    "{......}我当然知道你不知道了，{w=0.25}蠢货。"
+    "我也是够蠢的，{w=0.5}怎么问了一个你不知道的问题。"
+    "真是奇怪，{w=0.25}正常流程应该会把你传送到取名进程里，{w=0.25}但是触发器并没有被响应。"
+    "唉，{w=0.5}我到时候再去看看吧。"
     "{......}"
-    "啊，当然，得先把你的事情解决了。"
-    "我大概只能把你的名字手动赋值进变量里，然后把你跳转到游戏的序章。"
-    "稍等，我准备一下。"
+    "啊，{w=0.25}当然，{w=0.25}得先把你的事情解决了。"
+    "我大概只能把你的名字手动赋值进变量里，{w=0.5}然后把你跳转到游戏的序章。"
+    "稍等，{w=0.25}我准备一下。"
     
     scene black with dissolve
     pause(1.0)
@@ -238,19 +240,21 @@ label setup_naming_entered:
     
         # 第一次：
         if empty_name_attempts == 1:
-            "不，你不能什么都不输入，我不确定这样会不会触发什么bug。"
+            "不，{w=0.25}你不能什么都不输入，{w=0.5}我不确定这样会不会触发什么bug。"
             jump setup_naming_loop
 
         # 第二次：
         elif empty_name_attempts == 2:
-            "你是故意的吗？{w=0.25}我可不觉得这很好玩。"
+            "你是故意的吗？{w=0.5}我可不觉得这很好玩。"
             jump setup_naming_loop
             
         # 第三次：
         elif empty_name_attempts == 3:
-            "你到底要干什么？{w=0.25}你是想触发什么彩蛋吗？"
-            "我不能和你一直在取名界面耽搁下去，我也有工作要做。"
-            $ empty_name_attempts += 1
+            "你到底要干什么？{w=1.0}你是想触发什么彩蛋吗？"
+            "我不能和你一直在取名界面耽搁下去，{w=0.5}我也有工作要做。"
+            # yangsy.comment "这里怎么漏了个 jump setup_naming_loop 啊喂\n{w=1.0}什么事只过三（"
+            jump setup_naming_loop
+
             # menu:
             #     "我不会取名字。":
             #         "{......}行吧，你最好不是骗我的。"
@@ -293,28 +297,60 @@ label setup_naming_entered:
             jump setup_naming_loop
 
 
-    # 否则，如果游戏目前处在调试模式：
-    elif player_input == persistent.password and not persistent.debug_mode and is_debug_installed:
-        python:
-            _history_list.pop()
-            persistent.debug_mode = True
-        nvl clear
-        debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
-        if not persistent.setup_saw_debug_screen:
+    # 否则，如果输入了调试码，且允许进入调试模式：
+    elif player_input == "VGVhbSBBQ0xDQyBNZW1iZXI=" and is_debug_installed:
+        # 如果游戏目前不处在调试模式：
+        if not persistent.debug_mode:
+            if renpy.windows:
+                python:
+                    debug_cmd_window = CmdWindow("DEBUG MODE")
+                    debug_cmd_window.Create()
+                    debug_cmd_window.Color("0A")
+                    persistent.debug_mode = True
+                    debug_cmd_window.ShowText("Debug Mode Enabled")
+                with Pause(1)
+                $ debug_cmd_window.Close()
+                $ del debug_cmd_window
+                
+            else:    
+                python:
+                    _history_list.pop()
+                    persistent.debug_mode = True
+                nvl clear
+                debug "Debug Mode Enabled{fast}{w=1.0}{nw}"
+        # 否则：
+        else:
+            if renpy.windows:
+                python:
+                    debug_cmd_window = CmdWindow("DEBUG MODE")
+                    debug_cmd_window.Create()
+                    debug_cmd_window.Color("0A")
+                    debug_cmd_window.ShowText("Debug Mode Is Already Enabled")
+                with Pause(1)
+                $ debug_cmd_window.Close()
+                $ del debug_cmd_window
+                
+            else:    
+                nvl clear
+                debug "Debug Mode Is Already Enabled{fast}{w=1.0}{nw}"
+        if not persistent.variables["setup_saw_debug_screen"]:
 
             # setup "？"
             # setup "你刚刚{w=0.25}，是不是输入了什么东西{w=0.5}，然后弹出了一个奇怪的界面？"
             # setup "我想{w=0.25}你可能是有什么特殊的身份吧。"
 
             "{......}？"
-            "你怎么知道这个？你到底是谁？"
+            "你怎么知道这个？{w=1.0}你到底是谁？"
             "{......}"
-            "哎，算了，你都知道这个了，我也没资格再问你了，你爱干啥干啥吧。"
+            "哎，{w=0.25}算了，{w=0.5}你都知道这个了，{w=0.5}我也没资格再问你了，{w=0.5}你爱干啥干啥吧。"
 
-            $ persistent.setup_saw_debug_screen = True
+            $ persistent.variables["setup_saw_debug_screen"] = True
         else:
-            mwam.comment "你们来填吧，我想不出这里写什么"
-            yangsy.comment "总感觉这里留空就行了（"
+            # mwam.comment "你们来填吧，我想不出这里写什么"
+            # yangsy.comment "总感觉这里留空就行了（"
+            # mwam.comment "留空的话那我注释了（"
+            # mwam.comment "全空会报错这谁绷得住，算了，加个pass吧（）"
+            pass
         jump setup_naming_loop
 
 
@@ -354,14 +390,14 @@ label setup_naming_entered:
 
                     "{......}？"
                     "等我检查一下{......}"
-                    "名字冲突了？真不巧，我没想到会发生这种事。"
+                    "名字冲突了？{w=1.0}真不巧，{w=0.5}我没想到会发生这种事。"
                     "稍等一下，{w=0.5}我得回退一下进程{......}{nw}"
                 # 第二次：
                 elif duplicate_name_attempts == 2:
                     # setup "啊，{w=0.25}你运气真不好。\n{w=1.0}我想{w=0.25}你得再试一次了。"
 
-                    "又冲突了？你是不是在网络上看过攻略了？还是你认识他们？"
-                    "哎，你再换一个吧。"
+                    "又冲突了？{w=1.0}你是不是在网络上看过攻略了？{w=0.5}还是你认识他们？"
+                    "哎，{w=0.5}你再换一个吧。"
                 # 第三次：
                 elif duplicate_name_attempts == 3:
                     # setup "喂，{w=1.0}你是故意的吧。"
@@ -369,8 +405,8 @@ label setup_naming_entered:
                     # setup "我劝你最好{cps=*0.5}认真考虑一下，{w=0.5}我的耐心是有限的。{/cps}"
 
                     "喂，{w=1.0}你是故意的吧。"
-                    "连续三次冲突了，你觉得这有意思吗？"
-                    "你继续试吧，反正是肯定用不了的。"
+                    "连续三次冲突了，{w=0.5}你觉得这有意思吗？"
+                    "你继续试吧，{w=0.25}反正是肯定用不了的。"
                 # 否则
                 else:
                     "{......}"
@@ -381,26 +417,62 @@ label setup_naming_entered:
                 # 返回重新输入
                 jump setup_naming_loop
             # 撞名，未修改，调试模式：
-            else: 
-                nvl clear
-                debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
-                debug "user@debugmode:~$ {fast}su root{w=1.0}{nw}"
-                debug "Enter Password: {fast}{w=3.0}{nw}"
-                debug "root@debugmode:~$ {fast}{w=0.5}chmod 777 changestorage.sh{w=1.0}{nw}"
-                debug "root@debugmode:~$ {fast}{w=0.5}./changestorage.sh{w=1.0}{nw}"
-                nvl clear
-                debug "{w=1.0}{nw}"
-                $ _history_list.pop()
-                nvl clear
-                debug "info: changestorage.sh begin{fast}{w=1.0}{nw}"
-                debug "data: Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
-                $ persistent.variables["duplicate_name_fixed"] = True
-                debug "data: Success.{fast}{w=0.5}{nw}"
-                debug "Press any key to continue...{fast}"
+            else:
+                if renpy.windows:
+                    python:
+                        debug_cmd_window = CmdWindow("DEBUG MODE")
+                        debug_cmd_window.Create()
+                        debug_cmd_window.Color("0A")
+
+                        for debug_cmd_page in (
+                            (
+                                (
+                                    "Welcome to use Debug Mode Terminal.\n"
+                                    "user@debugmode:~$ ", 0.1
+                                ),
+                                ( "su - root\n", 0.5 ),
+                                ( "Password:\n", 3 ),
+                                ( "user@debugmode:~$ ", 0.5 ),
+                                ( "chmod 777 changestorage.sh\n", 1.0 ),
+                                ( "user@debugmode:~$ ", 0.5 ),
+                                ( "./changestorage.sh\n", 1.0 ),
+                            ),
+                            (
+                                ( "info: changestorage.sh begin\n", 1.0 ),
+                                ( "data: Now modify the storage of character data from 'Normal' to 'Special'......\n", 1.0 ),
+                                ( "data: Success.\n", 1.5 ),
+                            ),
+                        ):
+                            debug_cmd_content = ""
+                            for debug_cmd_extend, debug_cmd_pause in debug_cmd_page:
+                                debug_cmd_content += debug_cmd_extend
+                                debug_cmd_window.Clear()
+                                debug_cmd_window.ShowText(debug_cmd_content)
+                                renpy.with_statement(Pause(debug_cmd_pause))
+
+                        persistent.variables["duplicate_name_fixed"] = True
+                        debug_cmd_window.Close()
+                        del debug_cmd_window, debug_cmd_page, debug_cmd_content, debug_cmd_extend, debug_cmd_pause
+                else: 
+                    nvl clear
+                    debug "Welcome to use Debug Mode Terminal.{fast}{nw}"
+                    debug "user@debugmode:~$ {fast}su - root{w=1.0}{nw}"
+                    debug "Password: {fast}{w=3.0}{nw}"
+                    debug "root@debugmode:~$ {fast}{w=0.5}chmod 777 changestorage.sh{w=1.0}{nw}"
+                    debug "root@debugmode:~$ {fast}{w=0.5}./changestorage.sh{w=1.0}{nw}"
+                    nvl clear
+                    debug "{w=1.0}{nw}"
+                    $ _history_list.pop()
+                    nvl clear
+                    debug "info: changestorage.sh begin{fast}{w=1.0}{nw}"
+                    debug "data: Now modify the storage of character data from 'Normal' to 'Special'{fast}{......}{w=1.0}{nw}"
+                    $ persistent.variables["duplicate_name_fixed"] = True
+                    debug "data: Success.{fast}{w=0.5}{nw}"
+                    debug "Press any key to continue...{fast}"
                 "等等。"
                 "如果我没搞错的话，{w=0.5}你应该是这个游戏的其中一位开发者吧？"
                 "那你刚刚是不是修改了角色的数据存储方式？"
-                "{......}你现在应该可以正常使用你自己的名字了"
+                "{......}你现在应该可以正常使用你自己的名字了。"
                 "不过可能因此而引起的其他问题我可不负责。"
                 $ mc.nickname = player_input
                 jump setup_naming_confirm
@@ -421,7 +493,7 @@ label setup_naming_entered:
         # setup "难道说你觉得这样做就能获得什么“{green}管理员权限{/green}”之类的？"
         # setup "谁知道呢，{w=0.5}说不定某次更新之后作者就会为这个加点什么？"
 
-        "{......}我不明白，你觉得这样做能获得什么“{green}管理员权限{/green}”之类的？"
+        "{......}我不明白，{w=0.5}你觉得这样做能获得什么“{green}管理员权限{/green}”之类的？"
         "谁知道呢，{w=0.5}说不定某次更新之后那群开发者就会为这个加点什么了。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
@@ -433,7 +505,7 @@ label setup_naming_entered:
 
         "{......}"
         "这好像是你系统账户的名字。\n{w=1.0}你不会所有地方都会用一样的名字吧？"
-        "没什么好说的，你喜欢就好。"
+        "没什么好说的，{w=0.25}你喜欢就好。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
     
@@ -449,21 +521,21 @@ label setup_naming_entered:
         # setup "难道说你在聊天框里塞了颜文字？{w=1.0}我的程序可检测不出来。"
 
         "你这{......}"
-        "虽然说输入框能支持，但是{......}你取个这样的名字，我该怎么念呢？"
-        "你在输入框里塞了颜文字吗？我这边可看不出来吗，都是加密的。"        
+        "虽然说输入框能支持，{w=0.5}但是{......}你取个这样的名字，{w=0.5}我该怎么念呢？"
+        "你在输入框里塞了颜文字吗？{w=1.0}我这边可看不出来，{w=0.5}都是加密的。"        
         $ mc.nickname = player_input
         jump setup_naming_confirm
 
     # 否则，如果输入的名字长度大于20个字符：
     elif len(player_input) > 20:
         # setup "哇，{w=0.25}这可真是个很长的名字。\n{w=1.0}不过这么长的名字，{w=0.5}我可不能确定UI能不能适配。\n{w=1.0}也许换个名字是个更好的选择？"
-        "哇，{w=0.25}这名字可真长，不过UI可能塞不下吧。"
+        "哇，{w=0.25}这名字可真长，{w=0.5}不过UI可能塞不下吧。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
 
     # 否则，如果输入的名字长度小于3字节：
     elif len(bytes(player_input, encoding="utf-8")) < 3:
-        setup "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
+        "或许你不太擅长取名字，{w=0.5}我也一样。\n{w=1.0}没关系，{w=0.25}名字又不是什么很重要的东西。"
         $ mc.nickname = player_input
         jump setup_naming_confirm
     
@@ -496,11 +568,12 @@ label setup_naming_done:
 #     setup "哦不对，{w=0.25}你又问不了我。（笑）"
 #     setup "好吧，稍等一下，{w=0.5}我得找找剧情被我放在哪了{......}{nw}"
 
-    "终于弄完了，你还有其他问题吗？{w=3}{nw}"
-    "不对，你又问不了我。（笑）"
-    "好吧，那我就把你跳转到剧情里了，有缘再见。{w=2}{nw}"
-    "或者说，再也不见，哈哈。{w=1}{nw}"
+    "终于弄完了，{w=0.5}你还有其他问题吗？{w=3}{nw}"
+    "不对，{w=0.25}你又问不了我。（笑）"
+    "好吧，{w=0.5}那我就把你跳转到剧情里了，{w=0.5}有缘再见。{w=2}{nw}"
+    "或者说，{w=0.25}再也不见，{w=0.25}哈哈。{w=1}{nw}"
 
-    stop music fadeout 2.0
-    
+    $ variables["in_setup"] = False
+    $ renpy.block_rollback()
+
     return

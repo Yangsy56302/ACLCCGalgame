@@ -1,5 +1,3 @@
-
-
 label chplotadvice_yoosee:
 
     scene black with dissolve
@@ -33,7 +31,6 @@ label chplotadvice_yoosee:
     """
 
     return
-
 
 
 label chplotadvice_yangsy:

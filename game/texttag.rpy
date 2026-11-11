@@ -49,6 +49,13 @@ init python:
             (renpy.TEXT_TAG, "/cps"),
         ]
     
+    def texttag_at(tag, argument):
+        return [
+            (renpy.TEXT_TAG, "color=#0080ff"),
+            (renpy.TEXT_TEXT, "@{}".format(argument)),
+            (renpy.TEXT_TAG, "/color"),
+        ]
+    
     config.custom_text_tags["green"] = texttag_green
     config.custom_text_tags["yellow"] = texttag_yellow
     config.custom_text_tags["orange"] = texttag_orange
@@ -56,3 +63,4 @@ init python:
     config.custom_text_tags["magenta"] = texttag_magenta
     config.self_closing_custom_text_tags["..."] = texttag_ellipsis
     config.self_closing_custom_text_tags["......"] = texttag_ellipsis2
+    config.self_closing_custom_text_tags["at"] = texttag_at
