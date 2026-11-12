@@ -238,7 +238,7 @@ label ch1:
 
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
-    $ persistent.variables["has_seen_ending"] = True
+    # $ persistent.variables["has_seen_ending"] = True
 
 
     return
