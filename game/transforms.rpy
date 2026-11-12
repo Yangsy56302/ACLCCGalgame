@@ -1,3 +1,19 @@
+transform wipeadofai(new_widget=None, old_widget=None):
+    delay 0.5
+
+    contains:
+        old_widget
+        events False
+        align (0.0, 0.5) crop (0.0, 0.0, 1.0, 1.0)
+        ease_cubic 0.5 crop (0.0, 0.0, 0.0, 1.0)
+
+    contains:
+        new_widget 
+        events True
+        align (1.0, 0.5) crop (1.0, 0.0, 0.0, 1.0)
+        ease_cubic 0.5 crop (0.0, 0.0, 1.0, 1.0)
+
+
 # 决定直接挪用DDLC位置变换了（
 
 transform tcommon(x=640, z=0.80):

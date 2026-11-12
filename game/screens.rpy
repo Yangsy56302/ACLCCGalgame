@@ -2173,23 +2173,22 @@ screen music_room():
 
 
 screen chapter_title(title_text):
-
-    text title_text:
+    vbox at chapter_appear:
         xalign 0.5
-        yalign 0.5
-        size 72
-        color "#ffffff"
-        outlines [(2, "#000000", 0, 0)]  # 文字描边，增强可读性
+        ycenter 0.5
+        text title_text:
+            size 68
+            color "#ffffff"
+            outlines [(0, "#00000050", 3, 3)]
 
-label show_chapter(title):
-    window hide
-    show screen chapter_title(title)
-    with dissolve
-    $ renpy.pause(2.0) # 'hard=True' 会忽略玩家的点击，确保效果停留
-    hide screen chapter_title
-    with dissolve
-    window auto
-    return
+    timer 3.25 action Hide("chapter_title")
+
+transform chapter_appear:
+    on show:
+        alpha 0
+        linear 0.25 alpha 1.0
+    on hide:
+        linear 0.5 alpha 0.0
 
 
 screen copy_tip(message):
