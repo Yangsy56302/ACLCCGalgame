@@ -1,4 +1,4 @@
-﻿################################################################################
+################################################################################
 ## Initialization
 ################################################################################
 
@@ -2075,7 +2075,8 @@ init python:
         _("Before Beginning"): "mus_setup.ogg",
         _("Astral Calm"): "mus_astral_calm.mp3",
         _("Aurora"): "mus_aurora.mp3",
-        _("Ammonium Cyanide"): "mus_ammonium_cyanide.mp3"
+        _("Ammonium Cyanide"): "mus_ammonium_cyanide.mp3",
+        _("Clear and Graceful"): "mus_clear_and_graceful.ogg",
         # 更多音乐请自行添加
     }
 
