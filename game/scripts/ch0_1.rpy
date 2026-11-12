@@ -258,6 +258,6 @@ label ch0_1:
     $ persistent.has_seen_ending = True
 
 
-    call to_be_continued("ch0") from _call_to_be_continued
+    call to_be_continued("ch0") from _call_to_be_continued_from_ch0
 
     return
