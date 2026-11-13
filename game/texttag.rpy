@@ -1,36 +1,8 @@
 init python:
-    
-    def texttag_green(tag, argument, contents):
-        return [
-            (renpy.TEXT_TAG, "color=#5fff4e"),
-        ] + contents + [
-            (renpy.TEXT_TAG, "/color"),
-        ]
-    
-    def texttag_yellow(tag, argument, contents):
-        return [
-            (renpy.TEXT_TAG, "color=#fcff4d"),
-        ] + contents + [
-            (renpy.TEXT_TAG, "/color"),
-        ]
 
-    def texttag_orange(tag, argument, contents):
-        return [
-            (renpy.TEXT_TAG, "color=#ff6f4d"),
-        ] + contents + [
-            (renpy.TEXT_TAG, "/color"),
-        ]
-
-    def texttag_red(tag, argument, contents):
-        return [
-            (renpy.TEXT_TAG, "color=#ff0000"),
-        ] + contents + [
-            (renpy.TEXT_TAG, "/color"),
-        ]
-
-    def texttag_magenta(tag, argument, contents):
-        return [
-            (renpy.TEXT_TAG, "color=#da59ff"),
+    def texttag_color(color):
+        return lambda tag, argument, contents: [
+            (renpy.TEXT_TAG, f"color={color}"),
         ] + contents + [
             (renpy.TEXT_TAG, "/color"),
         ]
@@ -56,11 +28,11 @@ init python:
             (renpy.TEXT_TAG, "/color"),
         ]
     
-    config.custom_text_tags["green"] = texttag_green
-    config.custom_text_tags["yellow"] = texttag_yellow
-    config.custom_text_tags["orange"] = texttag_orange
-    config.custom_text_tags["red"] = texttag_red
-    config.custom_text_tags["magenta"] = texttag_magenta
+    config.custom_text_tags["green"] = texttag_color("#5fff4e")
+    config.custom_text_tags["yellow"] = texttag_color("#fcff4d")
+    config.custom_text_tags["orange"] = texttag_color("#ff6f4d")
+    config.custom_text_tags["red"] = texttag_color("#ff0000")
+    config.custom_text_tags["magenta"] = texttag_color("#da59ff")
     config.self_closing_custom_text_tags["..."] = texttag_ellipsis
     config.self_closing_custom_text_tags["......"] = texttag_ellipsis2
     config.self_closing_custom_text_tags["at"] = texttag_at
