@@ -228,6 +228,8 @@ layeredimage mwam:
     group brow prefix brow:
         attribute smile default:
             "char/mwam/brow/smile.png"
+    attribute blush:
+        "char/mwam/blush.png"
 
 
 default nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")

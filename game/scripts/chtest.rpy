@@ -49,7 +49,8 @@ label chtest_control:
 
 label chtest_mwam_remake:
     show mwam
-    mwam "test"
+    mwam "尝试一点东西"
+    mwam blush "嗯，对"
     return
 
 label chtest_exceptscreen:
