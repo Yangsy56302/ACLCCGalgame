@@ -230,6 +230,8 @@ layeredimage mwam:
             "char/mwam/brow/smile.png"
     attribute blush:
         "char/mwam/blush.png"
+    attribute angry:
+        "char/mwam/angry.png"
 
 
 default nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")

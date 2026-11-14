@@ -33,7 +33,7 @@ label chtest_char:
     
     show yangsy zorder 2 at t41
     show gra zorder 2 at t11
-    show mwam zorder 2 at t43
+    show mwam angry zorder 2 at t43
     show morin zorder 2 at t44
     show baile zorder 3 at t42
     ""
@@ -53,6 +53,9 @@ label chtest_mwam_remake:
     show mwam
     mwam "尝试一点东西"
     mwam blush "嗯，对"
+    mwam -blush angry "I'm Very ANGRY!!!!"
+    mwam "I Want You To DIE!!!!!!!!!!!!"
+    hide mwam
     return
 
 label chtest_exceptscreen:
