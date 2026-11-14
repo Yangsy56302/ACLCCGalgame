@@ -31,7 +31,7 @@ label chtest_char:
     
     show yangsy zorder 2 at t41
     show gra zorder 2 at t11
-    show mwam angry zorder 2 at t43
+    show mwam zorder 2 at t43
     show morin zorder 2 at t44
     show baile zorder 3 at t42
     ""
@@ -47,6 +47,10 @@ label chtest_control:
 
     return
 
+label chtest_mwam_remake:
+    show mwam
+    mwam "test"
+    return
 
 label chtest_exceptscreen:
 
