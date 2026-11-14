@@ -58,6 +58,11 @@ ADOFAI Cursed Levels (CN) Community
 
 {space=80}{a=https://space.bilibili.com/672178840}baileovo{/a}
 
+音乐
+
+{space=80}{a=https://space.bilibili.com/496241761}ms_win_and_mc{/a}
+
+{space=80}{a=https://space.bilibili.com/3493270749448480}晴柚-Grafrustix{/a}
 
 立绘
 
