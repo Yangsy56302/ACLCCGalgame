@@ -222,9 +222,13 @@ layeredimage mwam:
     group eye prefix eye:
         attribute normal default:
             "char/mwam/eye/normal.png"
+        attribute happy:
+            "char/mwam/eye/happy.png"
     group mouth prefix mouth:
         attribute smile default:
             "char/mwam/mouth/smile.png"
+        attribute happy:
+            "char/mwam/mouth/happy.png"
     group brow prefix brow:
         attribute smile default:
             "char/mwam/brow/smile.png"

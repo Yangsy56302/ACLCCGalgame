@@ -52,7 +52,7 @@ label chtest_control:
 label chtest_mwam_remake:
     show mwam
     mwam "尝试一点东西"
-    mwam blush "嗯，对"
+    mwam blush mouth_happy eye_happy "嗯，对"
     mwam -blush angry "I'm Very ANGRY!!!!"
     mwam "I Want You To DIE!!!!!!!!!!!!"
     hide mwam
