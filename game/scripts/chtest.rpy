@@ -25,6 +25,8 @@ label chany:
             $ renpy.call(label_name)
         "renpy.jump('[label_name]')":
             $ renpy.jump(label_name)
+    # mwam.comment "不加return的来了"
+    return
 
 
 label chtest_char:
