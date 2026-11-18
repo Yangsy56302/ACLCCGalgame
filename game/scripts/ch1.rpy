@@ -1,52 +1,21 @@
 label ch1:
-    
-    scene bg that_video with fade
-    play music "mus_astral_calm.mp3"
-    
-    "你点开了他的头像，在他的主页里并没有找到什么和群聊有关的信息，只有寥寥几个和冰与火之舞无关的视频。"
-    "而且你一会就要去上学了，也就没有进一步的寻找下去。"
-    "你不是什么记性很好的人，这事很快便被你抛在脑后。"
 
-    scene bg home_night with fade
-
-    "又过了几天，你的账号收到了一条私信——"
-
-    nvl clear
-    gra.nvl "你好，有兴趣来我们的群里讨论魔改吗？"
-    menu(nvl=True):
-        "？":
-            mc.nvl "？" 
-    "{......}没有回复。"
-    "其实你知道他在说什么，但是你不知道该怎么回复。"
-    "你不敢直接同意，也不好意思直接拒绝，于是决定装傻充愣——"
-    
-    mc.nvl "你是？"
-
-    gra.nvl "我是Grafrustix，之前你在评论区发过回复"
-    mc.nvl "你好"
-    gra.nvl "我们群里有不少人都对魔改感兴趣，有兴趣加群一起讨论吗？"
-    mc.nvl "魔改是？"
-    gra.nvl "就是你之前在视频里看到的那种，我也不知道怎么解释，你可以去群里看看"
-    mc.nvl "哦哦"
-    gra.nvl "怎么样，要来吗？"
-    mc.nvl "呃{......}"
-    gra.nvl "没关系，你可以先考虑一下"
-    "你故意等了一会，才回复——"
-    mc.nvl "我先想想吧，群号可以先给我一下吗？"
-    gra.nvl "行"
-
-
-    scene bg home_night with fade
+    scene bg that_video with dissolve
     
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-
     
-    "你点开了他的头像。\n{w=1.0}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
+    "你点开了他的头像——\n{w=0.5}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
     "你一会就要去上学了，{w=0.5}也就没有进一步的寻找下去。"
     "你不是什么记性很好的人，{w=0.5}这事很快便被你抛在脑后。"
 
-    scene bg home_night with fade
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_night with wipeadofai
 
     "又过了几天，{w=0.5}你的账号收到了一条私信——"
 
@@ -74,7 +43,7 @@ label ch1:
     mc.nvl "我先想想吧，{w=0.5}群号可以先给我一下吗？"
     gra.nvl "行"
 
-    scene bg home_night with fade
+    scene bg home_night with dissolve
     
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
@@ -276,7 +245,6 @@ label ch1:
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
     # $ persistent.variables["has_seen_ending"] = True
-
 
     # call to_be_continued("ch1") from _call_to_be_continued
 
