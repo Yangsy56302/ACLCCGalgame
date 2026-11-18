@@ -25,6 +25,8 @@ label chany:
             $ renpy.call(label_name)
         "renpy.jump('[label_name]')":
             $ renpy.jump(label_name)
+    # mwam.comment "不加return的来了"
+    return
 
 
 label chtest_char:
@@ -47,6 +49,14 @@ label chtest_control:
 
     return
 
+label chtest_mwam_remake:
+    show mwam
+    mwam "尝试一点东西"
+    mwam blush mouth_happy eye_happy "嗯，对"
+    mwam -blush angry mouth_angry eye_normal brow_angry "I'm Very ANGRY!!!!"
+    mwam "I Want You To DIE!!!!!!!!!!!!"
+    hide mwam
+    return
 
 label chtest_exceptscreen:
 

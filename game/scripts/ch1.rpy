@@ -41,10 +41,48 @@ label ch1:
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
+    
+    "你点开了他的头像。\n{w=1.0}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
+    "你一会就要去上学了，{w=0.5}也就没有进一步的寻找下去。"
+    "你不是什么记性很好的人，{w=0.5}这事很快便被你抛在脑后。"
+
+    scene bg home_night with fade
+
+    "又过了几天，{w=0.5}你的账号收到了一条私信——"
+
+    nvl clear
+    gra.nvl "你好，{w=0.25}有兴趣来我们的群里讨论魔改吗？"
+    menu(nvl=True):
+        "？":
+            mc.nvl "？" 
+    "{......}没有回复。"
+    "其实你知道他在说什么，{w=0.5}但是你不知道该怎么回复。\n{w=1.0}你不敢直接同意，{w=0.5}也不好意思直接拒绝，{w=0.5}于是决定装傻充愣——"
+    
+    mc.nvl "你是？"
+    gra.nvl "我是Grafrustix，{w=0.5}之前你在评论区发过回复"
+    mc.nvl "你好"
+    gra.nvl "我们群里有不少人都对魔改感兴趣"
+    gra.nvl "{w=0.5}有兴趣加群一起讨论吗？"
+    mc.nvl "魔改是？"
+    gra.nvl "就是你之前在视频里看到的那种"
+    gra.nvl "我也不知道怎么解释，{w=0.5}你可以去群里看看"
+    mc.nvl "哦哦"
+    gra.nvl "怎样，{w=0.25}要来吗？"
+    mc.nvl "呃{......}"
+    gra.nvl "没关系，{w=0.25}你可以先考虑一下"
+    "你故意等了一会，{w=0.5}才回复——"
+    mc.nvl "我先想想吧，{w=0.5}群号可以先给我一下吗？"
+    gra.nvl "行"
+
+    scene bg home_night with fade
+    
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+
     # if has_phone:
     #     "你使用在视频简介里发现的群号找到了群。"
     # else:
-    "你用父母的手机号注册了一个QQ，使用在视频简介里发现的群号找到了群。"
+    "你用父母的手机号注册了一个QQ，{w=0.5}使用在视频简介里发现的群号找到了群。"
     
     menu:
         "要加群吗？"
@@ -63,7 +101,6 @@ label ch1:
     # "没花多久时间，{w=0.5}你就把这些视频全都看了一遍。"
     # "你还发现不同的螃蟹对应着不同的效果，{w=0.5}于是就将它们全部记了下来，{w=0.5}以便不时之需。"
 
-    
 
     # scene black with dissolve
     # "{......}"
@@ -73,14 +110,14 @@ label ch1:
     # "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
     # "你满怀期待地打开了QQ——{nw}"
 
-    "过了一会，手机上弹出一条通知——"
+    "过了一会，{w=0.5}手机上弹出一条通知——"
 
     stop music
     nvl clear
     qq.nvl "群主拒绝了你的入群申请"
 
     mc "{......}"
-    "好吧，这的确让你有点难受。"
+    "好吧，{w=0.25}这的确让你有点难受。"
     
     scene black with dissolve
 
@@ -89,14 +126,10 @@ label ch1:
 
     scene bg home_midnight with dissolve
     mc "？？？"
-
-    play music "mus_astral_calm.mp3"
-    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-
-    """你点开了手机QQ，点开主页上那个名字是“Grafrustix”的好友："""
-    gra.nvl """抱歉啊，刚刚不小心点错了[[笑哭]"""
+    """你点开了手机QQ，{w=0.5}点开主页上那个名字是“Grafrustix”的好友："""
+    gra.nvl """抱歉啊，{w=0.25}刚刚不小心点错了[[笑哭]"""
     gra.nvl "我看看能不能把你拉进去"
-    mc.nvl "没关系的，实在不行我重新加一遍"
+    mc.nvl "没关系的，{w=0.25}实在不行我重新加一遍"
     gra.nvl "那就好"
 
     # menu:
@@ -108,9 +141,8 @@ label ch1:
 
     "你又发了一遍入群申请——"
     voice "voice/message_prompt.ogg"
-    # extend "这次的提示音倒是没过多久就出现了。"
     "这次的提示音倒是没过多久就出现了。"
-    "QQ的群聊一栏多出了个“Grafrustix的聊天群”，群头像右上角有个小红点。"
+    "QQ的群聊一栏多出了个“Grafrustix的聊天群”，{w=0.5}群头像右上角有个小红点。"
     "你点开了群聊——"
 
     nvl clear
@@ -185,7 +217,7 @@ label ch1:
 
     gra.nvl "明白了"
 
-    mc.nvl "Gra，这个{......}魔改{......}可以详细讲一讲吗？"
+    mc.nvl "Gra，{w=0.5}这个{......}魔改{......}可以详细讲一讲吗？"
     gra.nvl "可以的可以的"
 
     nvl clear
@@ -196,27 +228,10 @@ label ch1:
 
     stop music
 
-    gra.nvl """
-    {cps=*2.5}魔改是一种对谱面进行修改的方式\n
-    通常会先在关卡标题后面加上“但如何如何”的描述{/cps}{nw}
-    """
-    gra.nvl """
-    {cps=*2.5}举个例子，Firestix有个魔改关卡，标题是\n
-    “11-X 赫拉克勒斯但每一块地板上都有一个旋转”\n
-    其中的描述部分就是“但每一块地板上都有一个旋转”{/cps}{nw}
-    """
-    gra.nvl """
-    {cps=*2.5}然后对谱面进行修改，使谱面符合指定的描述\n
-    这里就需要给每块地板上都添加旋转\n
-    改完谱面之后还要修改音乐，确保与修改后的谱面所契合\n
-    这点很重要，毕竟冰与火之舞是一款音乐游戏\n
-    音乐与关卡不一致是很严重的问题{/cps}{nw}
-    """
-    gra.nvl """
-    {cps=*2.5}魔改后的关卡会与原关卡产生一种强烈的反差感\n
-    我们喜欢这种反差感，并因此聚集在这里\n
-    其实我和另外几位成员也会自己制作魔改{/cps}{nw}
-    """
+    gra.nvl "{cps=*2.5}魔改是一种对谱面进行修改的方式\n通常会先在关卡标题后面加上“但如何如何”的描述{/cps}{nw}"
+    gra.nvl "{cps=*2.5}举个例子，Firestix有个魔改关卡，标题是\n“11-X 赫拉克勒斯但每一块地板上都有一个旋转”\n其中的描述部分就是“但每一块地板上都有一个旋转”{/cps}{nw}"
+    gra.nvl "{cps=*2.5}然后对谱面进行修改，使谱面符合指定的描述\n这里就需要给每块地板上都添加旋转\n改完谱面之后还要修改音乐，确保与修改后的谱面所契合\n这点很重要，毕竟冰与火之舞是一款音乐游戏\n音乐与关卡不一致是很严重的问题{/cps}{nw}"
+    gra.nvl "{cps=*2.5}魔改后的关卡会与原关卡产生一种强烈的反差感\n我们喜欢这种反差感，并因此聚集在这里\n其实我和另外几位成员也会自己制作魔改{/cps}{nw}"
     if variables["gra_chemistry_name"]:
         gra.nvl "{cps=*0.5}哪天你也该去试一试{/cps}"
     else:
@@ -245,6 +260,7 @@ label ch1:
     baile.nvl "睡啥睡"
     baile.nvl "起来嗨"
     mwam.nvl "养生呢搁这"
+    # mc.nvl "不是，是我['妈' if has_phone else '母亲']叫我睡觉了"
     mc.nvl "不是，是我妈叫我睡觉了"
     gra.nvl "这样"
     gra.nvl "那就祝你好梦"
@@ -259,7 +275,7 @@ label ch1:
 
     "你躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
-    $ persistent.has_seen_ending = True
+    # $ persistent.variables["has_seen_ending"] = True
 
 
     # call to_be_continued("ch1") from _call_to_be_continued
