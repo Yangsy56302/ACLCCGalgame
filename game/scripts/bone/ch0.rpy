@@ -1,4 +1,6 @@
 label bone_ch0:
+    yangsy.comment "有异议的如果能改代码就写在bone里提交就行 不能的话发群里@yangsy 感谢您的支持与配合（"
+
     "ch0"
 
     yangsy.comment "这里先直接沿用当前的ch0就行；剧情大致走向目前是没问题的"
