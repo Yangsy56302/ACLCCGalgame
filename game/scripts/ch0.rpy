@@ -124,9 +124,13 @@ label ch0:
     "{cps=*0.5}日子依旧普普通通的过着{......}"
 
 
-    # scene bg that_video with fade
-    scene home_noon with fade
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
 
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_noon with wipeadofai
 
 
     play music "mus_astral_calm.mp3"
