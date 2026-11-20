@@ -5,6 +5,44 @@ label chex_unknown_not_join:
     jump bad_ending_no_choice
 
 
+label chex_gra_birthday:
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg sky with wipeadofai
+
+    "时间过得飞快，不久就到了[gra]的生日了。"
+    yangsy.comment "不是等会这才两天剧情就开始加速了？别啊（"
+    $ _history_list.pop()
+    $ _history_list.pop()
+    "今天是[gra]的生日。"
+    yangsy.comment "这段还没改，不过其实也没啥改的必要，挪一下剧情位置就行（"
+
+    nvl clear
+    gra.nvl "是时候发我的生日作了"
+    yangsy.nvl "诶Gra生日到了？"
+
+    myworldzycpc.nvl.comment "下文部分摘自生日作"
+    lingyun.nvl "快生"
+    hale.nvl "晴柚生日快乐"
+    nona.nvl "生日快乐，我喜欢你"
+    image gra_birthday grass = Transform('images/icon/gra_birthday/grass.png', zoom=0.25)
+    grass.nvl "{size=*1.5}生日快乐\n{image=gra_birthday grass}"
+    gra.nvl "哇，谢谢[grass]！"
+    yangsy.nvl "祝 [gra] 生日快乐，并且这辈子能在现实中与不是重度病娇的晴小姐相遇相爱相伴一生"
+    ashell.nvl "还记得那次，我突发奇想，想做官谱魔改，是你指引我着方向，在我迷茫的时候对我伸出援手，即使后面出了些小插曲你也不生气，多谢你这么多天的陪伴。祝你之后的每一天都会如此美好，祝我们ACLC的各位群友的友谊能够长长久久"
+    morin.nvl "祝我们的瓜服梯克斯（Grafrustix）生↑日↗快↘乐→~\n{color=#808080}省略若干行{/color}\n∴ 综上所述，祝Grafrustix生日快乐"
+    uni.nvl "柚子生了!!!"
+    maoyuna.nvl "我在地球，我是人类，我要说话了，G开头的字母哥话话话话话话话，然后震撼nm"
+    lv.nvl "生日快乐呀\n愿你{......}呃呃好吧没什么想祝福的\n给你留个{color=#FF0000}省略号{/color}\n这里面有我想说的\n但是被省略了！"
+    nvl clear
+    image gra_birthday baile = Transform('images/icon/gra_birthday/baile.png', zoom=0.5)
+    baile.nvl "{image=gra_birthday baile}"
+    yoosee.nvl "生日快乐\n祝你明天不会死\n明天的明天也不会死\nwhile {rb}{u}true{/u}{/rb}{rt}[[原文如此]{/rt}"
+    pumi.nvl "日了什么时候快生\n以及\n#1.2*大天空转adofai when"
+
+    return
+
+
 label chex_unknown_oi:
     $ ch0ex_oi_has_been_seen = True
     
