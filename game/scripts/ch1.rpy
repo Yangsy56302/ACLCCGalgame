@@ -1,31 +1,19 @@
 label ch1:
-
-    scene bg that_video with dissolve
-    
-    play music "mus_astral_calm.mp3"
-    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-    
-    "你点开了他的头像——\n{w=0.5}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
-    "你一会就要去上学了，{w=0.5}也就没有进一步的寻找下去。"
-    "你不是什么记性很好的人，{w=0.5}这事很快便被你抛在脑后。"
-
-    play sound "snd_screen_wipe_out.wav"
-    scene black with wipeadofai
-
-    with Pause(1.0)
-
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
 
-    "又过了几天，{w=0.5}你的账号收到了一条私信——"
+    show screen chapter_title("几天后")
 
     nvl clear
     gra.nvl "你好，{w=0.25}有兴趣来我们的群里讨论魔改吗？"
     menu(nvl=True):
         "？":
-            mc.nvl "？" 
+            mc.nvl "？"
+    
     "{......}没有回复。"
-    "其实你知道他在说什么，{w=0.5}但是你不知道该怎么回复。\n{w=1.0}你不敢直接同意，{w=0.5}也不好意思直接拒绝，{w=0.5}于是决定装傻充愣——"
+    "其实你知道他在说什么——\n{w=0.5}他那特征分明的头像能很轻易的让你想起他给你发的那条回复。"
+    "你只是不知道该怎么回复他。"
+    "你不敢直接同意，{w=0.5}也不好意思直接拒绝，{w=0.5}于是决定装傻充愣——"
     
     mc.nvl "你是？"
     gra.nvl "我是Grafrustix，{w=0.5}之前你在评论区发过回复"
