@@ -12,9 +12,9 @@ label ch2:
 
     show yangsy at l11
     pause 0.5
-    show yangsy brow_angry mouth_cat_sad_open at hf11
+    show yangsy fb_a fm_cso at hf11
     yangsy.comment "不是什么叫第二天一开始视角就换了？{w=0.5}这也太突兀了吧（"
-    show yangsy brow_sad mouth_cat_happy_open at d11
+    show yangsy fb_n fp_r fm_cho at d11
     yangsy.comment "Yangsy稍微试着改一下这段，抱歉了myworld（"
     show yangsy at rhide
     hide yangsy

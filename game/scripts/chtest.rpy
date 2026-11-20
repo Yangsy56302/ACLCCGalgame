@@ -49,6 +49,7 @@ label chtest_control:
 
     return
 
+
 label chtest_mwam_remake:
     show mwam
     mwam "尝试一点东西"
@@ -58,19 +59,30 @@ label chtest_mwam_remake:
     hide mwam
     return
 
+
 label chtest_exceptscreen:
 
     pause 1.0
 
-    show yangsy body_no_bag eye_flat zorder 3 at f11
-    yangsy brow_angry eye_jitome "诶，Yangsy试试看能不能卡个bug（"
-    show yangsy at h11
-    yangsy brow_happy eye_flat mouth_cat_happy_open '咳咳，{w=0.5}"\n$ raise StopIteration()\n"{nw}'
+    show yangsy bd_nb fe_f fp_non zorder 3 at f11
+    yangsy fb_a fe_j fp_c "诶，Yangsy试试看能不能卡个bug（"
+    yangsy fb_h fe_f fp_non fm_cho '咳咳，{w=0.5}"\n$ raise StopIteration()\n"{nw}'
+
+    with None
+    window hide
     # $ raise StopIteration()
+
+    show yangsy fm_ch
+
     show screen custom_exception('  {a}File "game/scripts/chtest.rpy", line ???{/a}, in script\n    $ raise StopIteration()\nStopIteration')
-    yangsy brow_happy eye_tareme mouth_cat_sad_open "{w=1.0}{......}"
+
+    with Pause(2)
+
+    show yangsy at h11
+    yangsy shd fe_t fp_c fm_ao "{w=1.0}{......}"
     show yangsy at d11
-    yangsy blush brow_angry mouth_happy_open "（诶不是咋还真卡崩了？？？）"
+    yangsy swt bls fm_a "（诶不是咋还真卡崩了？？？）"
+    show yangsy fb_a fp_r fm_cho at rhide
     hide yangsy
 
     return

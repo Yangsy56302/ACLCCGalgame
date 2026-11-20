@@ -268,55 +268,82 @@ transform tcyangsy:
 
 layeredimage yangsy:
     at tcyangsy
-    group body prefix body:
-        attribute normal default:
+    group body prefix bd:
+        attribute def default:
             "char/yangsy/body/default.png"
-        attribute no_bag:
-            "char/yangsy/body/without_bag.png"
-        attribute no_legwear:
-            "char/yangsy/body/without_legwear.png"
-        attribute no_both:
-            "char/yangsy/body/without_both.png"
-    group brow prefix brow:
-        attribute angry: 
+        attribute nb:
+            "char/yangsy/body/no_bag.png"
+        attribute no:
+            "char/yangsy/body/no_outer.png"
+        attribute nl:
+            "char/yangsy/body/no_legwear.png"
+    attribute cte:
+        "char/yangsy/cat_ears.png"
+    attribute shd:
+        "char/yangsy/shadow.png"
+    attribute swt:
+        "char/yangsy/sweat.png"
+    group brow prefix fb:
+        attribute a: 
             "char/yangsy/brow/angry.png"
-        attribute flat default:
-            "char/yangsy/brow/flat.png"
-        attribute happy: 
+        attribute n default:
+            "char/yangsy/brow/neutral.png"
+        attribute h: 
             "char/yangsy/brow/happy.png"
-        attribute sad: 
+        attribute s: 
             "char/yangsy/brow/sad.png"
-    group eye prefix eye:
-        attribute flat:
+    group eye prefix fe:
+        attribute f:
             "char/yangsy/eye/flat.png"
-        attribute gtlt:
+        attribute x:
             "char/yangsy/eye/gtlt.png"
-        attribute jitome:
+        attribute j:
             "char/yangsy/eye/jitome.png"
-        attribute tareme default:
+        attribute t default:
             "char/yangsy/eye/tareme.png"
-    group mouth prefix mouth:
-        attribute cat_happy default: 
+    group pupil prefix fp:
+        attribute non:
+            "char/yangsy/pupil/none.png"
+        attribute c default:
+            "char/yangsy/pupil/center.png"
+        attribute l:
+            "char/yangsy/pupil/left.png"
+        attribute r:
+            "char/yangsy/pupil/right.png"
+        attribute h:
+            "char/yangsy/pupil/heart.png"
+        attribute s:
+            "char/yangsy/pupil/star.png"
+    group mouth prefix fm:
+        attribute cm: 
+            "char/yangsy/mouth/cat_smug.png"
+        attribute cmo: 
+            "char/yangsy/mouth/cat_smug_open.png"
+        attribute ch default: 
             "char/yangsy/mouth/cat_happy.png"
-        attribute cat_happy_open: 
+        attribute cho: 
             "char/yangsy/mouth/cat_happy_open.png"
-        attribute cat_sad: 
+        attribute cs: 
             "char/yangsy/mouth/cat_sad.png"
-        attribute cat_sad_open: 
+        attribute cso: 
             "char/yangsy/mouth/cat_sad_open.png"
-        attribute happy: 
+        attribute h: 
             "char/yangsy/mouth/happy.png"
-        attribute happy_open: 
+        attribute ho: 
             "char/yangsy/mouth/happy_open.png"
-        attribute neutral: 
+        attribute n: 
             "char/yangsy/mouth/neutral.png"
-        attribute neutral_open: 
+        attribute no: 
             "char/yangsy/mouth/neutral_open.png"
-        attribute sad: 
+        attribute s: 
             "char/yangsy/mouth/sad.png"
-        attribute sad_open: 
+        attribute so: 
             "char/yangsy/mouth/sad_open.png"
-    attribute blush:
+        attribute a: 
+            "char/yangsy/mouth/angry.png"
+        attribute ao: 
+            "char/yangsy/mouth/angry_open.png"
+    attribute bls:
         "char/yangsy/blush.png"
 
 
