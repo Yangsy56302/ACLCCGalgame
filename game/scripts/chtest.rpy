@@ -49,6 +49,14 @@ label chtest_control:
 
     return
 
+label chtest_mwam_remake:
+    show mwam
+    mwam "尝试一点东西"
+    mwam blush mouth_happy eye_happy "嗯，对"
+    mwam -blush angry mouth_angry eye_normal brow_angry "I'm Very ANGRY!!!!"
+    mwam "I Want You To DIE!!!!!!!!!!!!"
+    hide mwam
+    return
 
 label chtest_exceptscreen:
 

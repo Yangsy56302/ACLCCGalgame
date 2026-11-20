@@ -209,11 +209,37 @@ transform tcmwam:
     zoom 0.75
 
 # image side mwam = "char/mwam/avatar.jpg"
-image mwam = At("char/mwam/normal.png", tcmwam)
-image mwam smile = At("char/mwam/smile.png", tcmwam)
-image mwam happy = At("char/mwam/happy.png", tcmwam)
-image mwam sad = At("char/mwam/sad.png", tcmwam)
-image mwam angry = At("char/mwam/angry.png", tcmwam)
+# image mwam = At("char/mwam/normal.png", tcmwam)
+# image mwam smile = At("char/mwam/smile.png", tcmwam)
+# image mwam happy = At("char/mwam/happy.png", tcmwam)
+# image mwam sad = At("char/mwam/sad.png", tcmwam)
+# image mwam angry = At("char/mwam/angry.png", tcmwam)
+layeredimage mwam:
+    at tcmwam
+    group body prefix body:
+        attribute normal default:
+            "char/mwam/body/basic.png"
+    group eye prefix eye:
+        attribute normal default:
+            "char/mwam/eye/normal.png"
+        attribute happy:
+            "char/mwam/eye/happy.png"
+    group mouth prefix mouth:
+        attribute normal default:
+            "char/mwam/mouth/normal.png"
+        attribute happy:
+            "char/mwam/mouth/happy.png"
+        attribute angry:
+            "char/mwam/mouth/angry.png"
+    group brow prefix brow:
+        attribute normal default:
+            "char/mwam/brow/normal.png"
+        attribute angry:
+            "char/mwam/brow/angry.png"
+    attribute blush:
+        "char/mwam/blush.png"
+    attribute angry:
+        "char/mwam/angry.png"
 
 
 default nona = CharacterWithData("怃", image="nona", what_prefix="", what_suffix="")
