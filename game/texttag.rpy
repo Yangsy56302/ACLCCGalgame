@@ -1,38 +1,70 @@
 init python:
 
-    def texttag_color(color):
-        return lambda tag, argument, contents: [
-            (renpy.TEXT_TAG, f"color={color}"),
+    def texttag_color(color: str):
+        def texttag_color_inner(tag: str, argument: str, contents: list[int, str]) -> list[int, str]: 
+            return [
+                (renpy.TEXT_TAG, f"color={color}"),
+            ] + contents + [
+                (renpy.TEXT_TAG, "/color"),
+            ]
+        return texttag_color_inner
+    
+    def texttag_at(tag: str, argument: str, contents: list[int, str]) -> list[int, str]: 
+        "{at}[yoosee.nvl]{/at} -> @ゆすい"
+        return [
+            (renpy.TEXT_TAG, "atcolor"),
+            (renpy.TEXT_TEXT, "@"),
         ] + contents + [
-            (renpy.TEXT_TAG, "/color"),
+            (renpy.TEXT_TAG, "/atcolor"),
         ]
     
-    def texttag_ellipsis(tag, argument):
+    def texttag_reply(tag: str, argument: str, contents: list[int, str]) -> list[int, str]: 
+        "[myworld.nvl]{reply}😰{/reply} -> myworldzycpc回应了你的消息：😰"
         return [
-            (renpy.TEXT_TAG, "cps=*0.25"),
-            (renpy.TEXT_TEXT, "...\u200B"),
-            (renpy.TEXT_TAG, "/cps"),
-        ]
-    
-    def texttag_ellipsis2(tag, argument):
+            (renpy.TEXT_TEXT, "回应了你的消息："),
+        ] + contents
+
+    def texttag_poke(tag: str, argument: str, contents: list[int, str]) -> list[int, str]:
+        "你{poke=nonym}[nonym.nvl]{/poke} -> 你揉了揉实在没必要取昵称的毛茸茸的兔耳朵uwu"
+        poke_reaction = poke_reactions.get(argument, ("戳了戳", ))
+        if len(poke_reaction) == 1:
+            return [
+                (renpy.TEXT_TEXT, f"{poke_reaction[0]}"),
+            ] + contents
         return [
-            (renpy.TEXT_TAG, "cps=*0.25"),
-            (renpy.TEXT_TEXT, "......\u200B"),
-            (renpy.TEXT_TAG, "/cps"),
+            (renpy.TEXT_TEXT, f"{poke_reaction[0]}"),
+        ] + contents + [
+            (renpy.TEXT_TEXT, f"{poke_reaction[1]}"),
         ]
-    
-    def texttag_at(tag, argument):
-        return [
-            (renpy.TEXT_TAG, "color=#0080ff"),
-            (renpy.TEXT_TEXT, "@{}".format(argument)),
-            (renpy.TEXT_TAG, "/color"),
-        ]
-    
-    config.custom_text_tags["green"] = texttag_color("#5fff4e")
-    config.custom_text_tags["yellow"] = texttag_color("#fcff4d")
-    config.custom_text_tags["orange"] = texttag_color("#ff6f4d")
-    config.custom_text_tags["red"] = texttag_color("#ff0000")
-    config.custom_text_tags["magenta"] = texttag_color("#da59ff")
-    config.self_closing_custom_text_tags["..."] = texttag_ellipsis
-    config.self_closing_custom_text_tags["......"] = texttag_ellipsis2
-    config.self_closing_custom_text_tags["at"] = texttag_at
+
+    def text_filter_ellipsis(text: str) -> str:
+        return text.replace(
+            "{...}", 
+            "{cps=*0.25}...\u200B{/cps}"
+        ).replace(
+            "{......}", 
+            "{cps=*0.25}......\u200B{/cps}"
+        )
+
+define poke_reactions = {
+    "myworld": ("戳了戳", ),
+    "morin": ("揉了揉", "的脸，嘿嘿⊙▽⊙"),
+    "nonym": ("揉了揉", "的毛茸茸的兔耳朵uwu"),
+    "yangsy": ("拍了拍", "的头像，One!"),
+}
+
+define config.custom_text_tags = {
+    "green": texttag_color("#5fff4e"),
+    "yellow": texttag_color("#fcff4d"),
+    "orange": texttag_color("#ff6f4d"),
+    "red": texttag_color("#ff0000"),
+    "magenta": texttag_color("#da59ff"),
+    "atcolor": texttag_color("#0080ff"),
+    "at": texttag_at,
+    "poke": texttag_poke,
+    "reply": texttag_reply,
+}
+
+define config.say_menu_text_filters = [
+    text_filter_ellipsis
+]

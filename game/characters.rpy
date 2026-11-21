@@ -357,13 +357,11 @@ default myworldzycpc = CharacterWithData("myworldzycpc", image="myworldzycpc", w
 # image side myworldzycpc = "char/myworldzycpc/avatar.jpg"
 # image myworldzycpc = "char/myworldzycpc/normal.png"
 
+
 default comment = CharacterWithData("# ", what_color="#808080")
 
 default narrator = CharacterWithData(None)
 
-
 default system = narrator.center # 别名？
 
-define debug = CharacterWithData(None, kind=nvl, what_color="#00ff00",what_font=debug_gui_font)
-
-default qq = CharacterWithData("QQ")
+define debug = CharacterWithData(None, kind=nvl, what_color="#00ff00", what_font=debug_gui_font)
