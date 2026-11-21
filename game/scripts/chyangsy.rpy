@@ -70,7 +70,7 @@ label chyangsy_2:
     nvl clear
 
     mc.nvl """
-    {at=[yangsy.nvl]} 求助{fast}{w=0.25}{nw}
+    {at}[yangsy.nvl]{/at} 求助{fast}{w=0.25}{nw}
     
     [[文件] level.zip{fast}{w=0.5}{nw}
     

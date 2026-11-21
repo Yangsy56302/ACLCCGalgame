@@ -31,9 +31,9 @@ label ch2:
     scene bg home_noon with wipeadofai
 
 
-    "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为你升起。"
-    "阳光照亮到了你的房间，\n{w=0.5}也照亮了你那沉睡的意识。"
-    "你揉了揉眼睛，{w=0.5}环顾了一下四周以适应早晨的光线，\n{w=0.5}然后迫不及待地拿出手机，{w=0.25}打开了群聊。"
+    "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为我升起。"
+    "阳光照亮到了我的房间，\n{w=0.5}也照亮了我那沉睡的意识。"
+    "我揉了揉眼睛，{w=0.5}环顾了一下四周以适应早晨的光线，\n{w=0.5}然后迫不及待地拿出手机，{w=0.25}打开了群聊。"
 
     $ session_title = None
     nvl clear
@@ -46,7 +46,7 @@ label ch2:
     # morin.nvl "[[早上好 上午好 中午好 下午好 晚上好 半夜好 凌晨好\n专门做了一张图 用来问好 适用于各类人群]{fast}{w=1.0}{nw}"
     # gra.nvl "早{w=0.5}{nw}"
 
-    system.nvl "[yangsy.nvl]回应了你的消息：☀{fast}{w=0.5}{nw}"
+    system.nvl "{reply=☀}[yangsy.nvl]{/reply}{fast}{w=0.5}{nw}"
     yangsy.nvl "早啊（"
 
     "{......}"
@@ -124,7 +124,7 @@ label ch2:
     play sound "snd_screen_wipe_in.wav"
     scene bg home_noon with wipeadofai
     
-    "刚刚写完英语作业的你突然意识到，{w=0.5}也许是时候检查一下群内的情况了。"
+    "刚刚写完英语作业的我突然意识到，{w=0.5}也许是时候检查一下群内的情况了。"
     
     yangsy.comment "myworld相关剧情Yangsy先移走了"
     yangsy.comment "各位写剧情的时候别忘了现在是2022（划掉）2024年\n很多现ACLCC成员还没加入呢（"
@@ -206,7 +206,7 @@ label ch2:
     gra.nvl "{cps=*0.25}{......}{/cps}"
     $ renpy.music.set_pause(False)
 
-    gra.nvl "{at=[mc]} 诶，{w=0.5}话说{w=0.25}你要不要做个魔改试试水？"
+    gra.nvl "{at}[mc.nvl]{/at} 诶，{w=0.5}话说{w=0.25}你要不要做个魔改试试水？"
     mc.nvl "我？"
     gra.nvl "对啊"
     gra.nvl "毕竟都加入ACLC了"
