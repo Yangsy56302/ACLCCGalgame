@@ -235,7 +235,7 @@ label ch1:
     gra.nvl "那就祝你好梦"
     mwam.nvl "明天见"
     morin.nvl "晚安"
-    system.nvl "[yangsy.nvl]回应了你的消息：🌙{fast}"
+    system.nvl "{reply=🌙}[yangsy.nvl]{/reply}{fast}"
     
     scene black with dissolve
     "{......}"

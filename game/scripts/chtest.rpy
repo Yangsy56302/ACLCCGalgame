@@ -88,6 +88,19 @@ label chtest_exceptscreen:
     return
 
 
+label chtest_qqfeature:
+
+    yangsy.nvl "{at}[mc.nvl]{/at}"
+    mc.nvl "{at}[yangsy.nvl]{/at}"
+    system.nvl "[yangsy.nvl]{reply}🐱{/reply}"
+    system.nvl "你{poke=yangsy}[yangsy.nvl]{/poke}"
+    system.nvl "[yangsy.nvl]{poke=mc}你{/poke}"
+    system.nvl "[yangsy.nvl]{poke=yangsy}自己{/poke}"
+    system.nvl "你{poke=mc}自己{/poke}"
+
+    return
+
+
 label chtest_session_title:
     nvl clear
     $ session_title = gra

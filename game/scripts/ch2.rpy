@@ -46,7 +46,7 @@ label ch2:
     # morin.nvl "[[早上好 上午好 中午好 下午好 晚上好 半夜好 凌晨好\n专门做了一张图 用来问好 适用于各类人群]{fast}{w=1.0}{nw}"
     # gra.nvl "早{w=0.5}{nw}"
 
-    system.nvl "[yangsy.nvl]回应了你的消息：☀{fast}{w=0.5}{nw}"
+    system.nvl "{reply=☀}[yangsy.nvl]{/reply}{fast}{w=0.5}{nw}"
     yangsy.nvl "早啊（"
 
     "{......}"
@@ -206,7 +206,7 @@ label ch2:
     gra.nvl "{cps=*0.25}{......}{/cps}"
     $ renpy.music.set_pause(False)
 
-    gra.nvl "{at=[mc]} 诶，{w=0.5}话说{w=0.25}你要不要做个魔改试试水？"
+    gra.nvl "{at}[mc.nvl]{/at} 诶，{w=0.5}话说{w=0.25}你要不要做个魔改试试水？"
     mc.nvl "我？"
     gra.nvl "对啊"
     gra.nvl "毕竟都加入ACLC了"
