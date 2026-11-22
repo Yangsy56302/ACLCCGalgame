@@ -3,6 +3,10 @@ label ch3:
         call ch3_do_curse from _call_ch3_do_curse
     else:
         call ch3_dont_do_curse from _call_ch3_dont_do_curse
+    python:
+        spec_unlock_all_music()
+        spec_unlock_all_cg()
+        persistent.variables["has_seen_ending"] = True
     call tbc_card from _call_tbc_card
     return
 

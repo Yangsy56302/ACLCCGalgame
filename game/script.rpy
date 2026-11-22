@@ -797,3 +797,16 @@ if __name__ == '__main__':
                         os.remove(self.client_py)
                 except Exception:
                     pass
+
+
+init python:
+    def spec_unlock_all_music():
+        for music_file in room_musics.values():
+            renpy.mark_audio_seen(music_file)
+        renpy.save_persistent()
+
+    def spec_unlock_all_cg():
+        for group_images in gallery_images.values():
+            for img in group_images:
+                renpy.mark_image_seen(img)
+        renpy.save_persistent()
