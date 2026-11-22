@@ -83,7 +83,7 @@ label ch1:
 
     stop music
     nvl clear
-    qq.nvl "群主拒绝了你的入群申请"
+    system.nvl "群主拒绝了你的入群申请"
 
     mc "{......}"
     "好吧，{w=0.25}这的确让我有点难受。"
@@ -91,7 +91,7 @@ label ch1:
     scene black with dissolve
 
     "过了一会{......}"
-    qq.nvl "Grafrustix已添加你为好友"
+    system.nvl "Grafrustix已添加你为好友"
 
     scene bg home_midnight with dissolve
     mc "？？？"
