@@ -225,7 +225,7 @@ label ch1:
     gra.nvl "那就祝你好梦"
     mwam.nvl "明天见"
     morin.nvl "晚安"
-    system.nvl "{reply=🌙}[yangsy.nvl]{/reply}{fast}"
+    system.nvl "[yangsy.nvl]{reply}🌙{/reply}{fast}"
     
     stop music fadeout 2.0
     $ quick_menu = False
