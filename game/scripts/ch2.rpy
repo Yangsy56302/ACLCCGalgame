@@ -4,7 +4,7 @@ label ch2:
 
     $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
-
+    $ quick_menu = True
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
     myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
@@ -18,7 +18,7 @@ label ch2:
     yangsy.comment "Yangsy稍微试着改一下这段，抱歉了myworld（"
     show yangsy at rhide
     hide yangsy
-
+    $ quick_menu = False
     $ variables["another_view"] = False
     $ current_perspective = mc
 
@@ -30,7 +30,7 @@ label ch2:
     play sound "snd_screen_wipe_in.wav"
     scene bg home_noon with wipeadofai
 
-
+    $ quick_menu = True
     "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为我升起。"
     "阳光照亮到了我的房间，\n{w=0.5}也照亮了我那沉睡的意识。"
     "我揉了揉眼睛，{w=0.5}环顾了一下四周以适应早晨的光线，\n{w=0.5}然后迫不及待地拿出手机，{w=0.25}打开了群聊。"
@@ -248,5 +248,5 @@ label ch2:
             gra.nvl "无论做不做魔改，{w=0.5}我们ACLC都一样欢迎你！"
             # myworldzycpc.nvl "太好了，吓得我都不敢说话了…"
             # yangsy.nvl "至于吗…\n[['''.gif]"
-
+    $ quick_menu = False
     return

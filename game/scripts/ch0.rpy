@@ -205,5 +205,6 @@ label ch0:
     yangsy.comment "这一小段结语可给Yangsy写爽了（"
     yangsy.comment "哦对这里会有一个转场图片，或许可以画一张Gra的形象在自己家或者宿舍之类的位置回mc评论的画面？"
 
+    $ quick_menu = False
     return
 
