@@ -27,11 +27,13 @@ label cutscene(chp):
 
     play sound "snd_screen_wipe_in.wav"
     scene expression "images/cutscene/[chp].png" with wipeadofai
+    show cutscene_text at tcutscene_text
 
     with Pause(3.0)
     
     play sound "snd_screen_wipe_out.wav"
     scene black with wipeadofai
+    hide cutscene_text
 
     with Pause(1.0)
 
@@ -47,6 +49,7 @@ label nocutscene:
     with Pause(1.0)
 
     return
+
 
 
 label to_be_continued(chp):
