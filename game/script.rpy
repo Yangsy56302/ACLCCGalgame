@@ -27,11 +27,13 @@ label cutscene(chp):
 
     play sound "snd_screen_wipe_in.wav"
     scene expression "images/cutscene/[chp].png" with wipeadofai
+    show cutscene_text at tcutscene_text
 
     with Pause(3.0)
     
     play sound "snd_screen_wipe_out.wav"
     scene black with wipeadofai
+    hide cutscene_text
 
     with Pause(1.0)
 
@@ -48,11 +50,27 @@ label nocutscene:
 
     return
 
+
+image cutscene_text = Text("ACLCCGame",
+    font=adofai_chinese_font,
+    size=96,
+    color="#ffd3f6",
+    outlines=[(0, "#000000a0", 6, 6)])
+
+
+transform tcutscene_text:
+    xalign 0.0
+    yalign 0.9375
+    alpha 0.0
+    easein_cubic 1.0 alpha 1.0 xalign 0.0625
+
+
 image tbc_text = Text("未完待续",
     font=adofai_chinese_font,
     size=64,
     color="#ffffff",
     outlines=[(2, "#000000a0", 0, 1)])
+
 
 transform tbc_corner:
     xalign 0.965
@@ -60,6 +78,7 @@ transform tbc_corner:
     alpha 0.0
     pause 0.3
     linear 2.5 alpha 1.0
+
 
 label tbc_card:
     stop music fadeout 2.5
@@ -76,6 +95,7 @@ label tbc_card:
     hide tbc_text with Dissolve(1.5)
     with Pause(0.3)
     return
+
 
 label to_be_continued(chp):
     while True:
