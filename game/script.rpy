@@ -51,6 +51,20 @@ label nocutscene:
     return
 
 
+image cutscene_text = Text("ACLCCGame",
+    font=adofai_chinese_font,
+    size=96,
+    color="#ffd3f6",
+    outlines=[(0, "#000000a0", 6, 6)])
+
+
+transform tcutscene_text:
+    xalign 0.0
+    yalign 0.9375
+    alpha 0.0
+    easein_cubic 1.0 alpha 1.0 xalign 0.0625
+
+
 
 label to_be_continued(chp):
     while True:
