@@ -6,7 +6,6 @@ label ch3:
     python:
         spec_unlock_all_music()
         spec_unlock_all_cg()
-        persistent.variables["has_seen_ending"] = True
     call tbc_card from _call_tbc_card
     return
 

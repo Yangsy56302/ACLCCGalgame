@@ -68,7 +68,11 @@ label tbc_card:
     $ quick_menu = False
 
     show tbc_text at tbc_corner
-    with Pause(5.0)
+    with Pause(2.5)
+    if not persistent.variables["has_seen_ending"]:
+        $ persistent.variables["has_seen_ending"] = True
+        $ renpy.notify("鉴赏模式已解锁")
+    with Pause(2.5)
     hide tbc_text with Dissolve(1.5)
     with Pause(0.3)
     return
