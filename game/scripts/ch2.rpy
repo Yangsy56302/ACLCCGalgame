@@ -30,7 +30,7 @@ label ch2:
     play sound "snd_screen_wipe_in.wav"
     scene bg home_noon with wipeadofai
 
-
+    $ quick_menu = True
     "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为我升起。"
     "阳光照亮到了我的房间，\n{w=0.5}也照亮了我那沉睡的意识。"
     "我揉了揉眼睛，{w=0.5}环顾了一下四周以适应早晨的光线，\n{w=0.5}然后迫不及待地拿出手机，{w=0.25}打开了群聊。"
@@ -46,7 +46,7 @@ label ch2:
     # morin.nvl "[[早上好 上午好 中午好 下午好 晚上好 半夜好 凌晨好\n专门做了一张图 用来问好 适用于各类人群]{fast}{w=1.0}{nw}"
     # gra.nvl "早{w=0.5}{nw}"
 
-    system.nvl "{reply=☀}[yangsy.nvl]{/reply}{fast}{w=0.5}{nw}"
+    system.nvl "[yangsy.nvl]{reply}☀{/reply}{fast}{w=0.5}{nw}"
     yangsy.nvl "早啊（"
 
     "{......}"
@@ -248,5 +248,5 @@ label ch2:
             gra.nvl "无论做不做魔改，{w=0.5}我们ACLC都一样欢迎你！"
             # myworldzycpc.nvl "太好了，吓得我都不敢说话了…"
             # yangsy.nvl "至于吗…\n[['''.gif]"
-
+    $ quick_menu = False
     return

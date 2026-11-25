@@ -14,7 +14,8 @@ label ch3_do_curse:
     
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
-
+    
+    $ quick_menu = True
     nvl clear
     mc.nvl "我真的想不出来什么主意……"
     gra.nvl "那要不就先暂时不想了\n{w=1.0}我们给你一些现成的魔改效果，{w=0.5}你用它去魔改一张现成的谱面"
@@ -57,7 +58,8 @@ label ch3_dont_do_curse:
     
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
-
+    
+    $ quick_menu = True
     nvl clear
     nona.nvl "[[level.zip]\n{w=1.0}我的新魔改做好了！\n{w=1.0}哪个好宝宝帮我测试一下呀"
     yangsy.nvl "Yangsy试试？（"
