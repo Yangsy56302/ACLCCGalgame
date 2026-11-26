@@ -17,7 +17,7 @@ label ch1:
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
 
-    "又过了几天，{w=0.5}我的账号收到了一条私信——"
+    show screen chapter_title("几天后")
 
     nvl clear
     gra.nvl "你好，{w=0.25}有兴趣来我们的群里讨论魔改吗？"
@@ -237,15 +237,19 @@ label ch1:
     morin.nvl "晚安"
     system.nvl "[yangsy.nvl]{reply}🌙{/reply}{fast}"
     
-    scene black with dissolve
-    "{......}"
-    scene bg star with dissolve
-    stop music fadeout 2.0
+    stop music fadeout 1.0
 
-    "我躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+    
+    with Pause(1.0)
+
+    play sound "snd_screen_wipe_in.wav"
+    scene bg star with wipeadofai
+
+    "我躺在床上回想今晚发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
     # $ persistent.variables["has_seen_ending"] = True
 
     # call to_be_continued("ch1") from _call_to_be_continued
-    $ quick_menu = False
     return
