@@ -106,6 +106,8 @@ label to_be_continued(chp):
         menu:
             "查看已被废弃的AI剧情":
                 jump vibe_ch2
+            "查看Yangsy写的非常粗略的剧情框架":
+                call bone_ch0
             "查看游离的支线章节":
                 menu:
                     "chex_unknown_oi":
@@ -114,6 +116,8 @@ label to_be_continued(chp):
                         call chex_unknown_baile_lefthanded from _call_chex_unknown_baile_lefthanded
                     "chex_myworld":
                         call chex_myworld from _call_chex_myworld
+                    "chex_gra_birthday":
+                        call chex_gra_birthday from _call_chex_gra_birthday
                     "返回":
                         pass
             "查看剧情建议":

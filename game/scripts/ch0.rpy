@@ -181,7 +181,7 @@ label ch0:
 
     gra.nvl "觉得有兴趣的话可以来我们群里玩哦[[doge]"
     # mwam.comment "他自己说的，不要问我（{nw}"
-    
+
     # "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
 
     scene bg that_video with dissolve
