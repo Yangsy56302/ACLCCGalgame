@@ -170,29 +170,25 @@ label ch0:
     "我还是觉得意犹未尽，{w=0.5}发了一条评论——"
 
     nvl clear
-    mc.nvl "{w=1.0}{nw}"
-
+    mc.nvl "{w=0.5}{nw}"
     $ _history_list.pop()
-    "——其实我早就把那天评论的具体内容给忘了，\n{w=0.5}但我记得这条评论收获了不少的点赞与回复。"
-    stop music fadeout 1.0
-    "其中有一条是这么写的："
 
-    scene black with dissolve
+    with None
+    "——其实我早就把那天评论的具体内容给忘了，\n{w=0.5}但我记得这条评论收获了不少的点赞与回复。"
+    "其中有一条是这么写的："
 
     gra.nvl "觉得有兴趣的话可以来我们群里玩哦[[doge]"
     # mwam.comment "他自己说的，不要问我（{nw}"
 
     # "{cps=*0.5}故事，{w=0.5}就从这{w=0.25}开始了。{/cps}"
+    
+    yangsy.comment "所以mc这里是因为想进群看看还是其他原因才决定查看[gra]的？（"
 
-    scene bg that_video with dissolve
-    
-    play music "mus_astral_calm.mp3"
-    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-    
     "我点开了他的头像——\n{w=0.5}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
     "由于一会还要去上学，{w=0.5}我也就没有进一步的寻找下去。"
     "我不是什么记性很好的人，{w=0.5}这事很快便被我抛在脑后。"
 
+    stop music fadeout 1.0
     scene black with dissolve
 
     "这只不过是人生中无数个小插曲里面的又一个罢了。"
