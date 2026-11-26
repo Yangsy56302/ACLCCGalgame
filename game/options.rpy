@@ -23,7 +23,7 @@ define gui.show_name = False
 
 ## The version of the game.
 
-define config.version = "a0"
+define config.version = "Demonstration Edition"
 
 define build.version = "0.0.1"
 
@@ -296,3 +296,5 @@ define config.autosave_on_quit = True
 define config.check_conflicting_properties = True
 
 # define config.auto_voice = "voice/{id}.ogg"
+
+default preferences.fullscreen = True
