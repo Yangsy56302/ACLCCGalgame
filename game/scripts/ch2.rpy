@@ -1,36 +1,36 @@
 label ch2:
-    play sound "snd_screen_wipe_in.wav"
-    scene black with wipeadofai
+    # play sound "snd_screen_wipe_in.wav"
+    # scene black with wipeadofai
 
-    $ variables["another_view"] = True
-    $ current_perspective = myworldzycpc
+    # $ variables["another_view"] = True
+    # $ current_perspective = myworldzycpc
 
-    myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
-    myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
+    # myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
+    # myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
-    $ current_perspective = yangsy
+    # $ current_perspective = yangsy
 
-    show yangsy at l11
-    pause 0.5
-    show yangsy fb_a fm_cso at hf11
-    yangsy.comment "不是什么叫第二天一开始视角就换了？{w=0.5}这也太突兀了吧（"
-    show yangsy fb_n fp_r fm_cho at d11
-    yangsy.comment "Yangsy稍微试着改一下这段，抱歉了myworld（"
-    show yangsy at rhide
-    hide yangsy
+    # show yangsy at l11
+    # pause 0.5
+    # show yangsy fb_a fm_cso at hf11
+    # yangsy.comment "不是什么叫第二天一开始视角就换了？{w=0.5}这也太突兀了吧（"
+    # show yangsy fb_n fp_r fm_cho at d11
+    # yangsy.comment "Yangsy稍微试着改一下这段，抱歉了myworld（"
+    # show yangsy at rhide
+    # hide yangsy
 
-    $ variables["another_view"] = False
-    $ current_perspective = mc
+    # $ variables["another_view"] = False
+    # $ current_perspective = mc
 
 
-    play sound "snd_screen_wipe_out.wav"
-    scene black with wipeadofai
+    # play sound "snd_screen_wipe_out.wav"
+    # scene black with wipeadofai
     show screen chapter_title("第二天")
 
     play sound "snd_screen_wipe_in.wav"
     scene bg home_noon with wipeadofai
 
-
+    $ quick_menu = True
     "星期六早上的太阳已经从地平线上升起，\n{w=1.0}它现在正缓慢地从窗户对面的居民楼房顶再一次为我升起。"
     "阳光照亮到了我的房间，\n{w=0.5}也照亮了我那沉睡的意识。"
     "我揉了揉眼睛，{w=0.5}环顾了一下四周以适应早晨的光线，\n{w=0.5}然后迫不及待地拿出手机，{w=0.25}打开了群聊。"
@@ -46,7 +46,7 @@ label ch2:
     # morin.nvl "[[早上好 上午好 中午好 下午好 晚上好 半夜好 凌晨好\n专门做了一张图 用来问好 适用于各类人群]{fast}{w=1.0}{nw}"
     # gra.nvl "早{w=0.5}{nw}"
 
-    system.nvl "{reply=☀}[yangsy.nvl]{/reply}{fast}{w=0.5}{nw}"
+    system.nvl "[yangsy.nvl]{reply}☀{/reply}{fast}{w=0.5}{nw}"
     yangsy.nvl "早啊（"
 
     "{......}"
@@ -68,7 +68,7 @@ label ch2:
     
     yangsy.nvl "诶突然想到个问题"
     yangsy.nvl "[mc.nvl] {w=0.5}你对魔改的印象是...？（"
-    yangsy.nvl.comment "这里的选项主要用来暗示普通线与作者线两条路线\n现在就分开两条线还是太早了（"
+    # yangsy.nvl.comment "这里的选项主要用来暗示普通线与作者线两条路线\n现在就分开两条线还是太早了（"
 
     $ yangsy_curse_impression = None
     menu(nvl=True):
@@ -96,8 +96,8 @@ label ch2:
             mc.nvl "跟你说的那些人差不多"
             yangsy.nvl "{......}"
     
-    yangsy.nvl.comment "感觉[mc.nvl]有些ooc了 希望下一位能改一下（"
-    yangsy.nvl.comment "总之这里要给主线剧情设目标"
+    # yangsy.nvl.comment "感觉[mc.nvl]有些ooc了 希望下一位能改一下（"
+    # yangsy.nvl.comment "总之这里要给主线剧情设目标"
 
     yangsy.nvl "其实吧\n{w=0.5}我们这些做魔改的\n{w=0.25}其实不太受冰与火之舞圈待见"
     yangsy.nvl "那边普遍都觉得\n{w=0.5}所谓“魔改”什么的 {w=0.5}不过就是\n{w=0.25}这里随便塞点事件 {w=0.25}那里随便塞点轨道就行了的\n{w=0.5}对谱面的恶搞行为"
@@ -126,13 +126,13 @@ label ch2:
     
     "刚刚写完英语作业的我突然意识到，{w=0.5}也许是时候检查一下群内的情况了。"
     
-    yangsy.comment "myworld相关剧情Yangsy先移走了"
-    yangsy.comment "各位写剧情的时候别忘了现在是2022（划掉）2024年\n很多现ACLCC成员还没加入呢（"
-    yangsy.comment "以及这是ACLCCGame 不要过于偏题（（"
+    # yangsy.comment "myworld相关剧情Yangsy先移走了"
+    # yangsy.comment "各位写剧情的时候别忘了现在是2022（划掉）2024年\n很多现ACLCC成员还没加入呢（"
+    # yangsy.comment "以及这是ACLCCGame 不要过于偏题（（"
 
     nvl clear
 
-    yangsy.nvl.comment "这段随便填点日常对话吧（"
+    # yangsy.nvl.comment "这段随便填点日常对话吧（"
 
     mc.nvl "各位早上好"
     lv.nvl "早上好"
@@ -248,5 +248,5 @@ label ch2:
             gra.nvl "无论做不做魔改，{w=0.5}我们ACLC都一样欢迎你！"
             # myworldzycpc.nvl "太好了，吓得我都不敢说话了…"
             # yangsy.nvl "至于吗…\n[['''.gif]"
-
+    $ quick_menu = False
     return

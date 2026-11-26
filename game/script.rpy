@@ -12,8 +12,8 @@ label start:
     call ch2 from _call_ch2
     call cutscene("ch2") from _call_cutscene_2
     call ch3 from _call_ch3
-    call cutscene("ch3") from _call_cutscene_3
-    call to_be_continued("ch3") from _call_to_be_continued_from_ch3
+    call nocutscene from _call_nocutscene_3
+    # call to_be_continued("ch3") from _call_to_be_continued_from_ch3
     return
 
 
@@ -27,11 +27,13 @@ label cutscene(chp):
 
     play sound "snd_screen_wipe_in.wav"
     scene expression "images/cutscene/[chp].png" with wipeadofai
+    show cutscene_text at tcutscene_text
 
     with Pause(3.0)
     
     play sound "snd_screen_wipe_out.wav"
     scene black with wipeadofai
+    hide cutscene_text
 
     with Pause(1.0)
 
@@ -46,6 +48,52 @@ label nocutscene:
     
     with Pause(1.0)
 
+    return
+
+
+image cutscene_text = Text("ACLCCGame",
+    font=adofai_chinese_font,
+    size=96,
+    color="#ffd3f6",
+    outlines=[(0, "#000000a0", 6, 6)])
+
+
+transform tcutscene_text:
+    xalign 0.0
+    yalign 0.9375
+    alpha 0.0
+    easein_cubic 1.0 alpha 1.0 xalign 0.0625
+
+
+image tbc_text = Text("未完待续",
+    font=adofai_chinese_font,
+    size=64,
+    color="#ffffff",
+    outlines=[(2, "#000000a0", 0, 1)])
+
+
+transform tbc_corner:
+    xalign 0.965
+    yalign 0.945
+    alpha 0.0
+    pause 0.3
+    linear 2.5 alpha 1.0
+
+
+label tbc_card:
+    stop music fadeout 2.5
+    nvl clear
+    window hide
+    $ quick_menu = False
+
+    show tbc_text at tbc_corner
+    with Pause(2.5)
+    if not persistent.variables["has_seen_ending"]:
+        $ persistent.variables["has_seen_ending"] = True
+        $ renpy.notify("鉴赏模式已解锁")
+    with Pause(2.5)
+    hide tbc_text with Dissolve(1.5)
+    with Pause(0.3)
     return
 
 
@@ -773,3 +821,16 @@ if __name__ == '__main__':
                         os.remove(self.client_py)
                 except Exception:
                     pass
+
+
+init python:
+    def spec_unlock_all_music():
+        for music_file in room_musics.values():
+            renpy.mark_audio_seen(music_file)
+        renpy.save_persistent()
+
+    def spec_unlock_all_cg():
+        for group_images in gallery_images.values():
+            for img in group_images:
+                renpy.mark_image_seen(img)
+        renpy.save_persistent()
