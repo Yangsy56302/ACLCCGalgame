@@ -23,6 +23,7 @@ label ch2:
     play sound "snd_screen_wipe_out.wav"
     scene black with wipeadofai
     
+    # "又过了几天，{w=0.5}你的账号收到了一条私信——"
     show screen chapter_title("第二天")
 
     play sound "snd_screen_wipe_in.wav"
