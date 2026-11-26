@@ -4,7 +4,7 @@ label ch1:
     
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-    
+    $ quick_menu = True
     "我点开了他的头像——\n{w=0.5}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
     "我一会就要去上学了，{w=0.5}也就没有进一步的寻找下去。"
     "我不是什么记性很好的人，{w=0.5}这事很快便被我抛在脑后。"
@@ -235,7 +235,7 @@ label ch1:
     gra.nvl "那就祝你好梦"
     mwam.nvl "明天见"
     morin.nvl "晚安"
-    system.nvl "{reply=🌙}[yangsy.nvl]{/reply}{fast}"
+    system.nvl "[yangsy.nvl]{reply}🌙{/reply}{fast}"
     
     scene black with dissolve
     "{......}"
@@ -247,5 +247,5 @@ label ch1:
     # $ persistent.variables["has_seen_ending"] = True
 
     # call to_be_continued("ch1") from _call_to_be_continued
-
+    $ quick_menu = False
     return

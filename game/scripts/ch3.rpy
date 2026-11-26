@@ -3,7 +3,10 @@ label ch3:
         call ch3_do_curse from _call_ch3_do_curse
     else:
         call ch3_dont_do_curse from _call_ch3_dont_do_curse
-    
+    python:
+        spec_unlock_all_music()
+        spec_unlock_all_cg()
+    call tbc_card from _call_tbc_card
     return
 
 
@@ -11,13 +14,14 @@ label ch3_do_curse:
     
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
-
+    
+    $ quick_menu = True
     nvl clear
     mc.nvl "我真的想不出来什么主意……"
     gra.nvl "那要不就先暂时不想了\n{w=1.0}我们给你一些现成的魔改效果，{w=0.5}你用它去魔改一张现成的谱面"
     gra.nvl "这样如何？"
-    myworldzycpc.nvl.comment "话说你是不是忘了我也是新来的（"
-    yangsy.nvl.comment "没忘，{w=0.25}所以Yangsy换人说了（（"
+    # myworldzycpc.nvl.comment "话说你是不是忘了我也是新来的（"
+    # yangsy.nvl.comment "没忘，{w=0.25}所以Yangsy换人说了（（"
     yangsy.nvl "好主意啊Gra"
     yangsy.nvl "咱们也有段时间没做过多效果魔改了\n{w=0.5}毕竟都在给自己的系列构思新魔改效果（"
     gra.nvl "[[nfgtr.zip]{fast}{w=1.0}这是[yangsy]做的复合魔改的一个例子，{w=0.25}你可以看看{w=1.0}{nw}"
@@ -54,16 +58,17 @@ label ch3_dont_do_curse:
     
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
-
+    
+    $ quick_menu = True
     nvl clear
     nona.nvl "[[level.zip]\n{w=1.0}我的新魔改做好了！\n{w=1.0}哪个好宝宝帮我测试一下呀"
     yangsy.nvl "Yangsy试试？（"
     nona.nvl "谢谢Yangsy！\n{w=1.0}我喜欢你！"
-    myworldzycpc.nvl.comment """
-    下面这两行后续剧情可以用，主角就怃说喜欢这件事询问的时候，这里先埋个伏笔"
-    \nmc.nvl "？？？"
-    \ngra.nvl "哈，这是[nona]的习惯用语而已，别误会了（"
-    """
+    # myworldzycpc.nvl.comment """
+    # 下面这两行后续剧情可以用，主角就怃说喜欢这件事询问的时候，这里先埋个伏笔"
+    # \nmc.nvl "？？？"
+    # \ngra.nvl "哈，这是[nona]的习惯用语而已，别误会了（"
+    # """
 
     return
 
@@ -74,17 +79,17 @@ label gra_birthday:
     scene bg sky with wipeadofai
 
     "时间过得飞快，不久就到了[gra]的生日了。"
-    yangsy.comment "不是等会这才两天剧情就开始加速了？别啊（"
+    # yangsy.comment "不是等会这才两天剧情就开始加速了？别啊（"
     $ _history_list.pop()
     $ _history_list.pop()
     "今天是[gra]的生日。"
-    yangsy.comment "这段还没改，不过其实也没啥改的必要，挪一下剧情位置就行（"
+    # yangsy.comment "这段还没改，不过其实也没啥改的必要，挪一下剧情位置就行（"
 
     nvl clear
     gra.nvl "是时候发我的生日作了"
     yangsy.nvl "诶Gra生日到了？"
 
-    myworldzycpc.nvl.comment "下文部分摘自生日作"
+    # myworldzycpc.nvl.comment "下文部分摘自生日作"
     lingyun.nvl "快生"
     hale.nvl "晴柚生日快乐"
     nona.nvl "生日快乐，我喜欢你"

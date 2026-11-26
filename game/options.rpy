@@ -23,7 +23,7 @@ define gui.show_name = False
 
 ## The version of the game.
 
-define config.version = "a0"
+define config.version = "Demonstration Edition"
 
 define build.version = "0.0.1"
 
