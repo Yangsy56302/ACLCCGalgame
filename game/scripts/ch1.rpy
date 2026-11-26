@@ -3,7 +3,7 @@ label ch1:
     scene bg home_night with wipeadofai
 
     show screen chapter_title("几天后")
-    $ quick_menu = True
+
     nvl clear
     gra.nvl "你好，{w=0.25}有兴趣来我们的群里讨论魔改吗？"
     menu(nvl=True):
@@ -228,7 +228,6 @@ label ch1:
     system.nvl "[yangsy.nvl]{reply}🌙{/reply}{fast}"
     
     stop music fadeout 2.0
-    $ quick_menu = False
     play sound "snd_screen_wipe_out.wav"
     scene black with wipeadofai
     
@@ -236,10 +235,9 @@ label ch1:
 
     play sound "snd_screen_wipe_in.wav"
     scene bg home_noon with wipeadofai
-    $ quick_menu = True
+
     "我躺在床上回想今晚发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
 
     # call to_be_continued("ch1") from _call_to_be_continued
-    $ quick_menu = False
     return

@@ -363,7 +363,6 @@ label setup_naming_entered:
                 # 显示错误提示
                 python:
                     duplicate_name_attempts += 1
-                    quick_menu = False
                     error_message = "\n".join([
                         f'  {{a}}File "game/script.rpy", line ???{{/a}}, in script call',
                         f'    call setup_naming_start from _call_setup_naming_start',
@@ -378,7 +377,6 @@ label setup_naming_entered:
                 with None
                 show screen custom_exception(error_message)
                 python: 
-                    quick_menu = True
                     renpy.block_rollback()
                 pause 6.0
                 window auto
