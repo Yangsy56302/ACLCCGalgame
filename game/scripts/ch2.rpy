@@ -1,13 +1,13 @@
 label ch2:
-    # play sound "snd_screen_wipe_in.wav"
-    # scene black with wipeadofai
+    play sound "snd_screen_wipe_in.wav"
+    scene black with wipeadofai
 
     $ variables["another_view"] = True
     $ current_perspective = myworldzycpc
     myworldzycpc.comment "我要写主线了吗{...}冲突了怎么办呢{...}"
     myworldzycpc.comment "先写个简单的吧，{w=0.5}后续再慢慢改"
 
-    # $ current_perspective = yangsy
+    $ current_perspective = yangsy
 
     show yangsy at l11
     pause 0.5
@@ -20,9 +20,8 @@ label ch2:
     $ variables["another_view"] = False
     $ current_perspective = mc
 
-
-    # play sound "snd_screen_wipe_out.wav"
-    # scene black with wipeadofai
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
     
     show screen chapter_title("第二天")
 
