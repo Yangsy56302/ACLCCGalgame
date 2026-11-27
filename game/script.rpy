@@ -77,7 +77,7 @@ label to_be_continued(chp):
             "查看已被废弃的AI剧情":
                 jump vibe_ch2
             "查看Yangsy写的非常粗略的剧情框架":
-                call bone_ch0
+                call bone_ch0 from _call_bone_ch0
             "查看游离的支线章节":
                 menu:
                     "chex_unknown_oi":
