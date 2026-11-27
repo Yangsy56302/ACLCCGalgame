@@ -23,9 +23,9 @@ define gui.show_name = False
 
 ## The version of the game.
 
-define config.version = "Demonstration Edition"
+define config.version = "a1"
 
-define build.version = "0.0.1"
+define build.version = "0.0.2"
 
 
 ## Text that is placed on the game's about screen. Place the text between the

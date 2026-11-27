@@ -66,7 +66,7 @@ label ch2:
     
     yangsy.nvl "诶突然想到个问题"
     yangsy.nvl "[mc.nvl] {w=0.5}你对魔改的印象是...？（"
-    # yangsy.nvl.comment "这里的选项主要用来暗示普通线与作者线两条路线\n现在就分开两条线还是太早了（"
+    yangsy.nvl.comment "这里的选项主要用来暗示普通线与作者线两条路线\n现在就分开两条线还是太早了（"
 
     $ yangsy_curse_impression = None
     menu(nvl=True):
@@ -94,8 +94,8 @@ label ch2:
             mc.nvl "跟你说的那些人差不多"
             yangsy.nvl "{......}"
     
-    # yangsy.nvl.comment "感觉[mc.nvl]有些ooc了 希望下一位能改一下（"
-    # yangsy.nvl.comment "总之这里要给主线剧情设目标"
+    yangsy.nvl.comment "感觉[mc.nvl]有些ooc了 希望下一位能改一下（"
+    yangsy.nvl.comment "总之这里要给主线剧情设目标"
 
     yangsy.nvl "其实吧\n{w=0.5}我们这些做魔改的\n{w=0.25}其实不太受冰与火之舞圈待见"
     yangsy.nvl "那边普遍都觉得\n{w=0.5}所谓“魔改”什么的 {w=0.5}不过就是\n{w=0.25}这里随便塞点事件 {w=0.25}那里随便塞点轨道就行了的\n{w=0.5}对谱面的恶搞行为"
@@ -124,13 +124,13 @@ label ch2:
     
     "刚刚写完英语作业的我突然意识到，{w=0.5}也许是时候检查一下群内的情况了。"
     
-    # yangsy.comment "myworld相关剧情Yangsy先移走了"
-    # yangsy.comment "各位写剧情的时候别忘了现在是2022（划掉）2024年\n很多现ACLCC成员还没加入呢（"
-    # yangsy.comment "以及这是ACLCCGame 不要过于偏题（（"
+    yangsy.comment "myworld相关剧情Yangsy先移走了"
+    yangsy.comment "各位写剧情的时候别忘了现在是2022（划掉）2024年\n很多现ACLCC成员还没加入呢（"
+    yangsy.comment "以及这是ACLCCGame 不要过于偏题（（"
 
     nvl clear
 
-    # yangsy.nvl.comment "这段随便填点日常对话吧（"
+    yangsy.nvl.comment "这段随便填点日常对话吧（"
 
     mc.nvl "各位早上好"
     lv.nvl "早上好"

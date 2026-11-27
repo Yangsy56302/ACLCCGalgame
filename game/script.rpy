@@ -12,8 +12,8 @@ label start:
     call ch2 from _call_ch2
     call cutscene("ch2") from _call_cutscene_2
     call ch3 from _call_ch3
-    call nocutscene from _call_nocutscene_3
-    # call to_be_continued("ch3") from _call_to_be_continued_from_ch3
+    call cutscene("ch3") from _call_cutscene_3
+    call to_be_continued("ch3") from _call_to_be_continued_from_ch3
     return
 
 
@@ -65,36 +65,6 @@ transform tcutscene_text:
     easein_cubic 1.0 alpha 1.0 xalign 0.0625
 
 
-image tbc_text = Text("未完待续",
-    font=adofai_chinese_font,
-    size=64,
-    color="#ffffff",
-    outlines=[(2, "#000000a0", 0, 1)])
-
-
-transform tbc_corner:
-    xalign 0.965
-    yalign 0.945
-    alpha 0.0
-    pause 0.3
-    linear 2.5 alpha 1.0
-
-
-label tbc_card:
-    stop music fadeout 2.5
-    nvl clear
-    window hide
-    $ quick_menu = False
-
-    show tbc_text at tbc_corner
-    with Pause(2.5)
-    if not persistent.variables["has_seen_ending"]:
-        $ persistent.variables["has_seen_ending"] = True
-        $ renpy.notify("鉴赏模式已解锁")
-    with Pause(2.5)
-    hide tbc_text with Dissolve(1.5)
-    with Pause(0.3)
-    return
 
 
 label to_be_continued(chp):
