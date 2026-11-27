@@ -234,7 +234,7 @@ label ch1:
     with Pause(1.0)
 
     play sound "snd_screen_wipe_in.wav"
-    scene bg home_noon with wipeadofai
+    scene bg star with wipeadofai
 
     "我躺在床上回想今晚发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
