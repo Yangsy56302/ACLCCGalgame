@@ -1,37 +1,25 @@
 label ch1:
-
-    scene bg that_video with dissolve
-    
-    play music "mus_astral_calm.mp3"
-    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
-    $ quick_menu = True
-    "我点开了他的头像——\n{w=0.5}在他的主页里并没有找到什么和群聊有关的信息，\n{w=0.5}只有寥寥几个和冰与火之舞无关的视频。"
-    "我一会就要去上学了，{w=0.5}也就没有进一步的寻找下去。"
-    "我不是什么记性很好的人，{w=0.5}这事很快便被我抛在脑后。"
-
-    play sound "snd_screen_wipe_out.wav"
-    scene black with wipeadofai
-
-    with Pause(1.0)
-
     play sound "snd_screen_wipe_in.wav"
     scene bg home_night with wipeadofai
 
-    "又过了几天，{w=0.5}我的账号收到了一条私信——"
+    show screen chapter_title("几天后")
 
     nvl clear
     gra.nvl "你好，{w=0.25}有兴趣来我们的群里讨论魔改吗？"
     menu(nvl=True):
         "？":
-            mc.nvl "？" 
+            mc.nvl "？"
+    
     "{......}没有回复。"
-    "其实我知道他在说什么，{w=0.5}但是我不知道该怎么回复。\n{w=1.0}我不敢直接同意，{w=0.5}也不好意思直接拒绝，{w=0.5}于是决定装傻充愣——"
+    "其实我知道他在说什么，\n{w=0.5}他那特征分明的头像让我很轻易的就想起了他发的那条回复。"
+    "我只是不知道该怎么回复——\n{w=0.5}我不敢直接同意，{w=0.5}也不好意思直接拒绝。"
+    "于是我决定装傻充愣——"
     
     mc.nvl "你是？"
     gra.nvl "我是Grafrustix，{w=0.5}之前你在评论区发过回复"
     mc.nvl "你好"
     gra.nvl "我们群里有不少人都对魔改感兴趣"
-    gra.nvl "{w=0.5}有兴趣加群一起讨论吗？"
+    gra.nvl "有兴趣加群一起讨论吗？"
     mc.nvl "魔改是？"
     gra.nvl "就是你之前在视频里看到的那种"
     gra.nvl "我也不知道怎么解释，{w=0.5}你可以去群里看看"
@@ -51,16 +39,16 @@ label ch1:
     # if has_phone:
     #     "你使用在视频简介里发现的群号找到了群。"
     # else:
-    "我用父母的手机号注册了一个QQ，{w=0.5}使用在视频简介里发现的群号找到了群。"
+    "我用父母的手机号注册了一个QQ，\n{w=0.5}使用在视频简介里发现的群号找到了群，{w=0.5}然后发送了入群申请。"
     
-    menu:
-        "要加群吗？"
-        "当然":
-            pass
-        "还是算了......":
-            pass
+    # menu:
+    #     "要加群吗？"
+    #     "当然":
+    #         pass
+    #     "还是算了......":
+    #         pass
 
-    "我发送了入群申请。"
+    # "我发送了入群申请。"
 
     # scene bg that_video with fade
 
@@ -73,7 +61,7 @@ label ch1:
 
     # scene black with dissolve
     # "{......}"
-    scene bg home_midnight with fade
+    scene bg home_midnight with dissolve
     voice "voice/message_prompt.ogg"
     # "——突然响起的QQ提示音将你的意识拉回现实。"
     # "等了将近一个小时的你{w=0.25}此时已经迫不及待了。"
@@ -83,19 +71,19 @@ label ch1:
 
     stop music
     nvl clear
+    with None
+    system.nvl "已向“Grafrustix的聊天群”发送入群申请{fast}{nw}"
     system.nvl "群主拒绝了你的入群申请"
 
     mc "{......}"
-    "好吧，{w=0.25}这的确让我有点难受。"
+    "好吧，{w=0.25}这的确让我有点难受。{nw}"
     
-    scene black with dissolve
-
-    "过了一会{......}"
+    with None
     system.nvl "Grafrustix已添加你为好友"
 
-    scene bg home_midnight with dissolve
+    nvl clear
+
     mc "？？？"
-    """我点开了手机QQ，{w=0.5}点开主页上那个名字是“Grafrustix”的好友："""
     gra.nvl """抱歉啊，{w=0.25}刚刚不小心点错了[[笑哭]"""
     gra.nvl "我看看能不能把你拉进去"
     mc.nvl "没关系的，{w=0.25}实在不行我重新加一遍"
@@ -108,11 +96,11 @@ label ch1:
     #     "否":
     #         jump chex_unknown_not_join
 
-    "我又发了一遍入群申请——"
+    "我又发了一遍入群申请。"
     voice "voice/message_prompt.ogg"
-    "这次的提示音倒是没过多久就出现了。"
-    "QQ的群聊一栏多出了个“Grafrustix的聊天群”，{w=0.5}群头像右上角有个小红点。"
-    "我点开了群聊——"
+    "又过了一会儿，{w=0.5}QQ的消息界面多出了个“Grafrustix的聊天群”。"
+    "经过刚刚这么一番波折，{w=0.5}我现在终于成为群成员了。"
+    "当然，{w=0.25}作为群员要做的第一件事肯定是先点进群聊看看，\n{w=0.5}这样顺便还能把群头像右上角那个显眼的小红点消除掉。"
 
     nvl clear
     # gra.nvl "抱歉啊，{w=0.25}刚刚不小心点错了[[笑哭]"
@@ -125,8 +113,8 @@ label ch1:
     # mwam.nvl "这能点错也是没谁了{fast}{nw}"
     # mc.nvl "没关系的"
     
-    # play music "mus_astral_calm.mp3"
-    # $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
+    play music "mus_astral_calm.mp3"
+    $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
     gra.nvl "欢迎新人入群[[doge]"
     morin.nvl "[[新人酱！新人酱！！.gif]{fast}{w=0.25}{nw}"
@@ -144,7 +132,7 @@ label ch1:
     gra.nvl "叫我晴柚也行"
 
     gra.nvl "群里的成员主要是对魔改感兴趣才加入这里讨论的"
-    gra.nvl "不过也不完全是，比如说有一部分成员其实是我同学"
+    gra.nvl "不过也不完全是，{w=0.5}比如说有一部分成员其实是我同学"
     mwam.nvl "也可以说是线下粉丝"
     lingyun.nvl "神TM线下粉丝"
 
@@ -193,7 +181,7 @@ label ch1:
 
     gra.nvl "首先{...}你应该知道冰与火之舞吧？"
     mc.nvl "知道"
-    gra.nvl "那就好，省的我把整个游戏机制给从头讲一遍了"
+    gra.nvl "那就好，{w=0.5}省的我把整个游戏机制给从头讲一遍了"
 
     stop music
 
@@ -209,11 +197,13 @@ label ch1:
     play music "mus_astral_calm.mp3"
     $ renpy.notify("♪ ms_win_and_mc - Astral Calm")
 
+    yangsy.comment "迎面而来的消息洪流差点使你连最开始的问题都给忘掉了。\n{w=1.0}不过缓过神来的你还是尽量过了一遍大致内容。"
+
     mc.nvl "{......}{w=1.0}谢谢，{w=0.5}我大概明白了"
     gra.nvl "那就好\n{w=0.5}我还担心这么多字会不会把你给看迷糊呢"
     yangsy.nvl "这年头持有长文本阅读能力的人确实不多了（"
-    
-    nvl clear
+
+    # nvl clear
 
     # # if not has_phone:
     # mc.nvl "哦对，{w=0.25}还有，{w=0.5}QQ应该怎么用？我不是很熟悉[[笑哭]"
@@ -237,15 +227,17 @@ label ch1:
     morin.nvl "晚安"
     system.nvl "[yangsy.nvl]{reply}🌙{/reply}{fast}"
     
-    scene black with dissolve
-    "{......}"
-    scene bg star with dissolve
     stop music fadeout 2.0
+    play sound "snd_screen_wipe_out.wav"
+    scene black with wipeadofai
+    
+    with Pause(1.0)
 
-    "我躺在床上回想今天发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
+    play sound "snd_screen_wipe_in.wav"
+    scene bg home_noon with wipeadofai
+
+    "我躺在床上回想今晚发生的一切，{w=0.5}心中充满了干劲，{w=0.5}很快就进入了梦乡。"
     "窗外繁星点点，{w=0.5}或许{w=0.25}象征着无数个明天吧。"
-    # $ persistent.variables["has_seen_ending"] = True
 
     # call to_be_continued("ch1") from _call_to_be_continued
-    $ quick_menu = False
     return

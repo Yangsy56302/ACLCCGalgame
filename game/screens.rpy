@@ -125,6 +125,8 @@ screen say(who, what):
 
         text what id "what"
 
+    use quick_menu()
+
 
     ## If there's a side image, display it above the text. Do not display on the
     ## phone variant - there's no room.
@@ -215,6 +217,8 @@ screen input(prompt):
 
             text prompt style "input_prompt"
             input id "input"
+
+    use quick_menu()
 
 style input_prompt is default
 
@@ -316,14 +320,14 @@ style choice_button_text is default:
 ##
 ## The quick menu is displayed in-game to provide easy access to the out-of-game
 ## menus.
-default quick_menu = False
+default show_quick_menu = True
 
 screen quick_menu():
 
     ## Ensure this appears on top of other screens.
     zorder 100
 
-    if quick_menu:
+    if show_quick_menu:
 
         hbox:
             style_prefix "quick"
@@ -343,8 +347,8 @@ screen quick_menu():
 
 ## This code ensures that the quick_menu screen is displayed in-game, whenever
 ## the player has not explicitly hidden the interface.
-init python:
-    config.overlay_screens.append("quick_menu")
+# init python:
+#     config.overlay_screens.append("quick_menu")
 
 
 
@@ -1566,6 +1570,8 @@ screen nvl(dialogue, items=None):
 
     add SideImage() xalign 0.0 yalign 1.0
 
+    use quick_menu()
+
 
 screen nvl_dialogue(dialogue):
 
@@ -1665,7 +1671,7 @@ screen quick_menu():
 
     zorder 100
 
-    if quick_menu:
+    if show_quick_menu:
 
         hbox:
             style_prefix "quick"
