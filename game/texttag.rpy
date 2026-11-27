@@ -65,6 +65,4 @@ define config.custom_text_tags = {
     "reply": texttag_reply,
 }
 
-define config.say_menu_text_filters = [
-    text_filter_ellipsis
-]
+define config.say_menu_text_filter = text_filter_ellipsis

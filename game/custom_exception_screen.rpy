@@ -42,7 +42,7 @@ init python:
             except Exception:
                 pass
 
-
+style _trace is default
 screen custom_exception(fmt_short, fmt_full=None, traceback_fn=None):
     # modal True
     layer "master"
@@ -71,12 +71,12 @@ screen custom_exception(fmt_short, fmt_full=None, traceback_fn=None):
 
             text "[renpy.game.exception_info!q]" size gui._scale(22)
             frame style '_trace':
-                text fmt_short substitute False safe True
+                text fmt_short substitute False
 
             if fmt_full:
                 text "Full traceback:" size gui._scale(22)
                 frame style '_trace':
-                    text fmt_full substitute False safe True
+                    text fmt_full substitute False 
 
         hbox:
             vbox:

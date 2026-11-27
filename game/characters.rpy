@@ -216,22 +216,22 @@ transform tcmwam:
 # image mwam angry = At("char/mwam/angry.png", tcmwam)
 layeredimage mwam:
     at tcmwam
-    group body prefix body:
+    group body prefix "body":
         attribute normal default:
             "char/mwam/body/basic.png"
-    group eye prefix eye:
+    group eye prefix "eye":
         attribute normal default:
             "char/mwam/eye/normal.png"
         attribute happy:
             "char/mwam/eye/happy.png"
-    group mouth prefix mouth:
+    group mouth prefix "mouth":
         attribute normal default:
             "char/mwam/mouth/normal.png"
         attribute happy:
             "char/mwam/mouth/happy.png"
         attribute angry:
             "char/mwam/mouth/angry.png"
-    group brow prefix brow:
+    group brow prefix "brow":
         attribute normal default:
             "char/mwam/brow/normal.png"
         attribute angry:
@@ -268,7 +268,7 @@ transform tcyangsy:
 
 layeredimage yangsy:
     at tcyangsy
-    group body prefix bd:
+    group body prefix "bd":
         attribute def default:
             "char/yangsy/body/default.png"
         attribute nb:
@@ -283,7 +283,7 @@ layeredimage yangsy:
         "char/yangsy/shadow.png"
     attribute swt:
         "char/yangsy/sweat.png"
-    group brow prefix fb:
+    group brow prefix "fb":
         attribute a: 
             "char/yangsy/brow/angry.png"
         attribute n default:
@@ -292,7 +292,7 @@ layeredimage yangsy:
             "char/yangsy/brow/happy.png"
         attribute s: 
             "char/yangsy/brow/sad.png"
-    group eye prefix fe:
+    group eye prefix "fe":
         attribute f:
             "char/yangsy/eye/flat.png"
         attribute x:
@@ -301,7 +301,7 @@ layeredimage yangsy:
             "char/yangsy/eye/jitome.png"
         attribute t default:
             "char/yangsy/eye/tareme.png"
-    group pupil prefix fp:
+    group pupil prefix "fp":
         attribute non:
             "char/yangsy/pupil/none.png"
         attribute c default:
@@ -314,7 +314,7 @@ layeredimage yangsy:
             "char/yangsy/pupil/heart.png"
         attribute s:
             "char/yangsy/pupil/star.png"
-    group mouth prefix fm:
+    group mouth prefix "fm":
         attribute cm: 
             "char/yangsy/mouth/cat_smug.png"
         attribute cmo: 
